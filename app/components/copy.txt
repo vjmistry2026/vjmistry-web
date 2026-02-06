@@ -1,0 +1,31 @@
+    // const [bgHeight, setBgHeight] = useState<number>(0);
+
+    // useEffect(() => {
+    //     if (!bgRef.current) return;
+
+    //     const observer = new ResizeObserver((entries) => {
+    //         for (const entry of entries) {
+    //             setBgHeight(entry.contentRect.height);
+    //         }
+    //     });
+
+    //     observer.observe(bgRef.current);
+
+    //     return () => observer.disconnect();
+    // }, []);
+
+
+                    {/* LINE SVG — height synced to BG */}
+                {/* <div
+                    className="absolute top-0 -left-14 w-full max-w-[320px] z-10"
+                    style={{ height: bgHeight || "auto" }}
+                >
+                    <Image
+                        src="/assets/images/home/qsr/line-svg.svg"
+                        alt="QSR Line"
+                        width={932}
+                        height={873}
+                        className="w-full h-full object-contain"
+                        priority
+                    />
+                </div> */}

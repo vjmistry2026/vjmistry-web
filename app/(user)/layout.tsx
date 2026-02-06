@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import "../globals.css";
 import localFont from "next/font/local";
 import Navbar from "../components/client/Layout/Navbar";
+import Footer from "../components/client/Layout/Footer";
+import LenisProvider from "../components/LenisProvider";
 
 const robotoCondensed = Roboto_Condensed({
     subsets: ["latin"],
@@ -40,8 +42,11 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={`${nexa.variable} antialiased ${robotoCondensed.className}`}>
-                <Navbar />
-                {children}
+                <LenisProvider>
+                    <Navbar />
+                    {children}
+                    <Footer />
+                </LenisProvider>
             </body>
         </html>
     );
