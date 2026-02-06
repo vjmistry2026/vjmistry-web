@@ -7,7 +7,7 @@ import "swiper/css/effect-fade";
 import Image from "next/image";
 import { useRef, useState } from "react";
 import { HERO_SLIDES } from "../data";
-import CustomButton from "@/app/components/common/CustomButton";
+import CustomButton from "@/app/components/client/common/CustomButton";
 
 export default function HeroSection() {
     const swiperRef = useRef<any>(null);
@@ -38,20 +38,20 @@ export default function HeroSection() {
             </Swiper>
 
             <div className="absolute inset-0 z-10 pointer-events-none">
-                <div className="container h-full flex items-end pb-[100px] pointer-events-auto">
-                    <div className="flex w-full items-end justify-between">
+                <div className="container h-full flex items-end pb-100 pointer-events-auto">
+                    <div className="flex w-full flex-col lg:flex-row gap-[40px] lg:gap-0  lg:items-end justify-between">
                         {/* LEFT STATIC CONTENT */}
                         <div>
-                            <h1 className="text-85 font-condensed font-medium text-white leading-[100%] max-w-[23ch]">
+                            <h1 className="text-75 xl:text-85 font-condensed font-medium text-white leading-[120%] xl:max-w-[23ch]">
                                 Engineering Excellence Built on Trust & Legacy
                             </h1>
 
-                            <p className="mt-[30px] font-nexa text-20 text-white/70 max-w-[51ch]">
+                            <p className="mt-[15px] lg:mt-[30px] font-nexa text-20 text-white/70 max-w-[51ch]">
                                 Delivering reliable engineering, construction and industrial solutions with decades of
                                 expertise, precision and commitment to quality.
                             </p>
 
-                            <div className="mt-[60px] flex items-center gap-[30px]">
+                            <div className="mt-[30px] lg:mt-[60px] flex flex-col md:flex-row md:items-center gap-[15px] md:gap-[30px]">
                                 <div>
                                     <CustomButton label="Explore Our Services" href="#" />
                                 </div>
@@ -63,7 +63,7 @@ export default function HeroSection() {
                         </div>
 
                         {/* RIGHT SLIDER CONTROLLER */}
-                        <div className="bg-[#FDFDFD21]">
+                        <div className="bg-[#FDFDFD21] w-full md:w-fit">
                             {/* Progress Loader */}
                             <div className="h-[2px] bg-[#D9D9D9] overflow-hidden">
                                 <div
@@ -72,9 +72,9 @@ export default function HeroSection() {
                                 />
                             </div>
 
-                            <div className="flex items-center justify-between gap-[81px] p-[10px] 2xl:min-w-[454px]">
+                            <div className="flex items-center justify-between gap-[20px] lg:gap-[81px] p-[10px] 2xl:min-w-[454px]">
                                 <div className="flex items-center gap-[10px]">
-                                    <div className="w-[81px] h-[75px] relative">
+                                    <div className="w-[50px] h-[40px] lg:w-[81px] lg:h-[75px] relative">
                                         <Image
                                             src={HERO_SLIDES[activeIndex].image}
                                             alt="thumb"
