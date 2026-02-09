@@ -42,7 +42,7 @@ export default function HeroSection() {
                     <div className="flex w-full flex-col lg:flex-row gap-[40px] lg:gap-0  lg:items-end justify-between">
                         {/* LEFT STATIC CONTENT */}
                         <div>
-                            <h1 className="text-75 xl:text-85 font-condensed font-medium text-white leading-[120%] xl:max-w-[23ch]">
+                            <h1 className="text-75 3xl:text-85 font-condensed font-medium text-white leading-[120%] xl:max-w-[23ch]">
                                 Engineering Excellence Built on Trust & Legacy
                             </h1>
 
