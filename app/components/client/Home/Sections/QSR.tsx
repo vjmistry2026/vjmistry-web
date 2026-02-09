@@ -16,7 +16,8 @@ const Qsr = () => {
                     sm:h-auto
                     lg:h-[720px]
                     xl:h-[720px]
-                    2xl:min-h-[930px]
+                    2xl:h-[750px]
+                    3xl:min-h-[930px]
                 "
             >
                 {/* BG SVG — ONLY lg+ */}
@@ -25,7 +26,7 @@ const Qsr = () => {
                         src="/assets/images/home/qsr/bg-qsr-svg.svg"
                         alt="QSR"
                         fill
-                        className="object-cover object-[150%_center]"
+                        className="object-contain 2xl:object-cover 3xl:object-[150%_center]"
                         priority
                     />
                 </div>
@@ -62,8 +63,8 @@ const Qsr = () => {
             w-full
             max-w-full
             md:max-w-[480px]
-            lg:max-w-[640px]
-            2xl:max-w-[726px]
+            2xl:max-w-[640px]
+            3xl:max-w-[726px]
             h-[330px]
             md:h-auto
         "

@@ -29,27 +29,30 @@ const IndustriesWeServe = () => {
 
         const mm = gsap.matchMedia();
 
-        mm.add("(min-width: 1024px)", () => {
-            const scrollHeight = scrollEl.scrollHeight - scrollEl.clientHeight;
+mm.add("(min-width: 1024px)", () => {
+    const scrollHeight = scrollEl.scrollHeight - scrollEl.clientHeight;
 
-            const ctx = gsap.context(() => {
-                gsap.to(scrollEl, {
-                    scrollTop: scrollHeight,
-                    ease: "power1.out",
-                    scrollTrigger: {
-                        trigger: section,
-                        start: `top-=${navbarHeight} top`,
-                        end: `+=${scrollHeight}`,
-                        pin: true,
-                        scrub: 0.6,
-                        anticipatePin: 1,
-                        invalidateOnRefresh: true,
-                    },
-                });
-            }, section);
-
-            return () => ctx.revert();
+    const ctx = gsap.context(() => {
+        gsap.to(scrollEl, {
+            scrollTop: scrollHeight,
+            ease: "power1.out",
+            scrollTrigger: {
+                trigger: section,
+                start: () => `top ${getNavbarHeight()}px`,
+                end: `+=${scrollHeight}`,
+                pin: true,
+                pinType: "fixed", // ✅ THIS FIXES THE JERK
+                scrub: 0.6,
+                anticipatePin: 1,
+                invalidateOnRefresh: true,
+            },
         });
+    }, section);
+
+    return () => ctx.revert();
+});
+
+
 
         return () => mm.revert();
     }, []);
