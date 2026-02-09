@@ -115,6 +115,8 @@ body {
 
     /* Large headings */
     --text-60: clamp(28px, 2.9vw + 14px, 60px);
+    --text-66: clamp(36px, 2.35vw + 29.8px, 66px);
+
     --text-75: clamp(39px, 3.76vw + 23.9px, 75px);
     --text-82: clamp(44px, 2.79vw + 44px, 82px);
     --text-85: clamp(48px, 2.72vw + 48px, 85px);
@@ -151,6 +153,7 @@ body {
     --text-20: var(--text-20);
     --text-32: var(--text-32);
     --text-60: var(--text-60);
+    --text-66: var(--text-66);
     --text-75: var(--text-75);
     --text-82: var(--text-82);
     --text-85: var(--text-85);

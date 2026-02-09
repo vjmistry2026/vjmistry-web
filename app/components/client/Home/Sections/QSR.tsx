@@ -16,16 +16,16 @@ const Qsr = () => {
                     sm:h-auto
                     lg:h-[720px]
                     xl:h-[720px]
-                    2xl:min-h-[830px]
+                    2xl:min-h-[930px]
                 "
             >
                 {/* BG SVG — ONLY lg+ */}
-                <div className="hidden lg:block absolute inset-0 -left-30">
+                <div className="hidden lg:block absolute inset-0">
                     <Image
                         src="/assets/images/home/qsr/bg-qsr-svg.svg"
                         alt="QSR"
                         fill
-                        className="object-contain object-bottom"
+                        className="object-cover object-[150%_center]"
                         priority
                     />
                 </div>
@@ -52,36 +52,34 @@ const Qsr = () => {
                             "
                         >
                             {/* LEFT IMAGE */}
-<div className="flex-none w-full md:w-auto">
-    <Image
-        src="/assets/images/home/qsr/qsr-main.png"
-        alt="QSR"
-        width={728}
-        height={894}
-        className="
+                            <div className="flex-none w-full md:w-auto">
+                                <Image
+                                    src="/assets/images/home/qsr/qsr-main.png"
+                                    alt="QSR"
+                                    width={728}
+                                    height={894}
+                                    className="
             w-full
             max-w-full
             md:max-w-[480px]
             lg:max-w-[640px]
-            2xl:max-w-[728px]
-            h-[300px]
+            2xl:max-w-[726px]
+            h-[330px]
             md:h-auto
         "
-    />
-</div>
-
+                                />
+                            </div>
 
                             {/* RIGHT CONTENT */}
                             <div className="flex-1 text-left lg:mt-24">
-                                <h2 className="text-75 max-w-[448px] font-condensed leading-[120%] text-[#1C1C1C] mb-[24px]">
+                                <h2 className="text-60 lg:text-66 3xl:text-75 max-w-[448px] font-condensed leading-[120%] text-[#1C1C1C] mb-[24px]">
                                     Quality. Safety. Reliability.
                                 </h2>
 
-                                <p className="text-20 max-w-[674px] font-nexa font-bold text-paragraph leading-[1.5]">
-                                    At VJ Mistry, quality and safety are integral to every stage of our work.
-                                    Our processes are aligned with industry standards and best practices,
-                                    ensuring consistent outcomes, safe work environments, and dependable
-                                    project delivery.
+                                <p className="text-20 max-w-[684px] font-nexa font-bold text-paragraph leading-[1.5]">
+                                    At VJ Mistry, quality and safety are integral to every stage of our work. Our processes
+                                    are aligned with industry standards and best practices, ensuring consistent outcomes,
+                                    safe work environments, and dependable project delivery.
                                 </p>
                             </div>
                         </div>

@@ -62,9 +62,9 @@ const TrustedClients = () => {
     return (
         <section className="bg-[#F9F9F9] py-100 lg:py-130 overflow-hidden">
             <div style={{ paddingLeft: containerPadding }}>
-                <h2 className="text-75 leading-[100%] font-condensed mb-[20px] lg:mb-[30px] text-[#1C1C1C]">{title}</h2>
+                <h2 className="text-60 lg:text-66 3xl:text-75 leading-[100%] font-condensed mb-[20px] lg:mb-[30px] text-[#1C1C1C]">{title}</h2>
 
-                <p className="text-20 leading-[1.5] font-nexa font-bold text-paragraph max-w-[740px] mb-[30px] lg:mb-[60px]">
+                <p className="text-20 leading-[1.5] font-nexa font-bold text-paragraph max-w-[750px] mb-[30px] lg:mb-[60px]">
                     {description}
                 </p>
 

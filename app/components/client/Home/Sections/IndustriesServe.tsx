@@ -64,15 +64,15 @@ const IndustriesWeServe = () => {
                 className="h-full flex lg:flex-row flex-col justify-start"
             >
                 {/* LEFT */}
-                <div className="w-full lg:w-[47%] flex flex-col justify-start pt-100 lg:pt-150 2xl:pt-[191px] lg:pr-[66px] mb-[32px] lg:mb-[0px]">
-                    <h2 className="text-75 text-[#FDFDFD] font-condensed leading-[100%] mb-[30px]">{heading}</h2>
-                    <p className="text-20 font-nexa font-bold leading-[1.5] text-[#FDFDFD]/70 max-w-[710px]">
+                <div className="w-full lg:w-[45%] flex flex-col justify-start pt-100 lg:pt-150 2xl:pt-[191px] lg:pr-[66px] mb-[32px] lg:mb-[0px]">
+                    <h2 className="text-60 lg:text-66 3xl:text-75 text-[#FDFDFD] font-condensed leading-[100%] mb-[30px]">{heading}</h2>
+                    <p className="text-20 font-nexa font-bold leading-[1.5] text-[#FDFDFD]/70 max-w-[730px]">
                         {description}
                     </p>
                 </div>
 
                 {/* RIGHT */}
-                <div className="w-full lg:w-[53%] relative">
+                <div className="w-full lg:w-[55%] relative">
                     {/* Vertical faded line */}
                     {/* <div className="absolute left-0 top-0 h-full w-px bg-gradient-to-b from-transparent via-white/70 to-transparent" /> */}
                     <div className="absolute left-0 top-0 w-full h-px bg-gradient-to-r from-transparent via-white/70 to-transparent lg:left-0 lg:top-0 lg:h-full lg:w-px lg:bg-gradient-to-b" />

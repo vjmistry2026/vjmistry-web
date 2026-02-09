@@ -17,7 +17,7 @@ const Footer = () => {
                 <div className="pb-40 pt-70 grid grid-cols-2 xl:grid-cols-[2fr_1.2fr_1.2fr_1.2fr] gap-y-[30px] xl:gap-y-[60px] gap-x-100">
                     {/* SUBSCRIBE */}
                     <div className="max-w-[480px] col-span-2 md:col-span-1 xl:col-span-1">
-                        <h3 className="text-75 font-condensed leading-[110%] mb-[22px] lg:mb-[30px] text-[#FDFDFD]">
+                        <h3 className="text-66 2xl:text-75 font-condensed leading-[110%] mb-[22px] lg:mb-[30px] text-[#FDFDFD]">
                             Subscribe
                             <br />
                             to Newsletter
@@ -68,25 +68,27 @@ const Footer = () => {
 
                     {/* SOCIAL MEDIA */}
                     <div className="col-span-1">
-                        <h4 className="text-32 font-condensed leading-[100%] mb-[30px] text-[#FDFDFD]">
-                            Social Media
-                        </h4>
-                        <div className="flex items-center gap-[20px]">
-                            {socialMedia.map((item) => (
-                                <Link
-                                    key={item.label}
-                                    href={item.href}
-                                    className="h-[50px] w-[50px] flex items-center justify-center bg-paragraph/20 hover:bg-primary transition"
-                                >
-                                    <Image
-                                        src={item.icon}
-                                        alt={item.label}
-                                        width={24}
-                                        height={24}
-                                        className="object-contain w-[24px] h-[24px]"
-                                    />
-                                </Link>
-                            ))}
+                        <div>
+                            <h4 className="text-32 font-condensed leading-[100%] mb-[30px] text-[#FDFDFD]">
+                                Social Media
+                            </h4>
+                            <div className="flex items-center gap-[20px]">
+                                {socialMedia.map((item) => (
+                                    <Link
+                                        key={item.label}
+                                        href={item.href}
+                                        className="h-[50px] w-[50px] flex items-center justify-center bg-paragraph/20 hover:bg-primary transition"
+                                    >
+                                        <Image
+                                            src={item.icon}
+                                            alt={item.label}
+                                            width={24}
+                                            height={24}
+                                            className="object-contain w-[24px] h-[24px]"
+                                        />
+                                    </Link>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>
