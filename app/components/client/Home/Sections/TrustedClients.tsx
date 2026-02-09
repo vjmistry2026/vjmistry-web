@@ -4,8 +4,10 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { trustedClientsData } from "../data";
+import { useContainerPadding } from "@/app/hooks/useContainerPadding";
 
 const TrustedClients = () => {
+    const containerPadding = useContainerPadding();
     const { title, description, logos } = trustedClientsData;
 
     const viewportRef = useRef<HTMLDivElement | null>(null);
@@ -58,11 +60,11 @@ const TrustedClients = () => {
     }, []);
 
     return (
-        <section className="bg-[#F9F9F9] py-[130px] overflow-hidden">
-            <div className="container">
-                <h2 className="text-75 leading-[100%] font-condensed mb-[30px] text-[#1C1C1C]">{title}</h2>
+        <section className="bg-[#F9F9F9] py-100 lg:py-130 overflow-hidden">
+            <div style={{ paddingLeft: containerPadding }}>
+                <h2 className="text-75 leading-[100%] font-condensed mb-[20px] lg:mb-[30px] text-[#1C1C1C]">{title}</h2>
 
-                <p className="text-20 leading-[1.5] font-nexa font-bold text-paragraph max-w-[740px] mb-[60px]">
+                <p className="text-20 leading-[1.5] font-nexa font-bold text-paragraph max-w-[740px] mb-[30px] lg:mb-[60px]">
                     {description}
                 </p>
 
@@ -73,9 +75,9 @@ const TrustedClients = () => {
                     onMouseEnter={() => tweenRef.current?.pause()}
                     onMouseLeave={() => tweenRef.current?.resume()}
                 >
-                    <div ref={trackRef} className="flex w-max items-center gap-[40px]">
+                    <div ref={trackRef} className="flex w-max items-center gap-[20px]">
                         {logos.map((logo) => (
-                            <div key={logo.id} className="group relative shrink-0">
+                            <div key={logo.id} className="group relative shrink-0 max-w-[306px]">
                                 {/* GRADIENT BORDER (FAKE) */}
                                 <div
                                     className="
@@ -106,7 +108,7 @@ const TrustedClients = () => {
                                         alt={logo.alt}
                                         width={194}
                                         height={60}
-                                        className="object-contain h-[100px] grayscale transition"
+                                        className="object-contain h-[100px] grayscale transition px-4"
                                     />
                                 </div>
                             </div>

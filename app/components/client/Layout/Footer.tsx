@@ -14,10 +14,10 @@ const Footer = () => {
             <div className="container">
 
                 {/* ================= TOP SECTION ================= */}
-                <div className="pb-[40px] pt-[70px] grid grid-cols-1 md:grid-cols-2 xl:grid-cols-[2fr_1.2fr_1.2fr_1.2fr] gap-y-[60px] gap-x-[100px]">
+                <div className="pb-40 pt-70 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-[2fr_1.2fr_1.2fr_1.2fr] gap-y-[60px] gap-x-[100px]">
                     {/* SUBSCRIBE */}
                     <div className="max-w-[480px]">
-                        <h3 className="text-75 font-condensed leading-[100%] mb-[30px] text-[#FDFDFD]">
+                        <h3 className="text-75 font-condensed leading-[110%] mb-[22px] lg:mb-[30px] text-[#FDFDFD]">
                             Subscribe
                             <br />
                             to Newsletter

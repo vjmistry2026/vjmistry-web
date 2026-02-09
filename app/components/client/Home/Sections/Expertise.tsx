@@ -18,7 +18,7 @@ const ExpertiseSection = () => {
     const [progress, setProgress] = useState(0);
 
     return (
-        <section className="bg-[#1C1C1C] py-130">
+        <section className="bg-[#1C1C1C] py-100 lg:py-130">
             <div>
                 {/* HEADER */}
                 <div className="flex flex-col lg:flex-row lg:items-end items-start justify-between mb-[40px] lg:mb-[60px] gap-[20px] container">
@@ -46,7 +46,7 @@ const ExpertiseSection = () => {
                                     alt="arrow"
                                     width={14}
                                     height={14}
-                                    className="-rotate-135 group-hover:invert group-hover:brightness-0 transition-all duration-300"
+                                    className="-rotate-135 group-hover:invert group-hover:brightness-0 transition-all duration-300 w-[10px] h-[10px] object-contain lg:w-[14px] lg:h-[14px]"
                                 />
                             </button>
                             <button
@@ -58,7 +58,7 @@ const ExpertiseSection = () => {
                                     alt="arrow"
                                     width={14}
                                     height={14}
-                                    className="rotate-45 group-hover:invert group-hover:brightness-0 transition-all duration-300"
+                                    className="rotate-45 group-hover:invert group-hover:brightness-0 transition-all duration-300 w-[10px] h-[10px] object-contain lg:w-[14px] lg:h-[14px]"
                                 />
                             </button>
                         </div>
@@ -88,7 +88,7 @@ const ExpertiseSection = () => {
                 >
                     {slides.map((slide) => (
                         <SwiperSlide key={slide.id}>
-                            <div className="group relative overflow-hidden [clip-path:polygon(0_0,calc(100%-60px)_0,100%_55px,100%_100%,0_100%)]">
+                            <div className="group relative overflow-hidden cursor-pointer [clip-path:polygon(0_0,calc(100%-60px)_0,100%_55px,100%_100%,0_100%)]">
                                 {/* Image */}
                                 <Image
                                     src={slide.image}
@@ -161,10 +161,10 @@ const ExpertiseSection = () => {
                 </div>
 
                 {/* NAVIGATION */}
-                <div className="hidden flex items-center justify-center gap-[20px]">
+                <div className="hidden lg:flex items-center justify-center gap-[20px]">
                     <button
                         onClick={() => swiperRef.current?.slidePrev()}
-                        className="border group border-border h-[50px] w-[50px] lg:h-[64px] lg:w-[64px] flex items-center justify-center hover:bg-primary hover:border-primary transition-all duration-300"
+                        className="cursor-pointer border group border-border h-[50px] w-[50px] lg:h-[64px] lg:w-[64px] flex items-center justify-center hover:bg-primary hover:border-primary transition-all duration-300"
                     >
                         <Image
                             src="/assets/icons/right-top-arrow-primary.svg"
@@ -177,7 +177,7 @@ const ExpertiseSection = () => {
 
                     <button
                         onClick={() => swiperRef.current?.slideNext()}
-                        className="border group border-border h-[50px] w-[50px] lg:h-[64px] lg:w-[64px] flex items-center justify-center hover:bg-primary hover:border-primary transition-all duration-300"
+                        className="cursor-pointer border group border-border h-[50px] w-[50px] lg:h-[64px] lg:w-[64px] flex items-center justify-center hover:bg-primary hover:border-primary transition-all duration-300"
                     >
                         <Image
                             src="/assets/icons/right-top-arrow-primary.svg"
