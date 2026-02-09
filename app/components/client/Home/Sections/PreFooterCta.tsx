@@ -8,7 +8,7 @@ const PreFooterCta = () => {
     const { title, description, backgroundImage } = buildWithConfidenceData;
 
     return (
-        <section className="relative py-[127px] w-full overflow-hidden">
+        <section className="relative py-100 lg:py-130 w-full overflow-hidden">
             {/* Background Image */}
             <Image src={backgroundImage} alt="Build with confidence" fill priority className="object-cover" />
 
@@ -18,9 +18,9 @@ const PreFooterCta = () => {
             {/* Content */}
             <div className="relative z-10 h-full flex items-center justify-center text-center">
                 <div className="px-4 flex flex-col items-center">
-                    <h2 className="text-75 font-condensed leading-[100%] text-[#FDFDFD] mb-[30px] max-w-[12ch]">{title}</h2>
+                    <h2 className="text-75 font-condensed leading-[100%] text-[#FDFDFD] mb-[20px] lg:mb-[30px] max-w-[12ch]">{title}</h2>
 
-                    <p className="text-20 font-nexa font-bold leading-[1.5] text-white/70 mb-[60px] max-w-[54ch]">
+                    <p className="text-20 font-nexa font-bold leading-[1.5] text-white/70 mb-[30px] lg:mb-[60px] max-w-[54ch]">
                         {description}
                     </p>
 

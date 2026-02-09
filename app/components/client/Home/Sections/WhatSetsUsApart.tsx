@@ -73,37 +73,37 @@ const WhatSetsUsApart = () => {
     }, [activeIndex]);
 
     return (
-        <section className="bg-white py-[150px] overflow-hidden">
+        <section className="bg-white py-100 lg:py-150 overflow-hidden">
             <div>
                 {/* HEADER */}
-                <div className="container flex items-center justify-between mb-[60px]">
-                    <h2 className="text-82 font-condensed leading-[100%] text-black">{heading}</h2>
+                <div className="container flex items-center justify-between mb-[20px] lg:mb-[60px]">
+                    <h2 className="text-75 xl:text-82 font-condensed leading-[100%] text-black">{heading}</h2>
 
                     {/* NAVIGATION */}
-                    <div className="flex items-center gap-[20px]">
+                    <div className="flex items-center gap-[10px] lg:gap-[20px]">
                         <button
                             onClick={() => swiperRef.current?.slidePrev()}
-                            className="border group border-border h-[64px] w-[64px] flex items-center justify-center hover:bg-primary transition-all duration-300"
+                            className="border group border-border cursor-pointer h-[44px] sm:h-[52px] lg:h-[64px] w-[44px] sm:w-[52px] lg:w-[64px] flex items-center justify-center hover:bg-primary transition-all duration-300"
                         >
                             <Image
                                 src="/assets/icons/right-top-arrow-primary.svg"
                                 alt="prev"
                                 width={14}
                                 height={14}
-                                className="-rotate-135 group-hover:invert group-hover:brightness-0 transition-all duration-300"
+                                className="-rotate-135 group-hover:invert group-hover:brightness-0 transition-all duration-300 w-[10px] h-[10px] object-contain lg:w-[14px] lg:h-[14px]"
                             />
                         </button>
 
                         <button
                             onClick={() => swiperRef.current?.slideNext()}
-                            className="border group border-border h-[64px] w-[64px] flex items-center justify-center hover:bg-primary transition-all duration-300"
+                            className="border group border-border cursor-pointer h-[44px] sm:h-[52px] lg:h-[64px] w-[44px] sm:w-[52px] lg:w-[64px] flex items-center justify-center hover:bg-primary transition-all duration-300"
                         >
                             <Image
                                 src="/assets/icons/right-top-arrow-primary.svg"
                                 alt="next"
                                 width={14}
                                 height={14}
-                                className="rotate-45 group-hover:invert group-hover:brightness-0 transition-all duration-300"
+                                className="rotate-45 group-hover:invert group-hover:brightness-0 transition-all duration-300 w-[10px] h-[10px] object-contain lg:w-[14px] lg:h-[14px]"
                             />
                         </button>
                     </div>

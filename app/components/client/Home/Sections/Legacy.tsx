@@ -82,7 +82,7 @@ useEffect(() => {
     }, []);
 
     return (
-        <section className="bg-white pt-100 pb-150">
+        <section className="bg-white pt-100 pb-100 lg:pb-150">
             <div className="container">
                 {/* TOP SECTION */}
                 <div className="flex flex-col md:flex-row items-stretch lg:items-center gap-6 lg:gap-10">
@@ -121,7 +121,7 @@ useEffect(() => {
                     </div>
 
                     {/* RIGHT – 53% */}
-                    <div className="w-full md:w-[50%] lg:w-[53%] relative">
+                    <div className="w-full md:w-[50%] lg:w-[53%] xl:w-[54%] 2xl:w-[56%] relative">
                         <div
                             className="
     relative overflow-hidden

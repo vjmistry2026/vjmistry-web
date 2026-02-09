@@ -115,6 +115,8 @@ body {
     --text-82: clamp(44px, 4.5vw + 16px, 82px);
     --text-85: clamp(48px, 5vw + 16px, 85px);
 
+    --space-40: clamp(25px, 2vw + 8px, 40px);
+    --space-70: clamp(35px, 3vw + 8px, 70px);
     --space-100: clamp(40px, 4vw + 8px, 100px);
     --space-130: clamp(50px, 5vw + 16px, 130px);
     --space-150: clamp(60px, 6vw + 16px, 150px);
@@ -139,6 +141,8 @@ body {
     --text-82: var(--text-82);
     --text-85: var(--text-85);
 
+    --spacing-40: var(--space-40);
+    --spacing-70: var(--space-70);
     --spacing-100: var(--space-100);
     --spacing-130: var(--space-130);
     --spacing-150: var(--space-150);

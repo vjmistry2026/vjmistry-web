@@ -14,7 +14,7 @@ export default function HeroSection() {
     const [activeIndex, setActiveIndex] = useState(0);
 
     return (
-        <section className="relative h-screen w-full overflow-hidden">
+        <section className="relative h-[100dvh] w-full overflow-hidden">
             {/* Background Slider */}
             <Swiper
                 modules={[Autoplay, EffectFade]}
