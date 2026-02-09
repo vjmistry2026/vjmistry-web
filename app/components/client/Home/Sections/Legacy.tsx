@@ -106,7 +106,7 @@ useEffect(() => {
                                 />
 
                                 {/* text */}
-                                <span className="relative z-10 text-white px-[10px] py-[5px] inline-block">
+                                <span className="relative z-10 text-white px-[10px] py-[5px] inline-block tracking-[-0.7px] lg:tracking-[-0.5px]">
                                     {hero.title.highlight}
                                 </span>
                             </span>
