@@ -14,9 +14,9 @@ const Footer = () => {
             <div className="container">
 
                 {/* ================= TOP SECTION ================= */}
-                <div className="pb-40 pt-70 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-[2fr_1.2fr_1.2fr_1.2fr] gap-y-[60px] gap-x-[100px]">
+                <div className="pb-40 pt-70 grid grid-cols-2 xl:grid-cols-[2fr_1.2fr_1.2fr_1.2fr] gap-y-[30px] xl:gap-y-[60px] gap-x-[100px]">
                     {/* SUBSCRIBE */}
-                    <div className="max-w-[480px]">
+                    <div className="max-w-[480px] col-span-2 md:col-span-1 xl:col-span-1">
                         <h3 className="text-75 font-condensed leading-[110%] mb-[22px] lg:mb-[30px] text-[#FDFDFD]">
                             Subscribe
                             <br />
