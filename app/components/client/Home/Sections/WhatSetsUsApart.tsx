@@ -77,7 +77,7 @@ const WhatSetsUsApart = () => {
             <div>
                 {/* HEADER */}
                 <div className="container flex items-center justify-between mb-[20px] lg:mb-[60px]">
-                    <h2 className="text-75 xl:text-82 font-condensed leading-[100%] text-black">{heading}</h2>
+                    <h2 className="text-60 lg:text-66 xl:text-75 3xl:text-82 font-condensed leading-[100%] text-black">{heading}</h2>
 
                     {/* NAVIGATION */}
                     <div className="flex items-center gap-[10px] lg:gap-[20px]">

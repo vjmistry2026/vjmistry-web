@@ -94,7 +94,7 @@ useEffect(() => {
 
                         <h2
                             ref={titleRef}
-                            className="text-60 2xl:text-75 font-condensed flex flex-col leading-[100%] text-black"
+                            className="text-60 lg:text-66 3xl:text-75 font-condensed flex flex-col leading-[100%] text-black"
                         >
                             {hero.title.normal}
                             <span className="relative mt-[8px] lg:mt-[14px] w-fit inline-block overflow-hidden">
