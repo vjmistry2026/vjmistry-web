@@ -92,7 +92,7 @@ export default function HeroSection() {
                                     </div>
                                 </div>
 
-                                <div className="flex items-center gap-3 mr-[6px]">
+                                <div className="flex items-center gap-4 mr-[6px]">
                                     <button onClick={() => swiperRef.current.slidePrev()} className="">
                                         <Image
                                             src="/assets/icons/right-top-arrow-primary.svg"

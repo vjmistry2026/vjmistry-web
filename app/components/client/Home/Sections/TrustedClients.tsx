@@ -9,6 +9,7 @@ import { useContainerPadding } from "@/app/hooks/useContainerPadding";
 const TrustedClients = () => {
     const containerPadding = useContainerPadding();
     const { title, description, logos } = trustedClientsData;
+    const isDesktopRef = useRef(false);
 
     const viewportRef = useRef<HTMLDivElement | null>(null);
     const trackRef = useRef<HTMLDivElement | null>(null);
@@ -20,14 +21,14 @@ const TrustedClients = () => {
 
         if (!track || !viewport) return;
 
-        // Cleanup old clones (HMR safe)
+        // 👇 detect desktop once
+        isDesktopRef.current = window.innerWidth >= 1024;
+
         track.querySelectorAll("[data-clone='true']").forEach((n) => n.remove());
 
         const originalItems = Array.from(track.children) as HTMLElement[];
-
         let contentWidth = originalItems.reduce((acc, el) => acc + el.offsetWidth, 0);
 
-        // Clone until safely wider than viewport
         while (contentWidth < viewport.offsetWidth * 2.5) {
             originalItems.forEach((item) => {
                 const clone = item.cloneNode(true) as HTMLElement;
@@ -38,12 +39,11 @@ const TrustedClients = () => {
         }
 
         const wrapX = gsap.utils.wrap(-contentWidth / 2, 0);
-
         gsap.set(track, { x: 0 });
 
         const tween = gsap.to(track, {
             x: `-=${contentWidth / 2}`,
-            duration: 50, // 👈 speed control (higher = slower)
+            duration: 50,
             ease: "none",
             repeat: -1,
             modifiers: {
@@ -72,8 +72,12 @@ const TrustedClients = () => {
                 <div
                     ref={viewportRef}
                     className="relative w-full overflow-hidden"
-                    onMouseEnter={() => tweenRef.current?.pause()}
-                    onMouseLeave={() => tweenRef.current?.resume()}
+                    onMouseEnter={() => {
+                        if (isDesktopRef.current) tweenRef.current?.pause();
+                    }}
+                    onMouseLeave={() => {
+                        if (isDesktopRef.current) tweenRef.current?.resume();
+                    }}
                 >
                     <div ref={trackRef} className="flex w-max items-center gap-[20px]">
                         {logos.map((logo) => (

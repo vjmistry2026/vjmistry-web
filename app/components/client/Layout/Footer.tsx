@@ -14,7 +14,7 @@ const Footer = () => {
             <div className="container">
 
                 {/* ================= TOP SECTION ================= */}
-                <div className="pb-40 pt-70 grid grid-cols-2 xl:grid-cols-[2fr_1.2fr_1.2fr_1.2fr] gap-y-[30px] xl:gap-y-[60px] gap-x-[100px]">
+                <div className="pb-40 pt-70 grid grid-cols-2 xl:grid-cols-[2fr_1.2fr_1.2fr_1.2fr] gap-y-[30px] xl:gap-y-[60px] gap-x-100">
                     {/* SUBSCRIBE */}
                     <div className="max-w-[480px] col-span-2 md:col-span-1 xl:col-span-1">
                         <h3 className="text-75 font-condensed leading-[110%] mb-[22px] lg:mb-[30px] text-[#FDFDFD]">
@@ -67,7 +67,7 @@ const Footer = () => {
                     </div>
 
                     {/* SOCIAL MEDIA */}
-                    <div>
+                    <div className="col-span-1">
                         <h4 className="text-32 font-condensed leading-[100%] mb-[30px] text-[#FDFDFD]">
                             Social Media
                         </h4>
@@ -95,15 +95,16 @@ const Footer = () => {
                 <div className="h-px w-full bg-gradient-to-r from-[#1C1C1C] via-[#A6A6A6] to-[#1C1C1C]" />
 
                 {/* ================= BOTTOM SECTION ================= */}
-                <div className="pt-[40px] pb-[70px] grid grid-cols-1 md:grid-cols-2 xl:grid-cols-[2fr_2.4fr_0fr_1.2fr] gap-y-[50px] gap-x-[100px]">
+                <div className="pt-40 pb-70 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-[2fr_2.4fr_0fr_1.2fr] gap-y-[30px] lg:gap-y-[50px] gap-x-100">
                     {/* LOGO (under Subscribe) */}
-                    <div className="flex justify-center lg:justify-start">
-                        <Image src="/assets/logo/logo-white.png" alt="VJ Mistry" width={253} height={67} className="w-[253px] h-[67px]" />
+                    <div className="flex justify-start">
+                        <Image src="/assets/logo/logo-white.png" alt="VJ Mistry" width={253} height={67} className="w-[210px] lg:w-[253px] lg:h-[67px]" />
+                        
                     </div>
 
                     {/* CONNECT (under Quick Links) */}
                     <div>
-                        <h4 className="text-32 font-condensed leading-[100%] mb-[30px] text-[#FDFDFD]">
+                        <h4 className="text-32 font-condensed leading-[100%] mb-[20px] lg:mb-[30px] text-[#FDFDFD]">
                             Connect With Us
                         </h4>
 
@@ -132,7 +133,7 @@ const Footer = () => {
                         </div>
 
                         {/* ADDRESS */}
-                        <div className="flex items-start gap-[12px] mb-[20px]">
+                        <div className="flex items-start gap-[12px] mb-[10px] lg:mb-[20px]">
                             <Image src="/assets/images/footer/map.svg" alt="Location" width={16} height={16} className="mt-[4px]" />
                             <p className="text-20 font-nexa font-bold leading-[1.5] text-paragraph">
                                 {activeData.address}
@@ -140,7 +141,7 @@ const Footer = () => {
                         </div>
 
                         {/* PHONE */}
-                        <div className="flex items-center gap-[12px] mb-[20px]">
+                        <div className="flex items-center gap-[12px] mb-[10px] lg:mb-[20px]">
                             <Image src="/assets/images/footer/phone.svg" alt="Phone" width={16} height={16} />
                             <p className="text-20 font-nexa font-bold leading-[1.5] text-paragraph">
                                 {activeData.phone}
@@ -160,12 +161,12 @@ const Footer = () => {
                     <div className="hidden lg:block" />
 
                     {/* QR (under Social Media) */}
-                    <div className="flex justify-center lg:justify-start">
+                    <div className="flex justify-start">
                         <div>
-                            <h4 className="text-32 font-condensed leading-[100%] text-[#FDFDFD] mb-[30px]">
+                            <h4 className="text-32 font-condensed leading-[100%] text-[#FDFDFD] mb-[20px] lg:mb-[30px]">
                                 Scan Here
                             </h4>
-                            <div className="relative w-[190px] h-[190px] flex items-center justify-center">
+                            <div className="relative xl:w-[190px] xl:h-[190px] w-[140px] h-[140px] flex items-center justify-center">
                                 <Image
                                     src="/assets/images/footer/qr-border.svg"
                                     alt="QR Border"
@@ -190,7 +191,7 @@ const Footer = () => {
 
             {/* ================= PRIVACY ================= */}
             <div className="bg-[#2A2A2A]">
-                <div className="container py-[34px] leading-[100%] flex items-center gap-[80px] text-20 font-nexa font-bold text-paragraph">
+                <div className="container py-[20px] 2xl:py-[34px] leading-[100%] flex items-center justify-between lg:justify-start lg:gap-[80px] text-20 font-nexa font-bold text-paragraph">
                     <Link href="/privacy-policy" className="hover:text-white transition">
                         Privacy Policy
                     </Link>
