@@ -178,7 +178,7 @@ useEffect(() => {
                                 }}
                                 data-id={item.id}
                                 onMouseEnter={() => setActiveId(item.id)}
-                                className="relative overflow-hidden p-6  2xl:p-10 max-w-[367px] 
+                                className="relative overflow-hidden p-6  2xl:p-10 max-w-[367px] 2xl:min-h-[385px]
   transition-all duration-500
   [clip-path:polygon(0_0,calc(100%-45px)_0,100%_50px,100%_100%,0_100%)]
   bg-[#F9F9F9]"

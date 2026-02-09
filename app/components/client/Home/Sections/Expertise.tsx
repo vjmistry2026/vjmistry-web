@@ -88,14 +88,31 @@ const ExpertiseSection = () => {
                 >
                     {slides.map((slide) => (
                         <SwiperSlide key={slide.id}>
-                            <div className="group relative overflow-hidden cursor-pointer [clip-path:polygon(0_0,calc(100%-60px)_0,100%_55px,100%_100%,0_100%)]">
+                            {/* <div className="group relative overflow-hidden cursor-pointer [clip-path:polygon(0_0,calc(100%-78px)_0,100%_65px,100%_100%,0_100%)] 2xl:min-h-[463px]"> */}
+                            <div
+                                className="
+    group relative overflow-hidden cursor-pointer
+
+    [clip-path:polygon(0_0,calc(100%-45px)_0,100%_45px,100%_100%,0_100%)]
+
+    md:[clip-path:polygon(0_0,calc(100%-55px)_0,100%_50px,100%_100%,0_100%)]
+
+    lg:[clip-path:polygon(0_0,calc(100%-65px)_0,100%_55px,100%_100%,0_100%)]
+
+    xl:[clip-path:polygon(0_0,calc(100%-72px)_0,100%_60px,100%_100%,0_100%)]
+
+    2xl:[clip-path:polygon(0_0,calc(100%-78px)_0,100%_65px,100%_100%,0_100%)]
+
+    2xl:min-h-[463px]
+  "
+                            >
                                 {/* Image */}
                                 <Image
                                     src={slide.image}
                                     alt={slide.title}
                                     width={520}
-                                    height={420}
-                                    className="w-full h-[280px] md:h-[340px] lg:h-[420px] object-cover"
+                                    height={463}
+                                    className="w-full h-[260px] md:h-[340px] lg:h-[420px] 2xl:h-full object-cover"
                                 />
 
                                 {/* Dark overlay */}
@@ -110,8 +127,8 @@ const ExpertiseSection = () => {
                                 {/* DEFAULT TITLE */}
                                 <h3
                                     className="
-        absolute bottom-[25px] lg:bottom-[50px] left-[25px] lg:left-[50px] leading-[120%]
-        text-32 font-condensed max-w-[270px] text-[#FDFDFD]
+        absolute bottom-[20px] lg:bottom-[50px] left-[20px] lg:left-[50px] leading-[120%]
+        text-32 font-condensed max-w-[300px] text-[#FDFDFD]
         transition-all duration-500 ease-out
         group-hover:translate-y-[20px]
         group-hover:opacity-0
@@ -123,7 +140,7 @@ const ExpertiseSection = () => {
                                 {/* HOVER TITLE BOX */}
                                 <div
                                     className="
-        absolute bottom-[25px] lg:bottom-[50px] left-[25px] lg:left-[50px]
+        absolute bottom-[20px] lg:bottom-[50px] left-[20px] lg:left-[50px]
         flex items-center justify-between
         bg-white w-[calc(100%-50px)] lg:w-[calc(100%-100px)]
         px-[20px] py-[20px] lg:py-[30px]
@@ -132,7 +149,7 @@ const ExpertiseSection = () => {
         group-hover:translate-y-0 group-hover:opacity-100
       "
                                 >
-                                    <span className="max-w-[270px] leading-[120%] font-condensed text-32 text-black">
+                                    <span className="max-w-[300px] leading-[120%] font-condensed text-32 text-black">
                                         {slide.title}
                                     </span>
 
