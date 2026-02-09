@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { buildWithConfidenceData } from "../data";
 import CustomButton from "@/app/components/client/common/CustomButton";
+import AnimatedHeading from "../../common/AnimateHeading";
 
 const PreFooterCta = () => {
     const { title, description, backgroundImage } = buildWithConfidenceData;
@@ -18,7 +19,11 @@ const PreFooterCta = () => {
             {/* Content */}
             <div className="relative z-10 h-full flex items-center justify-center text-center">
                 <div className="px-4 flex flex-col items-center">
-                    <h2 className="text-75 font-condensed leading-[100%] text-[#FDFDFD] mb-[20px] lg:mb-[30px] max-w-[12ch]">{title}</h2>
+                    <AnimatedHeading
+                        tag="h2"
+                        text={title}    
+                        className="text-60 2xl:text-75 font-condensed leading-[100%] text-[#FDFDFD] mb-[20px] lg:mb-[30px] max-w-[13ch]"
+                    />
 
                     <p className="text-20 font-nexa font-bold leading-[1.5] text-white/70 mb-[30px] lg:mb-[60px] max-w-[54ch]">
                         {description}

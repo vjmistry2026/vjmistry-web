@@ -6,6 +6,7 @@ import { industriesData } from "../data";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useContainerPadding } from "@/app/hooks/useContainerPadding";
+import AnimatedHeading from "../../common/AnimateHeading";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -29,30 +30,28 @@ const IndustriesWeServe = () => {
 
         const mm = gsap.matchMedia();
 
-mm.add("(min-width: 1024px)", () => {
-    const scrollHeight = scrollEl.scrollHeight - scrollEl.clientHeight;
+        mm.add("(min-width: 1024px)", () => {
+            const scrollHeight = scrollEl.scrollHeight - scrollEl.clientHeight;
 
-    const ctx = gsap.context(() => {
-        gsap.to(scrollEl, {
-            scrollTop: scrollHeight,
-            ease: "power1.out",
-            scrollTrigger: {
-                trigger: section,
-                start: () => `top ${getNavbarHeight()}px`,
-                end: `+=${scrollHeight}`,
-                pin: true,
-                pinType: "fixed", // ✅ THIS FIXES THE JERK
-                scrub: 0.6,
-                anticipatePin: 1,
-                invalidateOnRefresh: true,
-            },
+            const ctx = gsap.context(() => {
+                gsap.to(scrollEl, {
+                    scrollTop: scrollHeight,
+                    ease: "power1.out",
+                    scrollTrigger: {
+                        trigger: section,
+                        start: () => `top ${getNavbarHeight()}px`,
+                        end: `+=${scrollHeight}`,
+                        pin: true,
+                        pinType: "fixed", // ✅ THIS FIXES THE JERK
+                        scrub: 0.6,
+                        anticipatePin: 1,
+                        invalidateOnRefresh: true,
+                    },
+                });
+            }, section);
+
+            return () => ctx.revert();
         });
-    }, section);
-
-    return () => ctx.revert();
-});
-
-
 
         return () => mm.revert();
     }, []);
@@ -68,7 +67,12 @@ mm.add("(min-width: 1024px)", () => {
             >
                 {/* LEFT */}
                 <div className="w-full lg:w-[45%] flex flex-col justify-start pt-100 lg:pt-150 2xl:pt-[191px] lg:pr-[66px] mb-[32px] lg:mb-[0px]">
-                    <h2 className="text-60 lg:text-66 3xl:text-75 text-[#FDFDFD] font-condensed leading-[100%] mb-[30px]">{heading}</h2>
+                    <AnimatedHeading
+                        tag="h2"
+                        text={heading}
+                        className="text-60 lg:text-66 3xl:text-75 text-[#FDFDFD] font-condensed leading-[100%] mb-[30px]"
+                    />
+
                     <p className="text-20 font-nexa font-bold leading-[1.5] text-[#FDFDFD]/70 max-w-[730px]">
                         {description}
                     </p>

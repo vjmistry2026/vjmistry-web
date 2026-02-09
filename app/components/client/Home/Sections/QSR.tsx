@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useContainerPadding } from "@/app/hooks/useContainerPadding";
+import AnimatedHeading from "../../common/AnimateHeading";
 
 const Qsr = () => {
     const paddingLeft = useContainerPadding();
@@ -73,9 +74,11 @@ const Qsr = () => {
 
                             {/* RIGHT CONTENT */}
                             <div className="flex-1 text-left lg:mt-24">
-                                <h2 className="text-60 lg:text-66 3xl:text-75 max-w-[448px] font-condensed leading-[120%] text-[#1C1C1C] mb-[24px]">
-                                    Quality. Safety. Reliability.
-                                </h2>
+                                <AnimatedHeading
+                                    tag="h2"
+                                    text="Quality. Safety. Reliability."
+                                    className="text-60 lg:text-66 3xl:text-75 max-w-[488px] font-condensed leading-[120%] text-[#1C1C1C] mb-[24px]"
+                                />
 
                                 <p className="text-20 max-w-[684px] font-nexa font-bold text-paragraph leading-[1.5]">
                                     At VJ Mistry, quality and safety are integral to every stage of our work. Our processes

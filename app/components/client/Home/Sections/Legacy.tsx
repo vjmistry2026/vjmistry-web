@@ -46,9 +46,10 @@ useEffect(() => {
                     }
                 });
             },
-            {
-                threshold: 0.5, // good balance for mobile
-            }
+{
+        threshold: 0,
+        rootMargin: "-60% 0px -40% 0px",
+    }
         );
 
         cardRefs.current.forEach((el) => el && observer!.observe(el));
@@ -166,7 +167,7 @@ useEffect(() => {
                 </div>
 
                 {/* STATS CARDS */}
-                <div ref={cardsWrapperRef} className="mt-100 lg:mt-150 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 lg:gap-10 2xl:gap-[51px]">
+                <div ref={cardsWrapperRef} className="mt-100 lg:mt-150 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-10 2xl:gap-[51px]">
                     {stats.map((item, index) => {
                         const isActive = activeId === item.id;
 

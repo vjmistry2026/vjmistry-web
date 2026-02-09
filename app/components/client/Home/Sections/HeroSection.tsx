@@ -8,6 +8,8 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 import { HERO_SLIDES } from "../data";
 import CustomButton from "@/app/components/client/common/CustomButton";
+import AnimatedHeading from "../../common/AnimateHeading";
+import HeroAnimatedHeading from "../../common/HeroAnimation";
 
 export default function HeroSection() {
     const swiperRef = useRef<any>(null);
@@ -42,9 +44,11 @@ export default function HeroSection() {
                     <div className="flex w-full flex-col lg:flex-row gap-[40px] lg:gap-0  lg:items-end justify-between">
                         {/* LEFT STATIC CONTENT */}
                         <div>
-                            <h1 className="text-75 3xl:text-85 font-condensed font-medium text-white leading-[120%] xl:max-w-[23ch]">
-                                Engineering Excellence Built on Trust & Legacy
-                            </h1>
+                            <HeroAnimatedHeading
+                                tag="h1"
+                                text="Engineering Excellence Built on Trust & Legacy"
+                                className="text-75 3xl:text-85 font-condensed font-medium text-white leading-[120%] xl:max-w-[23ch]"
+                            />
 
                             <p className="mt-[15px] lg:mt-[30px] font-nexa text-20 text-white/70 max-w-[51ch]">
                                 Delivering reliable engineering, construction and industrial solutions with decades of
