@@ -61,7 +61,7 @@ const Qsr = () => {
                                     height={894}
                                     className="
             w-full
-            max-w-full
+            max-w-[450px]
             md:max-w-[480px]
             2xl:max-w-[640px]
             3xl:max-w-[726px]
