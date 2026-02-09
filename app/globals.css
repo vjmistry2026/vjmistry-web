@@ -115,16 +115,25 @@ body {
 
     /* Large headings */
     --text-60: clamp(28px, 2.9vw + 14px, 60px);
-    --text-75: clamp(38px, 3.76vw + 23.9px, 75px);
+    --text-75: clamp(39px, 3.76vw + 23.9px, 75px);
     --text-82: clamp(44px, 2.79vw + 44px, 82px);
     --text-85: clamp(48px, 2.72vw + 48px, 85px);
 
 
-    --space-40: clamp(25px, 2vw + 8px, 40px);
-    --space-70: clamp(35px, 3vw + 8px, 70px);
+    /* --space-40: clamp(25px, 2vw + 8px, 40px); */
+    --space-40: clamp(25px, 1.1vw + 25px, 40px);
+
+    /* --space-70: clamp(35px, 3vw + 8px, 70px); */
+    --space-70: clamp(35px, 2.57vw + 35px, 70px);
+
     --space-100: clamp(40px, 4vw + 8px, 100px);
-    --space-130: clamp(50px, 5vw + 16px, 130px);
-    --space-150: clamp(60px, 6vw + 16px, 150px);
+    /* --space-100: clamp(40px, 4.4vw + 40px, 100px); */
+
+    /* --space-130: clamp(50px, 5vw + 16px, 130px); */
+    --space-130: clamp(50px, 5.88vw + 50px, 130px);
+
+    /* --space-150: clamp(60px, 6vw + 16px, 150px); */
+    --space-150: clamp(60px, 6.62vw + 60px, 150px);
 }
 
 
@@ -212,4 +221,14 @@ body {
     transform: scaleX(0);
     animation: progress-bar-fill-sets-apart 4s linear forwards;
     display: block;
+}
+
+@keyframes border-move {
+    from {
+        background-position: 0% 50%, 0% 50%;
+    }
+
+    to {
+        background-position: 200% 50%, 200% 50%;
+    }
 }

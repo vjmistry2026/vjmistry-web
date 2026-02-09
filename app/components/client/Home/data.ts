@@ -15,7 +15,7 @@ export const legacySectionData = {
       "VJ Mistry is a trusted engineering and contracting company known for delivering high-quality solutions across complex industrial and infrastructure projects. With a strong foundation built on technical expertise, disciplined execution, and long-term client relationships, we continue to support projects that demand precision, safety, and reliability.",
     primaryButton: {
       label: "Know More About Us",
-      href: "/about",
+      href: "#",
     },
     image: {
       src: "/assets/images/home/legacy/legacy-main-right.jpg",
