@@ -85,9 +85,13 @@ useEffect(() => {
         <section className="bg-white pt-100 pb-100 lg:pb-150">
             <div className="container">
                 {/* TOP SECTION */}
-                <div className="flex flex-col md:flex-row items-stretch lg:items-center gap-6 lg:gap-10">
+                {/* <div className="flex flex-col md:flex-row items-stretch lg:items-center gap-6 lg:gap-10 2xl:gap-[86px]"> */}
+                <div className="flex flex-col md:flex-row items-stretch lg:items-center gap-6 lg:gap-[45px] xl:gap-[60px] 2xl:gap-18">
+
                     {/* LEFT – 48% */}
-                    <div className="w-full md:w-[50%] lg:w-47%] overflow-hidden">
+                    {/* <div className="w-full md:w-[50%] lg:w-[47%] xl:w-[46%] 2xl:w-[44%] overflow-hidden"> */}
+                    <div className="w-fit md:max-w-[50%] overflow-hidden">
+
                         <h2
                             ref={titleRef}
                             className="text-60 2xl:text-75 font-condensed flex flex-col leading-[100%] text-black"
@@ -108,7 +112,7 @@ useEffect(() => {
                             </span>
                         </h2>
 
-                        <p className="text-paragraph mt-[20px] lg:mt-[30px] font-nexa font-bold text-20 leading-[1.5] lg:max-w-[700px]">
+                        <p className="text-paragraph mt-[20px] lg:mt-[30px] font-nexa font-bold text-20 leading-[1.5] xl:max-w-[670px] tracking-[-0.4px]">
                             {hero.description}
                         </p>
                         <div className="mt-[20px] lg:mt-[30px] xl:mt-[40px] 2xl:mt-15">
@@ -121,7 +125,9 @@ useEffect(() => {
                     </div>
 
                     {/* RIGHT – 53% */}
-                    <div className="w-full md:w-[50%] lg:w-[53%] xl:w-[54%] 2xl:w-[56%] relative">
+                    {/* <div className="w-full md:w-[50%] lg:w-[53%] xl:w-[54%] 2xl:w-[56%] relative"> */}
+                    <div className="flex-1 relative flex">
+
                         <div
                             className="
     relative overflow-hidden
@@ -172,7 +178,7 @@ useEffect(() => {
                                 }}
                                 data-id={item.id}
                                 onMouseEnter={() => setActiveId(item.id)}
-                                className="relative overflow-hidden p-6  2xl:p-10 max-w-[367px]
+                                className="relative overflow-hidden p-6  2xl:p-10 max-w-[367px] 
   transition-all duration-500
   [clip-path:polygon(0_0,calc(100%-45px)_0,100%_50px,100%_100%,0_100%)]
   bg-[#F9F9F9]"
