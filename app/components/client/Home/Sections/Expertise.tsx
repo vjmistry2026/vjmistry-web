@@ -9,6 +9,7 @@ import { useRef, useState } from "react";
 import "swiper/css";
 import CustomButton from "@/app/components/client/common/CustomButton";
 import { useContainerPadding } from "@/app/hooks/useContainerPadding";
+import AnimatedHeading from "../../common/AnimateHeading";
 
 const ExpertiseSection = () => {
     const containerPadding = useContainerPadding();
@@ -23,9 +24,12 @@ const ExpertiseSection = () => {
                 {/* HEADER */}
                 <div className="flex flex-col lg:flex-row lg:items-end items-start justify-between mb-[40px] lg:mb-[60px] gap-[20px] container">
                     <div className="w-full">
-                        <h2 className="text-60 lg:text-66 3xl:text-75 font-condensed leading-[100%] mb-[20px] lg:mb-[30px] text-white">
-                            {heading}
-                        </h2>
+                        <AnimatedHeading
+                            tag="h2"
+                            text={heading}
+                            className="text-60 lg:text-66 3xl:text-75 font-condensed leading-[100%] mb-[20px] lg:mb-[30px] text-white"
+                        />
+
                         <p className="text-20 max-w-[590px] font-nexa font-bold text-white/70 leading-[1.5]">
                             {description}
                         </p>

@@ -21,6 +21,10 @@ body {
     font-family: var(--font-roboto-condensed);
 }
 
+* {
+    overscroll-behavior: none;
+}
+
 
 @theme {
     --breakpoint-*: initial;
@@ -114,7 +118,7 @@ body {
 
 
     /* Large headings */
-    --text-60: clamp(28px, 2.9vw + 14px, 60px);
+    --text-60: clamp(32px, 3vw + 14px, 60px);
     --text-66: clamp(36px, 2.35vw + 29.8px, 66px);
 
     --text-75: clamp(39px, 3.76vw + 23.9px, 75px);

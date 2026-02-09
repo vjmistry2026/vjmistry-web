@@ -17,7 +17,7 @@ const Footer = () => {
                 <div className="pb-40 pt-70 grid grid-cols-2 xl:grid-cols-[2fr_1.2fr_1.2fr_1.2fr] gap-y-[30px] xl:gap-y-[60px] gap-x-100">
                     {/* SUBSCRIBE */}
                     <div className="max-w-[480px] col-span-2 md:col-span-1 xl:col-span-1">
-                        <h3 className="text-66 3xl:text-75 font-condensed leading-[110%] mb-[22px] lg:mb-[30px] text-[#FDFDFD]">
+                        <h3 className="text-60 lg:text-66 3xl:text-75 font-condensed leading-[110%] mb-[22px] lg:mb-[30px] text-[#FDFDFD]">
                             Subscribe
                             <br />
                             to Newsletter
@@ -39,7 +39,7 @@ const Footer = () => {
                         <h4 className="text-32 font-condensed leading-[100%] mb-[30px] text-[#FDFDFD]">
                             Quick Links
                         </h4>
-                        <ul className="flex flex-col gap-[20px] text-20 leading-[1.5] text-paragraph">
+                        <ul className="flex flex-col gap-2 lg:gap-4 xl:gap-[20px] text-20 leading-[1.5] text-paragraph">
                             {quickLinks.map((item) => (
                                 <li key={item.label}>
                                     <Link href={item.href} className="hover:text-[#FDFDFD] font-nexa font-bold transition">
@@ -55,7 +55,7 @@ const Footer = () => {
                         <h4 className="text-32 font-condensed leading-[100%] mb-[30px] text-[#FDFDFD]">
                             Resources
                         </h4>
-                        <ul className="flex flex-col gap-[20px] text-20 leading-[1.5] text-paragraph">
+                        <ul className="flex flex-col gap-2 lg:gap-4 xl:gap-[20px] text-20 leading-[1.5] text-paragraph">
                             {resources.map((item) => (
                                 <li key={item.label}>
                                     <Link href={item.href} className="hover:text-[#FDFDFD] font-nexa font-bold transition">
