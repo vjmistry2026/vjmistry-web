@@ -25,34 +25,41 @@ const TextGenerateEffect = ({
         if (hasAnimated.current) return;
         hasAnimated.current = true;
 
-        animate(
-            "[data-char]",
-            {
-                opacity: 1,
-                filter: filter ? "blur(0px)" : "none",
-            },
-            {
-                duration,
-                delay: stagger(0.04), // typing cadence
-                ease: "easeOut",
-            }
-        );
+        const startAnimation = () => {
+            animate(
+                "[data-char]",
+                {
+                    opacity: 1,
+                    filter: filter ? "blur(0px)" : "none",
+                },
+                {
+                    duration,
+                    delay: stagger(0.03),
+                    ease: "easeOut",
+                }
+            );
+        };
+
+        // ✅ Ensure animation starts AFTER page load
+        if (document.readyState === "complete") {
+            startAnimation();
+        } else {
+            window.addEventListener("load", startAnimation, { once: true });
+        }
     }, [animate, duration, filter]);
 
     return (
         <Tag className={className}>
-            <motion.span
-                ref={scope}
-                style={{ display: "inline-block", whiteSpace: "pre-wrap" }}
-            >
+            <motion.span ref={scope}>
                 {text.split("").map((char, index) => (
                     <motion.span
-                        key={`${char}-${index}`}
+                        key={index}
                         data-char
                         style={{
                             opacity: 0,
                             filter: filter ? "blur(8px)" : "none",
-                            display: "inline-block",
+                            display: "inline",       // ✅ NOT inline-block
+                            whiteSpace: "pre-wrap",  // ✅ natural wrapping
                         }}
                     >
                         {char}

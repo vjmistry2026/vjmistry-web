@@ -21,10 +21,6 @@ body {
     font-family: var(--font-roboto-condensed);
 }
 
-* {
-    overscroll-behavior: none;
-}
-
 
 @theme {
     --breakpoint-*: initial;
