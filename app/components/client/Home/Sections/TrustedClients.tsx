@@ -4,12 +4,16 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { trustedClientsData } from "../data";
-import { useContainerPadding } from "@/app/hooks/useContainerPadding";
 import AnimatedHeading from "../../common/AnimateHeading";
+import { motion } from "framer-motion";
+import { moveUp } from "@/app/components/motionVariants";
+import { useContainerLeftInset } from "@/app/hooks/useContainerLeftInset";
+import ContainerAnchor from "../../Layout/ContainerAnchor";
 
 const TrustedClients = () => {
-    const containerPadding = useContainerPadding();
     const { title, description, logos } = trustedClientsData;
+        const containerRef = useRef<HTMLDivElement>(null);
+    const leftInset = useContainerLeftInset(containerRef);
 
     const isDesktopRef = useRef(false);
 
@@ -64,16 +68,22 @@ const TrustedClients = () => {
 
     return (
         <section className="bg-[#F9F9F9] py-100 lg:py-130 overflow-hidden">
-            <div style={{ paddingLeft: containerPadding }}>
+            <ContainerAnchor ref={containerRef} />
+            <div style={{ paddingLeft: leftInset }}>
                 <AnimatedHeading
                     tag="h2"
                     text={title}
                     className="text-60 lg:text-66 3xl:text-75 leading-[100%] font-condensed mb-[20px] lg:mb-[30px] text-[#1C1C1C]"
                 />
 
-                <p className="text-20 leading-[1.5] font-nexa font-bold text-paragraph max-w-[750px] mb-[30px] lg:mb-[60px]">
+                <motion.p 
+                variants={moveUp(0.3)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                className="text-20 leading-[1.5] font-nexa font-bold text-paragraph max-w-[750px] mb-[30px] lg:mb-[60px]">
                     {description}
-                </p>
+                </motion.p>
 
                 {/* MARQUEE */}
                 <div

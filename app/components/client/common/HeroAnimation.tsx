@@ -58,8 +58,8 @@ const TextGenerateEffect = ({
                         style={{
                             opacity: 0,
                             filter: filter ? "blur(8px)" : "none",
-                            display: "inline",       // ✅ NOT inline-block
-                            whiteSpace: "pre-wrap",  // ✅ natural wrapping
+                            display: "inline",
+                            whiteSpace: "pre-wrap",
                         }}
                     >
                         {char}
