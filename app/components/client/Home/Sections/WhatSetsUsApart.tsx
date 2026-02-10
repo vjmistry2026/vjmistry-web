@@ -5,14 +5,17 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperClass } from "swiper";
 import { useRef, useState, useEffect } from "react";
 import { whatSetsUsApartData } from "../data";
-import { useContainerPadding } from "@/app/hooks/useContainerPadding";
 
 import "swiper/css";
 import AnimatedHeading from "../../common/AnimateHeading";
+import { moveUp } from "@/app/components/motionVariants";
+import { motion } from "framer-motion";
+import { useContainerLeftInset } from "@/app/hooks/useContainerLeftInset";
 
 const WhatSetsUsApart = () => {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const leftInset = useContainerLeftInset(containerRef);
     const { heading, slides } = whatSetsUsApartData;
-    const padding = useContainerPadding();
 
     const swiperRef = useRef<SwiperClass | null>(null);
     const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -77,15 +80,15 @@ const WhatSetsUsApart = () => {
         <section className="bg-white py-100 lg:py-150 overflow-hidden">
             <div>
                 {/* HEADER */}
-                <div className="container flex items-center justify-between mb-[20px] lg:mb-[60px]">
+                <div ref={containerRef} className="container flex items-center justify-between mb-[20px] lg:mb-[60px]">
                     <AnimatedHeading
                         tag="h2"
                         text={heading}
-                        className="text-60 lg:text-66 xl:text-75 3xl:text-82 font-condensed leading-[100%] text-black"
+                        className="text-60 lg:text-66 3xl:text-82 font-condensed leading-[100%] text-black"
                     />
 
                     {/* NAVIGATION */}
-                    <div className="flex items-center gap-[10px] lg:gap-[20px]">
+                    <motion.div variants={moveUp(0.35)} initial="hidden" whileInView="show" viewport={{ once: true }} className="flex items-center gap-[10px] lg:gap-[20px]">
                         <button
                             onClick={() => swiperRef.current?.slidePrev()}
                             className="border group border-border cursor-pointer h-[44px] sm:h-[52px] lg:h-[64px] w-[44px] sm:w-[52px] lg:w-[64px] flex items-center justify-center hover:bg-primary transition-all duration-300"
@@ -111,7 +114,7 @@ const WhatSetsUsApart = () => {
                                 className="rotate-45 group-hover:invert group-hover:brightness-0 transition-all duration-300 w-[10px] h-[10px] object-contain lg:w-[14px] lg:h-[14px]"
                             />
                         </button>
-                    </div>
+                    </motion.div>
                 </div>
 
                 {/* SLIDER */}
@@ -123,11 +126,14 @@ const WhatSetsUsApart = () => {
                             setActiveIndex(swiper.activeIndex);
                         });
                     }}
-                    style={{ marginLeft: padding }}
+                    style={{ marginLeft: leftInset }}
                     className="!overflow-hidden !pr-[15px] !lg:pr-0"
                     breakpoints={{
                         0: {
                             slidesPerView: 1,
+                        },
+                        640: {
+                            slidesPerView: 1.3,
                         },
                         768: {
                             slidesPerView: 2.2,
@@ -142,7 +148,11 @@ const WhatSetsUsApart = () => {
 
                         return (
                             <SwiperSlide key={slide.id}>
-                                <div
+                                <motion.div
+                                    variants={moveUp(index * 0.4)}
+                                    initial="hidden"
+                                    whileInView="show"
+                                    viewport={{ once: true }}
                                     onMouseEnter={() => {
                                         requestAnimationFrame(() => {
                                             setActiveIndex(index);
@@ -154,7 +164,7 @@ const WhatSetsUsApart = () => {
                                             startAutoplay();
                                         });
                                     }}
-                                    className={`relative border-l border-y border-border overflow-hidden cursor-pointer ${index === slides.length - 1 ? "border-r" : ""}`}
+                                    className={`relative border-l border-y border-border overflow-hidden cursor-pointer 3xl:min-h-[356px] ${index === slides.length - 1 ? "border-r" : ""}`}
                                 >
                                     {/* BACKGROUND IMAGE */}
                                     <Image
@@ -209,7 +219,7 @@ const WhatSetsUsApart = () => {
                                             {slide.title}
                                         </h3>
                                     </div>
-                                </div>
+                                </motion.div>
                             </SwiperSlide>
                         );
                     })}

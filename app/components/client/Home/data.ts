@@ -168,22 +168,6 @@ export const industriesData = {
       image: "/assets/images/home/serve/serve1.jpg",
       icon: "/assets/images/home/serve/serve-icon1.svg",
     },
-    {
-      id: 5,
-      title: "Commercial Development",
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-      image: "/assets/images/home/serve/serve2.jpg",
-      icon: "/assets/images/home/serve/serve-icon2.svg",
-    },
-    {
-      id: 6,
-      title: "Commercial Development",
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-      image: "/assets/images/home/serve/serve3.jpg",
-      icon: "/assets/images/home/serve/serve-icon3.svg",
-    },
   ],
 };
 

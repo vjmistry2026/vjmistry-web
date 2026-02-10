@@ -4,6 +4,8 @@ import Image from "next/image";
 import { buildWithConfidenceData } from "../data";
 import CustomButton from "@/app/components/client/common/CustomButton";
 import AnimatedHeading from "../../common/AnimateHeading";
+import { moveUp } from "@/app/components/motionVariants";
+import { motion } from "framer-motion";
 
 const PreFooterCta = () => {
     const { title, description, backgroundImage } = buildWithConfidenceData;
@@ -22,17 +24,26 @@ const PreFooterCta = () => {
                     <AnimatedHeading
                         tag="h2"
                         text={title}    
-                        className="text-60 2xl:text-75 font-condensed leading-[100%] text-[#FDFDFD] mb-[20px] lg:mb-[30px] max-w-[13ch]"
+                        className="text-60 2xl:text-75 font-condensed leading-[120%] text-[#FDFDFD] mb-[20px] lg:mb-[30px] max-w-[13ch]"
                     />
 
-                    <p className="text-20 font-nexa font-bold leading-[1.5] text-white/70 mb-[30px] lg:mb-[60px] max-w-[54ch]">
+                    <motion.p 
+                    variants={moveUp(0.3)}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true }}
+                    className="text-20 font-nexa font-bold leading-[1.5] text-white/70 mb-[30px] lg:mb-[60px] max-w-[54ch]">
                         {description}
-                    </p>
+                    </motion.p>
 
                     {/* STATIC BUTTON */}
-                    <div>
+                    <motion.div
+                    variants={moveUp(0.5)}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true }}>
                         <CustomButton label="Contact Us" href="#" />
-                    </div>
+                    </motion.div>
                 </div>
             </div>
         </section>

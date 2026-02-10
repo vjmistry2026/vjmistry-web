@@ -5,6 +5,8 @@ import { legacySectionData } from "../data";
 import { useEffect, useRef, useState } from "react";
 import Counter from "@/app/components/client/common/Counter";
 import CustomButton from "@/app/components/client/common/CustomButton";
+import { moveUp } from "@/app/components/motionVariants";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const LegacySection = () => {
     const { hero, stats } = legacySectionData;
@@ -16,50 +18,58 @@ const LegacySection = () => {
     const [isActiveTitle, setIsActiveTitle] = useState(false);
     const titleRef = useRef<HTMLHeadingElement | null>(null);
 
-useEffect(() => {
-    const isAbove720 = window.innerWidth >= 720;
+    const imageWrapperRef = useRef<HTMLDivElement | null>(null);
 
-    // CLEANUP helper
-    let observer: IntersectionObserver | null = null;
+    const { scrollYProgress } = useScroll({
+        target: imageWrapperRef,
+        offset: ["start end", "end start"],
+    });
 
-    if (isAbove720 && cardsWrapperRef.current) {
-        // ✅ DESKTOP / TABLET (keep same behavior)
-        observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    setActiveId(2); // same as before
-                    observer?.disconnect();
-                }
-            },
-            { threshold: 0.3 }
-        );
+    const y = useTransform(scrollYProgress, [0, 1], ["0vh", "-10vh"]);
 
-        observer.observe(cardsWrapperRef.current);
-    } else {
-        // ✅ MOBILE (<720px) — per-card activation
-        observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
+    useEffect(() => {
+        const isAbove720 = window.innerWidth >= 720;
+
+        // CLEANUP helper
+        let observer: IntersectionObserver | null = null;
+
+        if (isAbove720 && cardsWrapperRef.current) {
+            // ✅ DESKTOP / TABLET (keep same behavior)
+            observer = new IntersectionObserver(
+                ([entry]) => {
                     if (entry.isIntersecting) {
-                        const id = Number(entry.target.getAttribute("data-id"));
-                        setActiveId(id);
+                        setActiveId(2); // same as before
+                        observer?.disconnect();
                     }
-                });
-            },
-{
-        threshold: 0,
-        rootMargin: "-60% 0px -40% 0px",
-    }
-        );
+                },
+                { threshold: 0.3 },
+            );
 
-        cardRefs.current.forEach((el) => el && observer!.observe(el));
-    }
+            observer.observe(cardsWrapperRef.current);
+        } else {
+            // ✅ MOBILE (<720px) — per-card activation
+            observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            const id = Number(entry.target.getAttribute("data-id"));
+                            setActiveId(id);
+                        }
+                    });
+                },
+                {
+                    threshold: 0,
+                    rootMargin: "-60% 0px -40% 0px",
+                },
+            );
 
-    return () => {
-        observer?.disconnect();
-    };
-}, []);
+            cardRefs.current.forEach((el) => el && observer!.observe(el));
+        }
 
+        return () => {
+            observer?.disconnect();
+        };
+    }, []);
 
     useEffect(() => {
         if (!titleRef.current) return;
@@ -88,11 +98,9 @@ useEffect(() => {
                 {/* TOP SECTION */}
                 {/* <div className="flex flex-col md:flex-row items-stretch lg:items-center gap-6 lg:gap-10 2xl:gap-[86px]"> */}
                 <div className="flex flex-col md:flex-row items-stretch lg:items-center gap-6 lg:gap-[45px] xl:gap-[60px] 2xl:gap-18">
-
                     {/* LEFT – 48% */}
                     {/* <div className="w-full md:w-[50%] lg:w-[47%] xl:w-[46%] 2xl:w-[44%] overflow-hidden"> */}
                     <div className="w-fit md:max-w-[50%] overflow-hidden">
-
                         <h2
                             ref={titleRef}
                             className="text-60 lg:text-66 3xl:text-75 font-condensed flex flex-col leading-[100%] text-black"
@@ -113,23 +121,35 @@ useEffect(() => {
                             </span>
                         </h2>
 
-                        <p className="text-paragraph mt-[20px] lg:mt-[30px] font-nexa font-bold text-20 leading-[1.5] xl:max-w-[670px] tracking-[-0.4px]">
+                        <motion.p
+                            variants={moveUp(0.2)}
+                            initial="hidden"
+                            whileInView="show"
+                            viewport={{ once: true }}
+                            className="text-paragraph mt-[20px] lg:mt-[30px] font-nexa font-bold text-20 leading-[1.5] xl:max-w-[670px] tracking-[-0.4px]"
+                        >
                             {hero.description}
-                        </p>
-                        <div className="mt-[20px] lg:mt-[30px] xl:mt-[40px] 2xl:mt-15">
+                        </motion.p>
+                        <motion.div
+                            variants={moveUp(0.4)}
+                            initial="hidden"
+                            whileInView="show"
+                            viewport={{ once: true }}
+                            className="mt-[20px] lg:mt-[30px] xl:mt-[40px] 2xl:mt-15"
+                        >
                             <CustomButton
                                 label={hero.primaryButton.label}
                                 href={hero.primaryButton.href}
                                 textColor="black"
                             />
-                        </div>
+                        </motion.div>
                     </div>
 
                     {/* RIGHT – 53% */}
                     {/* <div className="w-full md:w-[50%] lg:w-[53%] xl:w-[54%] 2xl:w-[56%] relative"> */}
                     <div className="flex-1 relative flex">
-
                         <div
+                            ref={imageWrapperRef}
                             className="
     relative overflow-hidden
     [clip-path:polygon(0_0,calc(100%-40px)_0,100%_40px,100%_100%,0_100%)]
@@ -140,14 +160,17 @@ useEffect(() => {
     2xl:[clip-path:polygon(0_0,calc(100%-90px)_0,100%_90px,100%_100%,0_100%)]
   "
                         >
-                            <Image
-                                src={hero.image.src}
-                                alt={hero.image.alt}
-                                width={836}
-                                height={707}
-                                className="w-full h-full object-cover"
-                                priority
-                            />
+                            <motion.div style={{ y }} className="w-full h-full">
+                                <Image
+                                    src={hero.image.src}
+                                    alt={hero.image.alt}
+                                    width={836}
+                                    height={707}
+                                    className="w-full h-full object-cover scale-y-[1.25] scale-x-[1.1]"
+                                    priority
+                                />
+                            </motion.div>
+
                             <div
                                 style={{
                                     background:
@@ -167,12 +190,19 @@ useEffect(() => {
                 </div>
 
                 {/* STATS CARDS */}
-                <div ref={cardsWrapperRef} className="mt-100 lg:mt-150 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-10 2xl:gap-[51px]">
+                <div
+                    ref={cardsWrapperRef}
+                    className="mt-100 lg:mt-150 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-10 2xl:gap-[51px]"
+                >
                     {stats.map((item, index) => {
                         const isActive = activeId === item.id;
 
                         return (
-                            <div
+                            <motion.div
+                                variants={moveUp(index * 0.35)}
+                                initial="hidden"
+                                whileInView="show"
+                                viewport={{ once: true }}
                                 key={item.id}
                                 ref={(el) => {
                                     cardRefs.current[index] = el;
@@ -180,7 +210,7 @@ useEffect(() => {
                                 data-id={item.id}
                                 onMouseEnter={() => setActiveId(item.id)}
                                 className="relative overflow-hidden p-6  2xl:p-10 sm:max-w-[367px] 2xl:min-h-[385px]
-  transition-all duration-500
+  transition-colors duration-500
   [clip-path:polygon(0_0,calc(100%-45px)_0,100%_50px,100%_100%,0_100%)]
   bg-[#F9F9F9]"
                             >
@@ -211,19 +241,29 @@ useEffect(() => {
                                         className={`transition ${isActive ? "invert brightness-0" : ""}`}
                                     />
 
-                                    <h3
+                                    <motion.h3
+                                        variants={moveUp(index * 0.35)}
+                                        initial="hidden"
+                                        whileInView="show"
+                                        viewport={{ once: true }}
                                         className={`mt-[92px] xl:mt-[65px] 2xl:mt-[92px] text-75 md:text-60 xl:text-75 font-condensed leading-[100%] mb-[18px] ${isActive ? "text-white" : "text-black"}`}
                                     >
                                         <Counter to={item.value} duration={2} suffix="+" />
-                                    </h3>
+                                    </motion.h3>
 
-                                    <p
-                                        className={`text-20 max-w-[230px] font-nexa font-bold leading-[1.5] ${isActive ? "text-[#D9D9D9]" : "text-[#7D7D7D]"}`}
+                                    <motion.p
+                                        variants={moveUp(index * 0.35)}
+                                        initial="hidden"
+                                        whileInView="show"
+                                        viewport={{ once: true }}
+                                        className={`text-20 font-nexa font-bold leading-[1.5] ${
+                                            index === stats.length - 1 ? "max-w-[110px]" : "max-w-[230px]"
+                                        } ${isActive ? "text-[#D9D9D9]" : "text-[#7D7D7D]"}`}
                                     >
                                         {item.label}
-                                    </p>
+                                    </motion.p>
                                 </div>
-                            </div>
+                            </motion.div>
                         );
                     })}
                 </div>
