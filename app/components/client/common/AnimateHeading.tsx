@@ -43,7 +43,7 @@ const AnimatedHeading = ({
                 stagger: 0.025,
                 scrollTrigger: {
                     trigger: el,
-                    start: "top 85%",
+                    start: "top 95%",
                     once: true,
                 },
             });
