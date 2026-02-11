@@ -13,7 +13,7 @@ const Footer = () => {
     const activeData = contactLocations[activeLocation];
 
     return (
-        <footer className="bg-[#1C1C1C]">
+        <footer className="bg-[#1C1C1C] overflow-hidden">
             <div className="container">
                 {/* ================= TOP SECTION ================= */}
                 <div className="pb-40 pt-70 grid grid-cols-2 xl:grid-cols-[2fr_1.2fr_1.2fr_1.2fr] gap-y-[30px] xl:gap-y-[60px] gap-x-100">
