@@ -272,7 +272,7 @@ const animateOutgoingCollapse = (prevImage: string | null, container: HTMLElemen
             background:linear-gradient(
                 180deg,
                 rgba(0,0,0,0) 0%,
-                rgba(0,0,0,1) 100%
+                rgba(0,0,0,0.3) 100%
             );
         "></div>
     `;
@@ -293,7 +293,7 @@ const animateOutgoingCollapse = (prevImage: string | null, container: HTMLElemen
             // scale down
             .to(imageWrap, {
                 scaleX: 0.85,
-                scaleY: 0.7,
+                scaleY: 0.75,
                 duration: 1.2,
                 ease: "power3.out",
             })
@@ -340,7 +340,7 @@ export default function HeroSection() {
                         <div className="relative h-screen w-full hero-slide">
                             <Image src={slide.image} alt={slide.title} fill priority className="object-cover" />
                             <div className="absolute inset-0 bg-[#00000033]" />
-                            <div className="absolute left-0 right-0 bottom-0 top-[20%] bg-[linear-gradient(180deg,rgba(0,0,0,0)_0%,rgba(0,0,0,1)_100%)]" />
+                            <div className="absolute left-0 right-0 bottom-0 top-[20%] bg-[linear-gradient(180deg,rgba(0,0,0,0)_0%,rgba(0,0,0,0.3)_100%)]" />
                         </div>
                     </SwiperSlide>
                 ))}
