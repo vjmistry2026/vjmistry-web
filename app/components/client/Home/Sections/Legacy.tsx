@@ -192,7 +192,7 @@ const LegacySection = () => {
                 {/* STATS CARDS */}
                 <div
                     ref={cardsWrapperRef}
-                    className="mt-100 lg:mt-150 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-10 2xl:gap-[51px]"
+                    className="mt-100 lg:mt-150 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-10 3xl:gap-[51px]"
                 >
                     {stats.map((item, index) => {
                         const isActive = activeId === item.id;
