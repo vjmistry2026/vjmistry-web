@@ -62,7 +62,7 @@ const Qsr = () => {
 }}
 
                 >
-                    <div className="flex flex-col md:flex-row md:items-center gap-[24px] lg:gap-[60px]">
+                    <div className="flex flex-col md:flex-row md:items-end lg:items-center gap-[24px] lg:gap-[60px]">
                         {/* LEFT IMAGE */}
                         <motion.div
                             variants={moveUp(0.3)}
