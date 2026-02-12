@@ -14,18 +14,16 @@ export default function DesktopNavbar() {
 
     const isActive = hovered || scrolled;
 
-
     useEffect(() => {
-    const handleScroll = () => {
-        setScrolled(window.scrollY > 10);
-    };
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 10);
+        };
 
-    window.addEventListener("scroll", handleScroll);
-    handleScroll(); // run once on mount
+        window.addEventListener("scroll", handleScroll);
+        handleScroll(); // run once on mount
 
-    return () => window.removeEventListener("scroll", handleScroll);
-}, []);
-
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
     return (
         <nav
@@ -69,12 +67,12 @@ export default function DesktopNavbar() {
                                     {item.href ? (
                                         <Link
                                             href={item.href}
-                                            className="text-16 2xl:text-20 font-nexa font-bold leading-[100%]"
+                                            className="text-16 xl:text-17 3xl:text-20 font-nexa font-bold leading-[100%]"
                                         >
                                             {item.label}
                                         </Link>
                                     ) : (
-                                        <span className="text-16 2xl:text-20 font-nexa font-bold leading-[100%]">
+                                        <span className="text-16 xl:text-17 3xl:text-20 font-nexa font-bold leading-[100%]">
                                             {item.label}
                                         </span>
                                     )}
@@ -126,7 +124,9 @@ export default function DesktopNavbar() {
 
                     {/* CTA Square (exact 20px gap) */}
                     <Link
-                        href="/contact"
+                        href="#"
+                        onMouseEnter={() => setHoveredItem("Contact Us")}
+                        onMouseLeave={() => setHoveredItem(null)}
                         className="ml-5 2xl:ml-[20px] p-[25px] bg-[var(--primary)] flex items-center justify-center"
                     >
                         <Image
@@ -134,7 +134,9 @@ export default function DesktopNavbar() {
                             alt="Go"
                             width={16}
                             height={16}
-                            className={`transition-all duration-400 ${hovered ? "rotate-45" : ""}`}
+                            className={`transition-transform duration-400 ${
+                                hoveredItem === "Contact Us" ? "rotate-45" : ""
+                            }`}
                         />
                     </Link>
                 </div>

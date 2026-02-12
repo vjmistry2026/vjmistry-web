@@ -11,7 +11,7 @@ const PreFooterCta = () => {
     const { title, description, backgroundImage } = buildWithConfidenceData;
 
     return (
-        <section className="relative py-100 lg:py-130 w-full overflow-hidden">
+        <section className="relative py-100 lg:py-130 w-full overflow-hidden max-h-[643px]">
             {/* Background Image */}
             <Image src={backgroundImage} alt="Build with confidence" fill priority className="object-cover" />
 

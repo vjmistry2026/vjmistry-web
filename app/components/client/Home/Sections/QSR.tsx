@@ -11,10 +11,10 @@ import ContainerAnchor from "../../Layout/ContainerAnchor";
 const Qsr = () => {
     const containerRef = useRef<HTMLDivElement>(null);
     const leftInset = useContainerLeftInset(containerRef);
-    const [isLg, setIsLg] = useState(false);
+    const [screenWidth, setScreenWidth] = useState(0);
 
     useEffect(() => {
-        const check = () => setIsLg(window.innerWidth >= 1024);
+        const check = () => setScreenWidth(window.innerWidth);
         check();
         window.addEventListener("resize", check);
         return () => window.removeEventListener("resize", check);
@@ -26,7 +26,7 @@ const Qsr = () => {
             <ContainerAnchor ref={containerRef} />
 
             {/* HEIGHT CONTROLLER */}
-            <div className="relative overflow-hidden sm:h-auto lg:h-[600px] xl:h-[650px] 2xl:h-[750px] 3xl:min-h-[930px]">
+            <div className="relative overflow-hidden sm:h-auto lg:h-[600px] xl:h-[640px] 2xl:h-[750px] 3xl:min-h-[930px]">
                 {/* BG SVG — ONLY lg+ */}
                 <div className="hidden xl:block absolute inset-0">
                     <Image
@@ -38,6 +38,10 @@ const Qsr = () => {
                     />
                 </div>
 
+                <div className="hidden 2xl:block absolute top-0 left-0 -translate-x-[28.5%] 3xl:-translate-x-[29.5%] bottom-0 z-[10] w-full h-full">
+                    <Image src="/assets/images/home/qsr/line-svg.svg" alt="QSR" fill className="object-contain" priority />
+                </div>
+
                 {/* CONTENT WRAPPER */}
                 <div
                     className="
@@ -47,7 +51,10 @@ const Qsr = () => {
                         md:container
                         lg:px-0
                     "
-                    style={{ paddingLeft: leftInset, paddingRight: !isLg ? leftInset : undefined }}
+                    style={{
+                        paddingLeft: screenWidth >= 770 && screenWidth < 1024 ? 0 : leftInset + 15,
+                        paddingRight: screenWidth < 1024 ? leftInset : undefined,
+                    }}
                 >
                     <div className="flex flex-col md:flex-row md:items-center gap-[24px] lg:gap-[60px]">
                         {/* LEFT IMAGE */}
@@ -89,9 +96,9 @@ const Qsr = () => {
                                 viewport={{ once: true }}
                                 className="text-20 max-w-[684px] font-nexa font-bold text-paragraph leading-[1.5]"
                             >
-                                At VJ Mistry, quality and safety are integral to every stage of our work. Our processes
-                                are aligned with industry standards and best practices, ensuring consistent outcomes,
-                                safe work environments, and dependable project delivery.
+                                At VJ Mistry, quality and safety are integral to every stage of our work. Our processes are
+                                aligned with industry standards and best practices, ensuring consistent outcomes, safe work
+                                environments, and dependable project delivery.
                             </motion.p>
                         </div>
                     </div>

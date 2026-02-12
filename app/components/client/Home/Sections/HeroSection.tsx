@@ -231,7 +231,7 @@ import { Autoplay, EffectFade } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-fade";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { HERO_SLIDES } from "../data";
 import CustomButton from "@/app/components/client/common/CustomButton";
 import HeroAnimatedHeading from "../../common/HeroAnimation";
@@ -239,7 +239,7 @@ import gsap from "gsap";
 import { motion, AnimatePresence } from "framer-motion";
 import { moveLeft, moveUp } from "@/app/components/motionVariants";
 
-const animateOutgoingCollapse = (prevImage: string | null, container: HTMLElement) => {
+const animateOutgoingCollapse = (prevImage: string | null, container: HTMLElement, isMobile: boolean) => {
     if (!prevImage) return;
 
     // Overlay
@@ -268,13 +268,6 @@ const animateOutgoingCollapse = (prevImage: string | null, container: HTMLElemen
         <img src="${prevImage}"
             style="width:100%; height:100%; object-fit:cover;" />
         <div style="position:absolute; inset:0; background:rgba(0,0,0,0.2);"></div>
-        <div style="position:absolute; inset:0;
-            background:linear-gradient(
-                180deg,
-                rgba(0,0,0,0) 0%,
-                rgba(0,0,0,0.3) 100%
-            );
-        "></div>
     `;
 
     overlay.appendChild(imageWrap);
@@ -291,9 +284,10 @@ const animateOutgoingCollapse = (prevImage: string | null, container: HTMLElemen
                 ease: "power1.out",
             })
             // scale down
+
             .to(imageWrap, {
                 scaleX: 0.85,
-                scaleY: 0.75,
+                scaleY: isMobile ? 0.5 : 0.75,
                 duration: 1.2,
                 ease: "power3.out",
             })
@@ -310,6 +304,14 @@ export default function HeroSection() {
     const swiperRef = useRef<any>(null);
     const [activeIndex, setActiveIndex] = useState(0);
     const prevImageRef = useRef<string | null>(null);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const check = () => setIsMobile(window.innerWidth < 768);
+        check();
+        window.addEventListener("resize", check);
+        return () => window.removeEventListener("resize", check);
+    }, []);
 
     return (
         <section className="relative h-[100dvh] md:h-[90dvh] lg:h-[100dvh] w-full overflow-hidden">
@@ -325,7 +327,7 @@ export default function HeroSection() {
                     prevImageRef.current = HERO_SLIDES[swiper.realIndex].image;
                 }}
                 onBeforeTransitionStart={(swiper) => {
-                    animateOutgoingCollapse(prevImageRef.current, swiper.el);
+                    animateOutgoingCollapse(prevImageRef.current, swiper.el, isMobile);
                 }}
                 onSlideChange={(swiper) => {
                     setActiveIndex(swiper.realIndex);
@@ -340,7 +342,7 @@ export default function HeroSection() {
                         <div className="relative h-screen w-full hero-slide">
                             <Image src={slide.image} alt={slide.title} fill priority className="object-cover" />
                             <div className="absolute inset-0 bg-[#00000033]" />
-                            <div className="absolute left-0 right-0 bottom-0 top-[20%] bg-[linear-gradient(180deg,rgba(0,0,0,0)_0%,rgba(0,0,0,0.3)_100%)]" />
+                            {/* <div className="absolute left-0 right-0 bottom-0 top-[20%] bg-[linear-gradient(180deg,rgba(0,0,0,0)_0%,rgba(0,0,0,0.3)_100%)]" /> */}
                         </div>
                     </SwiperSlide>
                 ))}
