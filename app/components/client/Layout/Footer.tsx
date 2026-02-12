@@ -105,6 +105,7 @@ const Footer = () => {
                             <div className="flex items-center gap-[20px]">
                                 {socialMedia.map((item, index) => (
                                     <motion.div
+                                        key={index}
                                         variants={moveUp(index * 0.2)}
                                         initial="hidden"
                                         whileInView="show"
@@ -283,12 +284,12 @@ const Footer = () => {
                 className="bg-[#2A2A2A]"
             >
                 <div className="container py-[20px] 2xl:py-[34px] leading-[100%] flex items-center justify-between lg:justify-start lg:gap-[80px] text-20 font-nexa font-bold text-paragraph">
-                    <motion.div variants={moveUp(0.45)} initial="hidden" whileInView="show" viewport={{ once: true }}>
+                    <motion.div variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true }}>
                         <Link href="/privacy-policy" className="hover:text-white transition">
                             Privacy Policy
                         </Link>
                     </motion.div>
-                    <motion.div variants={moveUp(0.55)} initial="hidden" whileInView="show" viewport={{ once: true }}>
+                    <motion.div variants={moveUp(0.35)} initial="hidden" whileInView="show" viewport={{ once: true }}>
                         <Link href="/terms-conditions" className="hover:text-white transition">
                             Terms & Conditions
                         </Link>

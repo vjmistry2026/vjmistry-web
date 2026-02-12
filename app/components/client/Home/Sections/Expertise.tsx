@@ -93,7 +93,7 @@ const ExpertiseSection = () => {
                     onSwiper={(swiper) => (swiperRef.current = swiper)}
                     onProgress={(swiper) => setProgress(swiper.progress)}
                     spaceBetween={20}
-                    slidesPerView={1.2}
+                    slidesPerView={1.04}
                     breakpoints={{
                         640: {
                             slidesPerView: 1.3,
@@ -121,27 +121,20 @@ const ExpertiseSection = () => {
                 >
                     {slides.map((slide, index) => (
                         <SwiperSlide key={slide.id}>
-                            {/* <div className="group relative overflow-hidden cursor-pointer [clip-path:polygon(0_0,calc(100%-78px)_0,100%_65px,100%_100%,0_100%)] 2xl:min-h-[463px]"> */}
                             <motion.div
                                 variants={moveUp(index * 0.3)}
                                 initial="hidden"
                                 whileInView="show"
                                 viewport={{ once: true }}
                                 className="
-    group relative overflow-hidden cursor-pointer
-
-    [clip-path:polygon(0_0,calc(100%-45px)_0,100%_45px,100%_100%,0_100%)]
-
-    md:[clip-path:polygon(0_0,calc(100%-55px)_0,100%_50px,100%_100%,0_100%)]
-
-    lg:[clip-path:polygon(0_0,calc(100%-65px)_0,100%_55px,100%_100%,0_100%)]
-
-    xl:[clip-path:polygon(0_0,calc(100%-72px)_0,100%_60px,100%_100%,0_100%)]
-
-    2xl:[clip-path:polygon(0_0,calc(100%-78px)_0,100%_65px,100%_100%,0_100%)]
-
-    3xl:min-h-[463px]
-  "
+      group relative overflow-hidden cursor-pointer
+      [clip-path:polygon(0_0,calc(100%-45px)_0,100%_45px,100%_100%,0_100%)]
+      md:[clip-path:polygon(0_0,calc(100%-55px)_0,100%_50px,100%_100%,0_100%)]
+      lg:[clip-path:polygon(0_0,calc(100%-65px)_0,100%_55px,100%_100%,0_100%)]
+      xl:[clip-path:polygon(0_0,calc(100%-72px)_0,100%_60px,100%_100%,0_100%)]
+      2xl:[clip-path:polygon(0_0,calc(100%-78px)_0,100%_65px,100%_100%,0_100%)]
+      3xl:min-h-[463px] 3xl:min-w-[633px]
+    "
                             >
                                 {/* Image */}
                                 <Image
@@ -149,7 +142,7 @@ const ExpertiseSection = () => {
                                     alt={slide.title}
                                     width={520}
                                     height={463}
-                                    className="w-full h-[260px] md:h-[340px] lg:h-[420px] 2xl:h-full 3xl:min-h-[463px] object-cover"
+                                    className="w-full h-[260px] md:h-[340px] lg:h-[420px] 2xl:h-full 3xl:min-h-[463px] 3xl:min-w-[633px] object-cover"
                                 />
 
                                 {/* Dark overlay */}
@@ -164,33 +157,35 @@ const ExpertiseSection = () => {
                                 {/* DEFAULT TITLE */}
                                 <h3
                                     className="
-        absolute bottom-[20px] lg:bottom-[50px] left-[20px] lg:left-[50px] leading-[120%]
-        text-32 font-condensed max-w-[300px] text-[#FDFDFD]
-        transition-all duration-500 ease-out
-        group-hover:translate-y-[20px]
-        group-hover:opacity-0
+        absolute bottom-[25px] lg:bottom-[50px] left-[25px] lg:left-[50px]
+        text-30 md:text-32 font-condensed leading-[120%]
+        max-w-[300px] text-[#FDFDFD]
+        transition-transform duration-800 ease-[cubic-bezier(0.22,1,0.36,1)]
+        translate-y-0
+        group-hover:translate-y-[200%]
       "
                                 >
                                     {slide.title}
                                 </h3>
 
-                                {/* HOVER TITLE BOX */}
+                                {/* WHITE BOX (SAME LEFT & BOTTOM) */}
                                 <div
                                     className="
-        absolute bottom-[20px] lg:bottom-[50px] left-[20px] lg:left-[50px]
+        absolute bottom-[25px] lg:bottom-[50px] left-[25px] lg:left-[50px]
+        w-[calc(100%-50px)] lg:w-[calc(100%-100px)]
         flex items-center justify-between
-        bg-white w-[calc(100%-50px)] lg:w-[calc(100%-100px)]
-        px-[20px] px-[15px] lg:py-[20px]
-        transition-all duration-500 ease-out
-        translate-y-[60px] opacity-0
-        group-hover:translate-y-0 group-hover:opacity-100
+        bg-white
+        px-[20px] py-[10px] lg:py-[20px]
+        transition-transform duration-800 ease-[cubic-bezier(0.22,1,0.36,1)]
+        translate-y-[200%]
+        group-hover:translate-y-0
       "
                                 >
-                                    <span className="max-w-[300px] leading-[120%] font-condensed text-32 text-black">
+                                    <span className="max-w-[300px] leading-[120%] font-condensed text-30 md:text-32 text-black">
                                         {slide.title}
                                     </span>
 
-                                    <span className="flex h-[64px] w-[64px] items-center justify-center bg-primary">
+                                    <span className="flex h-[40px] w-[40px] md:h-[64px] md:w-[64px] items-center justify-center bg-primary flex-shrink-0">
                                         <Image
                                             src="/assets/icons/right-top-arrow-white.svg"
                                             alt="arrow"

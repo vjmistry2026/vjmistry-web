@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { NAV_ITEMS } from "./navItems";
+import { moveLeft } from "../../motionVariants";
 
 export default function MobileNavbar() {
     const [open, setOpen] = useState(false);
@@ -84,8 +85,14 @@ export default function MobileNavbar() {
                     >
                         <div className="pt-[100px] px-[24px] pb-[40px]">
                             <ul className="flex flex-col gap-[24px]">
-                                {NAV_ITEMS.map((item) => (
-                                    <li key={item.label}>
+                                {NAV_ITEMS.map((item, index) => (
+                                    <motion.li
+                                        key={item.label}
+                                        variants={moveLeft(index * 0.15)}
+                                        initial="hidden"
+                                        animate="show"
+                                        viewport={{ once: true }}
+                                    >
                                         {/* MAIN ITEM */}
                                         <div className="flex items-center justify-between">
                                             {item.href ? (
@@ -146,7 +153,7 @@ export default function MobileNavbar() {
                                                 </motion.ul>
                                             )}
                                         </AnimatePresence>
-                                    </li>
+                                    </motion.li>
                                 ))}
                             </ul>
                         </div>

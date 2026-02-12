@@ -100,7 +100,7 @@ const LegacySection = () => {
                 <div className="flex flex-col md:flex-row items-stretch lg:items-center gap-6 lg:gap-[45px] xl:gap-[60px] 2xl:gap-18">
                     {/* LEFT – 48% */}
                     {/* <div className="w-full md:w-[50%] lg:w-[47%] xl:w-[46%] 2xl:w-[44%] overflow-hidden"> */}
-                    <div className="w-fit md:max-w-[50%] overflow-hidden">
+                    <div className="w-fit md:max-w-[50%]">
                         <h2
                             ref={titleRef}
                             className="text-60 lg:text-66 3xl:text-75 font-condensed flex flex-col leading-[100%] text-black"
@@ -135,7 +135,7 @@ const LegacySection = () => {
                             initial="hidden"
                             whileInView="show"
                             viewport={{ once: true }}
-                            className="mt-[20px] lg:mt-[30px] xl:mt-[40px] 2xl:mt-15"
+                            className="mt-[20px] lg:mt-[30px] xl:mt-[40px] 2xl:mt-15 flex-shrink-0"
                         >
                             <CustomButton
                                 label={hero.primaryButton.label}
@@ -209,7 +209,7 @@ const LegacySection = () => {
                                 }}
                                 data-id={item.id}
                                 onMouseEnter={() => setActiveId(item.id)}
-                                className="relative overflow-hidden p-6  2xl:p-10 sm:max-w-[367px] 2xl:min-h-[385px]
+                                className="relative overflow-hidden p-[25px] md:p-[30px] xl:p-10 sm:max-w-[367px] 2xl:min-h-[385px]
   transition-colors duration-500
   [clip-path:polygon(0_0,calc(100%-45px)_0,100%_50px,100%_100%,0_100%)]
   bg-[#F9F9F9]"

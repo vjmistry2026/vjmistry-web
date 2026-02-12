@@ -180,7 +180,7 @@ const WhatSetsUsApart = () => {
                                     {isActive && <div className="absolute inset-0 bg-black/70" />}
 
                                     {/* CONTENT */}
-                                    <div className="relative z-10 h-full p-[40px] flex flex-col gap-[60px]">
+                                    <div className="relative z-10 h-full p-[25px] md:p-[30px] xl:p-[40px] flex flex-col gap-[60px]">
                                         {/* ICON */}
                                         <div className="relative h-[60px] w-[60px] overflow-hidden bg-black">
                                             {/* animated background */}
