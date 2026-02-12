@@ -26,7 +26,7 @@ const Qsr = () => {
             <ContainerAnchor ref={containerRef} />
 
             {/* HEIGHT CONTROLLER */}
-            <div className="relative overflow-hidden sm:h-auto lg:h-[600px] xl:h-[640px] 2xl:h-[750px] 3xl:min-h-[930px]">
+            <div className="relative overflow-hidden sm:h-auto lg:h-[600px] xl:h-[600px] 2xl:h-[750px] 3xl:min-h-[930px]">
                 {/* BG SVG — ONLY lg+ */}
                 <div className="hidden xl:block absolute inset-0">
                     <Image
@@ -52,9 +52,15 @@ const Qsr = () => {
                         lg:px-0
                     "
                     style={{
-                        paddingLeft: screenWidth >= 770 && screenWidth < 1024 ? 0 : leftInset + 15,
+                        paddingLeft:
+                            screenWidth >= 1200 && screenWidth < 1500
+                                ? leftInset + 15
+                                : screenWidth >= 770 && screenWidth < 1024
+                                    ? 0
+                                    : leftInset,
                         paddingRight: screenWidth < 1024 ? leftInset : undefined,
-                    }}
+}}
+
                 >
                     <div className="flex flex-col md:flex-row md:items-center gap-[24px] lg:gap-[60px]">
                         {/* LEFT IMAGE */}
@@ -75,7 +81,7 @@ const Qsr = () => {
                                     max-w-[450px]
                                     md:max-w-none
                                     2xl:max-w-[640px]
-                                    3xl:max-w-[726px]
+                                    3xl:min-w-[726px]
                                     h-auto
                                 "
                             />
