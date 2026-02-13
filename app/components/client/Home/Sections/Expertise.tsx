@@ -105,14 +105,14 @@ const ExpertiseSection = () => {
                         },
                         1024: {
                             slidesPerView: 2.3,
-                            spaceBetween: 25,
-                        },
-                        1480: {
-                            slidesPerView: 2.7,
                             spaceBetween: 30,
                         },
+                        1480: {
+                            slidesPerView: 2.62,
+                            spaceBetween: 40,
+                        },
                         1620: {
-                            slidesPerView: 2.7,
+                            slidesPerView: 2.62,
                             spaceBetween: 40,
                         },
                     }}
@@ -133,7 +133,7 @@ const ExpertiseSection = () => {
       lg:[clip-path:polygon(0_0,calc(100%-65px)_0,100%_55px,100%_100%,0_100%)]
       xl:[clip-path:polygon(0_0,calc(100%-72px)_0,100%_60px,100%_100%,0_100%)]
       2xl:[clip-path:polygon(0_0,calc(100%-78px)_0,100%_65px,100%_100%,0_100%)]
-      3xl:min-h-[463px] 3xl:min-w-[633px]
+      3xl:min-h-[463px] 3xl:max-w-[633px]
     "
                             >
                                 {/* Image */}
@@ -142,7 +142,7 @@ const ExpertiseSection = () => {
                                     alt={slide.title}
                                     width={520}
                                     height={463}
-                                    className="w-full h-[260px] md:h-[340px] lg:h-[420px] 2xl:h-full 3xl:min-h-[463px] 3xl:min-w-[633px] object-cover"
+                                    className="w-full h-[260px] md:h-[340px] lg:h-[420px] 2xl:h-full 3xl:min-h-[463px] 3xl:max-w-[633px] object-cover"
                                 />
 
                                 {/* Dark overlay */}
