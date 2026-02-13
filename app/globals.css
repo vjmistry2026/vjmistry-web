@@ -89,7 +89,7 @@ body {
     }
 
     @media (width >=1680px) {
-        max-width: 1600px;
+        max-width: 1620px;
     }
 }
 
@@ -110,7 +110,7 @@ body {
 
 
     /* Medium headings */
-    --text-30: clamp(20px, 0.55vw + 20px, 30px);
+    --text-30: clamp(20px, 0.54vw + 20px, 30px);
     --text-32: clamp(24px, 0.59vw + 24px, 32px);
 
 

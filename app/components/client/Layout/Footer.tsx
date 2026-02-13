@@ -14,260 +14,272 @@ const Footer = () => {
 
     return (
         <footer className="bg-[#1C1C1C] overflow-hidden">
-            <div className="container">
-                {/* ================= TOP SECTION ================= */}
-                <div className="pb-40 pt-70 grid grid-cols-2 xl:grid-cols-[2fr_1.2fr_1.2fr_1.2fr] gap-y-[30px] xl:gap-y-[60px] gap-x-100">
-                    {/* SUBSCRIBE */}
-                    <div className="max-w-[480px] col-span-2 md:col-span-1 xl:col-span-1">
-                        <motion.h3
-                            variants={moveUp(0.2)}
-                            initial="hidden"
-                            whileInView="show"
-                            viewport={{ once: true }}
-                            className="text-60 lg:text-66 3xl:text-75 font-condensed leading-[110%] mb-[22px] lg:mb-[30px] text-[#FDFDFD]"
-                        >
-                            Subscribe
-                            <br />
-                            to Newsletter
-                        </motion.h3>
-                        <motion.div
-                            variants={moveUp(0.2)}
-                            initial="hidden"
-                            whileInView="show"
-                            viewport={{ once: true }}
-                            className="flex max-w-[386px]"
-                        >
-                            <input
-                                type="email"
-                                placeholder="Enter email address"
-                                className="w-full h-[48px] px-[16px] placeholder:text-[#64748B] placeholder:text-14 placeholder:font-nexa placeholder:font-normal placeholder:leading-[1.57] outline-none bg-white"
-                            />
-                            <button className="bg-primary text-white font-nexa font-normal px-[47px] text-16">Join</button>
-                        </motion.div>
-                    </div>
-
-                    {/* QUICK LINKS */}
-                    <div>
-                        <AnimatedHeading
-                            tag="h4"
-                            text="Quick Links"
-                            className="text-32 font-condensed leading-[100%] mb-[30px] text-[#FDFDFD]"
-                        />
-                        <ul className="flex flex-col gap-2 lg:gap-4 xl:gap-[20px] text-20 leading-[1.5] text-paragraph">
-                            {quickLinks.map((item, index) => (
-                                <motion.li
-                                    variants={moveUp(index * 0.2)}
-                                    initial="hidden"
-                                    whileInView="show"
-                                    viewport={{ once: true }}
-                                    key={item.label}
-                                >
-                                    <Link href={item.href} className="hover:text-[#FDFDFD] font-nexa font-bold transition">
-                                        {item.label}
-                                    </Link>
-                                </motion.li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    {/* RESOURCES */}
-                    <div>
-                        <AnimatedHeading
-                            tag="h4"
-                            text="Resources"
-                            className="text-32 font-condensed leading-[100%] mb-[30px] text-[#FDFDFD]"
-                        />
-                        <ul className="flex flex-col gap-2 lg:gap-4 xl:gap-[20px] text-20 leading-[1.5] text-paragraph">
-                            {resources.map((item, index) => (
-                                <motion.li
-                                    variants={moveUp(index * 0.2)}
-                                    initial="hidden"
-                                    whileInView="show"
-                                    viewport={{ once: true }}
-                                    key={item.label}
-                                >
-                                    <Link href={item.href} className="hover:text-[#FDFDFD] font-nexa font-bold transition">
-                                        {item.label}
-                                    </Link>
-                                </motion.li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    {/* SOCIAL MEDIA */}
-                    <div className="col-span-1">
+            <div className="relative overflow-hidden">
+                <div className="absolute left-0 top-0 bottom-0 z-0">
+                    <Image
+                        src="/assets/images/footer/footer-left-svg.svg"
+                        alt="Footer Background"
+                        width={605}
+                        height={750}
+                        className="object-contain opacity-10 2xl:w-[80%] 3xl:w-full"
+                    />
+                </div>
+                <div className="container">
+                    {/* ================= TOP SECTION ================= */}
+                    <div className="pb-40 pt-70 grid grid-cols-2 xl:grid-cols-[2fr_1.2fr_1.2fr_1.2fr] gap-y-[30px] xl:gap-y-[60px] gap-x-100">
+                        {/* SUBSCRIBE */}
+                        <div className="max-w-[480px] col-span-2 md:col-span-1 xl:col-span-1">
+                            <motion.h3
+                                variants={moveUp(0.2)}
+                                initial="hidden"
+                                whileInView="show"
+                                viewport={{ once: true }}
+                                className="text-60 lg:text-66 3xl:text-75 font-condensed leading-[110%] mb-[22px] lg:mb-[30px] text-[#FDFDFD]"
+                            >
+                                Subscribe
+                                <br />
+                                to Newsletter
+                            </motion.h3>
+                            <motion.div
+                                variants={moveUp(0.2)}
+                                initial="hidden"
+                                whileInView="show"
+                                viewport={{ once: true }}
+                                className="flex max-w-[386px] z-10 isolate"
+                            >
+                                <input
+                                    type="email"
+                                    placeholder="Enter email address"
+                                    className="w-full h-[48px] px-[16px] placeholder:text-[#64748B] placeholder:text-14 placeholder:[font-family:var(--font-nexa)] placeholder:font-[400] placeholder:leading-[1.57] outline-none bg-white"
+                                />
+                                <button className="bg-primary text-white font-nexa font-normal px-[47px] text-16 cursor-pointer">
+                                    Join
+                                </button>
+                            </motion.div>
+                        </div>
+                        {/* QUICK LINKS */}
                         <div>
                             <AnimatedHeading
                                 tag="h4"
-                                text="Social Media"
+                                text="Quick Links"
                                 className="text-32 font-condensed leading-[100%] mb-[30px] text-[#FDFDFD]"
                             />
-                            <div className="flex items-center gap-[20px]">
-                                {socialMedia.map((item, index) => (
-                                    <motion.div
-                                        key={index}
+                            <ul className="flex flex-col gap-2 lg:gap-4 xl:gap-[20px] text-20 leading-[1.5] text-paragraph">
+                                {quickLinks.map((item, index) => (
+                                    <motion.li
                                         variants={moveUp(index * 0.2)}
                                         initial="hidden"
                                         whileInView="show"
                                         viewport={{ once: true }}
+                                        key={item.label}
                                     >
                                         <Link
-                                            key={item.label}
                                             href={item.href}
-                                            className="h-[50px] w-[50px] flex items-center justify-center bg-paragraph/20 hover:bg-primary transition"
+                                            className="hover:text-[#FDFDFD] font-nexa font-bold transition"
                                         >
-                                            <Image
-                                                src={item.icon}
-                                                alt={item.label}
-                                                width={24}
-                                                height={24}
-                                                className="object-contain w-[24px] h-[24px]"
-                                            />
+                                            {item.label}
                                         </Link>
-                                    </motion.div>
+                                    </motion.li>
                                 ))}
+                            </ul>
+                        </div>
+                        {/* RESOURCES */}
+                        <div>
+                            <AnimatedHeading
+                                tag="h4"
+                                text="Resources"
+                                className="text-32 font-condensed leading-[100%] mb-[30px] text-[#FDFDFD]"
+                            />
+                            <ul className="flex flex-col gap-2 lg:gap-4 xl:gap-[20px] text-20 leading-[1.5] text-paragraph">
+                                {resources.map((item, index) => (
+                                    <motion.li
+                                        variants={moveUp(index * 0.2)}
+                                        initial="hidden"
+                                        whileInView="show"
+                                        viewport={{ once: true }}
+                                        key={item.label}
+                                    >
+                                        <Link
+                                            href={item.href}
+                                            className="hover:text-[#FDFDFD] font-nexa font-bold transition"
+                                        >
+                                            {item.label}
+                                        </Link>
+                                    </motion.li>
+                                ))}
+                            </ul>
+                        </div>
+                        {/* SOCIAL MEDIA */}
+                        <div className="col-span-1 xl:justify-self-end">
+                            <div>
+                                <AnimatedHeading
+                                    tag="h4"
+                                    text="Social Media"
+                                    className="text-32 font-condensed leading-[100%] mb-[30px] text-[#FDFDFD]"
+                                />
+                                <div className="flex items-center gap-[20px]">
+                                    {socialMedia.map((item, index) => (
+                                        <motion.div
+                                            key={index}
+                                            variants={moveUp(index * 0.2)}
+                                            initial="hidden"
+                                            whileInView="show"
+                                            viewport={{ once: true }}
+                                        >
+                                            <Link
+                                                key={item.label}
+                                                href={item.href}
+                                                className="h-[50px] w-[50px] flex items-center justify-center bg-paragraph/20 hover:bg-primary transition"
+                                            >
+                                                <Image
+                                                    src={item.icon}
+                                                    alt={item.label}
+                                                    width={24}
+                                                    height={24}
+                                                    className="object-contain w-[24px] h-[24px]"
+                                                />
+                                            </Link>
+                                        </motion.div>
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                {/* ================= DIVIDER ================= */}
-                <motion.div
-                    variants={moveUp(0.4)}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true }}
-                    className="h-px w-full bg-gradient-to-r from-[#1C1C1C] via-[#A6A6A6] to-[#1C1C1C]"
-                />
-
-                {/* ================= BOTTOM SECTION ================= */}
-                <div className="pt-40 pb-70 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-[2fr_2.4fr_0fr_1.2fr] gap-y-[30px] lg:gap-y-[50px] gap-x-100">
-                    {/* LOGO (under Subscribe) */}
+                    {/* ================= DIVIDER ================= */}
                     <motion.div
                         variants={moveUp(0.4)}
                         initial="hidden"
                         whileInView="show"
                         viewport={{ once: true }}
-                        className="flex justify-start"
-                    >
-                        <Image
-                            src="/assets/logo/logo-white.png"
-                            alt="VJ Mistry"
-                            width={253}
-                            height={67}
-                            className="w-[210px] md:w-[250px] max-h-[75px] lg:w-[253px] lg:h-[67px]"
-                        />
-                    </motion.div>
-
-                    {/* CONNECT (under Quick Links) */}
-                    <div>
-                        <AnimatedHeading
-                            tag="h4"
-                            text="Connect With Us"
-                            className="text-32 font-condensed leading-[100%] mb-[20px] lg:mb-[30px] text-[#FDFDFD]"
-                        />
-
-                        {/* TABS */}
-                        <div className="flex items-center gap-[20px] ml-1">
-                            {(Object.keys(contactLocations) as (keyof typeof contactLocations)[]).map((key) => {
-                                const isActive = activeLocation === key;
-
-                                return (
-                                    <motion.button
-                                        variants={moveUp(0.35)}
-                                        initial="hidden"
-                                        whileInView="show"
-                                        viewport={{ once: true }}
-                                        key={key}
-                                        onClick={() => setActiveLocation(key)}
-                                        className={`flex items-center gap-[12px] transition-colors duration-300 cursor-pointer font-nexa font-bold text-20 mb-[20px] ${
-                                            isActive ? "text-white" : "text-white/70 hover:text-white"
-                                        }`}
-                                    >
-                                        <span
-                                            className={`h-[5px] w-[5px] rounded-full ${
-                                                isActive ? "bg-primary" : "bg-paragraph"
-                                            }`}
-                                        />
-                                        {contactLocations[key].label}
-                                    </motion.button>
-                                );
-                            })}
-                        </div>
-
-                        {/* ADDRESS */}
+                        className="h-px w-full bg-gradient-to-r from-[#1C1C1C] via-[#A6A6A6] to-[#1C1C1C]"
+                    />
+                    {/* ================= BOTTOM SECTION ================= */}
+                    <div className="pt-40 pb-70 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-[2fr_2.4fr_0fr_1.2fr] gap-y-[30px] lg:gap-y-[50px] gap-x-100">
+                        {/* LOGO (under Subscribe) */}
                         <motion.div
-                            key={activeData.address}
                             variants={moveUp(0.4)}
                             initial="hidden"
                             whileInView="show"
                             viewport={{ once: true }}
-                            className="flex items-start gap-[12px] mb-[10px] lg:mb-[20px]"
+                            className="flex justify-start"
                         >
                             <Image
-                                src="/assets/images/footer/map.svg"
-                                alt="Location"
-                                width={16}
-                                height={16}
-                                className="mt-[4px]"
+                                src="/assets/logo/logo-white.png"
+                                alt="VJ Mistry"
+                                width={253}
+                                height={67}
+                                className="w-[210px] md:w-[250px] max-h-[75px] lg:w-[253px] lg:h-[67px]"
                             />
-                            <p className="text-20 font-nexa font-bold leading-[1.5] text-paragraph">{activeData.address}</p>
                         </motion.div>
-
-                        {/* PHONE */}
-                        <motion.div
-                            key={activeData.phone}
-                            variants={moveUp(0.5)}
-                            initial="hidden"
-                            whileInView="show"
-                            viewport={{ once: true }}
-                            className="flex items-center gap-[12px] mb-[10px] lg:mb-[20px]"
-                        >
-                            <Image src="/assets/images/footer/phone.svg" alt="Phone" width={16} height={16} />
-                            <p className="text-20 font-nexa font-bold leading-[1.5] text-paragraph">{activeData.phone}</p>
-                        </motion.div>
-
-                        {/* EMAIL */}
-                        <motion.div
-                            key={activeData.email}
-                            variants={moveUp(0.6)}
-                            initial="hidden"
-                            whileInView="show"
-                            viewport={{ once: true }}
-                            className="flex items-center gap-[12px]"
-                        >
-                            <Image src="/assets/images/footer/mail.svg" alt="Email" width={16} height={16} />
-                            <p className="text-20 font-nexa font-bold leading-[1.5] text-paragraph">{activeData.email}</p>
-                        </motion.div>
-                    </div>
-
-                    {/* EMPTY COLUMN (under Resources) */}
-                    <div className="hidden lg:block" />
-
-                    {/* QR (under Social Media) */}
-                    <div className="flex justify-start">
-                        <div>
+                        {/* CONNECT (under Quick Links) */}
+                        <div className="col-span-1 xl:col-span-2">
                             <AnimatedHeading
                                 tag="h4"
-                                text="Scan Here"
-                                className="text-32 font-condensed leading-[100%] text-[#FDFDFD] mb-[20px] lg:mb-[30px]"
+                                text="Connect With Us"
+                                className="text-32 font-condensed leading-[100%] mb-[20px] lg:mb-[30px] text-[#FDFDFD]"
                             />
-                            <div className="relative xl:w-[190px] xl:h-[190px] w-[140px] h-[140px] flex items-center justify-center">
+                            {/* TABS */}
+                            <div className="flex items-center gap-[20px] ml-1">
+                                {(Object.keys(contactLocations) as (keyof typeof contactLocations)[]).map((key) => {
+                                    const isActive = activeLocation === key;
+                                    return (
+                                        <motion.button
+                                            variants={moveUp(0.35)}
+                                            initial="hidden"
+                                            whileInView="show"
+                                            viewport={{ once: true }}
+                                            key={key}
+                                            onClick={() => setActiveLocation(key)}
+                                            className={`flex items-center gap-[12px] transition-colors duration-300 cursor-pointer font-nexa font-bold text-20 mb-[20px] ${
+                                                isActive ? "text-white" : "text-paragraph hover:text-white"
+                                            }`}
+                                        >
+                                            <span
+                                                className={`h-[5px] w-[5px] rounded-full ${
+                                                    isActive ? "bg-white" : "bg-paragraph"
+                                                }`}
+                                            />
+                                            {contactLocations[key].label}
+                                        </motion.button>
+                                    );
+                                })}
+                            </div>
+                            {/* ADDRESS */}
+                            <motion.div
+                                key={activeData.address}
+                                variants={moveUp(0.4)}
+                                initial="hidden"
+                                whileInView="show"
+                                viewport={{ once: true }}
+                                className="flex items-start gap-[12px] mb-[10px] lg:mb-[20px]"
+                            >
                                 <Image
-                                    src="/assets/images/footer/qr-border.svg"
-                                    alt="QR Border"
-                                    width={190}
-                                    height={190}
-                                    className="absolute inset-0 w-full h-full"
+                                    src="/assets/images/footer/map.svg"
+                                    alt="Location"
+                                    width={16}
+                                    height={16}
+                                    className="mt-[4px]"
                                 />
-                                <div className="relative z-10 p-[13px]">
+                                <p className="text-20 font-nexa font-bold leading-[1.5] text-paragraph">
+                                    {activeData.address}
+                                </p>
+                            </motion.div>
+                            {/* PHONE */}
+                            <motion.div
+                                key={activeData.phone}
+                                variants={moveUp(0.5)}
+                                initial="hidden"
+                                whileInView="show"
+                                viewport={{ once: true }}
+                                className="flex items-center gap-[12px] mb-[10px] lg:mb-[20px]"
+                            >
+                                <Image src="/assets/images/footer/phone.svg" alt="Phone" width={16} height={16} />
+                                <p className="text-20 font-nexa font-bold leading-[1.5] text-paragraph">
+                                    {activeData.phone}
+                                </p>
+                            </motion.div>
+                            {/* EMAIL */}
+                            <motion.div
+                                key={activeData.email}
+                                variants={moveUp(0.6)}
+                                initial="hidden"
+                                whileInView="show"
+                                viewport={{ once: true }}
+                                className="flex items-center gap-[12px]"
+                            >
+                                <Image src="/assets/images/footer/mail.svg" alt="Email" width={16} height={16} />
+                                <p className="text-20 font-nexa font-bold leading-[1.5] text-paragraph">
+                                    {activeData.email}
+                                </p>
+                            </motion.div>
+                        </div>
+                        {/* EMPTY COLUMN (under Resources) */}
+                        {/* <div className="hidden lg:block" /> */}
+                        {/* QR (under Social Media) */}
+                        <div className="flex xl:justify-end">
+                            <div>
+                                <AnimatedHeading
+                                    tag="h4"
+                                    text="Scan Here"
+                                    className="text-32 font-condensed leading-[100%] text-[#FDFDFD] mb-[20px] lg:mb-[30px]"
+                                />
+                                <div className="relative xl:w-[190px] xl:h-[190px] w-[140px] h-[140px] flex items-center justify-center">
                                     <Image
-                                        src="/assets/images/footer/social/qr.svg"
-                                        alt="QR Code"
-                                        width={164}
-                                        height={164}
-                                        className="w-[164px] h-[164px]"
+                                        src="/assets/images/footer/qr-border.svg"
+                                        alt="QR Border"
+                                        width={190}
+                                        height={190}
+                                        className="absolute inset-0 w-full h-full"
                                     />
+                                    <div className="relative z-10 p-[13px]">
+                                        <Image
+                                            src="/assets/images/footer/social/qr.svg"
+                                            alt="QR Code"
+                                            width={164}
+                                            height={164}
+                                            className="w-[164px] h-[164px]"
+                                        />
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -285,12 +297,12 @@ const Footer = () => {
             >
                 <div className="container py-[20px] 2xl:py-[34px] leading-[100%] flex items-center justify-between lg:justify-start lg:gap-[80px] text-20 font-nexa font-bold text-paragraph">
                     <motion.div variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true }}>
-                        <Link href="/privacy-policy" className="hover:text-white transition">
+                        <Link href="#" className="hover:text-white transition">
                             Privacy Policy
                         </Link>
                     </motion.div>
                     <motion.div variants={moveUp(0.35)} initial="hidden" whileInView="show" viewport={{ once: true }}>
-                        <Link href="/terms-conditions" className="hover:text-white transition">
+                        <Link href="#" className="hover:text-white transition">
                             Terms & Conditions
                         </Link>
                     </motion.div>
