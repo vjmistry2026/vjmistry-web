@@ -36,22 +36,22 @@ export default function DesktopNavbar() {
         >
             <div className="container flex items-center justify-between max-h-[124px] py-[30px]">
                 {/* Logo */}
-                <Link href="/" className="relative flex items-center w-[170px] 2xl:w-[234px] h-[62px]">
+                <Link href="/" className="relative flex items-center w-[170px] 2xl:w-[253px] h-[67px] shrink-0">
                     <Image
                         src="/assets/logo/logo-white.png"
                         alt="V.J. Mistry & Company Ltd."
-                        width={234}
-                        height={62}
+                        width={253}
+                        height={67}
                         priority
-                        className={`absolute inset-0 transition-all duration-300 ease-out ${isActive ? "opacity-0 scale-100" : "opacity-100 scale-100"} 2xl:w-[234px] 2xl:h-[62px] w-[140px] xl:w-[180px] h-auto`}
+                        className={`absolute inset-0 transition-all duration-300 ease-out ${isActive ? "opacity-0 scale-100" : "opacity-100 scale-100"} 2xl:w-[253px] 2xl:h-[67px] w-[140px] xl:w-[180px] h-auto`}
                     />
                     <Image
-                        src="/assets/logo/logo-black.png"
+                        src="/assets/logo/logo-black.svg"
                         alt="V.J. Mistry & Company Ltd."
-                        width={234}
-                        height={62}
+                        width={253}
+                        height={67}
                         priority
-                        className={`absolute inset-0 transition-all duration-300 ease-out ${isActive ? "opacity-100 scale-100" : "opacity-0 scale-100"} 2xl:w-[234px] 2xl:h-[62px] w-[140px] xl:w-[180px] h-auto`}
+                        className={`absolute inset-0 transition-all duration-300 ease-out ${isActive ? "opacity-100 scale-100" : "opacity-0 scale-100"} 2xl:w-[253px] 2xl:h-[67px] w-[140px] xl:w-[180px] h-auto`}
                     />
                 </Link>
 
