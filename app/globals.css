@@ -81,11 +81,11 @@ body {
     }
 
     @media (width >=1460px) {
-        max-width: 1400px;
+        max-width: 1330px;
     }
 
     @media (width >=1540px) {
-        max-width: 1480px;
+        max-width: 1400px;
     }
 
     @media (width >=1680px) {
