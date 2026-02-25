@@ -23,7 +23,7 @@ export default function MobileNavbar() {
                     {/* LOGO */}
                     <Link href="/" className="w-[140px]">
                         <Image
-                            src="/assets/logo/logo-black.png"
+                            src="/assets/logo/logo-black.svg"
                             alt="V.J. Mistry"
                             width={180}
                             height={50}
