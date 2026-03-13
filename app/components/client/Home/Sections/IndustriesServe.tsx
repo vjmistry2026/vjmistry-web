@@ -123,7 +123,7 @@ const IndustriesWeServe = () => {
                                 >
                                     {/* Image */}
                                     <div className="w-full h-[250px] md:h-[300px] lg:w-[220px] lg:h-[220px] xl:w-[250px] xl:h-[250px] 2xl:w-[350px] 2xl:h-[350px] relative shrink-0">
-                                        <Image src={item.image} alt={item.title} fill className="object-cover" />
+                                        <Image src={item.image} alt={item.title} fill className="object-cover pointer-events-none" />
                                     </div>
                                     {/* Content */}
                                     <div className="flex flex-col gap-[20px] xl:gap-[30px]">
@@ -140,7 +140,7 @@ const IndustriesWeServe = () => {
                                                 width={38}
                                                 height={47}
                                                 priority
-                                                className="w-[30px] h-[35px] xl:w-[38px] xl:h-[47px]"
+                                                className="pointer-events-none w-[30px] h-[35px] xl:w-[38px] xl:h-[47px]"
                                             />
                                             <h3 className="text-32 text-[#FDFDFD] leading-[110%] font-condensed">
                                                 {item.title}

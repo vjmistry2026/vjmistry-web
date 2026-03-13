@@ -112,7 +112,7 @@ const TrustedClients = () => {
                                         alt={logo.alt}
                                         width={194}
                                         height={60}
-                                        className="object-contain h-[100px] grayscale transition px-4"
+                                        className="pointer-events-none object-contain h-[100px] grayscale transition px-4"
                                     />
                                 </div>
                             </div>

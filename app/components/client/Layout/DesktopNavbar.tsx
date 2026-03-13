@@ -27,7 +27,7 @@ export default function DesktopNavbar() {
 
     return (
         <nav
-            className={`fixed top-0 left-0 site-navbar w-full z-50 transition-colors duration-400 ${isActive ? "bg-[#FDFDFD]" : "bg-transparent"}`}
+            className={`z-[9999] fixed top-0 left-0 site-navbar w-full transition-colors duration-450 ${isActive ? "bg-[#FDFDFD]" : "bg-transparent"}`}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => {
                 setHovered(false);
@@ -43,7 +43,7 @@ export default function DesktopNavbar() {
                         width={253}
                         height={67}
                         priority
-                        className={`absolute inset-0 transition-all duration-300 ease-out ${isActive ? "opacity-0 scale-100" : "opacity-100 scale-100"} 2xl:w-[253px] 2xl:h-[67px] w-[140px] xl:w-[180px] h-auto`}
+                        className={`pointer-events-none absolute inset-0 transition-all duration-300 ease-out ${isActive ? "opacity-0 scale-100" : "opacity-100 scale-100"} 2xl:w-[253px] 2xl:h-[67px] w-[140px] xl:w-[180px] h-auto`}
                     />
                     <Image
                         src="/assets/logo/logo-black.svg"
@@ -51,7 +51,7 @@ export default function DesktopNavbar() {
                         width={253}
                         height={67}
                         priority
-                        className={`absolute inset-0 transition-all duration-300 ease-out ${isActive ? "opacity-100 scale-100" : "opacity-0 scale-100"} 2xl:w-[253px] 2xl:h-[67px] w-[140px] xl:w-[180px] h-auto`}
+                        className={`pointer-events-none absolute inset-0 transition-all duration-300 ease-out ${isActive ? "opacity-100 scale-100" : "opacity-0 scale-100"} 2xl:w-[253px] 2xl:h-[67px] w-[140px] xl:w-[180px] h-auto`}
                     />
                 </Link>
 
@@ -83,7 +83,7 @@ export default function DesktopNavbar() {
                                             alt="Down Arrow"
                                             width={16}
                                             height={7}
-                                            className={`transition-transform duration-300 ${hoveredItem === item.label ? "rotate-180" : ""} ${isActive ? "invert" : ""}`}
+                                            className={`pointer-events-none transition-all duration-400 ${hoveredItem === item.label ? "rotate-180" : ""} ${isActive ? "invert" : ""}`}
                                         />
                                     )}
                                 </div>
@@ -134,7 +134,7 @@ export default function DesktopNavbar() {
                             alt="Go"
                             width={16}
                             height={16}
-                            className={`transition-transform duration-400 ${
+                            className={`transition-transform duration-400 pointer-events-none ${
                                 hoveredItem === "Contact Us" ? "rotate-45" : ""
                             }`}
                         />

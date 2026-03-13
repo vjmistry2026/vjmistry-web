@@ -5,15 +5,36 @@ import { buildWithConfidenceData } from "../data";
 import CustomButton from "@/app/components/client/common/CustomButton";
 import AnimatedHeading from "../../common/AnimateHeading";
 import { moveUp } from "@/app/components/motionVariants";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 const PreFooterCta = () => {
     const { title, description, backgroundImage } = buildWithConfidenceData;
 
+    const sectionRef = useRef<HTMLElement>(null);
+
+    // Track scroll progress of this section relative to the viewport
+    const { scrollYProgress } = useScroll({
+        target: sectionRef,
+        offset: ["start end", "end start"],
+    });
+
+    // Map scroll progress to a vertical translation of 25vh
+    const y = useTransform(scrollYProgress, [0, 1], ["-25vh", "25vh"]);
+
     return (
-        <section className="relative py-100 lg:py-130 w-full overflow-hidden max-h-[643px]">
-            {/* Background Image */}
-            <Image src={backgroundImage} alt="Build with confidence" fill priority className="object-cover" />
+        <section ref={sectionRef} className="relative py-100 lg:py-130 w-full overflow-hidden max-h-[643px]">
+
+            {/* Background Image — scale(1.25) gives room to move without showing edges */}
+            <motion.div className="absolute inset-0" style={{ y }}>
+                <Image
+                    src={backgroundImage}
+                    alt="Build with confidence"
+                    fill
+                    priority
+                    className="object-cover pointer-events-none scale-[1.18]"
+                />
+            </motion.div>
 
             {/* Dark Overlay */}
             <div className="absolute inset-0 bg-black/80" />
@@ -23,25 +44,26 @@ const PreFooterCta = () => {
                 <div className="px-4 flex flex-col items-center">
                     <AnimatedHeading
                         tag="h2"
-                        text={title}    
+                        text={title}
                         className="text-60 2xl:text-75 font-condensed leading-[120%] text-[#FDFDFD] mb-[20px] lg:mb-[30px] max-w-[13ch]"
                     />
 
-                    <motion.p 
-                    variants={moveUp(0.3)}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true }}
-                    className="text-20 font-nexa font-bold leading-[1.5] text-white/70 mb-[30px] lg:mb-[60px] max-w-[54ch]">
+                    <motion.p
+                        variants={moveUp(0.3)}
+                        initial="hidden"
+                        whileInView="show"
+                        viewport={{ once: true }}
+                        className="text-20 font-nexa font-bold leading-[1.5] text-white/70 mb-[30px] lg:mb-[60px] max-w-[54ch]"
+                    >
                         {description}
                     </motion.p>
 
-                    {/* STATIC BUTTON */}
                     <motion.div
-                    variants={moveUp(0.5)}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true }}>
+                        variants={moveUp(0.5)}
+                        initial="hidden"
+                        whileInView="show"
+                        viewport={{ once: true }}
+                    >
                         <CustomButton label="Contact Us" href="#" />
                     </motion.div>
                 </div>
