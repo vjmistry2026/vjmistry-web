@@ -1,16 +1,26 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 interface CustomButtonProps {
   label: string;
   href: string;
   className?: string;
   textColor?: string;
+  onClick?: () => void;
 }
 
-const CustomButton = ({ label, href, className = "", textColor = "#ffffff" }: CustomButtonProps) => {
+const CustomButton = ({ label, href, className = "", textColor = "#ffffff", onClick }: CustomButtonProps) => {
+  const [pressed, setPressed] = useState(false);
+
+  const handleClick = () => {
+    setPressed(true);
+    setTimeout(() => setPressed(false), 200);
+    onClick?.();
+  };
+
   return (
-    <Link href={href} className={`group inline-flex items-center font-nexa font-bold text-16 ${className}`}>
+    <Link href={href} onClick={handleClick} className={`group inline-flex items-center font-nexa font-bold text-16 transition-all duration-250 ${className} ${pressed ? "scale-95" : "scale-100"}`}>
       {/* Text box */}
       <span
         style={{ "--btn-text": textColor } as React.CSSProperties}
@@ -26,7 +36,7 @@ const CustomButton = ({ label, href, className = "", textColor = "#ffffff" }: Cu
           alt="arrow-up-right"
           width={14}
           height={14}
-          className="h-[12px] sm:h-[14px] w-[12px] sm:w-[14px] transition-all duration-300 group-hover:rotate-45 group-hover:invert group-hover:brightness-0"
+          className="pointer-events-none h-[12px] sm:h-[14px] w-[12px] sm:w-[14px] transition-all duration-300 group-hover:rotate-45 group-hover:invert group-hover:brightness-0"
         />
       </span>
     </Link>

@@ -10,8 +10,10 @@ import "swiper/css";
 import CustomButton from "@/app/components/client/common/CustomButton";
 import AnimatedHeading from "../../common/AnimateHeading";
 import { motion } from "framer-motion";
-import { moveUp } from "@/app/components/motionVariants";
+import { moveUp, moveUpV2 } from "@/app/components/motionVariants";
 import { useContainerLeftInset } from "@/app/hooks/useContainerLeftInset";
+import SliderNavButton from "../../common/NavigationButton";
+import Reveal from "../../common/RevealOneByOneAnimation";
 
 const ExpertiseSection = () => {
     const { heading, description, slides } = expertiseSectionData;
@@ -59,30 +61,8 @@ const ExpertiseSection = () => {
                             viewport={{ once: true }}
                             className="flex lg:hidden items-center justify-center gap-[10px]"
                         >
-                            <button
-                                onClick={() => swiperRef.current?.slidePrev()}
-                                className="border group border-border h-[44px] sm:h-[52px] lg:h-[64px] w-[44px] sm:w-[52px] lg:w-[64px] flex items-center justify-center hover:bg-primary hover:border-primary transition-all duration-300"
-                            >
-                                <Image
-                                    src="/assets/icons/right-top-arrow-primary.svg"
-                                    alt="arrow"
-                                    width={14}
-                                    height={14}
-                                    className="-rotate-135 group-hover:invert group-hover:brightness-0 transition-all duration-300 w-[10px] h-[10px] object-contain lg:w-[14px] lg:h-[14px]"
-                                />
-                            </button>
-                            <button
-                                onClick={() => swiperRef.current?.slideNext()}
-                                className="border group border-border h-[44px] sm:h-[52px] lg:h-[64px] w-[44px] sm:w-[52px] lg:w-[64px] flex items-center justify-center hover:bg-primary hover:border-primary transition-all duration-300"
-                            >
-                                <Image
-                                    src="/assets/icons/right-top-arrow-primary.svg"
-                                    alt="arrow"
-                                    width={14}
-                                    height={14}
-                                    className="rotate-45 group-hover:invert group-hover:brightness-0 transition-all duration-300 w-[10px] h-[10px] object-contain lg:w-[14px] lg:h-[14px]"
-                                />
-                            </button>
+                            <SliderNavButton direction="left" onClick={() => swiperRef.current?.slidePrev()} />
+                            <SliderNavButton direction="right" onClick={() => swiperRef.current?.slideNext()} />
                         </motion.div>
                     </div>
                 </div>
@@ -121,12 +101,7 @@ const ExpertiseSection = () => {
                 >
                     {slides.map((slide, index) => (
                         <SwiperSlide key={slide.id}>
-                            <motion.div
-                                variants={moveUp(index * 0.3)}
-                                initial="hidden"
-                                whileInView="show"
-                                viewport={{ once: true }}
-                                className="
+                            <Reveal variants={moveUpV2} className="
       group relative overflow-hidden cursor-pointer
       [clip-path:polygon(0_0,calc(100%-45px)_0,100%_45px,100%_100%,0_100%)]
       md:[clip-path:polygon(0_0,calc(100%-55px)_0,100%_50px,100%_100%,0_100%)]
@@ -142,7 +117,7 @@ const ExpertiseSection = () => {
                                     alt={slide.title}
                                     width={520}
                                     height={463}
-                                    className="w-full h-[260px] md:h-[340px] lg:h-[420px] 2xl:h-full 3xl:min-h-[463px] 3xl:max-w-[633px] object-cover"
+                                    className="group-hover:scale-[1.04] transition-all duration-900 w-full h-[260px] md:h-[340px] lg:h-[420px] 2xl:h-full 3xl:min-h-[463px] 3xl:max-w-[633px] object-cover"
                                 />
 
                                 {/* Dark overlay */}
@@ -191,10 +166,11 @@ const ExpertiseSection = () => {
                                             alt="arrow"
                                             width={14}
                                             height={14}
+                                            className="translate-y-[8px] -translate-x-[8px] group-hover:translate-y-[0px] group-hover:translate-x-[0px] transition-transform duration-700"
                                         />
                                     </span>
                                 </div>
-                            </motion.div>
+                            </Reveal>
                         </SwiperSlide>
                     ))}
                 </Swiper>
@@ -223,31 +199,8 @@ const ExpertiseSection = () => {
                     viewport={{ once: true }}
                     className="hidden lg:flex items-center justify-center gap-[20px]"
                 >
-                    <button
-                        onClick={() => swiperRef.current?.slidePrev()}
-                        className="cursor-pointer border group border-border h-[50px] w-[50px] lg:h-[64px] lg:w-[64px] flex items-center justify-center hover:bg-primary hover:border-primary transition-all duration-300"
-                    >
-                        <Image
-                            src="/assets/icons/right-top-arrow-primary.svg"
-                            alt="arrow"
-                            width={14}
-                            height={14}
-                            className="-rotate-135 group-hover:invert group-hover:brightness-0 transition-all duration-300"
-                        />
-                    </button>
-
-                    <button
-                        onClick={() => swiperRef.current?.slideNext()}
-                        className="cursor-pointer border group border-border h-[50px] w-[50px] lg:h-[64px] lg:w-[64px] flex items-center justify-center hover:bg-primary hover:border-primary transition-all duration-300"
-                    >
-                        <Image
-                            src="/assets/icons/right-top-arrow-primary.svg"
-                            alt="arrow"
-                            width={14}
-                            height={14}
-                            className="rotate-45 group-hover:invert group-hover:brightness-0 transition-all duration-300"
-                        />
-                    </button>
+                    <SliderNavButton direction="left" onClick={() => swiperRef.current?.slidePrev()} />
+                    <SliderNavButton direction="right" onClick={() => swiperRef.current?.slideNext()} />
                 </motion.div>
             </div>
         </section>

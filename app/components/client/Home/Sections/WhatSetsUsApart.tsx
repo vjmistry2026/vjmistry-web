@@ -11,6 +11,7 @@ import AnimatedHeading from "../../common/AnimateHeading";
 import { moveUp } from "@/app/components/motionVariants";
 import { motion } from "framer-motion";
 import { useContainerLeftInset } from "@/app/hooks/useContainerLeftInset";
+import SliderNavButton from "../../common/NavigationButton";
 
 const WhatSetsUsApart = () => {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -23,54 +24,45 @@ const WhatSetsUsApart = () => {
     const [activeIndex, setActiveIndex] = useState(0);
 
     const SLIDES_PER_VIEW_DESKTOP = 3.3;
-
     const AUTOPLAY_DELAY = 4000;
 
     const getGroupStart = (index: number) => {
         const swiper = swiperRef.current;
         if (!swiper) return index;
-
         const slidesPerView = typeof swiper.params.slidesPerView === "number" ? swiper.params.slidesPerView : 1;
-
         return Math.floor(index / slidesPerView) * slidesPerView;
     };
 
     const isIndexVisible = (index: number) => {
         const swiper = swiperRef.current;
         if (!swiper) return true;
-
         const slidesPerView = typeof swiper.params.slidesPerView === "number" ? swiper.params.slidesPerView : 1;
-
         const start = swiper.activeIndex;
         const end = start + slidesPerView - 1;
-
         return index >= start && index <= end;
     };
 
-    const startAutoplay = () => {
-        if (timerRef.current) clearTimeout(timerRef.current);
+const startAutoplay = () => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => {
+        setActiveIndex((prev) => {
+            const next = prev + 1 >= slides.length ? 0 : prev + 1;
 
-        timerRef.current = setTimeout(() => {
-            setActiveIndex((prev) => {
-                let next = prev + 1;
-
-                if (next >= slides.length) {
+            requestAnimationFrame(() => {
+                if (next === 0) {
                     swiperRef.current?.slideTo(0);
-                    return 0;
-                }
-
-                if (!isIndexVisible(next)) {
+                } else if (!isIndexVisible(next)) {
                     swiperRef.current?.slideTo(getGroupStart(next + 1));
                 }
-
-                return next;
             });
-        }, AUTOPLAY_DELAY);
-    };
+
+            return next;
+        });
+    }, AUTOPLAY_DELAY);
+};
 
     useEffect(() => {
         startAutoplay();
-
         return () => {
             if (timerRef.current) clearTimeout(timerRef.current);
         };
@@ -89,31 +81,8 @@ const WhatSetsUsApart = () => {
 
                     {/* NAVIGATION */}
                     <motion.div variants={moveUp(0.35)} initial="hidden" whileInView="show" viewport={{ once: true }} className="flex items-center gap-[10px] lg:gap-[20px]">
-                        <button
-                            onClick={() => swiperRef.current?.slidePrev()}
-                            className="border group border-border cursor-pointer h-[44px] sm:h-[52px] lg:h-[64px] w-[44px] sm:w-[52px] lg:w-[64px] flex items-center justify-center hover:bg-primary transition-all duration-300"
-                        >
-                            <Image
-                                src="/assets/icons/right-top-arrow-primary.svg"
-                                alt="prev"
-                                width={14}
-                                height={14}
-                                className="-rotate-135 group-hover:invert group-hover:brightness-0 transition-all duration-300 w-[10px] h-[10px] object-contain lg:w-[14px] lg:h-[14px]"
-                            />
-                        </button>
-
-                        <button
-                            onClick={() => swiperRef.current?.slideNext()}
-                            className="border group border-border cursor-pointer h-[44px] sm:h-[52px] lg:h-[64px] w-[44px] sm:w-[52px] lg:w-[64px] flex items-center justify-center hover:bg-primary transition-all duration-300"
-                        >
-                            <Image
-                                src="/assets/icons/right-top-arrow-primary.svg"
-                                alt="next"
-                                width={14}
-                                height={14}
-                                className="rotate-45 group-hover:invert group-hover:brightness-0 transition-all duration-300 w-[10px] h-[10px] object-contain lg:w-[14px] lg:h-[14px]"
-                            />
-                        </button>
+                        <SliderNavButton direction="left" onClick={() => swiperRef.current?.slidePrev()} />
+                        <SliderNavButton direction="right" onClick={() => swiperRef.current?.slideNext()} />
                     </motion.div>
                 </div>
 
@@ -129,18 +98,10 @@ const WhatSetsUsApart = () => {
                     style={{ marginLeft: leftInset }}
                     className="!overflow-hidden !pr-[15px] !lg:pr-0"
                     breakpoints={{
-                        0: {
-                            slidesPerView: 1,
-                        },
-                        640: {
-                            slidesPerView: 1.3,
-                        },
-                        768: {
-                            slidesPerView: 2.2,
-                        },
-                        1024: {
-                            slidesPerView: SLIDES_PER_VIEW_DESKTOP,
-                        },
+                        0:    { slidesPerView: 1 },
+                        640:  { slidesPerView: 1.3 },
+                        768:  { slidesPerView: 2.2 },
+                        1024: { slidesPerView: SLIDES_PER_VIEW_DESKTOP },
                     }}
                 >
                     {slides.map((slide, index) => {
@@ -156,41 +117,38 @@ const WhatSetsUsApart = () => {
                                     onMouseEnter={() => {
                                         requestAnimationFrame(() => {
                                             setActiveIndex(index);
-
                                             if (!isIndexVisible(index)) {
                                                 swiperRef.current?.slideTo(getGroupStart(index));
                                             }
-
                                             startAutoplay();
                                         });
                                     }}
                                     className={`relative border-l border-y border-border overflow-hidden cursor-pointer 3xl:min-h-[356px] ${index === slides.length - 1 ? "border-r" : ""}`}
                                 >
-                                    {/* BACKGROUND IMAGE */}
+                                    {/* BACKGROUND IMAGE
+                                        When active: fades in + slowly drifts (scale + translate)
+                                        giving a subtle Ken Burns feel over the autoplay duration */}
                                     <Image
+                                        key={isActive ? "active" : "inactive"}
                                         src={slide.bgImage}
                                         alt=""
                                         fill
-                                        className={`object-cover transition-opacity duration-700 ${
-                                            isActive ? "opacity-100" : "opacity-0"
-                                        }`}
+                                        className={`object-cover transition-opacity duration-800 ${isActive ? "opacity-100" : "opacity-0"}`}
+                                        style={isActive ? { animation: "kenBurns 4000ms linear forwards" } : undefined}
                                     />
 
                                     {/* OVERLAY */}
-                                    {isActive && <div className="absolute inset-0 bg-black/70" />}
+                                    <div className={`absolute inset-0 bg-black/70 transition-opacity duration-800 ${isActive ? "opacity-100" : "opacity-0"}`} />
 
                                     {/* CONTENT */}
                                     <div className="relative z-10 h-full p-[25px] md:p-[30px] xl:p-[40px] flex flex-col gap-[60px]">
                                         {/* ICON */}
                                         <div className="relative h-[60px] w-[60px] overflow-hidden bg-black">
-                                            {/* animated background */}
                                             <span
                                                 className={`absolute inset-0 bg-primary origin-bottom transform transition-transform duration-500 ease-out ${
                                                     isActive ? "scale-y-100" : "scale-y-0"
                                                 }`}
                                             />
-
-                                            {/* icon */}
                                             <div className="relative z-10 h-full w-full flex items-center justify-center">
                                                 <Image
                                                     src={slide.icon}
@@ -213,9 +171,7 @@ const WhatSetsUsApart = () => {
                                         </div>
 
                                         {/* TITLE */}
-                                        <h3
-                                            className={`text-32 font-condensed leading-[100%] ${isActive ? "text-white" : "text-black"}`}
-                                        >
+                                        <h3 className={`text-32 font-condensed leading-[100%] ${isActive ? "text-white" : "text-black"}`}>
                                             {slide.title}
                                         </h3>
                                     </div>

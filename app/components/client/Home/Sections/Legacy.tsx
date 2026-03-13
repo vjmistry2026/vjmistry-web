@@ -25,7 +25,7 @@ const LegacySection = () => {
         offset: ["start end", "end start"],
     });
 
-    const y = useTransform(scrollYProgress, [0, 1], ["0vh", "-10vh"]);
+    const y = useTransform(scrollYProgress, [0, 1], ["0vh", "14vh"]);
 
     useEffect(() => {
         const isAbove720 = window.innerWidth >= 720;
@@ -93,13 +93,17 @@ const LegacySection = () => {
     }, []);
 
     return (
-        <section className="bg-white pt-100 pb-100 lg:pb-150">
-            <div className="container">
+        <section className="bg-white py-100 lg:pb-150">
+            <motion.div
+                variants={moveUp(0.2)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                className="container"
+            >
                 {/* TOP SECTION */}
-                {/* <div className="flex flex-col md:flex-row items-stretch lg:items-center gap-6 lg:gap-10 2xl:gap-[86px]"> */}
                 <div className="flex flex-col md:flex-row items-stretch lg:items-center gap-6 lg:gap-[45px] xl:gap-[60px] 2xl:gap-18">
                     {/* LEFT – 48% */}
-                    {/* <div className="w-full md:w-[50%] lg:w-[47%] xl:w-[46%] 2xl:w-[44%] overflow-hidden"> */}
                     <div className="w-fit md:max-w-[50%]">
                         <h2
                             ref={titleRef}
@@ -166,7 +170,7 @@ const LegacySection = () => {
                                     alt={hero.image.alt}
                                     width={836}
                                     height={707}
-                                    className="w-full h-full object-cover scale-y-[1.25] scale-x-[1.1]"
+                                    className="pointer-events-none w-full h-full object-cover scale-[1.15]"
                                     priority
                                 />
                             </motion.div>
@@ -183,7 +187,7 @@ const LegacySection = () => {
                                 alt="vj-legacy-svg"
                                 width={673}
                                 height={318}
-                                className="absolute bottom-0 left-0"
+                                className="pointer-events-none absolute bottom-0 left-0"
                             />
                         </div>
                     </div>
@@ -199,7 +203,7 @@ const LegacySection = () => {
 
                         return (
                             <motion.div
-                                variants={moveUp(index * 0.35)}
+                                variants={moveUp(index * 0.27)}
                                 initial="hidden"
                                 whileInView="show"
                                 viewport={{ once: true }}
@@ -227,7 +231,7 @@ const LegacySection = () => {
                                     alt="legacy"
                                     width={367}
                                     height={162}
-                                    className={`absolute left-0 top-0 transition-all duration-300
+                                    className={`pointer-events-none absolute left-0 top-0 transition-all duration-300
                     ${isActive ? "opacity-100" : "opacity-0"}`}
                                 />
 
@@ -238,7 +242,7 @@ const LegacySection = () => {
                                         alt={item.label}
                                         width={38}
                                         height={46}
-                                        className={`transition ${isActive ? "invert brightness-0" : ""}`}
+                                        className={`pointer-events-none transition ${isActive ? "invert brightness-0" : ""}`}
                                     />
 
                                     <motion.h3
@@ -267,7 +271,7 @@ const LegacySection = () => {
                         );
                     })}
                 </div>
-            </div>
+            </motion.div>
         </section>
     );
 };

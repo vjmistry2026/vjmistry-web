@@ -27,7 +27,7 @@ export default function MobileNavbar() {
                             alt="V.J. Mistry"
                             width={180}
                             height={50}
-                            className="w-full h-auto"
+                            className="pointer-events-none w-full h-auto"
                         />
                     </Link>
 
@@ -123,7 +123,7 @@ export default function MobileNavbar() {
                                                         alt="Arrow Down"
                                                         width={16}
                                                         height={16}
-                                                        className="invert"
+                                                        className="pointer-events-none invert"
                                                     />
                                                 </motion.span>
                                             )}
