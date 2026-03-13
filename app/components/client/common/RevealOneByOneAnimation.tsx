@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useRevealInView } from "@/app/lib/useRevealInView";
+import { useRevealInView } from "@/lib/useRevealInView";
 
 type Props = {
   children: React.ReactNode;
