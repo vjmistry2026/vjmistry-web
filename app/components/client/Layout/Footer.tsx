@@ -10,7 +10,7 @@ import {
   contactLocations,
 } from "./navItems";
 import { motion } from "framer-motion";
-import { moveLeft, moveUp } from "../../motionVariants";
+import { moveUp } from "../../motionVariants";
 import AnimatedHeading from "../common/AnimateHeading";
 
 const Footer = () => {
@@ -40,7 +40,7 @@ const Footer = () => {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
-                className="text-60 lg:text-66 3xl:text-75 font-condensed leading-[110%] mb-[22px] lg:mb-[30px] text-[#FDFDFD]"
+                className="section-heading leading-[110%] mb-[22px] lg:mb-[30px] text-paragraph-2"
               >
                 Subscribe
                 <br />
@@ -68,7 +68,7 @@ const Footer = () => {
               <AnimatedHeading
                 tag="h4"
                 text="Quick Links"
-                className="text-32 font-condensed leading-[100%] mb-[30px] text-[#FDFDFD]"
+                className="text-32 font-condensed leading-[100%] mb-[30px] !text-paragraph-2"
               />
               <ul className="flex flex-col gap-2 lg:gap-4 xl:gap-[20px] text-20 leading-[1.5] text-paragraph">
                 {quickLinks.map((item, index) => (
@@ -81,7 +81,7 @@ const Footer = () => {
                   >
                     <Link
                       href={item.href}
-                      className="hover:text-[#FDFDFD] duration-300 font-nexa font-bold transition-colors"
+                      className="hover:text-paragraph-2 duration-300 font-nexa font-bold transition-colors"
                     >
                       {item.label}
                     </Link>
@@ -94,7 +94,7 @@ const Footer = () => {
               <AnimatedHeading
                 tag="h4"
                 text="Resources"
-                className="text-32 font-condensed leading-[100%] mb-[30px] text-[#FDFDFD]"
+                className="text-32 font-condensed leading-[100%] mb-[30px] !text-paragraph-2"
               />
               <ul className="flex flex-col gap-2 lg:gap-4 xl:gap-[20px] text-20 leading-[1.5] text-paragraph">
                 {resources.map((item, index) => (
@@ -107,7 +107,7 @@ const Footer = () => {
                   >
                     <Link
                       href={item.href}
-                      className="hover:text-[#FDFDFD] duration-300 font-nexa font-bold transition-colors"
+                      className="hover:text-paragraph-2 duration-300 font-nexa font-bold transition-colors"
                     >
                       {item.label}
                     </Link>
@@ -121,7 +121,7 @@ const Footer = () => {
                 <AnimatedHeading
                   tag="h4"
                   text="Social Media"
-                  className="text-32 font-condensed leading-[100%] mb-[30px] text-[#FDFDFD]"
+                  className="text-32 font-condensed leading-[100%] mb-[30px] !text-paragraph-2"
                 />
                 <div className="flex items-center gap-[20px]">
                   {socialMedia.map((item, index) => (
@@ -186,7 +186,7 @@ const Footer = () => {
               <AnimatedHeading
                 tag="h4"
                 text="Connect With Us"
-                className="text-32 font-condensed leading-[100%] mb-[20px] lg:mb-[30px] text-[#FDFDFD]"
+                className="text-32 font-condensed leading-[100%] mb-[20px] lg:mb-[30px] !text-paragraph-2"
               />
               {/* TABS */}
               <div className="flex items-center gap-[20px] ml-1">
@@ -289,7 +289,7 @@ const Footer = () => {
                 <AnimatedHeading
                   tag="h4"
                   text="Scan Here"
-                  className="text-32 font-condensed leading-[100%] text-[#FDFDFD] mb-[20px] lg:mb-[30px]"
+                  className="text-32 font-condensed leading-[100%] !text-paragraph-2 mb-[20px] lg:mb-[30px]"
                 />
                 <div className="relative xl:w-[190px] xl:h-[190px] w-[140px] h-[140px] flex items-center justify-center">
                   <Image

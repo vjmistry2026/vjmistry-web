@@ -1,7 +1,7 @@
-import Index from "../components/client/Home/Index";
+import Index from "@/app/components/client/Home/Index";
 
 const page = async () => {
-    return <Index />;
+  return <Index />;
 };
 
 export default page;

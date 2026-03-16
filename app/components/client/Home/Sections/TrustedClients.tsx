@@ -71,9 +71,9 @@ const TrustedClients = () => {
             <ContainerAnchor ref={containerRef} />
             <div style={{ paddingLeft: leftInset }}>
                 <AnimatedHeading
-                    tag="h2"
+                    color="black"
                     text={title}
-                    className="text-60 lg:text-66 3xl:text-75 leading-[100%] font-condensed mb-[20px] lg:mb-[30px] text-[#1C1C1C]"
+                    className="mb-[20px] lg:mb-[30px]"
                 />
 
                 <motion.p 
@@ -81,7 +81,7 @@ const TrustedClients = () => {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
-                className="text-20 leading-[1.5] font-nexa font-bold text-paragraph max-w-[750px] mb-[30px] lg:mb-[60px]">
+                className="section-description max-w-[750px] mb-[30px] lg:mb-[60px]">
                     {description}
                 </motion.p>
 

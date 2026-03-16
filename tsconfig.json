@@ -33,7 +33,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/(user)/utils/getReadingTime.ts",
+    // "app/(user)/utils/getReadingTime.ts",
     ".next/dev/types/**/*.ts"
   ],
   "exclude": [

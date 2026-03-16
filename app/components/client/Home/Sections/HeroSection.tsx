@@ -41,7 +41,7 @@ const animateOutgoingCollapse = (prevImage: string | null, container: HTMLElemen
     imageWrap.innerHTML = `
         <img src="${prevImage}"
             style="width:100%; height:100%; object-fit:cover;" />
-        <div style="position:absolute; inset:0; background:rgba(0,0,0,0.2);"></div>
+        <div style="position:absolute; inset:0; background: linear-gradient(180deg, rgba(0, 0, 0, 0) 20.98%, rgba(0, 0, 0, 0.8) 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));"></div>
     `;
 
     overlay.appendChild(imageWrap);
@@ -115,8 +115,7 @@ export default function HeroSection() {
                     <SwiperSlide key={slide.id}>
                         <div className="relative h-screen w-full hero-slide">
                             <Image src={slide.image} alt={slide.title} fill priority className="object-cover pointer-events-none" />
-                            <div className="absolute inset-0 bg-[#00000033]" />
-                            {/* <div className="absolute left-0 right-0 bottom-0 top-[20%] bg-[linear-gradient(180deg,rgba(0,0,0,0)_0%,rgba(0,0,0,0.3)_100%)]" /> */}
+                            <div style={{background: "linear-gradient(180deg, rgba(0, 0, 0, 0) 20.98%, rgba(0, 0, 0, 0.8) 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2))"}} className="absolute inset-0" />
                         </div>
                     </SwiperSlide>
                 ))}
@@ -156,7 +155,7 @@ export default function HeroSection() {
                                         whileInView="show"
                                         viewport={{ once: true }}
                                     >
-                                        <CustomButton label="Explore Our Services" href="#" />
+                                        <CustomButton label="Explore Our Services" href="#" textColor="white" />
                                     </motion.div>
                                     <motion.div
                                         variants={moveUp(1.6)}
@@ -164,7 +163,7 @@ export default function HeroSection() {
                                         whileInView="show"
                                         viewport={{ once: true }}
                                     >
-                                        <CustomButton label="Get in Touch" href="#" />
+                                        <CustomButton label="Get in Touch" href="#" textColor="white" />
                                     </motion.div>
                                 </motion.div>
                             </div>
@@ -214,7 +213,7 @@ export default function HeroSection() {
                                                         animate="show"
                                                         exit={{ opacity: 0, y: -8 }}
                                                         transition={{ duration: 0.6, ease: "easeInOut" }}
-                                                        className="text-20 font-nexa leading-[100%] text-white min-w-[220px] lg:mb-[11px]"
+                                                        className="text-20 font-nexa leading-[100%] text-paragraph-2 min-w-[220px] lg:mb-[11px]"
                                                     >
                                                         {HERO_SLIDES[activeIndex].title}
                                                     </motion.p>
@@ -232,7 +231,7 @@ export default function HeroSection() {
                                                 alt="arrow-up-right"
                                                 width={12.5}
                                                 height={12.5}
-                                                className="-rotate-135 w-[10px] h-[10px] lg:w-[12.5px] lg:h-[12.5px] invert brightness-0 hover:brightness-100 hover:invert-0 transition-colors duration-300"
+                                                className="-rotate-135 w-[10px] h-[10px] lg:w-[12.5px] lg:h-[12.5px] invert brightness-0 hover:brightness-100 hover:invert-0 transition-all duration-400"
                                             />
                                         </button>
                                         <button onClick={() => swiperRef.current.slideNext()} className="">
@@ -241,7 +240,7 @@ export default function HeroSection() {
                                                 alt="arrow-up-right"
                                                 width={12.5}
                                                 height={12.5}
-                                                className="rotate-45 w-[10px] h-[10px] lg:w-[12.5px] lg:h-[12.5px] invert brightness-0 hover:brightness-100 hover:invert-0 transition-colors duration-300"
+                                                className="rotate-45 w-[10px] h-[10px] lg:w-[12.5px] lg:h-[12.5px] invert brightness-0 hover:brightness-100 hover:invert-0 transition-all duration-400"
                                             />
                                         </button>
                                     </div>

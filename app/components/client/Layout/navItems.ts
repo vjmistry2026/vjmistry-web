@@ -13,18 +13,19 @@ export const NAV_ITEMS: NavItem[] = [
   {
     label: "About Us",
     children: [
-      { label: "Company Profile", href: "#" },
+      { label: "Overview", href: "/about-us/overview" },
       { label: "Leadership", href: "#" },
       { label: "Our Values", href: "#" },
     ],
   },
   {
     label: "Services",
-    children: [
-      { label: "Engineering", href: "#" },
-      { label: "Construction", href: "#" },
-      { label: "Project Management", href: "#" },
-    ],
+    href: "/services",
+    // children: [
+    //   { label: "Engineering", href: "#" },
+    //   { label: "Construction", href: "#" },
+    //   { label: "Project Management", href: "#" },
+    // ],
   },
   {
     label: "Projects",

@@ -18,7 +18,7 @@ export default function MobileNavbar() {
     return (
         <>
             {/* TOP BAR */}
-            <nav className="fixed top-0 left-0 z-50 w-full bg-[#FDFDFD]">
+            <nav className="fixed top-0 left-0 z-50 w-full bg-[#FDFDFD] shadow-[0px_4.1px_43.04px_0px_#0000000F]">
                 <div className="container flex items-center justify-between py-[20px]">
                     {/* LOGO */}
                     <Link href="/" className="w-[140px]">
@@ -99,14 +99,14 @@ export default function MobileNavbar() {
                                                 <Link
                                                     href={item.href}
                                                     onClick={() => setOpen(false)}
-                                                    className="text-20 font-nexa font-bold text-black"
+                                                    className="text-20 font-nexa font-bold text-secondary"
                                                 >
                                                     {item.label}
                                                 </Link>
                                             ) : (
                                                 <button
                                                     onClick={() => toggleItem(item.label)}
-                                                    className="text-20 font-nexa font-bold text-black"
+                                                    className="text-20 font-nexa font-bold text-secondary"
                                                 >
                                                     {item.label}
                                                 </button>
