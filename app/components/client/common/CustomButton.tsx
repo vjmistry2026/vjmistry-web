@@ -6,11 +6,16 @@ interface CustomButtonProps {
   label: string;
   href: string;
   className?: string;
-  textColor?: string;
+  textColor?: "white" | "black";
   onClick?: () => void;
 }
 
-const CustomButton = ({ label, href, className = "", textColor = "#ffffff", onClick }: CustomButtonProps) => {
+const TEXT_COLORS = {
+  white: "#FDFDFD",
+  black: "#1C1C1C",
+};
+
+const CustomButton = ({ label, href, className = "", textColor = "white", onClick }: CustomButtonProps) => {
   const [pressed, setPressed] = useState(false);
 
   const handleClick = () => {
@@ -19,12 +24,14 @@ const CustomButton = ({ label, href, className = "", textColor = "#ffffff", onCl
     onClick?.();
   };
 
+  const color = TEXT_COLORS[textColor];
+
   return (
     <Link href={href} onClick={handleClick} className={`group inline-flex items-center font-nexa font-bold text-16 transition-all duration-250 ${className} ${pressed ? "scale-95" : "scale-100"}`}>
       {/* Text box */}
       <span
-        style={{ "--btn-text": textColor } as React.CSSProperties}
-        className="h-[44px] sm:h-[52px] lg:h-[64px] px-4 sm:px-6 lg:px-10 border border-border inline-flex items-center justify-center whitespace-nowrap mr-2 sm:mr-[10px] text-[var(--btn-text)] transition-all duration-300 group-hover:mr-0 group-hover:bg-primary group-hover:border-primary group-hover:text-white"
+        style={{ color }}
+        className="h-[44px] sm:h-[52px] lg:h-[64px] px-4 sm:px-6 lg:px-10 border border-border inline-flex items-center justify-center whitespace-nowrap mr-2 sm:mr-[10px] transition-all duration-300 group-hover:mr-0 group-hover:bg-primary group-hover:border-primary group-hover:!text-[#FDFDFD]"
       >
         {label}
       </span>

@@ -43,9 +43,9 @@ const PreFooterCta = () => {
             <div className="relative z-10 h-full flex items-center justify-center text-center">
                 <div className="px-4 flex flex-col items-center">
                     <AnimatedHeading
-                        tag="h2"
+                        color="white"
                         text={title}
-                        className="text-60 2xl:text-75 font-condensed leading-[120%] text-[#FDFDFD] mb-[20px] lg:mb-[30px] max-w-[13ch]"
+                        className="leading-[120%] mb-[20px] lg:mb-[30px] max-w-[13ch]"
                     />
 
                     <motion.p
@@ -53,7 +53,7 @@ const PreFooterCta = () => {
                         initial="hidden"
                         whileInView="show"
                         viewport={{ once: true }}
-                        className="text-20 font-nexa font-bold leading-[1.5] text-white/70 mb-[30px] lg:mb-[60px] max-w-[54ch]"
+                        className="section-description text-paragraph-2/70 mb-[30px] lg:mb-[60px] max-w-[54ch]"
                     >
                         {description}
                     </motion.p>
@@ -64,7 +64,7 @@ const PreFooterCta = () => {
                         whileInView="show"
                         viewport={{ once: true }}
                     >
-                        <CustomButton label="Contact Us" href="#" />
+                        <CustomButton label="Contact Us" href="#" textColor="white" />
                     </motion.div>
                 </div>
             </div>

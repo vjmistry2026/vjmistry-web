@@ -13,11 +13,11 @@ body {
     scroll-behavior: auto !important;
 }
 
-.font-nexa {
+@utility font-nexa {
     font-family: var(--font-nexa);
 }
-
-.font-condensed {
+ 
+@utility font-condensed {
     font-family: var(--font-roboto-condensed);
 }
 
@@ -99,6 +99,7 @@ body {
     --primary: #ED1C24;
     --secondary: #1C1C1C;
     --color-paragraph: #7D7D7D;
+    --color-paragraph-2: #FDFDFD;
     --color-border: #D9D9D9;
 
     /* Small text */
@@ -112,6 +113,7 @@ body {
     /* Medium headings */
     --text-30: clamp(20px, 0.54vw + 20px, 30px);
     --text-32: clamp(24px, 0.59vw + 24px, 32px);
+    --text-35: clamp(26px, 0.6vw + 26px, 35px);
 
 
     /* Large headings */
@@ -129,11 +131,13 @@ body {
     /* --space-70: clamp(35px, 3vw + 8px, 70px); */
     --space-70: clamp(35px, 2.57vw + 35px, 70px);
 
-    --space-100: clamp(40px, 4vw + 8px, 100px);
+    --space-100: clamp(44px, 4vw + 8px, 100px);
     /* --space-100: clamp(40px, 4.4vw + 40px, 100px); */
 
+    --space-120: clamp(45px, 4vw + 8px, 120px);
+
     /* --space-130: clamp(50px, 5vw + 16px, 130px); */
-    --space-130: clamp(50px, 5.88vw + 50px, 130px);
+   --space-130: clamp(50px, 6.72vw + 17px, 130px);
 
     /* --space-150: clamp(60px, 6vw + 16px, 150px); */
     --space-150: clamp(60px, 6.62vw + 60px, 150px);
@@ -145,6 +149,7 @@ body {
     --color-primary: var(--primary);
     --color-secondary: var(--secondary);
     --color-paragraph: var(--color-paragraph);
+    --color-paragraph-2: var(--color-paragraph-2);
     --color-border: var(--color-border);
     --breakpoint-7xl: 103.125rem;
     --container-7xl: 98.125rem;
@@ -164,6 +169,7 @@ body {
     --spacing-40: var(--space-40);
     --spacing-70: var(--space-70);
     --spacing-100: var(--space-100);
+    --spacing-120: var(--space-120);
     --spacing-130: var(--space-130);
     --spacing-150: var(--space-150);
 
@@ -185,6 +191,10 @@ body {
     font-size: var(--text-32);
 }
 
+@utility text-35 {
+    font-size: var(--text-35);
+}
+
 @utility text-60 {
     font-size: var(--text-60);
 }
@@ -201,6 +211,13 @@ body {
     font-size: var(--text-85);
 }
 
+@utility section-heading {
+    @apply text-60 lg:text-66 3xl:text-75 font-condensed leading-[100%];
+}
+
+@utility section-description  {
+    @apply text-20 font-nexa leading-[1.5] font-bold text-paragraph;
+}
 
 @keyframes hero-progress-bar {
     from {

@@ -24,7 +24,7 @@ const ExpertiseSection = () => {
     const [progress, setProgress] = useState(0);
 
     return (
-        <section className="bg-[#1C1C1C] py-100 lg:py-130">
+        <section className="bg-secondary py-100 lg:py-130">
             <div>
                 {/* HEADER */}
                 <div
@@ -33,9 +33,9 @@ const ExpertiseSection = () => {
                 >
                     <div className="w-full">
                         <AnimatedHeading
-                            tag="h2"
                             text={heading}
-                            className="text-60 lg:text-66 3xl:text-75 font-condensed leading-[100%] mb-[20px] lg:mb-[30px] text-white"
+                            className="mb-[20px] lg:mb-[30px]"
+                            color="white"
                         />
 
                         <motion.p
@@ -43,7 +43,7 @@ const ExpertiseSection = () => {
                             initial="hidden"
                             whileInView="show"
                             viewport={{ once: true }}
-                            className="text-20 max-w-[590px] font-nexa font-bold text-white/70 leading-[1.5]"
+                            className="section-description max-w-[590px] text-paragraph-2/70"
                         >
                             {description}
                         </motion.p>
@@ -52,7 +52,7 @@ const ExpertiseSection = () => {
                     {/* STATIC BUTTONS */}
                     <div className="flex w-full items-center justify-between lg:justify-end">
                         <motion.div variants={moveUp(0.35)} initial="hidden" whileInView="show" viewport={{ once: true }}>
-                            <CustomButton label="View All Services" href="#" textColor="#FDFDFD" />
+                            <CustomButton label="View All Services" href="#" textColor="white" />
                         </motion.div>
                         <motion.div
                             variants={moveUp(0.35)}
@@ -134,7 +134,7 @@ const ExpertiseSection = () => {
                                     className="
         absolute bottom-[25px] lg:bottom-[50px] left-[25px] lg:left-[50px]
         text-30 md:text-32 font-condensed leading-[120%]
-        max-w-[300px] text-[#FDFDFD]
+        max-w-[300px] text-paragraph-2
         transition-transform duration-800 ease-[cubic-bezier(0.22,1,0.36,1)]
         translate-y-0
         group-hover:translate-y-[200%]
@@ -156,7 +156,7 @@ const ExpertiseSection = () => {
         group-hover:translate-y-0
       "
                                 >
-                                    <span className="max-w-[300px] leading-[120%] font-condensed text-30 md:text-32 text-black">
+                                    <span className="max-w-[300px] leading-[120%] font-condensed text-30 md:text-32 text-secondary">
                                         {slide.title}
                                     </span>
 

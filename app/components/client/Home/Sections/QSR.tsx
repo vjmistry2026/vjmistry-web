@@ -86,9 +86,9 @@ const Qsr = () => {
                             {/* RIGHT TEXT */}
                             <div className="flex-1 pb-[60px] xl:pb-[80px] 2xl:pb-[100px]" style={{ paddingRight: leftInset }}>
                                 <AnimatedHeading
-                                    tag="h2"
+                                    color="black"
                                     text="Quality. Safety. Reliability."
-                                    className="text-60 lg:text-66 3xl:text-75 max-w-[488px] font-condensed leading-[120%] text-[#1C1C1C] mb-[24px]"
+                                    className="leading-[120%] max-w-[488px] mb-[24px]"
                                 />
 
                                 <motion.p
@@ -96,7 +96,7 @@ const Qsr = () => {
                                     initial="hidden"
                                     whileInView="show"
                                     viewport={{ once: true }}
-                                    className="text-20 max-w-[550px] font-nexa font-bold text-paragraph leading-[1.5]"
+                                    className="section-description max-w-[550px]"
                                 >
                                     At VJ Mistry, quality and safety are integral to every stage of our work. Our processes are
                                     aligned with industry standards and best practices, ensuring consistent outcomes, safe work
@@ -135,9 +135,9 @@ const Qsr = () => {
 
                         <div className="flex-1 md:w-1/2 text-left">
                             <AnimatedHeading
-                                tag="h2"
+                                color="black"
                                 text="Quality. Safety. Reliability."
-                                className="text-60 font-condensed leading-[120%] text-[#1C1C1C] mb-[24px]"
+                                className="leading-[120%] mb-[24px]"
                             />
 
                             <motion.p
@@ -145,7 +145,7 @@ const Qsr = () => {
                                 initial="hidden"
                                 whileInView="show"
                                 viewport={{ once: true }}
-                                className="text-20 max-w-[684px] font-nexa font-bold text-paragraph leading-[1.5]"
+                                className="section-description max-w-[684px]"
                             >
                                 At VJ Mistry, quality and safety are integral to every stage of our work. Our processes are
                                 aligned with industry standards and best practices, ensuring consistent outcomes, safe work

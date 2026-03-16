@@ -93,7 +93,7 @@ const LegacySection = () => {
     }, []);
 
     return (
-        <section className="bg-white py-100 lg:pb-150">
+        <section className="bg-white py-100 md:pb-130 3xl:pb-150">
             <motion.div
                 variants={moveUp(0.2)}
                 initial="hidden"
@@ -102,12 +102,12 @@ const LegacySection = () => {
                 className="container"
             >
                 {/* TOP SECTION */}
-                <div className="flex flex-col md:flex-row items-stretch lg:items-center gap-6 lg:gap-[45px] xl:gap-[60px] 2xl:gap-18">
+                <div className="flex flex-col md:flex-row items-stretch lg:items-center gap-6 lg:gap-9 xl:gap-[60px] 2xl:gap-18">
                     {/* LEFT – 48% */}
                     <div className="w-fit md:max-w-[50%]">
                         <h2
                             ref={titleRef}
-                            className="text-60 lg:text-66 3xl:text-75 font-condensed flex flex-col leading-[100%] text-black"
+                            className="section-heading flex flex-col text-secondary"
                         >
                             {hero.title.normal}
                             <span className="relative mt-[8px] lg:mt-[14px] w-fit inline-block overflow-hidden">
@@ -119,7 +119,7 @@ const LegacySection = () => {
                                 />
 
                                 {/* text */}
-                                <span className="relative z-10 text-white px-[10px] py-[5px] inline-block tracking-[-0.7px] lg:tracking-[-0.5px]">
+                                <span className="relative z-10 text-paragraph-2 px-[9px] xl:px-[10px] py-[5px] inline-block tracking-[-0.7px] lg:tracking-[-1.4px] 2xl:tracking-normal">
                                     {hero.title.highlight}
                                 </span>
                             </span>
@@ -130,7 +130,7 @@ const LegacySection = () => {
                             initial="hidden"
                             whileInView="show"
                             viewport={{ once: true }}
-                            className="text-paragraph mt-[20px] lg:mt-[30px] font-nexa font-bold text-20 leading-[1.5] xl:max-w-[670px] tracking-[-0.4px]"
+                            className="mt-[20px] lg:mt-[30px] section-description xl:max-w-[670px] tracking-[-0.4px] 3xl:tracking-normal"
                         >
                             {hero.description}
                         </motion.p>
@@ -196,7 +196,7 @@ const LegacySection = () => {
                 {/* STATS CARDS */}
                 <div
                     ref={cardsWrapperRef}
-                    className="mt-100 lg:mt-150 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-10 3xl:gap-[51px]"
+                    className="mt-100 lg:mt-130 3xl:mt-150 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-10 3xl:gap-[51px]"
                 >
                     {stats.map((item, index) => {
                         const isActive = activeId === item.id;
@@ -250,7 +250,7 @@ const LegacySection = () => {
                                         initial="hidden"
                                         whileInView="show"
                                         viewport={{ once: true }}
-                                        className={`mt-[92px] xl:mt-[65px] 2xl:mt-[92px] text-75 md:text-60 xl:text-75 font-condensed leading-[100%] mb-[18px] ${isActive ? "text-white" : "text-black"}`}
+                                        className={`mt-[92px] xl:mt-[65px] 2xl:mt-[92px] text-75 md:text-60 xl:text-75 font-condensed leading-[100%] mb-[18px] ${isActive ? "text-paragraph-2" : "text-secondary"}`}
                                     >
                                         <Counter to={item.value} duration={2} suffix="+" />
                                     </motion.h3>
@@ -260,9 +260,9 @@ const LegacySection = () => {
                                         initial="hidden"
                                         whileInView="show"
                                         viewport={{ once: true }}
-                                        className={`text-20 font-nexa font-bold leading-[1.5] ${
+                                        className={`section-description transition-colors duration-400 ${
                                             index === stats.length - 1 ? "max-w-[110px]" : "max-w-[230px]"
-                                        } ${isActive ? "text-[#D9D9D9]" : "text-[#7D7D7D]"}`}
+                                        } ${isActive ? "text-[#D9D9D9]" : "text-paragraph"}`}
                                     >
                                         {item.label}
                                     </motion.p>

@@ -69,14 +69,13 @@ const startAutoplay = () => {
     }, [activeIndex]);
 
     return (
-        <section className="bg-white py-100 lg:py-150 overflow-hidden">
+        <section className="bg-white py-100 lg:py-130 3xl:py-150 overflow-hidden">
             <div>
                 {/* HEADER */}
                 <div ref={containerRef} className="container flex items-center justify-between mb-[20px] lg:mb-[60px]">
                     <AnimatedHeading
-                        tag="h2"
+                        color="black"
                         text={heading}
-                        className="text-60 lg:text-66 3xl:text-82 font-condensed leading-[100%] text-black"
                     />
 
                     {/* NAVIGATION */}
@@ -138,12 +137,12 @@ const startAutoplay = () => {
                                     />
 
                                     {/* OVERLAY */}
-                                    <div className={`absolute inset-0 bg-black/70 transition-opacity duration-800 ${isActive ? "opacity-100" : "opacity-0"}`} />
+                                    <div className={`absolute inset-0 bg-black/70 transition-opacity duration-700 ${isActive ? "opacity-100" : "opacity-0"}`} />
 
                                     {/* CONTENT */}
                                     <div className="relative z-10 h-full p-[25px] md:p-[30px] xl:p-[40px] flex flex-col gap-[60px]">
                                         {/* ICON */}
-                                        <div className="relative h-[60px] w-[60px] overflow-hidden bg-black">
+                                        <div className="relative h-[60px] w-[60px] overflow-hidden bg-secondary">
                                             <span
                                                 className={`absolute inset-0 bg-primary origin-bottom transform transition-transform duration-500 ease-out ${
                                                     isActive ? "scale-y-100" : "scale-y-0"
@@ -171,7 +170,7 @@ const startAutoplay = () => {
                                         </div>
 
                                         {/* TITLE */}
-                                        <h3 className={`text-32 font-condensed leading-[100%] ${isActive ? "text-white" : "text-black"}`}>
+                                        <h3 className={`text-32 font-condensed leading-[100%] ${isActive ? "text-paragraph-2" : "text-secondary"}`}>
                                             {slide.title}
                                         </h3>
                                     </div>
