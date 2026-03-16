@@ -22,10 +22,16 @@ const TextGenerateEffect = ({
     const hasAnimated = useRef(false);
 
     useEffect(() => {
-        if (hasAnimated.current) return;
-        hasAnimated.current = true;
+        // Reset on every mount so client-side navigation works
+        hasAnimated.current = false;
 
-        const startAnimation = () => {
+        const el = scope.current as HTMLElement | null;
+        if (!el) return;
+
+        const runAnimation = () => {
+            if (hasAnimated.current) return;
+            hasAnimated.current = true;
+
             animate(
                 "[data-char]",
                 {
@@ -40,13 +46,23 @@ const TextGenerateEffect = ({
             );
         };
 
-        // ✅ Ensure animation starts AFTER page load
-        if (document.readyState === "complete") {
-            startAnimation();
-        } else {
-            window.addEventListener("load", startAnimation, { once: true });
-        }
-    }, [animate, duration, filter]);
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    observer.disconnect();
+                    runAnimation();
+                }
+            },
+            { threshold: 0.1 }
+        );
+
+        observer.observe(el);
+
+        return () => {
+            observer.disconnect();
+            hasAnimated.current = false;
+        };
+    }, [animate, duration, filter, text]); // text in deps so it re-animates if text changes
 
     return (
         <Tag className={className}>
