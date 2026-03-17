@@ -123,7 +123,7 @@ const CompanyTimeline = () => {
   };
 
   return (
-    <section ref={sectionRef} className="bg-white pb-100 md:pb-130 3xl:pb-150 overflow-hidden">
+    <section ref={sectionRef} className="bg-white pb-100 lg:pb-130 3xl:pb-150 overflow-hidden">
       <div className="container">
         <div className="flex flex-col gap-5 lg:gap-[30px] mb-[30px] lg:mb-15">
           <AnimatedHeading text={heading} className="max-w-[907px] leading-[120%]" />

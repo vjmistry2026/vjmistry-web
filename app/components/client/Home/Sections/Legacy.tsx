@@ -93,7 +93,7 @@ const LegacySection = () => {
     }, []);
 
     return (
-        <section className="bg-white py-100 md:pb-130 3xl:pb-150">
+        <section className="bg-white py-100 lg:pb-130 3xl:pb-150">
             <motion.div
                 variants={moveUp(0.2)}
                 initial="hidden"

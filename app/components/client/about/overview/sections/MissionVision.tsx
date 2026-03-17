@@ -7,7 +7,7 @@ import { moveLeft, moveUp } from "@/app/components/motionVariants";
 
 const MissionVision = () => {
   return (
-    <section className="pb-100 md:pb-130 3xl:pb-150">
+    <section className="pb-100 lg:pb-130 3xl:pb-150">
       <div className="container overflow-hidden">
         <div className="flex flex-col md:flex-row overflow-hidden">
           {/* Card 1 */}
