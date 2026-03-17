@@ -38,8 +38,8 @@ const PageBanner = ({ title, image }: Props) => {
       />
       <div className="absolute inset-0 bg-black/50" />
 
-      <div className="absolute bottom-7 sm:bottom-10 lg:bottom-[50px] 3xl:bottom-[71px] left-0 right-0">
-        <div className="container flex flex-col lg:flex-row items-start lg:items-end justify-between gap-y-5">
+      <div className="absolute bottom-5 sm:bottom-10 lg:bottom-[50px] 3xl:bottom-[71px] left-0 right-0">
+        <div className="container flex flex-col lg:flex-row items-start lg:items-end justify-between gap-y-2 md:gap-y-5">
           <HeroAnimatedHeading
             text={title}
             className="text-75 3xl:text-85 text-paragraph-2"

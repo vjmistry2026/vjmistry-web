@@ -36,12 +36,12 @@ const Breadcrumb = () => {
                         {isClickable ? (
                             <Link
                                 href={crumb.href}
-                                className="section-description text-paragraph-2/50 hover:text-paragraph-2 transition-colors duration-300"
+                                className="section-description text-16 sm:text-20 text-paragraph-2/50 hover:text-paragraph-2 transition-colors duration-300"
                             >
                                 {crumb.label}
                             </Link>
                         ) : (
-                            <span className={`section-description ${isLast ? "text-paragraph-2" : "text-paragraph-2/50"}`}>
+                            <span className={`section-description text-16 sm:text-20 ${isLast ? "text-paragraph-2" : "text-paragraph-2/50"}`}>
                                 {crumb.label}
                             </span>
                         )}
