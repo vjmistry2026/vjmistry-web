@@ -297,19 +297,19 @@ const ProjectsGrid = () => {
             </div>
 
             {/* Apply Filter */}
-<div className="flex items-center pr-8 2xl:pr-10 3xl:pr-[50px] xl:border-r border-border shrink-0 mt-10 xl:mt-0">
-  <button
-    type="button"
-    onClick={applyFilters}
-    className="relative overflow-hidden w-fit xl:w-auto px-5 xl:px-[30px] 3xl:px-[51px] py-3 md:py-4 lg:py-5 border border-primary text-primary text-20 font-nexa font-bold group transition-colors duration-300 cursor-pointer"
-  >
-    <span className="absolute left-0 top-0 h-full w-0 bg-primary transition-all duration-500 group-hover:w-full"></span>
+            <div className="flex items-center pr-8 2xl:pr-10 3xl:pr-[50px] xl:border-r border-border shrink-0 mt-10 xl:mt-0">
+              <button
+                type="button"
+                onClick={applyFilters}
+                className="relative overflow-hidden w-fit xl:w-auto px-5 xl:px-[30px] 3xl:px-[51px] py-3 md:py-4 lg:py-5 border border-primary text-primary text-20 font-nexa font-bold group transition-colors duration-300 cursor-pointer"
+              >
+                <span className="absolute left-0 top-0 h-full w-0 bg-primary transition-all duration-500 group-hover:w-full"></span>
 
-    <span className="relative z-10 group-hover:text-paragraph-2 transition-colors duration-300">
-      Apply Filter
-    </span>
-  </button>
-</div>
+                <span className="relative z-10 group-hover:text-paragraph-2 transition-colors duration-300">
+                  Apply Filter
+                </span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
