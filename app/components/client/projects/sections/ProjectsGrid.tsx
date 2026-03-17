@@ -1,0 +1,347 @@
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { projectsData, filterOptions, type Project } from "../data";
+import { Plus } from "lucide-react";
+import CustomButton from "../../common/CustomButton";
+
+const PROJECTS_PER_PAGE = 12;
+
+// ─── Dropdown ─────────────────────────────────────────────────────────────────
+type DropdownProps = {
+  label: string;
+  options: string[];
+  value: string;
+  onChange: (val: string) => void;
+};
+
+const Dropdown = ({ label, options, value, onChange }: DropdownProps) => {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node))
+        setOpen(false);
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  return (
+    <div ref={ref} className="relative w-full">
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between gap-[8px] border-b border-paragraph pb-[9px] focus:outline-none text-16 3xl:text-20 section-description"
+      >
+        <span className="text-left">{value || label}</span>
+        <span
+          className={`transition-transform duration-300 shrink-0 ${open ? "rotate-180" : ""}`}
+        >
+          <Image
+            src="/assets/icons/bottom_arrow_tip.svg"
+            alt=""
+            width={21}
+            height={10}
+          />
+        </span>
+      </button>
+
+      {open && (
+        <div className="absolute top-[calc(100%+8px)] left-0 z-50 bg-white border border-[#E5E5E5] shadow-lg w-full min-w-[160px] py-[6px] z-[9999]">
+          {options.map((opt) => (
+            <button
+              key={opt}
+              type="button"
+              onClick={() => {
+                onChange(opt);
+                setOpen(false);
+              }}
+              className={`w-full text-left px-[16px] py-[9px] font-nexa font-bold  text-secondary text-16 hover:bg-primary hover:text-paragraph-2 transition-colors duration-250 ${value === opt ? "text-[#C8102E] font-medium" : "text-[#111111]"}`}
+            >
+              {opt}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+// ─── Project Card ──────────────────────────────────────────────────────────────
+const ProjectCard = ({ project }: { project: Project }) => {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <Link
+      href={`/projects/${project.id}`}
+      className="group block cursor-pointer"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {/* Image */}
+      <div className="relative w-full aspect-[1/1] 3xl:max-h-[513px]  overflow-hidden bg-[#F0F0F0]">
+        <Image
+          src={project.image}
+          alt={project.title}
+          fill
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
+        {/* Overlay */}
+        <div
+          className={`
+                        absolute inset-0 bg-black/50 transition-opacity duration-300
+                        ${hovered ? "opacity-100" : "opacity-0"}
+                    `}
+        />
+        {/* Centered red arrow */}
+        <div
+          className={`
+                        absolute inset-0 flex items-center justify-center
+                        transition-all duration-300
+                        ${hovered ? "opacity-100 scale-100" : "opacity-0 scale-90"}
+                    `}
+        >
+          <div className="w-[61.48px] h-[64.38px] bg-primary flex items-center justify-center shrink-0">
+            <Image
+              src="/assets/icons/right-top-arrow-primary.svg"
+              alt="View project"
+              width={12.5}
+              height={12.5}
+              className={`invert brightness-0 shrink-0 w-[12.5px] h-[12.5px] transition-all duration-300 ${hovered ? "translate-x-[0px] translate-y-[0px]" : "-translate-x-[10px] translate-y-[10px]"}`}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Text */}
+      <div className="pt-5">
+        <p className="section-description mb-[10px]">
+          {[project.type, project.sector, project.location, project.status]
+            .filter(Boolean)
+            .map((item, index, arr) => (
+              <span key={index}>
+                {item}
+                {index < arr.length - 1 && (
+                  <span className="mx-[10px] text-paragraph">|</span>
+                )}
+              </span>
+            ))}
+        </p>
+        <h3 className="text-32 leading-[100%] font-condensed text-secondary mb-5">
+          {project.title}
+        </h3>
+        {/* Bottom border — red fill animates on hover */}
+        <div className="w-full h-[1px] bg-[#E5E5E5] relative overflow-hidden">
+          <div
+            className={`
+                            absolute inset-y-0 left-0 bg-primary
+                            transition-all duration-[400ms]
+                            ${hovered ? "w-full" : "w-0"}
+                        `}
+          />
+        </div>
+      </div>
+    </Link>
+  );
+};
+
+// ─── Main ─────────────────────────────────────────────────────────────────────
+const ProjectsGrid = () => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const searchQuery = searchParams.get("search") || "";
+  const typeFilter = searchParams.get("type") || "";
+  const sectorFilter = searchParams.get("sector") || "";
+  const locationFilter = searchParams.get("location") || "";
+  const statusFilter = searchParams.get("status") || "";
+  const page = parseInt(searchParams.get("page") || "1", 10);
+
+  const [draftSearch, setDraftSearch] = useState(searchQuery);
+  const [draftType, setDraftType] = useState(typeFilter);
+  const [draftSector, setDraftSector] = useState(sectorFilter);
+  const [draftLocation, setDraftLocation] = useState(locationFilter);
+  const [draftStatus, setDraftStatus] = useState(statusFilter);
+  const [showFilters, setShowFilters] = useState(false);
+
+  useEffect(() => {
+    setDraftSearch(searchQuery);
+    setDraftType(typeFilter);
+    setDraftSector(sectorFilter);
+    setDraftLocation(locationFilter);
+    setDraftStatus(statusFilter);
+  }, [searchQuery, typeFilter, sectorFilter, locationFilter, statusFilter]);
+
+  const updateURL = useCallback(
+    (params: Record<string, string>) => {
+      const current = new URLSearchParams(searchParams.toString());
+      Object.entries(params).forEach(([k, v]) => {
+        if (v) current.set(k, v);
+        else current.delete(k);
+      });
+      router.push(`${pathname}?${current.toString()}`, { scroll: false });
+    },
+    [searchParams, pathname, router],
+  );
+
+  const applyFilters = () => {
+    updateURL({
+      search: draftSearch,
+      type: draftType,
+      sector: draftSector,
+      location: draftLocation,
+      status: draftStatus,
+      page: "1",
+    });
+  };
+
+  const filtered = projectsData.filter((p) => {
+    if (
+      searchQuery &&
+      !p.title.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+      return false;
+    if (typeFilter && p.type !== typeFilter) return false;
+    if (sectorFilter && p.sector !== sectorFilter) return false;
+    if (locationFilter && p.location !== locationFilter) return false;
+    if (statusFilter && p.status !== statusFilter) return false;
+    return true;
+  });
+
+  const visibleCount = page * PROJECTS_PER_PAGE;
+  const visible = filtered.slice(0, visibleCount);
+  const hasMore = visibleCount < filtered.length;
+
+  return (
+    <div className="w-full">
+      {/* ─── Filter Bar ─────────────────────────────────────────────────── */}
+      <div className="border-b border-border">
+        <div className="container h-full">
+          {/* Mobile Filter Button */}
+          <div className="xl:hidden pt-100">
+            <button
+              onClick={() => setShowFilters(!showFilters)}
+              className="w-full flex items-center leading-0 justify-between px-5 gap-2 border border-secondary py-3 md:py-4 lg:py-5 text-secondary section-description hover:bg-primary hover:text-white transition-colors duration-300"
+            >
+              FILTER
+              <div
+                className={`transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${showFilters ? "rotate-45" : "rotate-0"}`}
+              >
+                <Plus className="text-secondary" size={32} />
+              </div>
+            </button>
+          </div>
+
+          <div
+            className={`flex flex-col xl:flex-row items-stretch transition-all duration-500  ${
+              showFilters ? "max-h-[1000px]" : "max-h-0 xl:max-h-none"
+            } xl:max-h-none`}
+          >
+            {/* Search */}
+            <div className="flex items-center gap-5 xl:px-4 2xl:px-7 3xl:px-[44px] py-6 xl:py-70 xl:border-r xl:border-l border-border 3xl:max-w-[300px]">
+              <span className="shrink-0">
+                <Image
+                  src="/assets/icons/search.svg"
+                  alt=""
+                  width={32}
+                  height={32}
+                />
+              </span>
+
+              <input
+                type="text"
+                placeholder="Search Projects"
+                value={draftSearch}
+                onChange={(e) => setDraftSearch(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && applyFilters()}
+                className="placeholder:text-paragraph text-17 3xl:placeholder:text-20 placeholder:leading-[1.5] focus:outline-none section-description max-w-[153px]"
+              />
+            </div>
+
+            {/* Dropdowns */}
+            <div className="flex flex-col xl:flex-row items-start xl:items-center justify-evenly gap-6 xl:gap-8 2xl:gap-10 3xl:gap-[55px] xl:px-8 2xl:px-10 3xl:px-[50px] flex-1">
+              <Dropdown
+                label="Project Type"
+                options={filterOptions.projectTypes}
+                value={draftType}
+                onChange={setDraftType}
+              />
+
+              <Dropdown
+                label="Sector"
+                options={filterOptions.sectors}
+                value={draftSector}
+                onChange={setDraftSector}
+              />
+
+              <Dropdown
+                label="Location"
+                options={filterOptions.locations}
+                value={draftLocation}
+                onChange={setDraftLocation}
+              />
+
+              <Dropdown
+                label="Status"
+                options={filterOptions.statuses}
+                value={draftStatus}
+                onChange={setDraftStatus}
+              />
+            </div>
+
+            {/* Apply Filter */}
+<div className="flex items-center pr-8 2xl:pr-10 3xl:pr-[50px] xl:border-r border-border shrink-0 mt-10 xl:mt-0">
+  <button
+    type="button"
+    onClick={applyFilters}
+    className="relative overflow-hidden w-fit xl:w-auto px-5 xl:px-[30px] 3xl:px-[51px] py-3 md:py-4 lg:py-5 border border-primary text-primary text-20 font-nexa font-bold group transition-colors duration-300 cursor-pointer"
+  >
+    <span className="absolute left-0 top-0 h-full w-0 bg-primary transition-all duration-500 group-hover:w-full"></span>
+
+    <span className="relative z-10 group-hover:text-paragraph-2 transition-colors duration-300">
+      Apply Filter
+    </span>
+  </button>
+</div>
+          </div>
+        </div>
+      </div>
+
+      {/* ─── Grid ───────────────────────────────────────────────────────── */}
+      <div className="container pt-15 md:pb-130 2xl:pb-150">
+        {visible.length === 0 ? (
+          <div className="py-100 text-center text-[#888888] text-[15px]">
+            No projects match your filters.
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-[30px] 2xl:gap-x-[40px] gap-y-[48px] 2xl:gap-y-[65px]">
+            {visible.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))}
+          </div>
+        )}
+
+        {hasMore && (
+          <div className="flex items-center justify-center mt-10 2xl:mt-[60px]">
+            <CustomButton
+              label="View More"
+              href=""
+              textColor="black"
+              arrowDirection="down"
+              onClick={() => updateURL({ page: String(page + 1) })}
+            />
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default ProjectsGrid;
