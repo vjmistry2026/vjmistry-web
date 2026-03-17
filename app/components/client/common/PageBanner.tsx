@@ -2,8 +2,9 @@
 
 import Image from "next/image";
 import Breadcrumb from "./Breadcrumb";
-import AnimatedHeading from "./AnimateHeading";
 import HeroAnimatedHeading from "@/app/components/client/common/HeroAnimation";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
 
 type Props = {
   title: string;
@@ -11,8 +12,61 @@ type Props = {
 };
 
 const PageBanner = ({ title, image }: Props) => {
+  const imageRef = useRef<HTMLDivElement>(null);
+  const breadcrumbRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!imageRef.current) return;
+
+    const el = imageRef.current;
+
+    gsap.killTweensOf(el);
+
+    const reveal = gsap.fromTo(
+      el,
+      { scale: 1.5 },
+      {
+        scale: 1.0,
+        duration: 2,
+        ease: "power3.out",
+        onComplete: () => {
+          gsap.to(el, {
+            scale: 1.06,
+            duration: 7,
+            ease: "sine.inOut",
+            repeat: -1,
+            yoyo: true,
+          });
+        },
+      }
+    );
+
+    // Breadcrumb move-left animation
+    if (breadcrumbRef.current) {
+      gsap.fromTo(
+        breadcrumbRef.current,
+        { x: 40, opacity: 0 },
+        {
+          x: 0,
+          opacity: 1,
+          duration: 0.9,
+          ease: "power3.out",
+          delay: 0.3,
+        }
+      );
+    }
+
+    return () => {
+      reveal.kill();
+      gsap.killTweensOf(el);
+      if (breadcrumbRef.current) gsap.killTweensOf(breadcrumbRef.current);
+    };
+  }, []);
+
   return (
     <section className="relative w-full h-[420px] lg:h-[500px] 2xl:h-[550px] 3xl:h-[763px] overflow-hidden">
+      <link rel="preload" as="image" href={image} />
+
       <div className="absolute left-0 bottom-[0%] sm:-bottom-[12%] 2xl:-bottom-[14%] w-[350px] sm:w-[500px] md:w-[600px] lg:w-[700px] 2xl:w-[920px] 3xl:w-[1210px] h-auto z-50">
         <Image
           src="/assets/icons/banner_bg_svg2.svg"
@@ -22,13 +76,22 @@ const PageBanner = ({ title, image }: Props) => {
           className="w-full h-full opacity-50"
         />
       </div>
-      <Image
-        src={image}
-        alt={title}
-        fill
-        priority
-        className="object-cover object-center"
-      />
+
+      <div
+        ref={imageRef}
+        className="absolute inset-0 will-change-transform"
+        style={{ transformOrigin: "center center" }}
+      >
+        <Image
+          src={image}
+          alt={title}
+          fill
+          priority
+          fetchPriority="high"
+          className="object-cover object-center"
+        />
+      </div>
+
       <div
         style={{
           background:
@@ -44,7 +107,9 @@ const PageBanner = ({ title, image }: Props) => {
             text={title}
             className="text-75 3xl:text-85 text-paragraph-2"
           />
-          <Breadcrumb />
+          <div ref={breadcrumbRef} style={{ opacity: 0 }}>
+            <Breadcrumb />
+          </div>
         </div>
       </div>
     </section>
