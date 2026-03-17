@@ -29,7 +29,7 @@ export const NAV_ITEMS: NavItem[] = [
   },
   {
     label: "Projects",
-    href: "#",
+    href: "/projects",
   },
   {
     label: "How We Work",

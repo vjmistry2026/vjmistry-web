@@ -89,7 +89,7 @@ body {
     }
 
     @media (width >=1680px) {
-        max-width: 1620px;
+        max-width: 1630px;
     }
 }
 
@@ -156,7 +156,7 @@ body {
 
     --text-15: var(--text-15);
     --text-16: var(--text-16);
-    --text-17: var(--text-18);
+    --text-17: var(--text-17);
     --text-20: var(--text-20);
     --text-30: var(--text-30);
     --text-32: var(--text-32);
