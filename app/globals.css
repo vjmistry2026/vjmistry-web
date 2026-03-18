@@ -16,7 +16,7 @@ body {
 @utility font-nexa {
     font-family: var(--font-nexa);
 }
- 
+
 @utility font-condensed {
     font-family: var(--font-roboto-condensed);
 }
@@ -124,6 +124,7 @@ body {
     --text-82: clamp(44px, 2.79vw + 44px, 82px);
     --text-85: clamp(48px, 2.72vw + 48px, 85px);
 
+    --spacing-30: clamp(20px, 0.44vw + 20px, 30px);
 
     /* --space-40: clamp(25px, 2vw + 8px, 40px); */
     --space-40: clamp(25px, 1.1vw + 25px, 40px);
@@ -131,13 +132,15 @@ body {
     /* --space-70: clamp(35px, 3vw + 8px, 70px); */
     --space-70: clamp(35px, 2.57vw + 35px, 70px);
 
+    --space-80: clamp(40px, 3vw + 8px, 80px);
+
     --space-100: clamp(44px, 4vw + 8px, 100px);
     /* --space-100: clamp(40px, 4.4vw + 40px, 100px); */
 
     --space-120: clamp(45px, 4vw + 8px, 120px);
 
     /* --space-130: clamp(50px, 5vw + 16px, 130px); */
-   --space-130: clamp(50px, 6.72vw + 17px, 130px);
+    --space-130: clamp(50px, 6.72vw + 17px, 130px);
 
     /* --space-150: clamp(60px, 6vw + 16px, 150px); */
     --space-150: clamp(60px, 6.62vw + 60px, 150px);
@@ -165,9 +168,10 @@ body {
     --text-75: var(--text-75);
     --text-82: var(--text-82);
     --text-85: var(--text-85);
-
+    --spacing-30: var(--spacing-30);
     --spacing-40: var(--space-40);
     --spacing-70: var(--space-70);
+    --spacing-80: var(--space-80);
     --spacing-100: var(--space-100);
     --spacing-120: var(--space-120);
     --spacing-130: var(--space-130);
@@ -215,7 +219,7 @@ body {
     @apply text-60 lg:text-66 3xl:text-75 font-condensed leading-[100%];
 }
 
-@utility section-description  {
+@utility section-description {
     @apply text-20 font-nexa leading-[1.5] font-bold text-paragraph;
 }
 
@@ -258,6 +262,11 @@ body {
 
 /* expertise image aniamtion */
 @keyframes kenBurns {
-  from { transform: scale(1) translate(0px, 0px); }
-  to   { transform: scale(1.1) translate(8px, -6px); }
+    from {
+        transform: scale(1) translate(0px, 0px);
+    }
+
+    to {
+        transform: scale(1.1) translate(8px, -6px);
+    }
 }

@@ -19,7 +19,7 @@ export default function DesktopNavbar() {
     const navItemsRef = useRef<HTMLDivElement>(null);
     const ctaRef = useRef<HTMLAnchorElement>(null);
     const pathname = usePathname();
-    const LIGHT_BG_ROUTES = ["/about-us/founder-message"];
+    const LIGHT_BG_ROUTES = ["/about-us/founder-message", "/news/news-details"];
     const isActive = hovered || scrolled || LIGHT_BG_ROUTES.includes(pathname);
 
     // Entry animation on mount

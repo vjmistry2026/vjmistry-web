@@ -9,7 +9,7 @@ import LenisProvider from "../components/LenisProvider";
 const robotoCondensed = Roboto_Condensed({
     subsets: ["latin"],
     weight: ["500"],
-    display: "swap",        
+    display: "swap",
 });
 
 const nexa = localFont({
