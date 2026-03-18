@@ -1,9 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { missionVisionData } from "../data";
 import { moveLeft, moveUp } from "@/app/components/motionVariants";
+import { useState, useRef, useEffect } from "react";
 
 const MissionVision = () => {
   return (
@@ -63,43 +64,73 @@ const Card = ({
   iconWidth: number;
   iconHeight: number;
 }) => {
+  const [hovered, setHovered] = useState(false);
+  const cardRef = useRef(null);
+  const isInView = useInView(cardRef, { once: true, amount: 0.5 });
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
+
+  const lineActive = hovered || (isMobile && isInView);
+
   return (
-    <div className="bg-[#F9F9F9] h-full px-6 sm:px-10 md:px-100 3xl:px-[107px] py-70 3xl:py-[66px]">
-      <div className="mb-6 lg:mb-[30px]">
-        <Image
-          src={item.icon}
-          alt={item.title}
-          width={iconWidth}
-          height={iconHeight}
-          className="pointer-events-none"
-          style={{ width: iconWidth, height: iconHeight }}
+    <div
+      ref={cardRef}
+      className="bg-[#F9F9F9] h-full px-6 sm:px-10 md:px-100 3xl:px-[107px] py-70 3xl:py-[66px]"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <div className="overflow_anim">
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          variants={moveUp(0.1)}
+          className="mb-6 lg:mb-[30px]"
+        >
+          <Image
+            src={item.icon}
+            alt={item.title}
+            width={iconWidth}
+            height={iconHeight}
+            className="pointer-events-none"
+            style={{ width: iconWidth, height: iconHeight }}
+          />
+        </motion.div>
+      </div>
+      <div className="overflow_anim">
+        <motion.h3
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          variants={moveUp(0.2)}
+          className="text-32 font-condensed text-secondary leading-[100%] mb-5 lg:mb-[30px]"
+        >
+          {item.title}
+        </motion.h3>
+      </div>
+
+      <div className="w-full h-px mb-5 lg:mb-[30px] overflow-hidden bg-border">
+        <motion.div
+          className="h-full bg-primary origin-left"
+          animate={{ scaleX: lineActive ? 1 : 0 }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
         />
       </div>
-      <motion.h3
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true }}
-        variants={moveUp(0.2)}
-        className="text-32 font-condensed text-secondary leading-[100%] mb-5 lg:mb-[30px]"
-      >
-        {item.title}
-      </motion.h3>
-      <motion.div
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true }}
-        variants={moveUp(0.35)}
-        className="w-full h-px bg-primary mb-5 lg:mb-[30px]"
-      />
-      <motion.p
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true }}
-        variants={moveUp(0.45)}
-        className="section-description"
-      >
-        {item.description}
-      </motion.p>
+
+      <div className="overflow-hidden">
+        <motion.p
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          variants={moveUp(0.45)}
+          className="section-description"
+        >
+          {item.description}
+        </motion.p>
+      </div>
     </div>
   );
 };
