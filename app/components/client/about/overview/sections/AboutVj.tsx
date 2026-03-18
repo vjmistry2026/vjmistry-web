@@ -7,7 +7,7 @@ import CustomButton from "@/app/components/client/common/CustomButton";
 import { moveUp } from "@/app/components/motionVariants";
 import { motion, useScroll, useTransform } from "framer-motion";
 
-const AboutHeroSection = () => {
+const AboutVj = () => {
     const { title, description, primaryButton, image } = aboutHeroSectionData;
 
     const [isActiveTitle, setIsActiveTitle] = useState(false);
@@ -45,11 +45,15 @@ const AboutHeroSection = () => {
     return (
         <section className="bg-white relative overflow-hidden">
             {/* BG SVG — top right */}
-            <img
-                src="/assets/icons/about-hero-bg.svg"
-                alt=""
-                className="pointer-events-none absolute top-0 right-0 w-auto h-full object-contain object-right-top"
-            />
+            <div className="absolute top-[0%] max-w-[90%] md:-top-[15%] lg:-top-[22%] 2xl:-top-[15%] 3xl:-top-[14.2%] -right-3 w-auto h-full md:max-w-[900px] xl:max-w-[1180px] 2xl:max-w-[1220px] 3xl:max-w-[1500px]">
+                <Image
+                    src="/assets/images/about/overview/vj-svg-top-right.svg"
+                    alt=""
+                    width={1500}
+                    height={800}
+                    className="pointer-events-none object-contain"
+                />
+            </div>
 
             <motion.div
                 variants={moveUp(0.2)}
@@ -98,7 +102,7 @@ const AboutHeroSection = () => {
                                 ref={imageWrapperRef}
                                 className="
                                     relative overflow-hidden w-full
-                                    h-[280px] sm:h-[360px] lg:h-full
+                                    h-[280px] sm:h-[360px] lg:h-full 3xl:min-h-[508px]
                                     [clip-path:polygon(0_0,calc(100%-55px)_0,100%_55px,100%_100%,0_100%)]
                                     sm:[clip-path:polygon(0_0,calc(100%-70px)_0,100%_70px,100%_100%,0_100%)]
                                     md:[clip-path:polygon(0_0,calc(100%-100px)_0,100%_100px,100%_100%,0_100%)]
@@ -135,4 +139,4 @@ const AboutHeroSection = () => {
     );
 };
 
-export default AboutHeroSection;
+export default AboutVj;
