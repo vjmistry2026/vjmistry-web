@@ -14,7 +14,7 @@ export const NAV_ITEMS: NavItem[] = [
     label: "About Us",
     children: [
       { label: "Overview", href: "/about-us/overview" },
-      { label: "Leadership", href: "#" },
+      { label: "Founder's Message", href: "/about-us/founder-message" },
       { label: "Our Values", href: "#" },
     ],
   },

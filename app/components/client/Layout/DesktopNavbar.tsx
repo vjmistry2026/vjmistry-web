@@ -7,6 +7,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { dropdownVariants, itemVariants } from "@/app/components/motionVariants";
 import gsap from "gsap";
+import { usePathname } from "next/navigation";
 
 export default function DesktopNavbar() {
     const [hovered, setHovered] = useState(false);
@@ -17,8 +18,9 @@ export default function DesktopNavbar() {
     const logoRef = useRef<HTMLAnchorElement>(null);
     const navItemsRef = useRef<HTMLDivElement>(null);
     const ctaRef = useRef<HTMLAnchorElement>(null);
-
-    const isActive = hovered || scrolled;
+    const pathname = usePathname();
+    const LIGHT_BG_ROUTES = ["/about-us/founder-message"];
+    const isActive = hovered || scrolled || LIGHT_BG_ROUTES.includes(pathname);
 
     // Entry animation on mount
     useEffect(() => {

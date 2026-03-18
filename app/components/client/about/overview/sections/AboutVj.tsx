@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { aboutHeroSectionData } from "../data";
 import { useEffect, useRef, useState } from "react";
-import CustomButton from "@/app/components/client/common/CustomButton";
 import { moveUp } from "@/app/components/motionVariants";
 import { motion, useScroll, useTransform } from "framer-motion";
 
