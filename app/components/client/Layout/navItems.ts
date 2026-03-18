@@ -42,7 +42,7 @@ export const NAV_ITEMS: NavItem[] = [
   {
     label: "Media Center",
     children: [
-      { label: "News", href: "#" },
+      { label: "News", href: "/news" },
       { label: "Events", href: "#" },
       { label: "Gallery", href: "#" },
     ],
