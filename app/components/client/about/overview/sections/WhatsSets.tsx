@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { whatSetsUsApartData } from "../data";
+import CounterAnimate2 from "../../../common/CounterAnimate2";
 
 const AUTOPLAY_INTERVAL = 3000;
 
@@ -176,7 +177,11 @@ const WhatSetsUsApart = () => {
                 }`}
               >
                 <p className="font-condensed text-primary text-75 xl:text-85 leading-[100%] mb-[10px]">
-                  {stat.value}
+                  <CounterAnimate2
+                    value={stat.value}
+                    totalTime={2}
+                    start={0}
+                  />
                 </p>
                 <p className="section-description text-secondary">
                   {stat.label}

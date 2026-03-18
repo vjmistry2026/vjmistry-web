@@ -145,6 +145,8 @@ body {
 
 
 @theme inline {
+    --font-family-sans: var(--font-nexa);
+
     --color-background: var(--background);
     --color-primary: var(--primary);
     --color-secondary: var(--secondary);
@@ -217,6 +219,10 @@ body {
 
 @utility section-description  {
     @apply text-20 font-nexa leading-[1.5] font-bold text-paragraph;
+}
+
+@utility overflow_anim {
+  @apply pb-1 -mb-1 overflow-hidden;
 }
 
 @keyframes hero-progress-bar {
