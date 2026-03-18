@@ -40,7 +40,7 @@ const Footer = () => {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
-                className="section-heading leading-[110%] mb-[22px] lg:mb-[30px] text-paragraph-2"
+                className="section-heading leading-[120%] mb-[22px] lg:mb-[30px] text-paragraph-2"
               >
                 Subscribe
                 <br />

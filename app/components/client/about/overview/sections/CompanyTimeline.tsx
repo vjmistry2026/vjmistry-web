@@ -126,14 +126,14 @@ const CompanyTimeline = () => {
     <section ref={sectionRef} className="bg-white pb-100 lg:pb-130 3xl:pb-150 overflow-hidden">
       <div className="container">
         <div className="flex flex-col gap-5 lg:gap-[30px] mb-[30px] lg:mb-15">
-          <AnimatedHeading text={heading} className="max-w-[907px] leading-[120%]" />
-          <div className="flex justify-between items-end gap-6">
+          <AnimatedHeading text={heading} className="max-w-[940px] leading-[120%]" />
+          <div className="flex justify-between items-center gap-6">
             <motion.p
               initial="hidden"
               whileInView="show"
               variants={moveUp(0.2)}
               viewport={{ once: true }}
-              className="section-description"
+              className="text-[20px] lg:text-32 font-condensed leading-[1.25] lg:leading-[100%] text-paragraph"
             >
               {description}
             </motion.p>
@@ -156,7 +156,7 @@ const CompanyTimeline = () => {
           whileInView="show"
           variants={moveUp(0.3)}
           viewport={{ once: true }}
-          className="relative flex flex-col lg:flex-row lg:items-end lg:gap-12"
+          className="relative flex flex-col lg:flex-row lg:items-stretch lg:gap-12"
         >
           {lineStyle && (
             <div
@@ -198,7 +198,7 @@ const CompanyTimeline = () => {
                           <button
                             onClick={() => handleSlideClick(realIndex)}
                             aria-label={`Go to ${slide.year}`}
-                            className="flex flex-col items-start w-full"
+                            className="flex flex-col items-start cursor-pointer w-full"
                             style={{ height: SLOT_HEIGHT }}
                           >
                             <div className="flex flex-col items-center">
@@ -227,7 +227,7 @@ const CompanyTimeline = () => {
                         <button
                           onClick={() => handleSlideClick(realIndex)}
                           aria-label={`Go to ${slide.year}`}
-                          className="flex flex-col items-start w-full"
+                          className="flex flex-col items-start w-full cursor-pointer"
                           style={{ height: SLOT_HEIGHT }}
                         >
                           <div className="flex flex-col items-center">
