@@ -101,6 +101,7 @@ body {
     --color-paragraph: #7D7D7D;
     --color-paragraph-2: #FDFDFD;
     --color-border: #D9D9D9;
+    --color-light: #F9F9F9;
 
     /* Small text */
     --text-15: clamp(12px, 0.22vw + 12px, 15px);
@@ -143,7 +144,7 @@ body {
     --space-130: clamp(50px, 6.72vw + 17px, 130px);
 
     /* --space-150: clamp(60px, 6vw + 16px, 150px); */
-    --space-150: clamp(60px, 6.62vw + 60px, 150px);
+    --space-150: clamp(60px, calc(6.72vw + 47px), 150px);
 }
 @media (max-width:1600px){
     :root{
@@ -161,6 +162,7 @@ body {
     --color-paragraph: var(--color-paragraph);
     --color-paragraph-2: var(--color-paragraph-2);
     --color-border: var(--color-border);
+    --color-light: var(--color-light);
     --breakpoint-7xl: 103.125rem;
     --container-7xl: 98.125rem;
 

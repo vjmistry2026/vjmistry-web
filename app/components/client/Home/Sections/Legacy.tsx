@@ -113,9 +113,8 @@ const LegacySection = () => {
                             <span className="relative mt-[8px] lg:mt-[14px] w-fit inline-block overflow-hidden">
                                 {/* animated background */}
                                 <span
-                                    className={`absolute inset-0 bg-primary transform origin-left transition-transform duration-1200 ease-out ${
-                                        isActiveTitle ? "scale-x-100" : "scale-x-0"
-                                    }`}
+                                    className={`absolute inset-0 bg-primary transform origin-left transition-transform duration-1200 ease-out ${isActiveTitle ? "scale-x-100" : "scale-x-0"
+                                        }`}
                                 />
 
                                 {/* text */}
@@ -260,9 +259,8 @@ const LegacySection = () => {
                                         initial="hidden"
                                         whileInView="show"
                                         viewport={{ once: true }}
-                                        className={`section-description transition-colors duration-400 ${
-                                            index === stats.length - 1 ? "max-w-[110px]" : "max-w-[230px]"
-                                        } ${isActive ? "text-[#D9D9D9]" : "text-paragraph"}`}
+                                        className={`section-description transition-colors duration-400 ${index === stats.length - 1 ? "max-w-[110px]" : "max-w-[230px]"
+                                            } ${isActive ? "text-[#D9D9D9]" : "text-paragraph"}`}
                                     >
                                         {item.label}
                                     </motion.p>
