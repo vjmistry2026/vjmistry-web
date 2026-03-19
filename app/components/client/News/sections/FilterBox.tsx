@@ -11,10 +11,11 @@ const FilterBox = ({
   onCategoryChange,
 }: FilterBoxProps) => {
   return ( 
-    <div className="flex justify-end gap-30 pt-80">
-      {newsCategories.map((category) => (
+    <div className="flex flex-wrap justify-start gap-3 pt-10 sm:justify-end sm:gap-4 xl:pt-80 xl:gap-30">
+      {newsCategories.map((category,index) => (
         <FilterButton
           key={category}
+          delayIndex={index}
           btnText={category}
           isActive={activeCategory === category}
           onClick={() => onCategoryChange(category)}

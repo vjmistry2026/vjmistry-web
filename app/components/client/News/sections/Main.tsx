@@ -12,6 +12,7 @@ import {
 import FilterBox from "./FilterBox";
 import NewsGrid from "./NewsGrid";
 import PopularBlock from "./PopularBlock";
+import AnimatedHeading from "../../common/AnimateHeading";
 
 const Main = () => {
   const router = useRouter();
@@ -41,7 +42,7 @@ const Main = () => {
   const { latestNewsList, remainingNewsList } = splitNewsByLatest(filteredNews);
 
   return ( 
-    <section className="pb-25 2xl:pb-30 3xl:pb-[147px]">
+    <section className="pb-15 xl:pb-25 2xl:pb-30 3xl:pb-[147px]">
       <div className="container">
         <FilterBox
           activeCategory={activeCategory}
@@ -52,10 +53,9 @@ const Main = () => {
             })
           }
         />
+        <AnimatedHeading text="Popular News" className="mb-30 pt-5 md:pt-10 xl:pt-13 2xl:pt-15 3xl:pt-[76px]" />
         <PopularBlock latestNewsList={latestNewsList} />
-        <NewsGrid
-          remainingNewsList={remainingNewsList}
-        />
+        <NewsGrid remainingNewsList={remainingNewsList} />
       </div>
     </section>
    );

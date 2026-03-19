@@ -1,10 +1,12 @@
 "use client";
 
 import { useCallback } from "react";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
+import { moveUp } from "@/app/components/motionVariants";
 import CustomButton from "../../common/CustomButton";
 import type { NewsItem } from "../data";
 
@@ -47,19 +49,26 @@ const NewsGrid = ({ remainingNewsList }: NewsGridProps) => {
 
   return (
     <div className="pt-10 xl:pt-13 2xl:pt-15">
-      <div className="grid grid-cols-1 gap-x-30 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
-        {visibleNews.map((article) => (
-          <article key={article.id} className="group">
+      <div className="grid grid-cols-1 gap-x-30 gap-y-8 xl:gap-y-12 md:grid-cols-2 lg:grid-cols-3">
+        {visibleNews.map((article, index) => (
+          <motion.article
+            key={article.id}
+            className="group"
+            variants={moveUp((index % 9) * 0.08)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+          >
             <Link
               href={`/news/news-details?slug=${article.slug}`}
               className="block"
             >
-              <div className="relative aspect-[0.94/1] w-full overflow-hidden">
+              <div className="relative aspect-[0.94/1] h-[250px] md:h-[350px] xl:h-[400px] 2xl:h-[550px] w-full overflow-hidden">
                 <Image
                   src={article.img}
                   alt={article.title}
                   fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105 "
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
                 <div className="absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
@@ -95,7 +104,7 @@ const NewsGrid = ({ remainingNewsList }: NewsGridProps) => {
                 </h3>
               </Link>
             </div>
-          </article>
+          </motion.article>
         ))}
       </div>
 
