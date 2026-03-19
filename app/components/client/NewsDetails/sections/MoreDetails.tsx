@@ -1,9 +1,11 @@
 "use client";
 
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { Fragment, useEffect, useRef, useState } from "react";
 import type { CSSProperties, MouseEvent } from "react";
 
+import { moveLeft, moveUp } from "@/app/components/motionVariants";
 import { newsDetails } from "../data";
 
 const STICKY_TOP = 150;
@@ -51,6 +53,15 @@ const MoreDetails = () => {
     width: 0,
     height: 0,
     containerHeight: 0,
+  });
+  const [activeSectionId, setActiveSectionId] = useState(() => {
+    const initialHash =
+      typeof window !== "undefined" ? window.location.hash.replace(/^#/, "") : "";
+    const firstSectionId = article?.content[0]
+      ? getSectionId(article.content[0].title)
+      : "";
+
+    return initialHash || firstSectionId;
   });
 
   useEffect(() => {
@@ -160,6 +171,46 @@ const MoreDetails = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const sectionIds = article?.content.map((section) => getSectionId(section.title)) ?? [];
+
+    if (sectionIds.length === 0) {
+      return;
+    }
+
+    const sections = sectionIds
+      .map((sectionId) => document.getElementById(sectionId))
+      .filter((section): section is HTMLElement => section !== null);
+
+    if (sections.length === 0) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntries = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+        if (visibleEntries.length === 0) {
+          return;
+        }
+
+        setActiveSectionId(visibleEntries[0].target.id);
+      },
+      {
+        rootMargin: "-20% 0px -55% 0px",
+        threshold: [0.2, 0.35, 0.5, 0.7],
+      },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [article]);
+
   if (!article) {
     return null;
   }
@@ -193,51 +244,69 @@ const MoreDetails = () => {
   })();
 
   return (
-    <section className="relative pt-15 2xl:pt-20 3xl:pt-25 pb-20 xl:pb-25 2xl:pb-[147px]">
+    <section className="relative pt-10 md:pt-12 xl:pt-15 2xl:pt-20 3xl:pt-25 pb-15 xl:pb-25 2xl:pb-30 3xl:pb-[147px]">
       <div className="container">
         <div
           ref={layoutRef}
-          className="flex flex-col gap-12 lg:flex-row lg:items-start 2xl:gap-20 3xl:gap-[120px]"
+          className="grid grid-cols-1 gap-10 md:gap-12 lg:grid-cols-[220px_minmax(0,1fr)] lg:items-start xl:grid-cols-[260px_minmax(0,1fr)] xl:gap-15 2xl:grid-cols-[320px_minmax(0,1fr)] 2xl:gap-20 3xl:grid-cols-[418px_968px] 3xl:gap-[234px]"
         >
           <aside
             ref={sidebarColumnRef}
-            className="relative w-full shrink-0 lg:w-[220px]"
+            className="relative w-full"
             style={sidebarColumnStyle}
           >
-            <div ref={sidebarRef} className="h-fit lg:w-[220px]" style={sidebarStyle}>
-              <p className="font-nexa text-14 font-bold uppercase tracking-[0.14em] text-secondary">
-                Table Of Contents
-              </p>
+            <div ref={sidebarRef} className="h-fit w-full" style={sidebarStyle}>
+              <motion.div
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.3 }}
+                variants={moveLeft(0.1)}
+              >
+                <p className="font-nexa text-20 font-black tracking-[0.14em] text-secondary mb-5">
+                  Table Of Contents
+                </p>
+                <hr className="border-border " />
 
-              <nav className="mt-8">
-                <ul className="space-y-4">
-                  {article.content.map((section) => (
-                    <li key={section.title}>
-                      <a
-                        href={`#${getSectionId(section.title)}`}
-                        onClick={(event) => handleTocClick(event, section.title)}
-                        className="group flex items-start gap-3 text-paragraph transition-colors duration-300 hover:text-primary"
-                      >
-                        <span className="mt-[7px] h-[6px] w-[6px] shrink-0 bg-primary transition-transform duration-300 group-hover:scale-125" />
-                        <span className="section-description text-14 leading-[1.5]">
-                          {section.title}
-                        </span>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
+                <nav className="mt-5">
+                  <ul className="space-y-3 sm:space-y-4">
+                    {article.content.map((section) => (
+                      <li key={section.title}>
+                        <a
+                          href={`#${getSectionId(section.title)}`}
+                          onClick={(event) => handleTocClick(event, section.title)}
+                          className="group flex items-center gap-3 xl:gap-30 text-paragraph transition-colors duration-300 hover:text-primary"
+                        >
+                          <span className="mt-[7px] h-[6px] w-[6px] xl:h-[13px] xl:w-[13px] shrink-0 bg-primary transition-transform duration-300 group-hover:scale-125" />
+                          <span
+                            className={`section-description font-nexa text-20 leading-1p5 transition-colors duration-300 ${
+                              activeSectionId === getSectionId(section.title)
+                                ? "text-primary"
+                                : "text-paragraph group-hover:text-primary"
+                            }`}
+                          >
+                            {section.title}
+                          </span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+              </motion.div>
             </div>
           </aside>
 
-          <div className="min-w-0 flex-1 space-y-12 2xl:space-y-15 3xl:space-y-[76px]">
-            {article.content.map((section) => (
-              <section
+          <div className="min-w-0 space-y-10 md:space-y-12 xl:space-y-15 2xl:space-y-20 3xl:space-y-[76px]">
+            {article.content.map((section, index) => (
+              <motion.section
                 key={section.title}
                 id={getSectionId(section.title)}
-                className="scroll-mt-[160px]"
+                className="scroll-mt-[120px] lg:scroll-mt-[160px]"
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.2 }}
+                variants={moveUp(index * 0.08)}
               >
-                <h2 className="mb-5 font-condensed text-32 leading-[110%] text-secondary 2xl:text-40">
+                <h2 className="mb-4 font-condensed text-32 leading-[110%] text-secondary sm:mb-5 2xl:text-40">
                   {section.title}
                 </h2>
 
@@ -248,9 +317,9 @@ const MoreDetails = () => {
                         {paragraph}
                       </p>
 
-                      {section.image === undefined ||
-                      section.imageAfterParagraph !== paragraphIndex ? null : (
-                        <div className="relative mt-6 aspect-[1.95/1] overflow-hidden">
+                       {section.image === undefined ||
+                       section.imageAfterParagraph !== paragraphIndex ? null : (
+                        <div className="relative mt-5 aspect-[1.25/1] overflow-hidden sm:mt-6 sm:aspect-[1.55/1] xl:aspect-[1.95/1]">
                           <Image
                             src={section.image}
                             alt={section.title}
@@ -265,7 +334,7 @@ const MoreDetails = () => {
                 </div>
 
                 {section.list && (
-                  <ul className="mt-8 grid grid-cols-1 gap-x-8 gap-y-4 md:grid-cols-2">
+                  <ul className="mt-6 grid grid-cols-1 gap-x-8 gap-y-4 sm:mt-8 md:grid-cols-2">
                     {section.list.map((item) => (
                       <li
                         key={item}
@@ -277,7 +346,7 @@ const MoreDetails = () => {
                     ))}
                   </ul>
                 )}
-              </section>
+              </motion.section>
             ))}
           </div>
         </div>

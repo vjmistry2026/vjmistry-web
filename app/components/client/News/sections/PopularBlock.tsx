@@ -1,7 +1,8 @@
-
+import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 
+import { moveLeft, moveUp } from "@/app/components/motionVariants";
 import type { NewsItem } from "../data";
 
 const articlePlacementClasses = [
@@ -28,18 +29,21 @@ const PopularBlock = ({ latestNewsList }: PopularBlockProps) => {
   }
 
   return (
-    <div className="grid grid-cols-1 gap-30 2xl:gap-15 pt-10 xl:pt-13 2xl:pt-15  3xl:pt-[76px] xl:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] border-b border-border mb-20 pb-10 xl:pb-13 2xl:pb-25">
+    <div className="grid grid-cols-1 gap-30 2xl:gap-15  xl:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] border-b border-border pb-5 xl:pb-13 2xl:pb-25">
       {latestNewsList.map((article, index) => {
         const isFeatured = index === 0;
-
         return (
-          <article
+          <motion.article
             key={article.id}
             className={`${articlePlacementClasses[index] ?? ""} ${
               isFeatured
                 ? "group"
                 : "grid grid-cols-[140px_minmax(0,1fr)] gap-5 border-b border-border last:border-0 pb-30 sm:grid-cols-[170px_minmax(0,1fr)]"
             }`}
+            variants={isFeatured ? moveUp(0) : moveLeft((index - 1) * 0.1)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
           >
             {isFeatured ? (
               <>
@@ -47,7 +51,7 @@ const PopularBlock = ({ latestNewsList }: PopularBlockProps) => {
                   href={`/news/news-details?slug=${article.slug}`}
                   className="block"
                 >
-                  <div className="relative h-[504px] w-full overflow-hidden">
+                  <div className="relative h-[250px] md:h-[300px] xl:h-[350px] 2xl:h-[504px] w-full overflow-hidden">
                     <Image
                       src={article.img}
                       alt={article.title}
@@ -105,24 +109,24 @@ const PopularBlock = ({ latestNewsList }: PopularBlockProps) => {
                 </Link>
 
                 <div className="min-w-0 flex flex-col justify-between">
-                  <div className="mb-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-2 section-description">
-                      <p className="flex flex-wrap items-center text-20">
+                  <div className="mb-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-1 section-description">
+                      <p className="flex flex-wrap items-center text-16 xl:text-20">
                         <span className="text-paragraph font-nexa">{article.category}</span>
                         <span className="mx-[10px] text-paragraph">|</span>
                         <span className="text-paragraph/70">{article.readTime}</span>
                       </p>
-                      <p className="text-paragraph">{formatDate(article.date)}</p>
+                      <p className="text-paragraph text-16 xl:text-20">{formatDate(article.date)}</p>
                   </div>
 
                   <Link href={`/news/news-details?slug=${article.slug}`}>
-                    <h3 className="font-condensed text-32 leading-[110%] text-secondary transition-colors duration-300 hover:text-primary">
+                    <h3 className="font-condensed text-20 md:text-32 leading-[110%] text-secondary transition-colors duration-300 hover:text-primary">
                       {article.title}
                     </h3>
                   </Link>
                 </div>
               </>
             )}
-          </article>
+          </motion.article>
         );
       })}
     </div>

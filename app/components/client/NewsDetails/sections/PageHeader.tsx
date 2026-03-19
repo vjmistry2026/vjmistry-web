@@ -1,12 +1,28 @@
+"use client";
+
+import { motion } from "framer-motion";
+
+import { moveUp } from "@/app/components/motionVariants";
 import Breadcrumb from "../../common/Breadcrumb";
+
 const PageHeader = () => {
   return ( 
-    <section className="pt-100 lg:pt-130 3xl:pt-150 mb-15 mt-[77px] lg:mt-[122px]">
+    <section className="mt-[77px] mb-8 pt-15 sm:mt-[90px] sm:mb-10 sm:pt-20 lg:mt-[122px] lg:mb-15 lg:pt-25 xl:pt-100 2xl:pt-130 3xl:pt-150">
       <div className="container">
-        <div className="flex items-center justify-between">
-          <p className="font-nexa text-20 text-paragraph font-bold">Published on Sep 15, 2025 | Blog</p>
-        <Breadcrumb variant="dark" />
-        </div>
+        <motion.div
+          className="flex flex-col gap-4 sm:gap-5 lg:flex-row lg:items-center lg:justify-between"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.6 }}
+          variants={moveUp(0.1)}
+        >
+          <p className="font-nexa text-16 sm:text-20 text-paragraph font-bold">
+            Published on Sep 15, 2025 | Blog
+          </p>
+          <div className="w-full overflow-x-auto lg:w-auto">
+            <Breadcrumb variant="dark" />
+          </div>
+        </motion.div>
       </div>
     </section>
    );
