@@ -11,7 +11,7 @@ const Main = () => {
   return ( 
     <section>
       <div className="container">
-        <div className="mb-10 flex flex-col gap-6 sm:mb-12 lg:mb-20 lg:flex-row lg:items-start lg:justify-between 3xl:mb-30">
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between 3xl:mb-30">
           <div className="min-w-0 flex-1">
             <AnimatedHeading text={newsDetails[0].title} className="mb-4 sm:mb-5 lg:mb-[30px]" />
           </div>
