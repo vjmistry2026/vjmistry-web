@@ -48,7 +48,7 @@ const PopularBlock = ({ latestNewsList }: PopularBlockProps) => {
             {isFeatured ? (
               <>
                 <Link
-                  href={`/news/news-details?slug=${article.slug}`}
+                  href={`/news/news-details/${article.slug}`}
                   className="block"
                 >
                   <div className="relative h-[250px] md:h-[300px] xl:h-[350px] 2xl:h-[504px] w-full overflow-hidden">
@@ -84,7 +84,7 @@ const PopularBlock = ({ latestNewsList }: PopularBlockProps) => {
                     <p className="text-paragraph">{formatDate(article.date)}</p>
                   </div>
 
-                  <Link href={`/news/news-details?slug=${article.slug}`}>
+                  <Link href={`/news/news-details/${article.slug}`}>
                     <h3 className="max-w-[620px] font-condensed text-32 leading-[110%] text-secondary transition-colors duration-300 hover:text-primary">
                       {article.title}
                     </h3>
@@ -94,7 +94,7 @@ const PopularBlock = ({ latestNewsList }: PopularBlockProps) => {
             ) : (
               <>
                 <Link
-                  href={`/news/news-details?slug=${article.slug}`}
+                  href={`/news/news-details/${article.slug}`}
                   className="block relative overflow-hidden h-full"
                 >
                   <div className="relative overflow-hidden h-full">
@@ -118,7 +118,7 @@ const PopularBlock = ({ latestNewsList }: PopularBlockProps) => {
                       <p className="text-paragraph text-16 xl:text-20">{formatDate(article.date)}</p>
                   </div>
 
-                  <Link href={`/news/news-details?slug=${article.slug}`}>
+                  <Link href={`/news/news-details/${article.slug}`}>
                     <h3 className="font-condensed text-20 md:text-32 leading-[110%] text-secondary transition-colors duration-300 hover:text-primary">
                       {article.title}
                     </h3>

@@ -112,7 +112,7 @@ body {
 
     /* Medium headings */
     --text-30: clamp(20px, 0.54vw + 20px, 30px);
-    --text-32: clamp(24px, 0.59vw + 24px, 32px);
+    --text-32: clamp(24px, 2.5vw + 0.1em, 32px);
     --text-35: clamp(26px, 0.6vw + 26px, 35px);
 
 
@@ -145,7 +145,12 @@ body {
     /* --space-150: clamp(60px, 6vw + 16px, 150px); */
     --space-150: clamp(60px, 6.62vw + 60px, 150px);
 }
-
+@media (max-width:1600px){
+    :root{
+        --text-20: clamp(14px, 1.44vw + 14px, 18px);
+        --text-32: clamp(24px, calc(2vw + 0.1rem), 28px);
+    }
+}
 
 @theme inline {
     --font-family-sans: var(--font-nexa);

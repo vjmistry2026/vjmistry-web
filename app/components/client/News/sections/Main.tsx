@@ -42,7 +42,7 @@ const Main = () => {
   const { latestNewsList, remainingNewsList } = splitNewsByLatest(filteredNews);
 
   return ( 
-    <section className="pb-15 xl:pb-25 2xl:pb-30 3xl:pb-[147px]">
+    <section className="pb-15 xl:pb-25 2xl:pb-[120px] 3xl:pb-[147px]">
       <div className="container">
         <FilterBox
           activeCategory={activeCategory}

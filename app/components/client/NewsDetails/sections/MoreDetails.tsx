@@ -244,7 +244,7 @@ const MoreDetails = () => {
   })();
 
   return (
-    <section className="relative pt-10 md:pt-12 xl:pt-15 2xl:pt-20 3xl:pt-25 pb-15 xl:pb-25 2xl:pb-30 3xl:pb-[147px]">
+    <section className="relative pt-10 md:pt-12 xl:pt-15 2xl:pt-20 3xl:pt-150 pb-15 xl:pb-25 2xl:pb-[120px] 3xl:pb-[147px]">
       <div className="container">
         <div
           ref={layoutRef}
@@ -295,7 +295,7 @@ const MoreDetails = () => {
             </div>
           </aside>
 
-          <div className="min-w-0 space-y-10 md:space-y-12 xl:space-y-15 2xl:space-y-20 3xl:space-y-[76px]">
+          <div className="min-w-0 space-y-10 md:space-y-12 xl:space-y-15 2xl:space-y-15 3xl:space-y-15">
             {article.content.map((section, index) => (
               <motion.section
                 key={section.title}

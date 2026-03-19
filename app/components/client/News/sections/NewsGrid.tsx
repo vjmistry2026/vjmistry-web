@@ -60,10 +60,10 @@ const NewsGrid = ({ remainingNewsList }: NewsGridProps) => {
             viewport={{ once: true, amount: 0.2 }}
           >
             <Link
-              href={`/news/news-details?slug=${article.slug}`}
+              href={`/news/news-details/${article.slug}`}
               className="block"
             >
-              <div className="relative aspect-[0.94/1] h-[250px] md:h-[350px] xl:h-[400px] 2xl:h-[550px] w-full overflow-hidden">
+              <div className="relative aspect-[0.94/1] h-[250px] md:h-[350px] xl:h-[400px] 3xl:h-[550px] w-full overflow-hidden">
                 <Image
                   src={article.img}
                   alt={article.title}
@@ -98,7 +98,7 @@ const NewsGrid = ({ remainingNewsList }: NewsGridProps) => {
                 </p>
               </div>
 
-              <Link href={`/news/news-details?slug=${article.slug}`}>
+              <Link href={`/news/news-details/${article.slug}`}>
                 <h3 className="font-condensed text-32 leading-[110%] text-secondary transition-colors duration-300 hover:text-primary">
                   {article.title}
                 </h3>
@@ -109,7 +109,7 @@ const NewsGrid = ({ remainingNewsList }: NewsGridProps) => {
       </div>
 
       {hasMore && (
-        <div className="mt-10 2xl:mt-[60px] flex items-center justify-center">
+        <div className="mt-10 2xl:mt-15 flex items-center justify-center">
           <CustomButton
             label="View More"
             href=""
