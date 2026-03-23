@@ -22,7 +22,7 @@ const PowerBehind = () => {
   };
 
     return (
-       <section className="bg-[#f3f3f3] py-16 lg:py-24">
+       <section className="bg-[#f3f3f3]  py-130 3xl:py-150">
       <div className="container ">
 
        <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-[auto_895px] gap-4 xl:gap-10 2xl:gap-[80px]">
