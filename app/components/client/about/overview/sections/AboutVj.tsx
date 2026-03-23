@@ -66,10 +66,7 @@ const AboutVj = () => {
 
                     {/* LEFT — full width mobile, 58% on lg+ */}
                     <div className="w-full md:w-[50%] lg:w-[58%] flex flex-col justify-center md:py-120">
-                        <h2
-                            ref={titleRef}
-                            className="section-heading flex items-center gap-3 text-secondary"
-                        >
+                        <h2 ref={titleRef} className="section-heading flex items-center gap-3 text-secondary" >
                             {title.normal}
                             <span className="relative w-fit inline-block overflow-hidden">
                                 <span

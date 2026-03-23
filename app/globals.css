@@ -287,3 +287,7 @@ body {
         transform: scale(1.1) translate(8px, -6px);
     }
 }
+
+.cmn-p{
+    @apply font-nexa text-20 leading-1p5 text-paragraph;
+}
