@@ -14,11 +14,11 @@ const ZeroHarm = () => {
   );
 
   return (
-    <section className="bg-white py-100 lg:py-130 3xl:py-130">
+    <section className="bg-white pt-130 pb-150">
       <div className="container">
         <AnimatedHeading text={title} className="mb-30" />
         <p className="cmn-p max-w-3xl font-bold">{desc}</p>
-        <div className="mt-15 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3 xl:gap-8 3xl:gap-10">
+        <div className="mt-5 md:mt-10 xl:mt-15 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3 xl:gap-8 3xl:gap-10">
           {items.map((item, index) => {
             const isActive = activeTitle === item.title;
 

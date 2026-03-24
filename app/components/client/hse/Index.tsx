@@ -11,7 +11,7 @@ const Index = () => {
   return ( 
     <>
     <PageBanner title={HSEData.bannerData.title} image={HSEData.bannerData.image} />
-    <DecImg sectionClassName="py-150" title={HSEData.hero.title} desc={HSEData.hero.desc} image={HSEData.hero.img} alt={HSEData.hero.title} className="lg:gap-[73px]" titleClass="mb-30 leading-[1.2]" />
+    <DecImg sectionClassName="py-150" title={HSEData.hero.title} desc={HSEData.hero.desc} image={HSEData.hero.img} alt={HSEData.hero.title} className="lg:gap-[73px]" titleClass="mb-2 xl:mb-30 leading-[1.2]" />
     <ComHealth/>
     <ZeroHarm />
     <QuoteBanner/>
