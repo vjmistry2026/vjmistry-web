@@ -16,16 +16,15 @@ const QuoteBanner = () => {
 
   // VERY subtle background movement (professional feel)
   const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
+  const quoteY = useTransform(scrollYProgress, [0, 1], [10, -10]);
+  const quoteX = useTransform(scrollYProgress, [0, 1], [-4, 6]);
 
   // Content animation
   const opacity = useTransform(scrollYProgress, [0, 0.4], [0, 1]);
   const contentY = useTransform(scrollYProgress, [0, 1], [50, 0]);
 
   return (
-    <section
-      ref={ref}
-      className="relative overflow-hidden pt-10 pb-8 xl:pt-25 xl:pb-22 2xl:pt-[236px] 2xl:pb-[130.25px]"
-    >
+    <section ref={ref} className="relative overflow-hidden pt-10 3xl:pt-0 pb-15 xl:pb-22 2xl:pb-[130.25px] 3xl:h-[694px] flex flex-col justify-end" >
       {/* Background Image */}
       <motion.div
         style={{ y: bgY }}
@@ -57,10 +56,11 @@ const QuoteBanner = () => {
             color="white"
           />
 
-          <img
+          <motion.img
             src="/assets/icons/white-quote.svg"
             alt=""
-            className="mb-5"
+            style={{ x: quoteX, y: quoteY }}
+            className="mb-5 scale-[1.03] will-change-transform"
           />
 
           <p className="cmn-p !text-paragraph-2 opacity-70 max-w-4xl">

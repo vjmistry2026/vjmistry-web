@@ -132,7 +132,7 @@ const PageBanner = ({ title, image }: Props) => {
           fill
           priority
           fetchPriority="high"
-          quality={100}
+          // quality={100}
           className="object-cover object-center"
         />
       </div>

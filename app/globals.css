@@ -89,7 +89,7 @@ body {
     }
 
     @media (width >=1680px) {
-        max-width: 1630px;
+        max-width: 1650px;
     }
 }
 
@@ -130,6 +130,8 @@ body {
     /* --space-40: clamp(25px, 2vw + 8px, 40px); */
     --space-40: clamp(25px, 1.1vw + 25px, 40px);
 
+    --space-50: clamp(30px, 5vw + 0.1em, 50px);
+
     /* --space-70: clamp(35px, 3vw + 8px, 70px); */
     --space-70: clamp(35px, 2.57vw + 35px, 70px);
 
@@ -146,10 +148,13 @@ body {
     /* --space-150: clamp(60px, 6vw + 16px, 150px); */
     --space-150: clamp(60px, calc(6.72vw + 47px), 150px);
 }
-@media (max-width:1600px){
-    :root{
+
+@media (max-width:1600px) {
+    :root {
         --text-20: clamp(14px, 1.44vw + 14px, 18px);
         --text-32: clamp(24px, calc(2vw + 0.1rem), 28px);
+        --space-130: clamp(30px, 4.72vw + 0.2em, 100px);
+        --space-150: clamp(30px, calc(5vw + 0.5em), 120px);
     }
 }
 
@@ -179,6 +184,7 @@ body {
     --text-85: var(--text-85);
     --spacing-30: var(--spacing-30);
     --spacing-40: var(--space-40);
+    --spacing-50: var(--space-50);
     --spacing-70: var(--space-70);
     --spacing-80: var(--space-80);
     --spacing-100: var(--space-100);
@@ -237,7 +243,7 @@ body {
 }
 
 @utility overflow_anim {
-  @apply pb-1 -mb-1 overflow-hidden;
+    @apply pb-1 -mb-1 overflow-hidden;
 }
 
 @keyframes hero-progress-bar {
@@ -288,6 +294,6 @@ body {
     }
 }
 
-.cmn-p{
+.cmn-p {
     @apply font-nexa text-20 leading-1p5 text-paragraph;
 }

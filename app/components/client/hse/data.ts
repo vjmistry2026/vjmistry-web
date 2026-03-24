@@ -61,7 +61,7 @@ export const HSEData = {
   },
   hero: {
     title: "Health, Safety & Environment",
-    desc: `Health, Safety, and Environmental (HSE) management is at our core. We prioritize safety, sustainability, and compliance across all operations, ensuring a safe working environment and long-term environmental responsibility.`,
+    desc: `Health, Safety, and Environment (HSE) are integral to our operations. We maintain strict safety protocols, proactive risk management practices, and environmentally responsible processes to ensure the well-being of our people, partners, and surroundings across every project.`,
     img: "/assets/images/hse/main.jpg",
   },
 
@@ -167,52 +167,23 @@ export const HSEData = {
     items: [
       {
         title: "Community Outreach",
-        album: [
-          "/assets/images/hse/csr/csr-1.jpg",
-          "/assets/images/hse/csr/csr-1a.jpg",
-          "/assets/images/hse/csr/csr-1b.jpg",
-          "/assets/images/hse/csr/csr-1d.jpg",
-          "/assets/images/hse/csr/csr-1c.jpg",
-        ],
+        album: ["/assets/images/hse/csr/csr-1.jpg", "/assets/images/hse/csr/csr-1a.jpg", "/assets/images/hse/csr/csr-1b.jpg", "/assets/images/hse/csr/csr-1d.jpg", "/assets/images/hse/csr/csr-1c.jpg"],
       },
       {
         title: "Workforce Wellbeing",
-        album: [
-          "/assets/images/hse/csr/csr-2.jpg",
-          "/assets/images/hse/csr/csr-1e.jpg",
-          "/assets/images/hse/csr/csr-1f.jpg",
-          "/assets/images/hse/csr/csr-1g.jpg",
-        ],
+        album: ["/assets/images/hse/csr/csr-2.jpg", "/assets/images/hse/csr/csr-1e.jpg", "/assets/images/hse/csr/csr-1f.jpg", "/assets/images/hse/csr/csr-1g.jpg"],
       },
       {
         title: "Environmental Initiatives",
-        album: [
-          "/assets/images/hse/csr/csr-3.jpg",
-          "/assets/images/hse/csr/csr-1a.jpg",
-          "/assets/images/hse/csr/csr-1b.jpg",
-          "/assets/images/hse/csr/csr-1d.jpg",
-          "/assets/images/hse/csr/csr-1e.jpg",
-        ],
+        album: ["/assets/images/hse/csr/csr-3.jpg", "/assets/images/hse/csr/csr-1a.jpg", "/assets/images/hse/csr/csr-1b.jpg", "/assets/images/hse/csr/csr-1d.jpg", "/assets/images/hse/csr/csr-1e.jpg"],
       },
       {
         title: "Lorem Ipsum Dollar ",
-        album: [
-          "/assets/images/hse/csr/csr-1f.jpg",
-          "/assets/images/hse/csr/csr-1a.jpg",
-          "/assets/images/hse/csr/csr-1b.jpg",
-          "/assets/images/hse/csr/csr-1d.jpg",
-          "/assets/images/hse/csr/csr-1e.jpg",
-        ],
+        album: ["/assets/images/hse/csr/csr-1f.jpg", "/assets/images/hse/csr/csr-1a.jpg", "/assets/images/hse/csr/csr-1b.jpg", "/assets/images/hse/csr/csr-1d.jpg", "/assets/images/hse/csr/csr-1e.jpg"],
       },
       {
         title: "Lorem Ipsum Dollar ",
-        album: [
-          "/assets/images/hse/csr/csr-1g.jpg",
-          "/assets/images/hse/csr/csr-1e.jpg",
-          "/assets/images/hse/csr/csr-1f.jpg",
-          "/assets/images/hse/csr/csr-1b.jpg",
-          "/assets/images/hse/csr/csr-1c.jpg",
-        ],
+        album: ["/assets/images/hse/csr/csr-1g.jpg", "/assets/images/hse/csr/csr-1e.jpg", "/assets/images/hse/csr/csr-1f.jpg", "/assets/images/hse/csr/csr-1b.jpg", "/assets/images/hse/csr/csr-1c.jpg"],
       },
     ],
   },
