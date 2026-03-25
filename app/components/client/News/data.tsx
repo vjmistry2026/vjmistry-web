@@ -1,6 +1,6 @@
 export const bannerData = {
   title: "News",
-  image: "/assets/images/about/overview/bannerImage.jpg",
+  image: "/assets/images/news/banner-img.jpg",
 };
 
 export const newsCategories = ["Blog", "News", "Events"] as const;

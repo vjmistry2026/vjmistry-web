@@ -3,8 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-// Add any real navigable routes here
-const VALID_ROUTES = new Set(["/", "/services", "/projects", "/contact-us"]);
+const VALID_ROUTES = new Set(["/","/news", "/services", "/projects", "/contact-us"]);
 
 type BreadcrumbProps = {
   variant?: "light" | "dark";
@@ -26,6 +25,10 @@ const Breadcrumb = ({ variant = "light" }: BreadcrumbProps) => {
     variant === "dark" ? "text-secondary/50" : "text-paragraph-2/50";
   const activeColor =
     variant === "dark" ? "text-secondary" : "text-paragraph-2";
+  const hoverColor =
+    variant === "dark"
+      ? "group-hover:text-secondary"
+      : "group-hover:text-paragraph-2";
 
   return (
     <nav className="flex items-center gap-[6px]">
@@ -34,22 +37,32 @@ const Breadcrumb = ({ variant = "light" }: BreadcrumbProps) => {
         const isClickable = !isLast && VALID_ROUTES.has(crumb.href);
 
         return (
-          <span key={crumb.href} className="flex items-center gap-1 pr-1 lg:gap-3 lg:pr-3">
-            <span className={`${inactiveColor} section-description`}>•</span>
-
+          <span
+            key={crumb.href}
+            className="flex items-center gap-1 pr-1 lg:gap-3 lg:pr-3"
+          >
             {isClickable ? (
-              <Link
-                href={crumb.href}
-                className={`section-description text-16 sm:text-20 ${inactiveColor} hover:${activeColor} transition-colors duration-300`}
-              >
-                {crumb.label}
+              <Link href={crumb.href} className="group flex items-center gap-1 lg:gap-3">
+                <span
+                  className={`section-description transition-colors duration-300 ${inactiveColor} ${hoverColor}`}
+                >
+                  •
+                </span>
+                <span
+                  className={`section-description text-16 sm:text-20 transition-colors duration-300 ${inactiveColor} ${hoverColor}`}
+                >
+                  {crumb.label}
+                </span>
               </Link>
             ) : (
-              <span
-                className={`section-description text-16 sm:text-20 ${isLast ? activeColor : inactiveColor}`}
-              >
-                {crumb.label}
-              </span>
+              <>
+                <span className={`${inactiveColor} section-description`}>•</span>
+                <span
+                  className={`section-description text-16 sm:text-20 ${isLast ? activeColor : inactiveColor}`}
+                >
+                  {crumb.label}
+                </span>
+              </>
             )}
           </span>
         );

@@ -48,8 +48,8 @@ const NewsGrid = ({ remainingNewsList }: NewsGridProps) => {
   const hasMore = visibleCount < remainingNewsList.length;
 
   return (
-    <div className="pt-10 xl:pt-13 2xl:pt-15">
-      <div className="grid grid-cols-1 gap-x-30 gap-y-8 xl:gap-y-12 md:grid-cols-2 lg:grid-cols-3">
+    <div className="pt-10 xl:pt-13 2xl:pt-15 3xl:pt-25">
+      <div className="grid grid-cols-1 gap-x-30 2xl:gap-x-10 gap-y-8 xl:gap-y-12 md:grid-cols-2 lg:grid-cols-3">
         {visibleNews.map((article, index) => (
           <motion.article
             key={article.id}
@@ -60,7 +60,7 @@ const NewsGrid = ({ remainingNewsList }: NewsGridProps) => {
             viewport={{ once: true, amount: 0.2 }}
           >
             <Link
-              href={`/news/news-details/${article.slug}`}
+              href={`/news/${article.slug}`}
               className="block"
             >
               <div className="relative aspect-[0.94/1] h-[250px] md:h-[350px] xl:h-[400px] 3xl:h-[550px] w-full overflow-hidden">
@@ -73,7 +73,7 @@ const NewsGrid = ({ remainingNewsList }: NewsGridProps) => {
                 />
                 <div className="absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:scale-110 group-hover:opacity-100">
-                  <div className="flex h-[64.38px] w-[61.48px] shrink-0 items-center justify-center bg-primary">
+                  <div className="flex h-[52px] w-[52px] shrink-0 items-center justify-center bg-primary xl:h-[64.38px] xl:w-[61.48px]">
                     <Image
                       src="/assets/icons/right-top-arrow-primary.svg"
                       alt="Read article"
@@ -87,10 +87,10 @@ const NewsGrid = ({ remainingNewsList }: NewsGridProps) => {
             </Link>
 
             <div className="pt-5">
-              <div className="mb-[10px] flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+              <div className="mb-5 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
                 <p className="section-description flex flex-wrap items-center text-20">
                   <span className="font-nexa text-paragraph">{article.category}</span>
-                  <span className="mx-[10px] text-paragraph">|</span>
+                  <span className="mx-[10px] w-[5px] h-[5px] block bg-paragraph rounded-full text-paragraph opacity-70 mt-[3px]"></span>
                   <span className="text-paragraph/70">{article.readTime}</span>
                 </p>
                 <p className="section-description text-paragraph">

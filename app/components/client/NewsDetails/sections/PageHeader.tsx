@@ -7,7 +7,7 @@ import Breadcrumb from "../../common/Breadcrumb";
 
 const PageHeader = () => {
   return ( 
-    <section className="mt-[77px] mb-8 pt-15 sm:mt-[90px] sm:mb-10 sm:pt-20 lg:mt-[122px] lg:mb-15 lg:pt-25 xl:pt-100 2xl:pt-130 3xl:pt-150">
+    <section className="mt-[77px] mb-8 pt-15 sm:mt-[90px] sm:mb-10 sm:pt-20 lg:mt-[122px] lg:mb-15 xl:mb-[65px] lg:pt-25 xl:pt-100 2xl:pt-130 3xl:pt-150">
       <div className="container">
         <motion.div
           className="flex flex-col gap-4 sm:gap-5 lg:flex-row lg:items-center lg:justify-between"
