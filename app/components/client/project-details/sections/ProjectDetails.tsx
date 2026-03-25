@@ -34,7 +34,9 @@ export default function ProjectDetails() {
                   height={32}
                   src={item.icon}
                   alt={item.label}
-                  className="w-auto h-6 xl:h-8 object-contain"
+                  className={`w-auto object-contain ${
+                    item.label === "Location" ? "h-7 xl:h-[34px]" : "h-6 xl:h-8"
+                  }`}
                 />
               </div>
 

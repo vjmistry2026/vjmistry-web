@@ -29,7 +29,7 @@ const PopularBlock = ({ latestNewsList }: PopularBlockProps) => {
   }
 
   return (
-    <div className="grid grid-cols-1 gap-30 2xl:gap-15  xl:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] border-b border-border pb-5 xl:pb-13 2xl:pb-25">
+    <div className="grid grid-cols-1 gap-30 2xl:gap-30 xl:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] 3xl:grid-cols-[842px_auto] border-b border-border pb-5 xl:pb-13 2xl:pb-25">
       {latestNewsList.map((article, index) => {
         const isFeatured = index === 0;
         return (
@@ -61,7 +61,7 @@ const PopularBlock = ({ latestNewsList }: PopularBlockProps) => {
                     />
                     <div className="absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:scale-110 group-hover:opacity-100">
-                      <div className="flex h-[64.38px] w-[61.48px] items-center justify-center bg-primary shrink-0">
+                      <div className="flex h-[52px] w-[52px] items-center justify-center bg-primary shrink-0 xl:h-[64.38px] xl:w-[61.48px]">
                         <Image
                           src="/assets/icons/right-top-arrow-primary.svg"
                           alt="Read article"
@@ -78,14 +78,14 @@ const PopularBlock = ({ latestNewsList }: PopularBlockProps) => {
                   <div className="mb-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-2 section-description pt-30">
                     <p className="flex flex-wrap items-center text-20">
                       <span className="text-paragraph font-nexa">{article.category}</span>
-                      <span className="mx-[10px] text-paragraph">|</span>
+                      <span className="mx-[10px] w-[5px] h-[5px] block bg-paragraph rounded-full text-paragraph opacity-70"></span>
                       <span className="text-paragraph/70">{article.readTime}</span>
                     </p>
                     <p className="text-paragraph">{formatDate(article.date)}</p>
                   </div>
 
-                  <Link href={`/news/news-details/${article.slug}`}>
-                    <h3 className="max-w-[620px] font-condensed text-32 leading-[110%] text-secondary transition-colors duration-300 hover:text-primary">
+                  <Link href={`/news/${article.slug}`}>
+                    <h3 className="max-w-[50ch] font-condensed text-32 leading-[110%] text-secondary transition-colors duration-300 hover:text-primary">
                       {article.title}
                     </h3>
                   </Link>
@@ -93,18 +93,9 @@ const PopularBlock = ({ latestNewsList }: PopularBlockProps) => {
               </>
             ) : (
               <>
-                <Link
-                  href={`/news/news-details/${article.slug}`}
-                  className="block relative overflow-hidden h-full"
-                >
+                <Link href={`/news/${article.slug}`} className="block relative overflow-hidden h-full" >
                   <div className="relative overflow-hidden h-full">
-                    <Image
-                      src={article.img}
-                      alt={article.title}
-                      fill
-                      className="object-cover h-full w-full max-w-full"
-                      sizes="(max-width: 640px) 140px, 170px"
-                    />
+                    <Image src={article.img} alt={article.title} fill className="object-cover h-full w-full max-w-full" sizes="(max-width: 640px) 140px, 170px" />
                   </div>
                 </Link>
 
@@ -112,7 +103,7 @@ const PopularBlock = ({ latestNewsList }: PopularBlockProps) => {
                   <div className="mb-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-1 section-description">
                       <p className="flex flex-wrap items-center text-16 xl:text-20">
                         <span className="text-paragraph font-nexa">{article.category}</span>
-                        <span className="mx-[10px] text-paragraph">|</span>
+                        <span className="mx-[10px] w-[5px] h-[5px] block bg-paragraph rounded-full text-paragraph opacity-70"></span>
                         <span className="text-paragraph/70">{article.readTime}</span>
                       </p>
                       <p className="text-paragraph text-16 xl:text-20">{formatDate(article.date)}</p>

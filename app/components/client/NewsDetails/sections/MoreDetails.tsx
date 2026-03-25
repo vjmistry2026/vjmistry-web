@@ -262,13 +262,13 @@ const MoreDetails = () => {
                 viewport={{ once: true, amount: 0.3 }}
                 variants={moveLeft(0.1)}
               >
-                <p className="font-nexa text-20 font-black tracking-[0.14em] text-secondary mb-5">
+                <p className="font-nexa text-20 font-extrabold  mb-5">
                   Table Of Contents
                 </p>
-                <hr className="border-border " />
+                <hr className="border-border w-[73%]" />
 
                 <nav className="mt-5">
-                  <ul className="space-y-3 sm:space-y-4">
+                  <ul className="space-y-3 sm:space-y-4 xl:space-y-30">
                     {article.content.map((section) => (
                       <li key={section.title}>
                         <a
@@ -323,13 +323,7 @@ const MoreDetails = () => {
                        {section.image === undefined ||
                        section.imageAfterParagraph !== paragraphIndex ? null : (
                         <div className="relative mt-5 aspect-[1.25/1] overflow-hidden sm:mt-6 sm:aspect-[1.55/1] xl:aspect-[1.95/1]">
-                          <Image
-                            src={section.image}
-                            alt={section.title}
-                            fill
-                            className="object-cover"
-                            sizes="(max-width: 1024px) 100vw, 70vw"
-                          />
+                          <Image src={section.image} alt={section.title} fill className="object-cover" sizes="(max-width: 1024px) 100vw, 70vw" />
                         </div>
                       )}
                     </Fragment>
@@ -339,11 +333,8 @@ const MoreDetails = () => {
                 {section.list && (
                   <ul className="mt-6 grid grid-cols-1 gap-x-8 gap-y-4 sm:mt-8 md:grid-cols-2">
                     {section.list.map((item) => (
-                      <li
-                        key={item}
-                        className="flex items-start gap-3 section-description text-paragraph"
-                      >
-                        <span className="mt-[7px] h-[6px] w-[6px] shrink-0 bg-primary" />
+                      <li key={item} className="flex items-center gap-3 xl:gap-5 section-description text-black" >
+                        <span className="mt-[3px] h-[6px] w-[6px] xl:w-[13px] xl:h-[13px] shrink-0 bg-primary" />
                         <span>{item}</span>
                       </li>
                     ))}

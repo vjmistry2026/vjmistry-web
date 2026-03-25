@@ -24,6 +24,11 @@ const nexa = localFont({
             weight: "700",
             style: "normal",
         },
+        {
+            path: "../../public/fonts/nexa/Nexa-ExtraBold.otf",
+            weight: "800",
+            style: "normal",
+        },
     ],
     variable: "--font-nexa",
     display: "swap",
