@@ -44,12 +44,12 @@ export const NAV_ITEMS: NavItem[] = [
     children: [
       { label: "News", href: "/news" },
       { label: "Events", href: "#" },
-      { label: "Gallery", href: "#" },
+      { label: "Gallery", href: "/gallery" },
     ],
   },
   {
     label: "Contact Us",
-    href: "#",
+    href: "/contact-us",
   },
 ];
 

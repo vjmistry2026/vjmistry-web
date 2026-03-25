@@ -46,6 +46,7 @@ const handleTocClick = (
 const MoreDetails = () => {
   const article = newsDetails[0];
   const layoutRef = useRef<HTMLDivElement>(null);
+  const contentColumnRef = useRef<HTMLDivElement>(null);
   const sidebarColumnRef = useRef<HTMLElement>(null);
   const sidebarRef = useRef<HTMLDivElement>(null);
   const [sidebarLayout, setSidebarLayout] = useState<SidebarLayout>({
@@ -67,16 +68,17 @@ const MoreDetails = () => {
   useEffect(() => {
     const updateSidebarLayout = () => {
       const layoutElement = layoutRef.current;
+      const contentColumnElement = contentColumnRef.current;
       const sidebarColumnElement = sidebarColumnRef.current;
       const sidebarElement = sidebarRef.current;
 
-      if (!layoutElement || !sidebarColumnElement || !sidebarElement) {
+      if (!layoutElement || !contentColumnElement || !sidebarColumnElement || !sidebarElement) {
         return;
       }
 
       const width = sidebarColumnElement.offsetWidth;
       const height = sidebarElement.offsetHeight;
-      const containerHeight = layoutElement.offsetHeight;
+      const containerHeight = contentColumnElement.offsetHeight;
 
       if (window.innerWidth < 1024) {
         setSidebarLayout((currentValue) => {
@@ -145,12 +147,14 @@ const MoreDetails = () => {
 
     let resizeObserver: ResizeObserver | null = null;
     const layoutElement = layoutRef.current;
+    const contentColumnElement = contentColumnRef.current;
     const sidebarColumnElement = sidebarColumnRef.current;
     const sidebarElement = sidebarRef.current;
 
     if (
       typeof ResizeObserver !== "undefined" &&
       layoutElement &&
+      contentColumnElement &&
       sidebarColumnElement &&
       sidebarElement
     ) {
@@ -159,6 +163,7 @@ const MoreDetails = () => {
       });
 
       resizeObserver.observe(layoutElement);
+      resizeObserver.observe(contentColumnElement);
       resizeObserver.observe(sidebarColumnElement);
       resizeObserver.observe(sidebarElement);
     }
@@ -244,17 +249,12 @@ const MoreDetails = () => {
   })();
 
   return (
-    <section className="relative pt-10 md:pt-12 xl:pt-15 2xl:pt-20 3xl:pt-150 pb-15 xl:pb-25 2xl:pb-[120px] 3xl:pb-[147px]">
+    <section className="relative pt-10 md:pt-12 xl:pt-15 2xl:pt-20 3xl:pt-150 pb-15 xl:pb-17 2xl:pb-20 3xl:pb-20">
       <div className="container">
-        <div
-          ref={layoutRef}
+        <div ref={layoutRef}
           className="grid grid-cols-1 gap-10 md:gap-12 lg:grid-cols-[220px_minmax(0,1fr)] lg:items-start xl:grid-cols-[260px_minmax(0,1fr)] xl:gap-15 2xl:grid-cols-[320px_minmax(0,1fr)] 2xl:gap-20 3xl:grid-cols-[418px_968px] 3xl:gap-[234px]"
         >
-          <aside
-            ref={sidebarColumnRef}
-            className="relative w-full"
-            style={sidebarColumnStyle}
-          >
+          <aside ref={sidebarColumnRef} className="relative w-full mt-5 xl:mt-17 2xl:mt-[110px]" style={sidebarColumnStyle} >
             <div ref={sidebarRef} className="h-fit w-full" style={sidebarStyle}>
               <motion.div
                 initial="hidden"
@@ -295,7 +295,10 @@ const MoreDetails = () => {
             </div>
           </aside>
 
-          <div className="min-w-0 space-y-10 md:space-y-12 xl:space-y-15 2xl:space-y-15 3xl:space-y-15">
+          <div
+            ref={contentColumnRef}
+            className="min-w-0 space-y-10 md:space-y-12 xl:space-y-15 2xl:space-y-15 3xl:space-y-15"
+          >
             {article.content.map((section, index) => (
               <motion.section
                 key={section.title}
