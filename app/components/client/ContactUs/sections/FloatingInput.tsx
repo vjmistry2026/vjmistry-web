@@ -21,7 +21,7 @@ const FloatingInput = ({
         {...registration}
         type={type}
         aria-invalid={error ? "true" : "false"}
-        className={`peer w-full border-b bg-transparent py-2 font-nexa text-20 font-bold text-black outline-none transition ${
+        className={`peer w-full border-b bg-transparent pb-4 font-nexa text-20 font-bold text-black outline-none transition ${
           error
             ? "border-primary focus:border-primary"
             : "border-gray-300 focus:border-red-500"
@@ -32,10 +32,10 @@ const FloatingInput = ({
         ${
           value
             ? "-top-5 text-sm text-red-500"
-            : "top-2 text-20 font-nexa font-bold text-paragraph peer-focus:-top-5 peer-focus:text-sm peer-focus:text-red-500"
+            : "top-2 text-20 font-nexa leading-1p5 font-bold text-paragraph peer-focus:-top-5 peer-focus:text-sm peer-focus:text-red-500"
         }`}
       >
-        {label}
+        {label} <span className="text-primary">*</span>
       </label>
 
       {error ? (
