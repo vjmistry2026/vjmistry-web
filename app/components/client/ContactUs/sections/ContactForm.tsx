@@ -84,7 +84,7 @@ const PowerBehind = () => {
             <img src="/assets/shapes/contact-shape.svg" alt="" className="w-auto h-auto object-cover" />
           </div>
 
-          <AnimatedHeading text="Let's Build Something Great Together" className="pb-2 font-medium md:pb-30" />
+          <AnimatedHeading text="Let's Build Something Great Together" className="pb-2 font-medium md:pb-30 leading-[1.2]" />
 
           <p className="cmn-p max-w-[41ch] font-bold">
             Whether you&apos;re planning a new project, need expert consultation, or
@@ -96,9 +96,9 @@ const PowerBehind = () => {
         </motion.div>
 
         <motion.div initial={{ opacity: 0, x: 60 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }} className="" >
-          <div style={{ paddingRight: containerInset }} className="relative pt-10">
+          <div style={{ paddingRight: containerInset }} className="relative ">
             <div className="bg-light px-6 py-7 lg:px-8 xl:px-[12] 2xl:px-50 2xl:py-[65px] h-full">
-          <form className="space-y-12" onSubmit={handleSubmit(onSubmit)} noValidate>
+          <form className="space-y-12 xl:space-y-17 3xl:space-y-[67.85px]" onSubmit={handleSubmit(onSubmit)} noValidate>
             <div className="grid grid-cols-1 gap-10 md:grid-cols-2 h-full">
               <FloatingInput
                 label="First Name"
@@ -176,7 +176,7 @@ const PowerBehind = () => {
               </div>
             ) : null}
 
-            <div className="flex items-stretch gap-4 pt-6">
+            <div className="flex items-stretch gap-4 pt-0">
               <button
                 type="submit"
                 disabled={isSubmitting}

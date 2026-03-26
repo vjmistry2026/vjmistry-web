@@ -17,7 +17,7 @@ function FloatingTextarea({
     <div className="relative">
       <textarea
         {...registration}
-        rows={3}
+        rows={4}
         aria-invalid={error ? "true" : "false"}
         className={`peer w-full resize-none border-b bg-transparent py-2 outline-none transition ${
           error
@@ -26,14 +26,14 @@ function FloatingTextarea({
         }`}
       />
 
-      <label className={`pointer-events-none absolute left-0 transition-all duration-300
+      <label className={`pointer-events-none absolute left-0 transition-all duration-300 font-nexa font-bold
         ${
           value
             ? "-top-5 text-sm text-red-500"
             : "top-2 text-lg text-paragraph peer-focus:-top-5 peer-focus:text-sm peer-focus:text-red-500"
         }`}
       >
-        {label}
+        {label} <span className="text-primary">*</span>
       </label>
 
       {error ? (
