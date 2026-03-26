@@ -57,35 +57,15 @@ const Certifications = () => {
     <section className="pt-130 pb-150 xl:py-130">
       <div className="container">
         <AnimatedHeading text={title} className="mb-2 md:mb-30" />
-        <motion.p
-          variants={moveUp(0.15)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.2 }}
-          className="cmn-p font-bold max-w-3xl"
-        >
-          {desc}
-        </motion.p>
+        <motion.p variants={moveUp(0.15)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="cmn-p font-bold max-w-3xl" > {desc} </motion.p>
 
         <div className="mt-8 grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2 xl:mt-10 xl:grid-cols-4">
           {items.map((item, index) => (
-            <motion.button
-              key={item}
-              type="button"
-              variants={moveUp(index * 0.08)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.18 }}
+            <motion.button key={item} type="button" variants={moveUp(index * 0.08)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.18 }}
               onClick={() => setActiveIndex(index)}
-              className="group relative flex min-h-[260px] cursor-pointer items-center justify-center overflow-hidden bg-white p-6 transition-colors duration-300 hover:bg-light sm:min-h-[320px] xl:min-h-[360px]"
+              className="group relative flex min-h-[260px] cursor-pointer items-center justify-center overflow-hidden bg-light p-6 transition-colors duration-300 hover:bg-white sm:min-h-[320px] xl:min-h-[360px]"
             >
-              <Image
-                src={item}
-                alt={`Certification ${index + 1}`}
-                width={260}
-                height={340}
-                className="h-auto max-h-full w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
-              />
+              <Image src={item} alt={`Certification ${index + 1}`} width={260} height={340} className="h-auto max-h-full w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]" />
             </motion.button>
           ))}
         </div>

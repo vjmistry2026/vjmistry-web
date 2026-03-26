@@ -87,7 +87,7 @@ export const certificatesData: CertificateData = {
       },
       {
         id: 6,
-        title: "CRB Class Certificate",
+        title: "CRB Class I Certificate",
         file: dummyCertificateFile,
       },
     ],

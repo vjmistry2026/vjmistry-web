@@ -87,7 +87,7 @@ export default function AlbumCard({
             sizes="(max-width: 1023px) 80vw, 28vw"
             className="h-[300px] object-cover transition-transform duration-700 group-hover:scale-105 xl:h-[400px] 3xl:h-[426px]"
           />
-          <div className="absolute inset-0 bg-black/10 transition-colors duration-300 group-hover:bg-black/0" />
+          <div className="absolute inset-0 bg-black/10 transition-colors duration-300 group-hover:bg-black/50" />
           <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:scale-110 group-hover:opacity-100">
             <div className="flex h-[64.38px] w-[61.48px] shrink-0 items-center justify-center bg-primary">
               <Image

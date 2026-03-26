@@ -18,7 +18,7 @@ const Main = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
-          className="cmn-p font-bold max-w-4xl"
+          className="cmn-p font-bold max-w-[80ch]"
         >
           {desc}
         </motion.p>

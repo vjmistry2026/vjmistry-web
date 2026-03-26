@@ -19,30 +19,33 @@ export const GalleryData = {
     image: "/assets/images/gallery/banner-img.jpg",
   },
 
-
- gallerySection: {
-    title: "Corporate Social Responsibility (CSR)",
-    desc: "We are committed to supporting communities, protecting the environment, and upholding ethical practices as part of our HSE responsibility.",
+  gallerySection: {
+    title: "Moments in the Making",
+    desc: "Explore our collection of project images showcasing quality craftsmanship, precision, and attention to detail. Each folder represents a milestone, capturing progress, completed works, and key highlights from our projects.",
     items: [
       {
-        title: "Community Outreach",
-        album: ["/assets/images/hse/csr/csr-1.jpg", "/assets/images/hse/csr/csr-1a.jpg", "/assets/images/hse/csr/csr-1b.jpg", "/assets/images/hse/csr/csr-1d.jpg", "/assets/images/hse/csr/csr-1c.jpg"],
+        title: "On-Site Insights",
+        album: ["/assets/images/gallery/g1.jpg", "/assets/images/hse/csr/csr-1a.jpg", "/assets/images/hse/csr/csr-1b.jpg", "/assets/images/hse/csr/csr-1d.jpg", "/assets/images/hse/csr/csr-1c.jpg"],
       },
       {
-        title: "Workforce Wellbeing",
-        album: ["/assets/images/hse/csr/csr-2.jpg", "/assets/images/hse/csr/csr-1e.jpg", "/assets/images/hse/csr/csr-1f.jpg", "/assets/images/hse/csr/csr-1g.jpg"],
+        title: "Work in Progress",
+        album: ["/assets/images/gallery/g2.jpg", "/assets/images/hse/csr/csr-1e.jpg", "/assets/images/hse/csr/csr-1f.jpg", "/assets/images/hse/csr/csr-1g.jpg"],
       },
       {
-        title: "Environmental Initiatives",
-        album: ["/assets/images/hse/csr/csr-3.jpg", "/assets/images/hse/csr/csr-1a.jpg", "/assets/images/hse/csr/csr-1b.jpg", "/assets/images/hse/csr/csr-1d.jpg", "/assets/images/hse/csr/csr-1e.jpg"],
+        title: "Completed Projects",
+        album: ["/assets/images/gallery/g3.jpg", "/assets/images/hse/csr/csr-1a.jpg", "/assets/images/hse/csr/csr-1b.jpg", "/assets/images/hse/csr/csr-1d.jpg", "/assets/images/hse/csr/csr-1e.jpg"],
       },
       {
-        title: "Lorem Ipsum Dollar ",
-        album: ["/assets/images/hse/csr/csr-1f.jpg", "/assets/images/hse/csr/csr-1a.jpg", "/assets/images/hse/csr/csr-1b.jpg", "/assets/images/hse/csr/csr-1d.jpg", "/assets/images/hse/csr/csr-1e.jpg"],
+        title: "Events",
+        album: ["/assets/images/gallery/g4.jpg", "/assets/images/hse/csr/csr-1a.jpg", "/assets/images/hse/csr/csr-1b.jpg", "/assets/images/hse/csr/csr-1d.jpg", "/assets/images/hse/csr/csr-1e.jpg"],
       },
       {
-        title: "Lorem Ipsum Dollar ",
-        album: ["/assets/images/hse/csr/csr-1g.jpg", "/assets/images/hse/csr/csr-1e.jpg", "/assets/images/hse/csr/csr-1f.jpg", "/assets/images/hse/csr/csr-1b.jpg", "/assets/images/hse/csr/csr-1c.jpg"],
+        title: "Construction & Execution",
+        album: ["/assets/images/gallery/g5.jpg", "/assets/images/hse/csr/csr-1e.jpg", "/assets/images/hse/csr/csr-1f.jpg", "/assets/images/hse/csr/csr-1b.jpg", "/assets/images/hse/csr/csr-1c.jpg"],
+      },
+      {
+        title: "Quality & Safety (HSE)",
+        album: ["/assets/images/gallery/g6.jpg", "/assets/images/hse/csr/csr-1e.jpg", "/assets/images/hse/csr/csr-1f.jpg", "/assets/images/hse/csr/csr-1b.jpg", "/assets/images/hse/csr/csr-1c.jpg"],
       },
     ],
   },

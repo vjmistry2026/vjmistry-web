@@ -21,7 +21,7 @@ const SectionTwo = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="mb-8 max-w-[780px] text-20 font-nexa leading-1p5 text-paragraph xl:mb-10 2xl:mb-15"
+          className="cmn-p font-bold mb-8 xl:mb-10 2xl:mb-15 max-w-3xl"
         >
           {transparency.description}
         </motion.p>
