@@ -22,7 +22,7 @@ export default function DesktopNavbar() {
   const navItemsRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLAnchorElement>(null);
   const pathname = usePathname();
-  const LIGHT_BG_ROUTES = ["/about-us/founder-message", "/news/"];
+  const LIGHT_BG_ROUTES = ["/about-us/founder-message", "/media-center/news/"];
 
   const isActive =
     hovered ||

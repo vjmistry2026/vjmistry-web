@@ -16,6 +16,7 @@ export const NAV_ITEMS: NavItem[] = [
       { label: "Overview", href: "/about-us/overview" },
       { label: "Founder's Message", href: "/about-us/founder-message" },
       { label: "Our Values", href: "#" },
+      { label: "Certificates", href: "/certificates" },
     ],
   },
   {
@@ -36,15 +37,15 @@ export const NAV_ITEMS: NavItem[] = [
     children: [
       { label: "Process", href: "#" },
       { label: "Safety", href: "#" },
-      { label: "Quality", href: "#" },
+      { label: "Quality", href: "/how-we-work/quality" },
     ],
   },
   {
     label: "Media Center",
     children: [
-      { label: "News", href: "/news" },
+      { label: "News", href: "/media-center/news" },
       { label: "Events", href: "#" },
-      { label: "Gallery", href: "/gallery" },
+      { label: "Gallery", href: "/media-center/gallery" },
     ],
   },
   {

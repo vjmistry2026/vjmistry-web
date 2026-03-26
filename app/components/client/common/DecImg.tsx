@@ -58,7 +58,7 @@ const DecImg = ({
     <section className={`relative ${sectionClassName}`}>
       {
         shape && (
-          <div className="absolute bottom-0 left-0">
+          <div className="absolute bottom-[-7%] left-0">
             <img src="/assets/shapes/shape-main2.svg" width={"744px"} height={"669px"} alt="" />
           </div>
 
@@ -74,7 +74,7 @@ const DecImg = ({
           <div className={reverse ? "md:order-1" : ""}>
             <div
               ref={imageWrapperRef}
-              className={`relative overflow-hidden w-full h-[280px] sm:h-[360px] lg:h-[420px] 3xl:h-[508px]
+              className={`relative overflow-hidden w-full h-[280px] sm:h-[360px] lg:h-[420px] 3xl:h-[574px]
                 [clip-path:polygon(0_0,calc(100%-55px)_0,100%_55px,100%_100%,0_100%)]
                 sm:[clip-path:polygon(0_0,calc(100%-70px)_0,100%_70px,100%_100%,0_100%)]
                 md:[clip-path:polygon(0_0,calc(100%-100px)_0,100%_100px,100%_100%,0_100%)]
@@ -84,7 +84,7 @@ const DecImg = ({
                 ${imageClassName}`}
             >
               <motion.div style={{ y: enableParallax ? y : 0 }} className="h-full w-full">
-                <Image src={image} alt={alt ?? title} fill className="pointer-events-none object-cover scale-[1.12]" priority={priority} />
+                <Image src={image} alt={alt ?? title} fill className="pointer-events-none object-cover scale-[1.12] 3xl:scale-[1.2]" priority={priority} />
               </motion.div>
 
               <div style={{ background: "linear-gradient(179.84deg, rgba(0, 0, 0, 0) 55.5%, rgba(0, 0, 0, 0.245203) 77.26%, rgba(0, 0, 0, 0.5) 99.87%)", }}

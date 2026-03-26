@@ -19,12 +19,32 @@ const DownloadCenter = () => {
     };
 
     if (previewItem) {
-      document.body.style.overflow = "hidden";
+      const scrollY = window.scrollY;
+      const { body, documentElement } = document;
+
+      documentElement.style.overflow = "hidden";
+      body.style.overflow = "hidden";
+      body.style.position = "fixed";
+      body.style.top = `-${scrollY}px`;
+      body.style.left = "0";
+      body.style.right = "0";
+      body.style.width = "100%";
       window.addEventListener("keydown", handleKeyDown);
+
+      return () => {
+        documentElement.style.overflow = "";
+        body.style.overflow = "";
+        body.style.position = "";
+        body.style.top = "";
+        body.style.left = "";
+        body.style.right = "";
+        body.style.width = "";
+        window.scrollTo(0, scrollY);
+        window.removeEventListener("keydown", handleKeyDown);
+      };
     }
 
     return () => {
-      document.body.style.overflow = "";
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [previewItem]);
@@ -39,32 +59,18 @@ const DownloadCenter = () => {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.4 }}
-            className="text-paragraph font-nexa font-bold leading-1p5"
+            className="cmn-p font-bold"
           >
             {downloadCenter.description}
           </motion.p>
 
-          <div className="grid grid-cols-1 gap-5 pt-8 md:grid-cols-2 xl:grid-cols-3 xl:gap-10 xl:pt-10 2xl:pt-15">
+          <div className="grid grid-cols-1 pt-8 md:grid-cols-2 xl:grid-cols-3 gap-x-5 xl:gap-x-10 gap-y-6 xl:gap-y-10 2xl:gap-y-15 xl:pt-10 2xl:pt-15 border-b border-border pb-150 ">
             {downloadCenter.items.map((item, index) => (
-              <motion.article
-                key={item.id}
-                variants={moveUp(index * 0.1)}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, amount: 0.2 }}
-                className="flex min-h-[202px] flex-col bg-light px-8 py-30 md:px-10 2xl:py-10 2xl:px-[44.43px] "
-              >
+              <motion.article key={item.id} variants={moveUp(index * 0.1)} initial="hidden" whileInView="show"
+                viewport={{ once: true, amount: 0.2 }} className="flex min-h-[202px] flex-col bg-light px-8 py-30 md:px-10 2xl:py-10 2xl:px-[44.43px] " >
                 <div className="flex items-center gap-4 2xl:gap-[22.21px]">
-                  <Image
-                    src="/assets/icons/pdf-icon.svg"
-                    alt=""
-                    width={46.66}
-                    height={49}
-                    className="pointer-events-none h-10 xl:h-[49px] w-auto flex-shrink-0"
-                  />
-                  <h3 className="font-condensed text-32 leading-[100%] text-secondary">
-                    {item.title}
-                  </h3>
+                  <Image src="/assets/icons/pdf-icon.svg" alt="" width={46.66} height={49} className="pointer-events-none h-10 xl:h-[49px] w-auto flex-shrink-0" />
+                  <h3 className="font-condensed text-32 leading-[100%] text-secondary"> {item.title} </h3>
                 </div>
 
                 <div className="mt-auto flex items-center justify-between gap-4 pt-9">
@@ -78,20 +84,12 @@ const DownloadCenter = () => {
                     <span className="font-nexa font-bold text-20  leading-1p5">View</span>
                   </button>
 
-                  <a
-                    href={item.file}
-                    download={`${item.title}.pdf`}
-                    aria-label={`Download ${item.title}`}
+                  <a href={item.file} download={`${item.title}.pdf`} aria-label={`Download ${item.title}`}
                     className="group inline-flex items-center gap-3 xl:gap-[23.35px] text-paragraph transition-colors duration-300 hover:text-primary"
                   >
-                    <Image
-                      src="/assets/icons/download-icon-primary.svg"
-                      alt=""
-                      width={21.08}
-                      height={21.08}
-                      className="pointer-events-none h-auto w-5 flex-shrink-0 xl:w-auto xl:h-auto"
-                    />
-                    <span className="font-nexa font-bold leading-1p5">Download</span>
+                    <Image src="/assets/icons/download-icon-primary.svg" alt="" width={21.08} height={21.08} className="pointer-events-none h-auto w-5
+                     flex-shrink-0 xl:w-auto xl:h-auto" />
+                    <span className="font-nexa font-bold text-20 leading-1p5 2xl:mr-3">Download</span>
                   </a>
                 </div>
               </motion.article>
@@ -107,7 +105,7 @@ const DownloadCenter = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setPreviewItem(null)}
-            className="fixed inset-0 z-[10050] flex items-center justify-center bg-secondary/70 p-4 backdrop-blur-[3px] sm:p-6 lg:p-10"
+            className="fixed inset-0 z-[10050] flex items-center justify-center overscroll-none bg-secondary/70 p-4 backdrop-blur-[3px] sm:p-6 lg:p-10"
           >
             <motion.div
               initial={{ opacity: 0, y: 24, scale: 0.98 }}
@@ -115,7 +113,7 @@ const DownloadCenter = () => {
               exit={{ opacity: 0, y: 24, scale: 0.98 }}
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
               onClick={(event) => event.stopPropagation()}
-              className="mx-auto flex h-[min(88vh,860px)] w-full max-w-[1200px] flex-col overflow-hidden rounded-[24px] bg-white shadow-[0_24px_80px_rgba(0,0,0,0.22)]"
+              className="mx-auto flex h-[min(88vh,860px)] w-full max-w-[1200px] flex-col overflow-hidden overscroll-contain rounded-[24px] bg-white shadow-[0_24px_80px_rgba(0,0,0,0.22)]"
             >
               <div className="flex flex-wrap items-start justify-between gap-4 border-b border-border px-5 py-4 sm:px-8 sm:py-5">
                 <div className="min-w-0">

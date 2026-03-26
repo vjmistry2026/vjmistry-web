@@ -17,14 +17,14 @@ const QualityShield = () => {
 
   return (
     <section className="relative overflow-hidden bg-light py-130">
-      <div className="absolute bottom-0 left-0 z-[5]">
+      <div className="absolute bottom-[-3%] left-0 z-[5]">
         <Image src="/assets/shapes/shape-quality-shield.svg" width={1066} height={731} alt="" className="w-[1066px] object-contain" />
       </div>
 
       <div className="container relative z-10">
         <div className="grid grid-cols-1 gap-10 xl:grid-cols-2 2xl:grid-cols-[minmax(0,1.2fr)_minmax(440px,1fr)] 3xl:gap-20">
           <div className="flex flex-col">
-            <AnimatedHeading text={title} className="mb-30 max-w-[16ch]" />
+            <AnimatedHeading text={title} className="mb-30" />
             <motion.p
               variants={moveUp(0.15)}
               initial="hidden"
@@ -50,7 +50,7 @@ const QualityShield = () => {
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: true, amount: 0.2 }}
-                    className="relative xl:pl-10"
+                    className="relative xl:pl-10 2xl:pl-25 3xl:pl-[108px]"
                   >
                     <button type="button" onClick={() => setActiveIndex(index)} className="group block w-full cursor-pointer text-left" >
                       {isActive ? (
@@ -60,11 +60,11 @@ const QualityShield = () => {
                             width={36}
                             height={36}
                             alt=""
-                            className="h-[36px] w-[36px] object-contain"
+                            className="h-[30px] w-[30px] object-contain"
                           />
                         </span>
                       ) : (
-                        <span className="absolute left-0 top-[8px] hidden h-[10px] w-[10px] -translate-x-1/2 bg-primary transition-transform duration-300 group-hover:scale-110 xl:block" />
+                        <span className="absolute left-0 top-[8px] hidden h-[10px] w-[10px] xl:h-[13px] xl:w-[13px] -translate-x-1/2 bg-primary transition-transform duration-300 group-hover:scale-110 xl:block" />
                       )}
 
                       <h3 className={`font-condensed text-[30px] leading-none transition-colors duration-300 ${
@@ -90,7 +90,7 @@ const QualityShield = () => {
                             transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                             className="overflow-hidden"
                           >
-                            <div className="relative h-[220px] overflow-hidden md:h-[280px] xl:h-[195px] 2xl:h-[260px]">
+                            <div className="relative h-[220px] overflow-hidden md:h-[280px] xl:h-[195px] 2xl:h-[260px] 3xl:h-[306px]">
                               <Image
                                 src={step.img}
                                 alt={step.title}

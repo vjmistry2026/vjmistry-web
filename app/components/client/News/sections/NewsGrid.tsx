@@ -60,7 +60,7 @@ const NewsGrid = ({ remainingNewsList }: NewsGridProps) => {
             viewport={{ once: true, amount: 0.2 }}
           >
             <Link
-              href={`/news/${article.slug}`}
+              href={`/media-center/news/${article.slug}`}
               className="block"
             >
               <div className="relative aspect-[0.94/1] h-[250px] md:h-[350px] xl:h-[400px] 3xl:h-[550px] w-full overflow-hidden">
