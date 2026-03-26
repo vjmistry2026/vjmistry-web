@@ -14,6 +14,8 @@ type AlbumCardProps = {
   isActive?: boolean;
 };
 
+const MAX_MODAL_THUMBS = 5;
+
 const getThumbDisplay = (album: string[]) => {
   if (album.length <= 4) {
     return {
@@ -28,6 +30,16 @@ const getThumbDisplay = (album: string[]) => {
   };
 };
 
+const getVisibleModalThumbs = (total: number, activeIndex: number) => {
+  if (total <= MAX_MODAL_THUMBS) {
+    return Array.from({ length: total }, (_, index) => index);
+  }
+
+  const startIndex = Math.max(0, Math.min(activeIndex - 2, total - MAX_MODAL_THUMBS));
+
+  return Array.from({ length: MAX_MODAL_THUMBS }, (_, index) => startIndex + index);
+};
+
 export default function AlbumCard({
   title,
   album,
@@ -37,6 +49,7 @@ export default function AlbumCard({
   const modalSwiperRef = useRef<SwiperType | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [modalIndex, setModalIndex] = useState(0);
+  const visibleModalThumbs = getVisibleModalThumbs(album.length, modalIndex);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -151,14 +164,14 @@ export default function AlbumCard({
         >
           <div className="relative w-full max-w-[1620px]" onClick={(event) => event.stopPropagation()} >
             <div className="max-w-[1444px]  mx-auto relative">
-            <button
-              type="button"
-              onClick={() => setIsOpen(false)}
-              className="absolute right-0 top-0 z-[10060] flex h-12 w-12 -translate-y-full cursor-pointer items-center justify-center bg-transparent text-white transition-colors duration-200 hover:text-primary sm:h-14 sm:w-14 xl:w-5 xl:h-5"
-              aria-label="Close gallery"
-            >
-              <Image src="/assets/icons/close-icon.svg" width={34} height={34} alt="" className="h-5 w-5" />
-            </button>
+              <button
+                type="button"
+                onClick={() => setIsOpen(false)}
+                className="absolute right-0 top-0 z-[10060] flex h-12 w-12 -translate-y-full cursor-pointer items-center justify-center bg-transparent text-white transition-colors duration-200 hover:text-primary sm:h-14 sm:w-14 xl:w-5 xl:h-5"
+                aria-label="Close gallery"
+              >
+                <Image src="/assets/icons/close-icon.svg" width={34} height={34} alt="" className="h-5 w-5" />
+              </button>
 
             </div>
 
@@ -168,7 +181,7 @@ export default function AlbumCard({
                 <div className="absolute left-2 top-1/2 z-20 -translate-y-1/2 sm:left-0">
                   <SliderNavButton
                     direction="left"
-                    
+
                     onClick={() => modalSwiperRef.current?.slidePrev()}
                   />
                 </div>
@@ -176,7 +189,7 @@ export default function AlbumCard({
                 <div className="absolute right-2 top-1/2 z-20 -translate-y-1/2 sm:right-0">
                   <SliderNavButton
                     direction="right"
-                    
+
                     onClick={() => modalSwiperRef.current?.slideNext()}
                   />
                 </div>
@@ -204,19 +217,25 @@ export default function AlbumCard({
               </div>
 
               <div className="mt-4 px-3 py-3 sm:px-4">
-                <div className="mx-auto flex max-w-[980px] items-center justify-center gap-2 overflow-x-auto sm:gap-3">
-                  {album.map((image, imageIndex) => (
+                <div className="mx-auto flex w-fit max-w-full items-center justify-center gap-5 overflow-x-auto">
+                  {visibleModalThumbs.map((imageIndex) => (
                     <button
                       key={`${title}-thumb-${imageIndex}`}
                       type="button"
                       onClick={() => modalSwiperRef.current?.slideTo(imageIndex)}
-                      className={`relative h-10 w-14 shrink-0 cursor-pointer overflow-hidden border transition-colors duration-200 sm:h-12 sm:w-18
-                          ${modalIndex === imageIndex
-                          ? "border-primary"
-                          : "border-white/20"
-                        }`}
+                      className={`relative shrink-0 cursor-pointer overflow-hidden border transition-all duration-300 ${
+                        modalIndex === imageIndex
+                          ? "h-[70px] w-[100px] border-transparent grayscale-0 opacity-100"
+                          : "h-[50px] w-[70px] border-white/20 grayscale opacity-55"
+                      }`}
                     >
-                      <Image src={image} alt="" fill sizes="72px" className="object-cover" />
+                      <Image
+                        src={album[imageIndex]}
+                        alt=""
+                        fill
+                        sizes={modalIndex === imageIndex ? "100px" : "70px"}
+                        className="object-cover"
+                      />
                     </button>
                   ))}
                 </div>
