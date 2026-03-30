@@ -19,18 +19,18 @@ export const foundersMessageData = {
       {
         title: "Integrity",
         description: "Adapting to the rapidly changing construction landscape.",
-        icon: "/assets/images/hse/icons/icon-1.svg",
+        icon: "/assets/images/about/founder-message/i1.svg",
       },
       {
         title: "Agility",
         description: "Adapting to the rapidly changing construction landscape.",
-        icon: "/assets/images/hse/icons/icon-3.svg",
+        icon: "/assets/images/about/founder-message/i2.svg",
         highlight: true,
       },
       {
         title: "Human-Centric",
         description: "Adapting to the rapidly changing construction landscape.",
-        icon: "/assets/images/hse/icons/icon-2.svg",
+        icon: "/assets/images/about/founder-message/i3.svg",
       },
     ],
   },

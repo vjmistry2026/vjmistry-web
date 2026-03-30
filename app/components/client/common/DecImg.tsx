@@ -55,7 +55,7 @@ const DecImg = ({
   }, []);
 
   return (
-    <section className={`relative ${sectionClassName}`}>
+    <section className={`relative overflow-hidden ${sectionClassName}`}>
       {
         shape && (
           <div className="absolute bottom-[-7%] left-0">

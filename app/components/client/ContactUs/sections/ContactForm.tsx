@@ -72,9 +72,7 @@ const PowerBehind = () => {
   return (
     <section className="relative overflow-hidden py-130 3xl:py-150">
       <ContainerAnchor ref={containerRef} />
-
-      <div
-        className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-[875px_auto] align-end"
+      <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-[1.2fr_1.5fr] 3xl:grid-cols-[875px_auto] align-end"
         // style={{ paddingInline: containerInset }}
       >
         <motion.div initial={{ opacity: 0, x: -60 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }} className="relative" >
@@ -83,7 +81,7 @@ const PowerBehind = () => {
             <img src="/assets/shapes/contact-shape.svg" alt="" className="w-auto h-auto object-cover" />
           </div>
 
-          <AnimatedHeading text="Let's Build Something Great Together" className="pb-2 font-medium md:pb-30 leading-[1.2]" />
+          <AnimatedHeading text="Let's Build Something Great Together" className="pb-2 font-medium md:pb-30 leading-[1.2] text-60 3xl:text-75" />
 
           <p className="cmn-p max-w-[41ch] font-bold">
             Whether you&apos;re planning a new project, need expert consultation, or

@@ -23,7 +23,7 @@ const Main = () => {
           {desc}
         </motion.p>
 
-        <div className="mt-8 xl:mt-10 2xl:mt-15 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:mt-10 xl:grid-cols-3 xl:gap-10">
+        <div className="mt-8 xl:mt-10 2xl:mt-15 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:mt-10 xl:grid-cols-3 3xl:gap-10">
           {items.map((item, index) => (
             <motion.div
               key={`${item.title}-${index}`}
@@ -31,6 +31,7 @@ const Main = () => {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.18 }}
+              className="flex flex-col h-full"
             >
               <AlbumCard title={item.title} album={item.album} />
             </motion.div>
