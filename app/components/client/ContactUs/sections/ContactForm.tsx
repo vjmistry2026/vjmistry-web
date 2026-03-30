@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import gsap from "gsap";
@@ -10,7 +9,7 @@ import FloatingTextarea from "./FloatingTextarea";
 import AnimatedHeading from "../../common/AnimateHeading";
 import ContainerAnchor from "../../Layout/ContainerAnchor";
 import { useContainerLeftInset } from "@/app/hooks/useContainerLeftInset";
-
+import CustomButton from "../../common/CustomButton";
 type ContactFormValues = {
   first: string;
   second: string;
@@ -177,27 +176,13 @@ const PowerBehind = () => {
             ) : null}
 
             <div className="flex items-stretch gap-4 pt-0">
-              <button
+              <CustomButton
+                label={isSubmitting ? "Sending..." : "Submit"}
+                href=""
+                textColor="black"
                 type="submit"
                 disabled={isSubmitting}
-                className="group relative flex cursor-pointer items-center overflow-hidden border border-[#D9D9D9] px-10 py-4 text-lg font-medium transition-all duration-300 hover:border-primary disabled:cursor-not-allowed disabled:opacity-70"
-              >
-                <span className="absolute inset-0 -translate-x-full bg-primary transition-transform duration-300 ease-in-out group-hover:translate-x-0" />
-                <span className="relative z-10 transition-colors duration-300 group-hover:text-white">
-                  {isSubmitting ? "Sending..." : "Submit"}
-                </span>
-              </button>
-
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="group relative flex aspect-square self-stretch cursor-pointer items-center justify-center overflow-hidden border border-[#D9D9D9] px-4 transition-all duration-300 hover:border-primary disabled:cursor-not-allowed disabled:opacity-70 xl:px-[25.25px]"
-              >
-                <span className="absolute inset-0 translate-y-full bg-primary transition-transform duration-300 ease-in-out group-hover:translate-y-0" />
-                <Image src="/assets/icons/right-top-arrow-primary.svg" alt="Open" width={14} height={14}
-                  className="pointer-events-none relative z-10 h-[14px] w-[14px] shrink-0 object-contain transition-all duration-300 group-hover:scale-110 group-hover:invert group-hover:brightness-0"
-                />
-              </button>
+              />
             </div>
           </form>
             </div>

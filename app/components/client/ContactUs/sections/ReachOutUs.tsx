@@ -15,10 +15,10 @@ const iconMap = {
 
 const ReachOutUs = () => {
   return (
-    <section className="py-130">
+    <section className="pb-130">
       <div className="container">
         <div className="mb-7 md:mb-10 xl:mb-15">
-          <AnimatedHeading text={reachOutData.title} className="mb-2 md:mb-30" />
+          <AnimatedHeading text={reachOutData.title} className="mb-2 md:mb-30 leading-[1]" />
           <motion.p
             variants={moveUp(0.15)}
             initial="hidden"
@@ -40,11 +40,11 @@ const ReachOutUs = () => {
               viewport={{ once: true, amount: 0.2 }}
               className="bg-light px-4 py-5 xl:px-6 xl:py-7 2xl:px-[44px] 2xl:py-[53px]"
             >
-              <h3 className="font-condensed text-32 leading-[1] text-secondary">
+              <h3 className="font-condensed text-32 leading-[1.2] text-secondary">
                 {item.title}
               </h3>
 
-              <div className="mb-5 mt-5 h-px w-full bg-primary/40" />
+              <div className="mb-5 mt-5 xl:mt-[25px] h-px w-full bg-primary/40" />
 
               <div className="space-y-4">
                 <div className="flex items-start gap-3 text-paragraph/70">
