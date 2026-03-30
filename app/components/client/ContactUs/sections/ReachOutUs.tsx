@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
 import AnimatedHeading from "../../common/AnimateHeading";
@@ -14,6 +15,60 @@ const iconMap = {
 } as const;
 
 const ReachOutUs = () => {
+  const lineAnimationFrameRef = useRef<number | null>(null);
+  const [linePositions, setLinePositions] = useState<Record<number, "start" | "center" | "end">>({});
+  const [animatedLines, setAnimatedLines] = useState<Record<number, boolean>>({});
+
+  useEffect(() => {
+    return () => {
+      if (lineAnimationFrameRef.current !== null) {
+        window.cancelAnimationFrame(lineAnimationFrameRef.current);
+      }
+    };
+  }, []);
+
+  const setLinePosition = (index: number, position: "start" | "center" | "end", animated: boolean) => {
+    setLinePositions((prev) => ({ ...prev, [index]: position }));
+    setAnimatedLines((prev) => ({ ...prev, [index]: animated }));
+  };
+
+  const handleLineMouseEnter = (index: number) => {
+    if (lineAnimationFrameRef.current !== null) {
+      window.cancelAnimationFrame(lineAnimationFrameRef.current);
+      lineAnimationFrameRef.current = null;
+    }
+
+    if (linePositions[index] === "end") {
+      setLinePosition(index, "start", false);
+
+      lineAnimationFrameRef.current = window.requestAnimationFrame(() => {
+        lineAnimationFrameRef.current = window.requestAnimationFrame(() => {
+          setLinePosition(index, "center", true);
+          lineAnimationFrameRef.current = null;
+        });
+      });
+
+      return;
+    }
+
+    setLinePosition(index, "center", true);
+  };
+
+  const handleLineMouseLeave = (index: number) => {
+    if (lineAnimationFrameRef.current !== null) {
+      window.cancelAnimationFrame(lineAnimationFrameRef.current);
+      lineAnimationFrameRef.current = null;
+    }
+
+    setLinePosition(index, "end", true);
+  };
+
+  const handleLineTransitionEnd = (index: number) => {
+    if (linePositions[index] !== "end") return;
+
+    setLinePosition(index, "start", false);
+  };
+
   return (
     <section className="pb-130">
       <div className="container">
@@ -38,15 +93,30 @@ const ReachOutUs = () => {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.2 }}
-              className="bg-light px-4 py-5 xl:px-6 xl:py-7 2xl:px-[44px] 2xl:py-[53px]"
+              onMouseEnter={() => handleLineMouseEnter(index)}
+              onMouseLeave={() => handleLineMouseLeave(index)}
+              className="bg-light px-4 py-5 xl:px-6 xl:py-7 2xl:px-[44px] 2xl:py-[53px] group"
             >
               <h3 className="font-condensed text-32 leading-[1.2] text-secondary">
                 {item.title}
               </h3>
 
-              <div className="mb-5 mt-5 xl:mt-[25px] h-px w-full bg-primary/40" />
+              <div className="relative mb-5 mt-5 h-px w-full overflow-hidden bg-border xl:mt-[25px] xl:mb-30">
+                <span
+                  onTransitionEnd={() => handleLineTransitionEnd(index)}
+                  className={`absolute inset-0 bg-primary ${
+                    animatedLines[index] ? "transition-transform duration-500 ease-in-out" : ""
+                  } ${
+                    linePositions[index] === "center"
+                      ? "translate-x-0"
+                      : linePositions[index] === "end"
+                        ? "translate-x-full"
+                        : "-translate-x-full"
+                  }`}
+                />
+              </div>
 
-              <div className="space-y-4">
+              <div className="space-y-4 xl:space-y-30">
                 <div className="flex items-start gap-3 text-paragraph/70">
                   <div className="min-w-[27px]">
                     <Image src={iconMap.address} alt="" width={22.99} height={26.66} className="mt-1 h-3 w-3 xl:w-[22.99px] xl:h-[26.66px] shrink-0" />
@@ -54,13 +124,13 @@ const ReachOutUs = () => {
                   <p className="cmn-p font-bold">{item.address}</p>
                 </div>
 
-                <div className="grid gap-3 sm:grid-cols-2">
+                <div className="flex flex-wrap items-center gap-x-5 xl:gap-x-10 gap-y-4">
                   {item.phones.map((phone) => (
                     <a key={phone} href={`tel:${phone.replace(/[^\d+]/g, "")}`}
                       className="flex items-start gap-3 text-paragraph/70 transition-colors duration-300 hover:text-primary"
                     >
                       <div className="min-w-[27px]">
-                      <Image src={iconMap.phone} alt="" width={24} height={24} className="mt-1 h-3 w-3 xl:w-[24px] xl:h-[24px] shrink-0" />
+                      <Image src={iconMap.phone} alt="" width={32} height={32} className="mt-1 h-3 w-3 xl:w-[26px] xl:h-[26px] shrink-0" />
                       </div>
                       <span className="cmn-p font-bold">{phone}</span>
                     </a>
@@ -69,7 +139,7 @@ const ReachOutUs = () => {
 
                 <a href={`mailto:${item.email}`} className="flex items-start gap-3 text-paragraph/70 transition-colors duration-300 hover:text-primary" >
                   <div className="min-w-[27px]">
-                  <Image src={iconMap.email} alt="" width={26.67} height={23.21} className="mt-1 h-3 w-3 xl:w-[26.67px] xl:h-[23.21px] shrink-0" />
+                  <Image src={iconMap.email} alt="" width={32} height={32} className="mt-1 h-3 w-3 xl:w-[32px] xl:h-[32.21px] shrink-0" />
                   </div>
                   <span className="cmn-p font-bold">{item.email}</span>
                 </a>

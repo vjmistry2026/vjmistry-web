@@ -105,10 +105,7 @@ const LegacySection = () => {
                 <div className="flex flex-col md:flex-row items-stretch lg:items-center gap-6 lg:gap-9 xl:gap-[60px] 2xl:gap-18">
                     {/* LEFT – 48% */}
                     <div className="w-fit md:max-w-[50%]">
-                        <h2
-                            ref={titleRef}
-                            className="section-heading flex flex-col text-secondary"
-                        >
+                        <h2 ref={titleRef} className="section-heading flex flex-col text-secondary" >
                             {hero.title.normal}
                             <span className="relative mt-[8px] lg:mt-[14px] w-fit inline-block overflow-hidden">
                                 {/* animated background */}
@@ -140,11 +137,7 @@ const LegacySection = () => {
                             viewport={{ once: true }}
                             className="mt-[20px] lg:mt-[30px] xl:mt-[40px] 2xl:mt-15 flex-shrink-0"
                         >
-                            <CustomButton
-                                label={hero.primaryButton.label}
-                                href={hero.primaryButton.href}
-                                textColor="black"
-                            />
+                            <CustomButton label={hero.primaryButton.label} href={hero.primaryButton.href} textColor="black" />
                         </motion.div>
                     </div>
 
@@ -153,7 +146,7 @@ const LegacySection = () => {
                     <div className="flex-1 relative flex">
                         <div
                             ref={imageWrapperRef}
-                            className="
+                            className=" h-fit
     relative overflow-hidden
     [clip-path:polygon(0_0,calc(100%-40px)_0,100%_40px,100%_100%,0_100%)]
     sm:[clip-path:polygon(0_0,calc(100%-50px)_0,100%_50px,100%_100%,0_100%)]
@@ -181,13 +174,7 @@ const LegacySection = () => {
                                 }}
                                 className="absolute inset-0"
                             />
-                            <Image
-                                src="/assets/icons/vj-legacy-svg.svg"
-                                alt="vj-legacy-svg"
-                                width={673}
-                                height={318}
-                                className="pointer-events-none absolute bottom-0 left-0"
-                            />
+                            <Image src="/assets/icons/vj-legacy-svg.svg" alt="vj-legacy-svg" width={673} height={318} className="pointer-events-none absolute bottom-0 left-0" />
                         </div>
                     </div>
                 </div>

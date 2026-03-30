@@ -6,21 +6,44 @@ import Breadcrumb from "@/app/components/client/common/Breadcrumb";
 import AnimatedHeading from "../../../common/AnimateHeading";
 import { motion } from "framer-motion";
 import { moveLeft } from "@/app/components/motionVariants";
+import { useEffect, useRef, useState } from "react";
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 export default function FoundersMessage() {
   const { heading, description, founder } = foundersMessageData;
+  const descriptionColumnRef = useRef<HTMLDivElement>(null);
+  const [imageColumnHeight, setImageColumnHeight] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (!descriptionColumnRef.current) return;
+
+    const descriptionEl = descriptionColumnRef.current;
+
+    const updateHeight = () => {
+      if (window.innerWidth < 1280) {
+        setImageColumnHeight(null);
+        return;
+      }
+
+      setImageColumnHeight(descriptionEl.getBoundingClientRect().height);
+    };
+
+    updateHeight();
+
+    const observer = new ResizeObserver(updateHeight);
+    observer.observe(descriptionEl);
+    window.addEventListener("resize", updateHeight);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", updateHeight);
+    };
+  }, []);
 
   return (
     <section className="relative bg-white w-full overflow-hidden mt-[77px] lg:mt-[122px]">
-      <div className="absolute top-0 right-0 w-auto h-full md:max-w-[900px] xl:max-w-[1180px] 2xl:max-w-[1220px] 3xl:max-w-[1500px]">
-        <Image
-          src="/assets/images/about/founder-message/bg-svg.svg"
-          alt=""
-          width={1500}
-          height={800}
-          className="pointer-events-none object-contain"
-        />
+      <div className="absolute top-[-1.5%] right-0 w-auto h-full md:max-w-[900px] xl:max-w-[1180px] 2xl:max-w-[1220px] 3xl:max-w-[1598.48px] 3xl:h-[708px]">
+        <Image src="/assets/images/about/founder-message/bg-svg.svg" alt="" width={1598.48} height={708} className="pointer-events-none object-contain" />
       </div>
 
       <div className="relative z-10 container py-100 lg:py-130 3xl:py-150">
@@ -37,9 +60,9 @@ export default function FoundersMessage() {
 
         <AnimatedHeading text={heading} className="mb-5 lg:mb-[30px]" />
 
-        <div className="flex flex-col xl:flex-row xl:items-end justify-between gap-8 lg:gap-15 2xl:gap-22">
+        <div className="flex flex-col xl:flex-row items-stretch 3xl:items-end justify-between gap-8 lg:gap-15 2xl:gap-22">
           {/* ── LEFT COLUMN ── */}
-          <div className="flex flex-col order-2 xl:order-1">
+          <div ref={descriptionColumnRef} className="flex flex-col order-2 xl:order-1">
             <div className="mb-5 lg:mb-[30px]">
               <Image
                 src="/assets/images/about/founder-message/quotes.svg"
@@ -59,9 +82,12 @@ export default function FoundersMessage() {
           </div>
 
           {/* ── RIGHT COLUMN ── */}
-          <div className="relative w-full xl:w-[50%] 3xl:w-[746px] shrink-0 pl-10 xl:pl-6 order-1 xl:order-2">
+          <div className="relative w-full xl:w-[50%] 3xl:w-[746px] h-full shrink-0 pl-10 xl:pl-6 order-1 xl:order-2">
             {/* Aspect ratio box — gives real height at all breakpoints */}
-            <div className="relative w-full aspect-[4/3] lg:aspect-[16/11] 3xl:h-[538px] 3xl:aspect-auto">
+            <div
+              className="relative w-full aspect-[4/3] lg:aspect-[16/11] h-full xl:aspect-auto"
+              style={imageColumnHeight ? { height: `${imageColumnHeight}px` } : undefined}
+            >
               <Image
                 src={founder.imageSrc}
                 alt={founder.imageAlt}

@@ -3,9 +3,10 @@
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import AnimatedHeading from "../../common/AnimateHeading";
 import { qualityData } from "../data";
+import ContainerAnchor from "../../Layout/ContainerAnchor";
 
 const QualityShield = () => {
   const { title, desc, steps } = qualityData.qualityShield;
@@ -14,31 +15,56 @@ const QualityShield = () => {
       ? steps.findIndex((step) => step.highlight)
       : 0,
   );
+  const sectionRef = useRef<HTMLElement>(null);
+  const firstColumnRef = useRef<HTMLDivElement>(null);
+  const [shapeBoundary, setShapeBoundary] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (!sectionRef.current || !firstColumnRef.current) return;
+
+    const sectionEl = sectionRef.current;
+    const firstColumnEl = firstColumnRef.current;
+
+    const calculateBoundary = () => {
+      const sectionRect = sectionEl.getBoundingClientRect();
+      const firstColumnRect = firstColumnEl.getBoundingClientRect();
+      setShapeBoundary(firstColumnRect.right - sectionRect.left);
+    };
+
+    calculateBoundary();
+
+    const sectionObserver = new ResizeObserver(calculateBoundary);
+    sectionObserver.observe(sectionEl);
+    sectionObserver.observe(firstColumnEl);
+
+    window.addEventListener("resize", calculateBoundary);
+
+    return () => {
+      sectionObserver.disconnect();
+      window.removeEventListener("resize", calculateBoundary);
+    };
+  }, []);
 
   return (
-    <section className="relative overflow-hidden bg-light py-130">
-      <div className="absolute bottom-[-3%] left-0 z-[5]">
+    <section ref={sectionRef} className="relative overflow-hidden bg-light py-130 ">
+      <ContainerAnchor />
+
+      <div
+        className="absolute bottom-[-3%] left-0 z-[5] overflow-hidden"
+        style={shapeBoundary ? { width: `${shapeBoundary}px` } : undefined}
+      >
         <Image src="/assets/shapes/shape-quality-shield.svg" width={1066} height={731} alt="" className="w-[1066px] object-contain" />
       </div>
 
       <div className="container relative z-10">
-        <div className="grid grid-cols-1 gap-10 xl:grid-cols-2 2xl:grid-cols-[minmax(0,1.2fr)_minmax(440px,1fr)] 3xl:gap-20">
-          <div className="flex flex-col">
+        <div className="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-[minmax(0,1.2fr)_minmax(440px,1fr)] ">
+          <div ref={firstColumnRef} className="flex flex-col">
             <AnimatedHeading text={title} className="mb-30" />
-            <motion.p
-              variants={moveUp(0.15)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.2 }}
-              className="cmn-p font-bold max-w-[51ch]"
-            >
-              {desc}
-            </motion.p>
+            <motion.p variants={moveUp(0.15)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="cmn-p font-bold max-w-[51ch]" > {desc} </motion.p>
           </div>
 
           <div className="relative">
             <div className="absolute left-0 top-0 hidden h-full w-px bg-border xl:block" />
-
             <div className="flex flex-col gap-6 xl:gap-15">
               {steps.map((step, index) => {
                 const isActive = index === activeIndex;
