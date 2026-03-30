@@ -9,6 +9,8 @@ interface CustomButtonProps {
   textColor?: "white" | "black";
   arrowDirection?: "up-right" | "up" | "right" | "down" | "left";
   onClick?: () => void;
+  type?: "button" | "submit" | "reset";
+  disabled?: boolean;
 }
 
 const TEXT_COLORS = {
@@ -24,11 +26,30 @@ const ARROW_ROTATION = {
   left: { base: "rotate-[225deg]", hover: "" },
 };
 
-const CustomButton = ({ label, href, className = "", textColor = "white", arrowDirection = "up-right", onClick }: CustomButtonProps) => {
+const CustomButton = ({
+  label,
+  href,
+  className = "",
+  textColor = "white",
+  arrowDirection = "up-right",
+  onClick,
+  type = "button",
+  disabled = false,
+}: CustomButtonProps) => {
   const [pressed, setPressed] = useState(false);
 
   const handleClick = (e?: React.MouseEvent) => {
-    if (!href || href === "" || href === "#") e?.preventDefault();
+    if (disabled) {
+      e?.preventDefault();
+      return;
+    }
+
+    const isButtonVariant = !href || href === "" || href === "#";
+
+    if (isButtonVariant && type === "button") {
+      e?.preventDefault();
+    }
+
     setPressed(true);
     setTimeout(() => setPressed(false), 200);
     onClick?.();
@@ -50,18 +71,18 @@ const CustomButton = ({ label, href, className = "", textColor = "white", arrowD
     </>
   );
 
-  const sharedClass = `group inline-flex items-center font-nexa font-bold text-16 transition-all duration-250 ${className} ${pressed ? "scale-95" : "scale-100"}`;
+  const sharedClass = `group inline-flex items-center font-nexa font-bold text-16 transition-all duration-250 ${disabled ? "cursor-not-allowed opacity-70" : "cursor-pointer"} ${className} ${pressed ? "scale-95" : "scale-100"}`;
 
   if (!href || href === "" || href === "#") {
     return (
-      <button type="button" onClick={handleClick} className={sharedClass}>
+      <button type={type} disabled={disabled} onClick={handleClick} className={sharedClass}>
         {inner}
       </button>
     );
   }
 
   return (
-    <Link href={href} onClick={handleClick} className={sharedClass}>
+    <Link href={href} onClick={handleClick} aria-disabled={disabled} className={sharedClass}>
       {inner}
     </Link>
   );

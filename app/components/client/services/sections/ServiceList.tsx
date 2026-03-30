@@ -94,20 +94,13 @@ const ServicesSection = () => {
     <section className="py-100 lg:py-130 3xl:py-150">
       <div className="border-b border-border pb-4">
           <div className="container mb-5 md:mb-[30px] 2xl:mb-[60px]">
-            <AnimatedHeading
-              className="section-heading leading-[120%] max-w-[711px]"
-              text={heading}
-            />
+            <AnimatedHeading className="section-heading leading-[120%] max-w-[711px]" text={heading} />
           </div>
           <div>
             {services.map((service, index) => {
               const isActive = index === activeIndex;
               return (
-                <div
-                  key={service.id}
-                  ref={(el) => {
-                    cardRefs.current[index] = el;
-                  }}
+                <div key={service.id} ref={(el) => { cardRefs.current[index] = el; }}
                   className={`relative overflow-hidden border-t border-border ${index === services.length - 1 ? "border-b" : ""}`}
                 >
                   <div
@@ -135,11 +128,7 @@ const ServicesSection = () => {
                       <div className="flex flex-col lg:flex-row items-center">
                         <div className="w-full lg:w-[54%] xl:w-[59%] p-6 md:p-10 lg:py-12 2xl:p-15">
                           <div className="mb-7 lg:mb-[38px]">
-                            <Image
-                              src={service.icon}
-                              alt=""
-                              width={62}
-                              height={62}
+                            <Image src={service.icon} alt="" width={62} height={62}
                               className={`w-auto h-[40px] lg:h-[62px] pointer-events-none transition-all duration-250 ${isActive ? "invert brightness-0" : ""}`}
                             />
                           </div>
