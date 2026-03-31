@@ -133,6 +133,7 @@ const Footer = () => {
                       viewport={{ once: true }}
                     >
                       <Link
+                      target="_blank"
                         key={item.label}
                         href={item.href}
                         className="relative overflow-hidden h-[50px] w-[50px] flex items-center justify-center bg-paragraph/20 group duration-300 transition-colors"

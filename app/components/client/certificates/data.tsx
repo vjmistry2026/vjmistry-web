@@ -1,5 +1,5 @@
 export const bannerData = {
-  title: "Certificates",
+  title: "Certifications",
   image: "/assets/images/certificates/bannerImage.jpg",
 };
 

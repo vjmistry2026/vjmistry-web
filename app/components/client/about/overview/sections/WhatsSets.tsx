@@ -155,14 +155,14 @@ const WhatSetsUsApart = () => {
                   index < 2 ? "border-b md:border-b-0 border-border" : ""
                 }`}
               >
-                <p className="font-condensed text-primary text-40 xl:text-60 3xl:text-85 leading-[100%] mb-[10px]">
+                <p className="font-condensed text-primary text-60 3xl:text-85 leading-[100%] mb-3 md:mb-[10px]">
                   <CounterAnimate2
                     value={stat.value}
                     totalTime={2}
                     start={0}
                   />
                 </p>
-                <p className="section-description text-secondary">
+                <p className="font-nexa leading-[1.2] md:leading-1p5 font-bold text-paragraph text-base md:text-20">
                   {stat.label}
                 </p>
               </div>
