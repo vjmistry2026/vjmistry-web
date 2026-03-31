@@ -99,27 +99,29 @@ const ServicesSection = () => {
           <div>
             {services.map((service, index) => {
               const isActive = index === activeIndex;
+              const overlayAnchorStyle = isActive
+                ? scrolledDown
+                  ? { top: 0, bottom: "auto" as const }
+                  : { top: "auto" as const, bottom: 0 }
+                : scrolledDown
+                  ? { top: "auto" as const, bottom: 0 }
+                  : { top: 0, bottom: "auto" as const };
+
               return (
                 <div key={service.id} ref={(el) => { cardRefs.current[index] = el; }}
                   className={`relative overflow-hidden border-t border-border ${index === services.length - 1 ? "border-b" : ""}`}
                 >
                   <div
-                    className="absolute inset-0 pointer-events-none"
+                    className="absolute inset-x-0 pointer-events-none"
                     style={{
+                      ...overlayAnchorStyle,
                       background:
                         "linear-gradient(180deg, #ED1C24 0%, #A71E22 100%)",
-                      transformOrigin: isActive
-                        ? scrolledDown
-                          ? "top"
-                          : "bottom"
-                        : scrolledDown
-                          ? "bottom"
-                          : "top",
-                      transform: `scaleY(${isActive ? 1 : 0})`,
+                      height: isActive ? "100%" : "0%",
                       transition: isActive
-                        ? `transform ${FILLIN_MS}ms ease-in-out`
+                        ? `height ${FILLIN_MS}ms ease-in-out`
                         : index === visibleIndex
-                          ? `transform ${FILLOUT_MS}ms ease-in-out`
+                          ? `height ${FILLOUT_MS}ms ease-in-out`
                           : "none",
                     }}
                   />
