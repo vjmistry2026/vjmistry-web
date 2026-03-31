@@ -55,20 +55,20 @@ export const NAV_ITEMS: NavItem[] = [
 
 // Footer
 export const quickLinks = [
-  { label: "About Us", href: "#" },
-  { label: "Services", href: "#" },
-  { label: "Projects", href: "#" },
+  { label: "About Us", href: "/about-us/overview" },
+  { label: "Services", href: "/services" },
+  { label: "Projects", href: "/projects" },
 ];
 
 export const resources = [
-  { label: "News", href: "#" },
-  { label: "Gallery", href: "#" },
+  { label: "News", href: "/media-center/news" },
+  { label: "Gallery", href: "/media-center/gallery" },
   { label: "Download Brochure", href: "#" },
   { label: "Download Company Profile", href: "#" },
 ];
 
 export const socialMedia = [
-  { label: "Facebook", icon: "/assets/images/footer/social/fb.svg", href: "#" },
+  { label: "Facebook", icon: "/assets/images/footer/social/fb.svg", href: "https://www.facebook.com/vj.mistryco/" },
   { label: "Instagram", icon: "/assets/images/footer/social/insta.svg", href: "#" },
   { label: "LinkedIn", icon: "/assets/images/footer/social/linkedin.svg", href: "#" },
 ];

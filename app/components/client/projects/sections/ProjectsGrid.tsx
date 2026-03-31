@@ -73,6 +73,7 @@ const Dropdown = ({ label, options, value, onChange }: DropdownProps) => {
               alt=""
               width={21}
               height={10}
+              className="h-[8px] w-[16px] sm:h-[10px] sm:w-[21px]"
             />
           </motion.span>
         </span>
