@@ -8,7 +8,7 @@ import { moveUp } from "@/app/components/motionVariants";
 
 const RelatedProjects = () => {
   return (
-    <section className="w-full pt-100 lg:pb-130 2xl:pb-150">
+    <section className="w-full pt-100 pb-100 lg:pb-130 2xl:pb-150">
       <div className="container mx-auto px-4">
         <AnimatedHeading
           text="Related Projects"

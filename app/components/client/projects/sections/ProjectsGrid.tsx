@@ -240,7 +240,7 @@ const ProjectsGrid = () => {
               >
                 <div className="flex flex-col xl:flex-row items-stretch">
                   {/* Search */}
-                  <div className="flex items-center gap-5 xl:px-4 2xl:px-7 3xl:px-[44px] py-6 xl:py-70 xl:border-r xl:border-l border-border 3xl:max-w-[300px]">
+                  <div className="flex items-center gap-5 xl:px-4 2xl:px-7 3xl:px-[44px] pt-6 pb-5 xl:py-70 border-b mb-6 xl:border-r xl:border-l border-border 3xl:max-w-[300px]">
                     <span className="shrink-0">
                       <Image
                         src="/assets/icons/search.svg"
@@ -307,7 +307,7 @@ const ProjectsGrid = () => {
 
           {/* Desktop — always rendered, not in AnimatePresence */}
           <div className="hidden xl:flex flex-row items-stretch">
-            <div className="flex items-center gap-5 xl:px-4 2xl:px-7 3xl:px-[44px] py-6 xl:py-70 xl:border-r xl:border-l border-border 3xl:max-w-[300px]">
+            <div className="flex items-center gap-5 xl:px-4 2xl:px-7 3xl:px-[44px] py-6 xl:py-70  xl:border-r xl:border-l border-border 3xl:max-w-[300px]">
               <span className="shrink-0">
                 <Image
                   src="/assets/icons/search.svg"
@@ -368,7 +368,7 @@ const ProjectsGrid = () => {
       </div>
 
       {/* ─── Grid ─────────────────────────────────────────────────────── */}
-      <div className="container pt-100 md:pb-130 2xl:pb-150">
+      <div className="container pb-100 pt-100 md:pb-130 2xl:pb-150">
         {visible.length === 0 ? (
           <div className="py-100 text-center section-description">
             No projects match your filters.

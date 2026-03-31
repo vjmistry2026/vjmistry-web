@@ -13,7 +13,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <div className="relative w-full aspect-[1/1] 3xl:max-h-[513px] overflow-hidden">
+      <div className="relative w-full h-[250px] md:h-[280px] 3xl:max-h-[513px] overflow-hidden">
         <Image
           src={project.image}
           alt={project.title}
