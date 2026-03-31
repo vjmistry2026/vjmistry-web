@@ -84,8 +84,7 @@ const WhatSetsUsApart = () => {
         </div>
 
         <div className="container relative z-10">
-          <h2 className="section-heading text-paragraph-2 mb-[40px] md:mb-[50px] lg:mb-[60px]"> {heading} </h2>
-
+          <h2 className="section-heading text-paragraph-2 mb-5 md:mb-12 lg:mb-15"> {heading} </h2>
           <div className="grid grid-cols-1 md:grid-cols-3">
             {features.map((feature, index) => {
               const isActive = index === activeIndex;

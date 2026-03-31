@@ -165,7 +165,7 @@ const Footer = () => {
           {/* ================= BOTTOM SECTION ================= */}
           <div className="pt-40 pb-70 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-[2fr_2.4fr_0fr_1.2fr] gap-y-[30px] lg:gap-y-[50px] gap-x-100">
             {/* LOGO (under Subscribe) */}
-            <Link href="/" className="z-999">
+            <Link href="/" className="">
               <motion.div
                 variants={moveUp(0.4)}
                 initial="hidden"
