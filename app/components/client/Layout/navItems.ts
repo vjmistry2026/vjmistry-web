@@ -69,7 +69,7 @@ export const resources = [
 
 export const socialMedia = [
   { label: "Facebook", icon: "/assets/images/footer/social/fb.svg", href: "https://www.facebook.com/vj.mistryco/" },
-  { label: "Instagram", icon: "/assets/images/footer/social/insta.svg", href: "#" },
+  { label: "Instagram", icon: "/assets/images/footer/social/insta.svg", href: "https://www.instagram.com/vj.mistryco/" },
   { label: "LinkedIn", icon: "/assets/images/footer/social/linkedin.svg", href: "#" },
 ];
 
