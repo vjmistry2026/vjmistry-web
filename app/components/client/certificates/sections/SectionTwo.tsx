@@ -14,14 +14,13 @@ const SectionTwo = () => {
   return (
     <section className="py-100 lg:py-130 3xl:py-130 bg-light">
       <div className="container">
-        <AnimatedHeading text={transparency.title} className="mb-30" />
-
+        <AnimatedHeading text={transparency.title} className="mb-4 md:mb-30" />
         <motion.p
           variants={moveUp(0.15)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="cmn-p font-bold mb-8 xl:mb-10 2xl:mb-15 max-w-3xl"
+          className="cmn-p font-bold mb-5 xl:mb-10 2xl:mb-15 max-w-3xl"
         >
           {transparency.description}
         </motion.p>

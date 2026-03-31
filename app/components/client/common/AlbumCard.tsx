@@ -291,8 +291,8 @@ export default function AlbumCard({
                     : "-translate-x-full"
             }`}
           />
-          <div className="relative z-10 grid grid-cols-[auto_1fr] w-full items-center  gap-1">
-            <h3 className={`font-condensed leading-[1.1] xl:text-32 group-hover:text-white ${isActive ? "text-white" : "text-secondary"}`} >
+          <div className="relative z-10 grid grid-cols-[auto_1fr] w-full items-center gap-1">
+            <h3 className={`font-condensed leading-[1.1] text-32 group-hover:text-white ${isActive ? "text-white" : "text-secondary"}`} >
               {title}
             </h3>
             <div className="flex shrink-0 items-center justify-end ">
