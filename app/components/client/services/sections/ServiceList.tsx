@@ -99,29 +99,35 @@ const ServicesSection = () => {
           <div>
             {services.map((service, index) => {
               const isActive = index === activeIndex;
-              const overlayAnchorStyle = isActive
-                ? scrolledDown
-                  ? { top: 0, bottom: "auto" as const }
-                  : { top: "auto" as const, bottom: 0 }
-                : scrolledDown
-                  ? { top: "auto" as const, bottom: 0 }
-                  : { top: 0, bottom: "auto" as const };
+              const isLeaving = index === visibleIndex && activeIndex !== visibleIndex;
+              const hiddenClipPath = scrolledDown
+                ? "inset(0 0 100% 0)"
+                : "inset(100% 0 0 0)";
+              const leavingClipPath = scrolledDown
+                ? "inset(100% 0 0 0)"
+                : "inset(0 0 100% 0)";
+              const clipPathValue = isActive
+                ? "inset(0 0 0 0)"
+                : isLeaving
+                  ? leavingClipPath
+                  : hiddenClipPath;
 
               return (
                 <div key={service.id} ref={(el) => { cardRefs.current[index] = el; }}
                   className={`relative overflow-hidden border-t border-border ${index === services.length - 1 ? "border-b" : ""}`}
                 >
                   <div
-                    className="absolute inset-x-0 pointer-events-none"
+                    className="absolute inset-0 pointer-events-none"
                     style={{
-                      ...overlayAnchorStyle,
                       background:
                         "linear-gradient(180deg, #ED1C24 0%, #A71E22 100%)",
-                      height: isActive ? "100%" : "0%",
+                      clipPath: clipPathValue,
+                      WebkitClipPath: clipPathValue,
+                      willChange: "clip-path",
                       transition: isActive
-                        ? `height ${FILLIN_MS}ms ease-in-out`
-                        : index === visibleIndex
-                          ? `height ${FILLOUT_MS}ms ease-in-out`
+                        ? `clip-path ${FILLIN_MS}ms ease-in-out, -webkit-clip-path ${FILLIN_MS}ms ease-in-out`
+                        : isLeaving
+                          ? `clip-path ${FILLOUT_MS}ms ease-in-out, -webkit-clip-path ${FILLOUT_MS}ms ease-in-out`
                           : "none",
                     }}
                   />
