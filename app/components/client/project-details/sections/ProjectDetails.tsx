@@ -61,7 +61,7 @@ export default function ProjectDetails() {
       <div>
         <div className="container pt-100">
           <AnimatedHeading
-            className="mb-5 lg:mb-[30px]"
+            className="mb-4 md:mb-30"
             text={projectDetails.title}
           />
 
@@ -70,7 +70,7 @@ export default function ProjectDetails() {
             whileInView="show"
             viewport={{ once: true }}
             variants={moveUp(0.3)}
-            className="section-description mb-[30px] lg:mb-10 2xl:mb-15"
+            className="section-description mb-30 lg:mb-10 2xl:mb-15"
           >
             {projectDetails.description}
           </motion.p>

@@ -14,7 +14,7 @@ const CorePhilosophy = () => {
   );
 
   return (
-    <section className="bg-light py-130">
+    <section className="bg-light pt-130 pb-150 sm:py-130">
       <div className="container">
         <motion.div
           variants={moveUp(0.1)}
@@ -22,7 +22,7 @@ const CorePhilosophy = () => {
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
         >
-          <AnimatedHeading text={title} className="mb-2 md:mb-30 leading-[1.2]" />
+          <AnimatedHeading text={title} className="mb-4 md:mb-30 leading-[1.2]" />
         </motion.div>
 
         <motion.div

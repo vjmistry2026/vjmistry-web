@@ -368,7 +368,7 @@ const ProjectsGrid = () => {
       </div>
 
       {/* ─── Grid ─────────────────────────────────────────────────────── */}
-      <div className="container pb-100 pt-100 md:pb-130 2xl:pb-150">
+      <div className="container pb-150 pt-100 md:pb-130 2xl:pb-150">
         {visible.length === 0 ? (
           <div className="py-100 text-center section-description">
             No projects match your filters.

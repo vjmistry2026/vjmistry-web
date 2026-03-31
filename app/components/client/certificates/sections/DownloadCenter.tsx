@@ -53,7 +53,7 @@ const DownloadCenter = () => {
     <>
       <section className="pt-40 pb-10 xl:pt-150 xl:pb-150 border-b border-border">
         <div className="container">
-          <AnimatedHeading text={downloadCenter.title} className="mb-30" />
+          <AnimatedHeading text={downloadCenter.title} className="mb-4 md:mb-30" />
           <motion.p
             variants={moveUp(0.18)}
             initial="hidden"
@@ -64,7 +64,7 @@ const DownloadCenter = () => {
             {downloadCenter.description}
           </motion.p>
 
-          <div className="grid grid-cols-1 pt-8 md:grid-cols-2 xl:grid-cols-3 gap-x-5 xl:gap-x-10 gap-y-6 xl:gap-y-10 2xl:gap-y-15 xl:pt-10 2xl:pt-15 border-b border-border pb-150 ">
+          <div className="grid grid-cols-1 pt-8 md:grid-cols-2 xl:grid-cols-3 gap-x-5 xl:gap-x-10 gap-y-6 xl:gap-y-10 2xl:gap-y-15 xl:pt-10 2xl:pt-15 border-b border-border pb-130 md:pb-150 ">
             {downloadCenter.items.map((item, index) => (
               <motion.article key={item.id} variants={moveUp(index * 0.1)} initial="hidden" whileInView="show"
                 viewport={{ once: true, amount: 0.2 }} className="flex min-h-[202px] flex-col bg-light px-8 py-30 md:px-10 2xl:py-10 2xl:px-[44.43px] " >

@@ -37,7 +37,7 @@ const SpotlightSlider = () => {
     slides.length <= 1 ? 100 : ((activeIndex + 1) / slides.length) * 100;
 
   return (
-    <section className="overflow-hidden py-12 xl:py-20 2xl:py-25 3xl:py-150">
+    <section className="overflow-hidden py-8 xl:py-20 2xl:py-25 3xl:py-150">
       <div ref={containerRef} className="container">
         <AnimatedHeading text={title} className="mb-2 md:mb-30" />
         <div className="mb-6 flex justify-between flex-wrap gap-2 2xl:mb-15">

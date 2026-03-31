@@ -46,30 +46,30 @@ export default function FoundersMessage() {
         <Image src="/assets/images/about/founder-message/bg-svg.svg" alt="" width={1598.48} height={708} className="pointer-events-none object-contain" />
       </div>
 
-      <div className="relative z-10 container py-100 lg:py-130 3xl:py-150">
+      <div className="relative z-10 container pt-5 pb-10 md:py-100 lg:py-130 3xl:py-150">
         {/* Breadcrumb */}
         <motion.div
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
           variants={moveLeft(0.2)}
-          className="mb-10 lg:mb-12 2xl:mb-15 w-full flex justify-end"
+          className="mb-5 md:mb-10 lg:mb-12 2xl:mb-15 w-full flex xl:justify-end"
         >
           <Breadcrumb variant="dark" />
         </motion.div>
 
-        <AnimatedHeading text={heading} className="mb-5 lg:mb-[30px]" />
+        <AnimatedHeading text={heading} className="mb-5 lg:mb-8" />
 
         <div className="flex flex-col xl:flex-row items-stretch 3xl:items-end justify-between gap-8 lg:gap-15 2xl:gap-22">
           {/* ── LEFT COLUMN ── */}
           <div ref={descriptionColumnRef} className="flex flex-col order-2 xl:order-1">
-            <div className="mb-5 lg:mb-[30px]">
+            <div className="mb-5 lg:mb-8">
               <Image
                 src="/assets/images/about/founder-message/quotes.svg"
                 alt="Quote"
                 width={50}
                 height={42}
-                className="h-[30px] xl:h-[42] w-auto"
+                className="h-8 xl:h-[42] w-auto"
               />
             </div>
 

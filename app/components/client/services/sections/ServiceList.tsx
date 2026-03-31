@@ -141,7 +141,7 @@ const ServicesSection = () => {
                             />
                           </div>
                           <h3
-                            className={`text-32 font-condensed leading-[100%] mb-5 lg:mb-[30px] transition-colors duration-300 ${isActive ? "text-paragraph-2" : "text-secondary"}`}
+                            className={`text-32 font-condensed leading-[100%] mb-2 md:mb-5 lg:mb-[30px] transition-colors duration-300 ${isActive ? "text-paragraph-2" : "text-secondary"}`}
                           >
                             {service.title}
                           </h3>
