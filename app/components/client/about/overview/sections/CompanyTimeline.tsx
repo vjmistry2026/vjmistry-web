@@ -245,7 +245,7 @@ const CompanyTimeline = () => {
             </div>
 
             {/* Fixed height on both breakpoints — content never causes section to jump */}
-            <div key={activeIndex} className="lg:mt-auto shrink-0 h-[160px] lg:h-[200px] 2xl:h-[220px] relative">
+            <div key={activeIndex} className="lg:mt-auto shrink-0 h-[240px] lg:h-[200px] 2xl:h-[220px] relative">
               <div className="lg:absolute inset-0 flex flex-col justify-end">
                 <motion.h3
                   key={`${activeIndex}-title`}
