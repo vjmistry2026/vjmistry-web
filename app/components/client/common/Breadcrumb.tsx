@@ -31,7 +31,10 @@ const Breadcrumb = ({ variant = "light" }: BreadcrumbProps) => {
       : "group-hover:text-paragraph-2";
 
   return (
-    <nav className="flex items-center gap-[6px]">
+    <nav
+      aria-label="Breadcrumb"
+      className="relative z-20 flex flex-wrap items-center gap-[6px] pointer-events-auto touch-manipulation"
+    >
       {crumbs.map((crumb, index) => {
         const isLast = index === crumbs.length - 1;
         const isClickable = !isLast && VALID_ROUTES.has(crumb.href);
@@ -42,7 +45,10 @@ const Breadcrumb = ({ variant = "light" }: BreadcrumbProps) => {
             className="flex items-center gap-1 pr-1 lg:gap-3 lg:pr-3"
           >
             {isClickable ? (
-              <Link href={crumb.href} className="group flex items-center gap-1 lg:gap-3">
+              <Link
+                href={crumb.href}
+                className="group relative z-10 flex items-center gap-1 pointer-events-auto touch-manipulation lg:gap-3"
+              >
                 <span
                   className={`section-description transition-colors duration-300 ${inactiveColor} ${hoverColor}`}
                 >
