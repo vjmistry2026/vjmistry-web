@@ -115,3 +115,23 @@ export async function uploadToDropbox(file: File, filePath: string): Promise<str
     throw error;
   }
 }
+
+
+export async function deleteDropboxFile(path: string) {
+  try {
+    const dropbox = await getDropboxInstance();
+    await dropbox.filesDeleteV2({ path });
+  } catch (error: unknown) {
+    const status =
+      typeof error === "object" &&
+        error !== null &&
+        "status" in error &&
+        typeof (error as { status?: unknown }).status === "number"
+        ? (error as { status: number }).status
+        : undefined;
+
+    if (status !== 409) {
+      throw error;
+    }
+  }
+}
