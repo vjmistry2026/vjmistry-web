@@ -1,14 +1,15 @@
 import PageBanner from "../common/PageBanner";
 import Main from "./section/Main";
 import { GalleryData } from "./data";
+import { GalleryType } from "@/app/types/gallery";
 
-const Index = () => {
-  return ( 
+const Index = ({ gallery }: { gallery: GalleryType }) => {
+  return (
     <>
-      <PageBanner title={GalleryData.bannerData.title} image={GalleryData.bannerData.image}/>
-      <Main />
+      <PageBanner title={gallery.pageTitle} image={gallery.banner} imageAlt={gallery.bannerAlt} />
+      <Main firstSection={gallery.firstSection} items={gallery.items} />
     </>
-   );
+  );
 }
- 
+
 export default Index;

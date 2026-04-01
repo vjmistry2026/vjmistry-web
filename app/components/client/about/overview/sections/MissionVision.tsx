@@ -5,8 +5,9 @@ import { motion, useInView } from "framer-motion";
 import { missionVisionData } from "../data";
 import { moveLeft, moveUp } from "@/app/components/motionVariants";
 import { useState, useRef, useEffect } from "react";
+import { AboutType } from "@/app/types/about";
 
-const MissionVision = () => {
+const MissionVision = ({ data }: { data: AboutType['thirdSection'] }) => {
   return (
     <section className="pb-100 lg:pb-130 3xl:pb-150">
       <div className="container overflow-hidden">
@@ -19,7 +20,7 @@ const MissionVision = () => {
             variants={moveUp(0.2)}
             className="w-full md:w-1/2 md:mb-[34px] 2xl:mb-[46px]"
           >
-            <Card item={missionVisionData[0]} iconWidth={36} iconHeight={42} />
+            <Card item={data.items[0]} iconWidth={36} iconHeight={42} />
           </motion.div>
 
           {/* Horizontal divider on mobile, vertical on md+ */}
@@ -40,7 +41,7 @@ const MissionVision = () => {
             variants={moveUp(0.32)}
             className="w-full md:w-1/2 md:mt-[34px] 2xl:mt-[46px]"
           >
-            <Card item={missionVisionData[1]} iconWidth={58} iconHeight={36} />
+            <Card item={data.items[1]} iconWidth={58} iconHeight={36} />
           </motion.div>
         </div>
       </div>
@@ -49,8 +50,8 @@ const MissionVision = () => {
 };
 
 type CardItem = {
-  id: string;
-  icon: string;
+  image: string;
+  imageAlt?: string;
   title: string;
   description: string;
 };
@@ -91,8 +92,8 @@ const Card = ({
           className="mb-6 lg:mb-[30px]"
         >
           <Image
-            src={item.icon}
-            alt={item.title}
+            src={item.image}
+            alt={item.imageAlt ?? item.title}
             width={iconWidth}
             height={iconHeight}
             className="pointer-events-none"

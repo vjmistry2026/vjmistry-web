@@ -7,8 +7,8 @@ import { newsDetails } from "../data";
 import AnimatedHeading from "../../common/AnimateHeading";
 import Image from "next/image";
 
-const Main = () => {
-  const article = newsDetails[0];
+const Main = ({ image, imageAlt, title }: { image: string, imageAlt: string, title: string }) => {
+  // const article = newsDetails[0];
   const [copied, setCopied] = useState(false);
   const [shared, setShared] = useState(false);
 
@@ -42,7 +42,7 @@ const Main = () => {
     try {
       if (navigator.share) {
         await navigator.share({
-          title: article.title,
+          title: title,
           url: shareUrl,
         });
       } else {
@@ -56,12 +56,12 @@ const Main = () => {
     }
   };
 
-  return ( 
+  return (
     <section>
       <div className="container">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between mb-4 xl:mb-30">
           <div className="min-w-0 flex-1">
-            <AnimatedHeading text={article.title} className="leading-[1.2]" />
+            <AnimatedHeading text={title} className="leading-[1.2]" />
           </div>
           <motion.div
             className="flex shrink-0 flex-row gap-3 sm:gap-4 lg:flex-col lg:gap-5"
@@ -97,12 +97,12 @@ const Main = () => {
           viewport={{ once: true, amount: 0.25 }}
           variants={moveUp(0.2)}
         >
-          <Image src={article.img} alt="" width={1620} height={609} className="h-auto w-full object-cover" />
+          <Image src={image} alt={imageAlt} width={1620} height={609} className="h-auto w-full object-cover" />
         </motion.div>
       </div>
-      
+
     </section>
-   );
+  );
 }
- 
+
 export default Main;

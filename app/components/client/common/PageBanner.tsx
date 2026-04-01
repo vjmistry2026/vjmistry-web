@@ -10,9 +10,10 @@ import gsap from "gsap";
 type Props = {
   title: string;
   image: string;
+  imageAlt?: string;
 };
 
-const PageBanner = ({ title, image }: Props) => {
+const PageBanner = ({ title, image, imageAlt }: Props) => {
   preload(image, {
     as: "image",
     fetchPriority: "high",
@@ -116,7 +117,7 @@ const PageBanner = ({ title, image }: Props) => {
 
       {/* GSAP animation target */}
       <div ref={imageRef} className="absolute inset-0 will-change-transform" style={{ transformOrigin: "center center" }} >
-        <Image src={image} alt={title} fill priority fetchPriority="high" className="object-cover object-center" />
+        <Image src={image} alt={imageAlt ?? title} fill priority fetchPriority="high" className="object-cover object-center" />
       </div>
 
       <div style={{ background: "linear-gradient(180deg, rgba(0, 0, 0, 0) 17.65%, rgba(0, 0, 0, 0.5) 100%)", }} className="absolute inset-0" />

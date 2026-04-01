@@ -1,4 +1,10 @@
 import Index from "@/app/components/client/hse/Index";
+import { getHse } from "@/lib/services/hse.service";
 
-const Page = () => <Index/>
+export const revalidate = false;
+
+const Page = async () => {
+    const hse = await getHse()
+    return <Index data={hse} />
+}
 export default Page;

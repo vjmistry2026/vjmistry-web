@@ -7,6 +7,7 @@ import type { CSSProperties, MouseEvent } from "react";
 
 import { moveLeft, moveUp } from "@/app/components/motionVariants";
 import { newsDetails } from "../data";
+import { NewsType } from "@/app/types/news";
 
 const STICKY_TOP = 150;
 
@@ -43,7 +44,7 @@ const handleTocClick = (
   window.history.replaceState(null, "", `#${sectionId}`);
 };
 
-const MoreDetails = () => {
+const MoreDetails = ({ secondSection, thirdSection }: { secondSection: NewsType['news'][number]['secondSection'], thirdSection: NewsType['news'][number]['thirdSection'] }) => {
   const article = newsDetails[0];
   const layoutRef = useRef<HTMLDivElement>(null);
   const contentColumnRef = useRef<HTMLDivElement>(null);
@@ -269,20 +270,19 @@ const MoreDetails = () => {
 
                 <nav className="mt-5">
                   <ul className="space-y-3 sm:space-y-4 xl:space-y-30">
-                    {article.content.map((section) => (
+                    {secondSection.items.map((section) => (
                       <li key={section.title}>
                         <a
                           href={`#${getSectionId(section.title)}`}
-                          onClick={(event) => handleTocClick(event, section.title)}
+                          onClick={(event) => handleTocClick(event, section.idToMap)}
                           className="group flex items-center gap-3 xl:gap-30 text-paragraph transition-colors duration-300 hover:text-primary"
                         >
                           <span className="mt-[7px] h-[6px] w-[6px] xl:h-[13px] xl:w-[13px] shrink-0 bg-primary transition-transform duration-300 group-hover:scale-125" />
                           <span
-                            className={`section-description font-nexa text-20 leading-1p5 transition-colors duration-300 ${
-                              activeSectionId === getSectionId(section.title)
-                                ? "text-primary"
-                                : "text-paragraph group-hover:text-primary"
-                            }`}
+                            className={`section-description font-nexa text-20 leading-1p5 transition-colors duration-300 ${activeSectionId === getSectionId(section.title)
+                              ? "text-primary"
+                              : "text-paragraph group-hover:text-primary"
+                              }`}
                           >
                             {section.title}
                           </span>
@@ -299,7 +299,10 @@ const MoreDetails = () => {
             ref={contentColumnRef}
             className="min-w-0 space-y-10 md:space-y-12 xl:space-y-15 2xl:space-y-15 3xl:space-y-15"
           >
-            {article.content.map((section, index) => (
+            <section className="news-item-content scroll-mt-[120px] lg:scroll-mt-[160px]" dangerouslySetInnerHTML={{ __html: thirdSection.content }}>
+
+            </section>
+            {/* {article.content.map((section, index) => (
               <motion.section
                 key={section.title}
                 id={getSectionId(section.title)}
@@ -320,8 +323,8 @@ const MoreDetails = () => {
                         {paragraph}
                       </p>
 
-                       {section.image === undefined ||
-                       section.imageAfterParagraph !== paragraphIndex ? null : (
+                      {section.image === undefined ||
+                        section.imageAfterParagraph !== paragraphIndex ? null : (
                         <div className="relative mt-5 aspect-[1.25/1] overflow-hidden sm:mt-6 sm:aspect-[1.55/1] xl:aspect-[1.95/1]">
                           <Image src={section.image} alt={section.title} fill className="object-cover" sizes="(max-width: 1024px) 100vw, 70vw" />
                         </div>
@@ -341,7 +344,7 @@ const MoreDetails = () => {
                   </ul>
                 )}
               </motion.section>
-            ))}
+            ))} */}
           </div>
         </div>
       </div>

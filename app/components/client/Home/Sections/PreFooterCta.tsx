@@ -8,9 +8,11 @@ import { moveUp } from "@/app/components/motionVariants";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
-const PreFooterCta = () => {
-    const { title, description, backgroundImage } = buildWithConfidenceData;
-
+const PreFooterCta = ({ data }: { data: HomeType['eighthSection'] }) => {
+    // const { title, description, backgroundImage } = buildWithConfidenceData;
+    const title = data.title
+    const description = data.description
+    const backgroundImage = data.image
     const sectionRef = useRef<HTMLElement>(null);
 
     // Track scroll progress of this section relative to the viewport
@@ -64,7 +66,7 @@ const PreFooterCta = () => {
                         whileInView="show"
                         viewport={{ once: true }}
                     >
-                        <CustomButton label="Contact Us" href="#" textColor="white" />
+                        <CustomButton label={data.buttonText} href="#" textColor="white" />
                     </motion.div>
                 </div>
             </div>

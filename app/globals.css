@@ -297,3 +297,24 @@ body {
 .cmn-p {
     @apply font-nexa text-20 leading-1p5 text-paragraph;
 }
+
+.news-item-content h2 {
+    @apply mb-4 font-condensed text-32 leading-[110%] text-secondary sm:mb-5
+}
+
+.news-item-content p {
+    @apply mb-4 section-description leading-[1.7] text-paragraph
+}
+
+.news-item-content ul {
+    @apply mt-6 grid grid-cols-1 gap-x-8 gap-y-4 sm:mt-8 md:grid-cols-2
+}
+
+.news-item-content li {
+    @apply flex items-center gap-3 xl:gap-5 section-description text-black;
+}
+
+.news-item-content li::before {
+    content: "";
+    @apply block h-[6px] w-[6px] xl:w-[13px] xl:h-[13px] bg-primary shrink-0;
+}

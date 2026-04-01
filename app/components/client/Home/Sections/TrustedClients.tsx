@@ -10,9 +10,12 @@ import { moveUp } from "@/app/components/motionVariants";
 import { useContainerLeftInset } from "@/app/hooks/useContainerLeftInset";
 import ContainerAnchor from "../../Layout/ContainerAnchor";
 
-const TrustedClients = () => {
-    const { title, description, logos } = trustedClientsData;
-        const containerRef = useRef<HTMLDivElement>(null);
+const TrustedClients = ({ data }: { data: HomeType['seventhSection'] }) => {
+    // const { title, description, logos } = trustedClientsData;
+    const title = data.title
+    const description = data.description
+    const logos = data.items
+    const containerRef = useRef<HTMLDivElement>(null);
     const leftInset = useContainerLeftInset(containerRef);
 
     const isDesktopRef = useRef(false);
@@ -76,12 +79,12 @@ const TrustedClients = () => {
                     className="mb-[20px] lg:mb-[30px]"
                 />
 
-                <motion.p 
-                variants={moveUp(0.3)}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }}
-                className="section-description max-w-[750px] mb-[30px] lg:mb-[60px]">
+                <motion.p
+                    variants={moveUp(0.3)}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true }}
+                    className="section-description max-w-[750px] mb-[30px] lg:mb-[60px]">
                     {description}
                 </motion.p>
 
@@ -97,8 +100,8 @@ const TrustedClients = () => {
                     }}
                 >
                     <div ref={trackRef} className="flex w-max items-center gap-[20px]">
-                        {logos.map((logo) => (
-                            <div key={logo.id} className="group relative shrink-0 max-w-[306px]">
+                        {logos.map((logo, index) => (
+                            <div key={index} className="group relative shrink-0 max-w-[306px]">
                                 <div
                                     className="absolute -inset-[1px] opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none"
                                     style={{
@@ -108,8 +111,8 @@ const TrustedClients = () => {
                                 />
                                 <div className="relative z-10 h-[134px] 2xl:w-[306px] flex items-center justify-center group-hover:border-primary/50 border border-border bg-[#F9F9F9]">
                                     <Image
-                                        src={logo.src}
-                                        alt={logo.alt}
+                                        src={logo.logo}
+                                        alt={logo.logoAlt}
                                         width={194}
                                         height={60}
                                         className="pointer-events-none object-contain h-[100px] grayscale transition px-4"

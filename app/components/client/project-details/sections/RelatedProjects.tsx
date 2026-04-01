@@ -5,8 +5,9 @@ import AnimatedHeading from "../../common/AnimateHeading";
 import ProjectCard from "../../common/ProjectCard";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
+import { ProjectType } from "@/app/types/project";
 
-const RelatedProjects = () => {
+const RelatedProjects = ({ data }: { data: ProjectType }) => {
   return (
     <section className="w-full pt-100 lg:pb-130 2xl:pb-150">
       <div className="container mx-auto px-4">
@@ -16,12 +17,12 @@ const RelatedProjects = () => {
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 xl:gap-10">
-          {projectsData.slice(0, 3).map((project, i) => (
+          {data.projects.slice(0, 3).map((project, i) => (
             <motion.div
-              key={project.id}
+              key={project._id}
               initial="hidden"
               whileInView="show"
-              viewport={{once: true}}
+              viewport={{ once: true }}
               variants={moveUp(i * 0.15)}
             >
               <ProjectCard project={project} />

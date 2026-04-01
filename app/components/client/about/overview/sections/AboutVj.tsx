@@ -5,9 +5,10 @@ import { aboutHeroSectionData } from "../data";
 import { useEffect, useRef, useState } from "react";
 import { moveUp } from "@/app/components/motionVariants";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { AboutType } from "@/app/types/about";
 
-const AboutVj = () => {
-    const { title, description, primaryButton, image } = aboutHeroSectionData;
+const AboutVj = ({ data }: { data: AboutType['firstSection'] }) => {
+    // const { title, description, primaryButton, image } = aboutHeroSectionData;
 
     const [isActiveTitle, setIsActiveTitle] = useState(false);
     const titleRef = useRef<HTMLHeadingElement | null>(null);
@@ -67,15 +68,14 @@ const AboutVj = () => {
                     {/* LEFT — full width mobile, 58% on lg+ */}
                     <div className="w-full md:w-[50%] lg:w-[58%] flex flex-col justify-center md:py-120">
                         <h2 ref={titleRef} className="section-heading flex items-center gap-3 text-secondary" >
-                            {title.normal}
+                            {data.title}
                             <span className="relative w-fit inline-block overflow-hidden">
                                 <span
-                                    className={`absolute inset-0 bg-primary transform origin-left delay-200 transition-transform duration-1200 ease-out ${
-                                        isActiveTitle ? "scale-x-100" : "scale-x-0"
-                                    }`}
+                                    className={`absolute inset-0 bg-primary transform origin-left delay-200 transition-transform duration-1200 ease-out ${isActiveTitle ? "scale-x-100" : "scale-x-0"
+                                        }`}
                                 />
                                 <span className="relative z-10 text-paragraph-2 px-[8px] py-[5px] inline-block">
-                                    {title.highlight}
+                                    {data.highlightText}
                                 </span>
                             </span>
                         </h2>
@@ -87,7 +87,7 @@ const AboutVj = () => {
                             viewport={{ once: true }}
                             className="mt-[20px] lg:mt-[30px] section-description xl:max-w-[670px] 2xl:max-w-[877px] md:-tracking-[0.3px] lg:-tracking-normal"
                         >
-                            {description}
+                            {data.description}
                         </motion.p>
                     </div>
 
@@ -109,8 +109,8 @@ const AboutVj = () => {
                             >
                                 <motion.div style={{ y }} className="w-full h-full">
                                     <Image
-                                        src={image.src}
-                                        alt={image.alt}
+                                        src={data.image}
+                                        alt={data.imageAlt ?? data.title}
                                         fill
                                         className="pointer-events-none md:object-contain lg:object-cover scale-[1.25]"
                                         priority

@@ -7,10 +7,11 @@ import AnimatedHeading from "../../../common/AnimateHeading";
 import { motion } from "framer-motion";
 import { moveLeft } from "@/app/components/motionVariants";
 import { useEffect, useRef, useState } from "react";
+import { FoundersMessageType } from "@/app/types/foundersMessage";
 
 // ─── Main Component ───────────────────────────────────────────────────────────
-export default function FoundersMessage() {
-  const { heading, description, founder } = foundersMessageData;
+export default function FoundersMessage({ data }: { data: FoundersMessageType['firstSection'] }) {
+  // const { heading, description, founder } = foundersMessageData;
   const descriptionColumnRef = useRef<HTMLDivElement>(null);
   const [imageColumnHeight, setImageColumnHeight] = useState<number | null>(null);
 
@@ -58,7 +59,7 @@ export default function FoundersMessage() {
           <Breadcrumb variant="dark" />
         </motion.div>
 
-        <AnimatedHeading text={heading} className="mb-5 lg:mb-[30px]" />
+        <AnimatedHeading text={data.items[0].title} className="mb-5 lg:mb-[30px]" />
 
         <div className="flex flex-col xl:flex-row items-stretch 3xl:items-end justify-between gap-8 lg:gap-15 2xl:gap-22">
           {/* ── LEFT COLUMN ── */}
@@ -76,7 +77,7 @@ export default function FoundersMessage() {
             <div
               className="section-description xl:max-w-[748px]"
               dangerouslySetInnerHTML={{
-                __html: description.replace(/\n\n/g, "<br><br>"),
+                __html: data.items[0].message?.replace(/\n\n/g, "<br><br>") || <p></p>,
               }}
             />
           </div>
@@ -89,8 +90,8 @@ export default function FoundersMessage() {
               style={imageColumnHeight ? { height: `${imageColumnHeight}px` } : undefined}
             >
               <Image
-                src={founder.imageSrc}
-                alt={founder.imageAlt}
+                src={data.items[0].image}
+                alt={data.items[0].imageAlt}
                 fill
                 className="object-cover object-top
         [clip-path:polygon(0_0,calc(100%-55px)_0,100%_55px,100%_100%,0_100%)]
@@ -121,10 +122,10 @@ export default function FoundersMessage() {
               className="absolute -left-0 bottom-[37px] z-[2] p-3 xl:p-5 min-w-[240px] xl:-translate-x-7 flex flex-col gap-[6px] xl:gap-[10px]"
             >
               <p className="text-[22px] md:text-32 font-condensed leading-[100%] text-paragraph-2">
-                {founder.name}
+                {data.items[0].name}
               </p>
               <p className="md:text-20 text-16 font-nexa font-bold leading-[1.5] text-paragraph-2/70">
-                {founder.designation}
+                {data.items[0].designation}
               </p>
             </div>
           </div>
