@@ -8,8 +8,8 @@ import CustomButton from "@/app/components/client/common/CustomButton";
 import { moveUp } from "@/app/components/motionVariants";
 import { motion, useScroll, useTransform } from "framer-motion";
 
-const LegacySection = () => {
-    const { hero, stats } = legacySectionData;
+const LegacySection = ({ data, secondSection }: { data: HomeType['firstSection'], secondSection: HomeType['secondSection'] }) => {
+    // const { hero, stats } = legacySectionData;
 
     const [activeId, setActiveId] = useState<number | null>(null);
     const cardsWrapperRef = useRef<HTMLDivElement | null>(null);
@@ -106,7 +106,7 @@ const LegacySection = () => {
                     {/* LEFT – 48% */}
                     <div className="w-fit md:max-w-[50%]">
                         <h2 ref={titleRef} className="section-heading flex flex-col text-secondary" >
-                            {hero.title.normal}
+                            {data.title}
                             <span className="relative mt-[8px] lg:mt-[14px] w-fit inline-block overflow-hidden">
                                 {/* animated background */}
                                 <span
@@ -116,7 +116,7 @@ const LegacySection = () => {
 
                                 {/* text */}
                                 <span className="relative z-10 text-paragraph-2 px-[9px] xl:px-[10px] py-[5px] inline-block tracking-[-0.7px] lg:tracking-[-1.4px] 2xl:tracking-normal">
-                                    {hero.title.highlight}
+                                    {data.highlightText}
                                 </span>
                             </span>
                         </h2>
@@ -128,7 +128,7 @@ const LegacySection = () => {
                             viewport={{ once: true }}
                             className="mt-[20px] lg:mt-[30px] section-description xl:max-w-[670px] tracking-[-0.4px] 3xl:tracking-normal"
                         >
-                            {hero.description}
+                            {data.description}
                         </motion.p>
                         <motion.div
                             variants={moveUp(0.4)}
@@ -137,7 +137,7 @@ const LegacySection = () => {
                             viewport={{ once: true }}
                             className="mt-[20px] lg:mt-[30px] xl:mt-[40px] 2xl:mt-15 flex-shrink-0"
                         >
-                            <CustomButton label={hero.primaryButton.label} href={hero.primaryButton.href} textColor="black" />
+                            <CustomButton label={data.buttonText} href={""} textColor="black" />
                         </motion.div>
                     </div>
 
@@ -158,8 +158,8 @@ const LegacySection = () => {
                         >
                             <motion.div style={{ y }} className="w-full h-full">
                                 <Image
-                                    src={hero.image.src}
-                                    alt={hero.image.alt}
+                                    src={data.image}
+                                    alt={data.imageAlt}
                                     width={836}
                                     height={707}
                                     className="pointer-events-none w-full h-full object-cover scale-[1.15]"
@@ -184,8 +184,8 @@ const LegacySection = () => {
                     ref={cardsWrapperRef}
                     className="mt-100 lg:mt-130 3xl:mt-150 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-10 3xl:gap-[51px]"
                 >
-                    {stats.map((item, index) => {
-                        const isActive = activeId === item.id;
+                    {secondSection.items.map((item, index) => {
+                        const isActive = activeId === index;
 
                         return (
                             <motion.div
@@ -193,12 +193,12 @@ const LegacySection = () => {
                                 initial="hidden"
                                 whileInView="show"
                                 viewport={{ once: true }}
-                                key={item.id}
+                                key={index}
                                 ref={(el) => {
                                     cardRefs.current[index] = el;
                                 }}
-                                data-id={item.id}
-                                onMouseEnter={() => setActiveId(item.id)}
+                                data-id={index}
+                                onMouseEnter={() => setActiveId(index)}
                                 className="relative overflow-hidden p-[25px] md:p-[30px] xl:p-10 sm:max-w-[367px] 2xl:min-h-[385px]
   transition-colors duration-500
   [clip-path:polygon(0_0,calc(100%-45px)_0,100%_50px,100%_100%,0_100%)]
@@ -224,8 +224,8 @@ const LegacySection = () => {
                                 {/* Content */}
                                 <div className="relative z-10">
                                     <Image
-                                        src={item.icon}
-                                        alt={item.label}
+                                        src={item.image}
+                                        alt={item.imageAlt}
                                         width={38}
                                         height={46}
                                         className={`pointer-events-none transition ${isActive ? "invert brightness-0" : ""}`}
@@ -238,7 +238,7 @@ const LegacySection = () => {
                                         viewport={{ once: true }}
                                         className={`mt-[92px] xl:mt-[65px] 2xl:mt-[92px] text-75 md:text-60 xl:text-75 font-condensed leading-[100%] mb-[18px] ${isActive ? "text-paragraph-2" : "text-secondary"}`}
                                     >
-                                        <Counter to={item.value} duration={2} suffix="+" />
+                                        <Counter to={item.number} duration={2} suffix="+" />
                                     </motion.h3>
 
                                     <motion.p
@@ -246,10 +246,10 @@ const LegacySection = () => {
                                         initial="hidden"
                                         whileInView="show"
                                         viewport={{ once: true }}
-                                        className={`section-description transition-colors duration-400 ${index === stats.length - 1 ? "max-w-[110px]" : "max-w-[230px]"
+                                        className={`section-description transition-colors duration-400 ${index === secondSection.items.length - 1 ? "max-w-[110px]" : "max-w-[230px]"
                                             } ${isActive ? "text-[#D9D9D9]" : "text-paragraph"}`}
                                     >
-                                        {item.label}
+                                        {item.value}
                                     </motion.p>
                                 </div>
                             </motion.div>

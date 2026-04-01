@@ -4,11 +4,16 @@ import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { whatSetsUsApartData } from "../data";
 import CounterAnimate2 from "../../../common/CounterAnimate2";
+import { AboutType } from "@/app/types/about";
 
 const AUTOPLAY_INTERVAL = 3000;
 
-const WhatSetsUsApart = () => {
-  const { heading, bgImage, features, stats } = whatSetsUsApartData;
+const WhatSetsUsApart = ({ firstData, secondData }: { firstData: AboutType['fourthSection'], secondData: AboutType['fifthSection'] }) => {
+  // const { heading, bgImage, features, stats } = whatSetsUsApartData;
+  const heading = firstData.title
+  const bgImage = firstData.image
+  const features = firstData.items
+  const stats = secondData.items
   const [activeIndex, setActiveIndex] = useState(0);
   const [cardHeight, setCardHeight] = useState<number | undefined>(undefined);
 
@@ -89,7 +94,11 @@ const WhatSetsUsApart = () => {
             {features.map((feature, index) => {
               const isActive = index === activeIndex;
               return (
-                <div key={feature.id} ref={(el) => { cardRefs.current[index] = el; }}
+                <div
+                  key={index}
+                  ref={(el) => {
+                    cardRefs.current[index] = el;
+                  }}
                   className={`relative border-border border-l border-r border-b ${index === 0 ? "border-t" : ""} md:border-t md:border-l-0 ${index === 0 ? "md:border-l-1" : ""}`}
                   style={{ height: cardHeight ? `${cardHeight}px` : "auto" }}
                   onMouseEnter={() => handleMouseEnter(index)}
@@ -110,7 +119,7 @@ const WhatSetsUsApart = () => {
 
                   <div className="p-[24px] lg:p-[30px] h-full cursor-pointer relative flex flex-col justify-between z-20">
                     <div className={`w-[60px] h-[60px] flex items-center justify-center transition-colors duration-300 shrink-0 mb-[33px] ${isActive ? "bg-secondary" : "bg-paragraph-2"}`} >
-                      <Image src={feature.icon} alt={feature.title} width={22} height={22}
+                      <Image src={feature.image} alt={feature.imageAlt ?? feature.title} width={22} height={22}
                         className={`pointer-events-none w-auto h-[32px] transition-all duration-300 ${isActive ? "invert brightness-0" : ""}`}
                       />
                     </div>
@@ -142,7 +151,7 @@ const WhatSetsUsApart = () => {
           <div className="grid grid-cols-2 md:grid-cols-4">
             {stats.map((stat, index) => (
               <div
-                key={stat.id}
+                key={index}
                 className={`p-5 lg:p-10 xl:p-[63px] border-r border-border ${
                   index === 0 ? "border-l" : ""
                 } ${index === 2 ? "border-l md:border-l-0" : ""} ${
@@ -150,10 +159,10 @@ const WhatSetsUsApart = () => {
                 }`}
               >
                 <p className="font-condensed text-primary text-60 3xl:text-85 leading-[100%] mb-3 md:mb-[10px]">
-                  <CounterAnimate2 value={stat.value} totalTime={2} start={0} />
+                  <CounterAnimate2 value={stat.number} totalTime={2} start={0} />
                 </p>
                 <p className="font-nexa leading-[1.2] md:leading-1p5 font-bold text-paragraph text-base md:text-20">
-                  {stat.label}
+                  {stat.value}
                 </p>
               </div>
             ))}

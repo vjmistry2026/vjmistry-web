@@ -5,8 +5,9 @@ import { HSEData } from "../data";
 import AnimatedHeading from "../../common/AnimateHeading";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { HSeType } from "@/app/types/hse";
 
-const QuoteBanner = () => {
+const QuoteBanner = ({ data }: { data: HSeType['fourthSection'] }) => {
   const ref = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -32,8 +33,8 @@ const QuoteBanner = () => {
       >
         <div className="relative w-full h-[120%]">
           <Image
-            src={HSEData.sustainability.img}
-            alt={HSEData.sustainability.title}
+            src={data.image}
+            alt={data.imageAlt}
             fill
             priority
             className="object-cover"
@@ -51,7 +52,7 @@ const QuoteBanner = () => {
           className="relative z-20"
         >
           <AnimatedHeading
-            text={HSEData.sustainability.title}
+            text={data.title}
             className="mb-30 leading-[1.2] max-w-3xl"
             color="white"
           />
@@ -64,7 +65,7 @@ const QuoteBanner = () => {
           />
 
           <p className="cmn-p !text-paragraph-2 opacity-70 max-w-4xl">
-            {HSEData.sustainability.desc}
+            {data.description}
           </p>
         </motion.div>
       </div>

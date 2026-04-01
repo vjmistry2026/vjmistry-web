@@ -11,16 +11,17 @@ import { moveUp } from "@/app/components/motionVariants";
 import { HSEData } from "../data";
 
 import "swiper/css";
+import { HSeType } from "@/app/types/hse";
 
-const CSR = () => {
-  const { title, desc, items } = HSEData.csr;
+const CSR = ({ data }: { data: HSeType['sixthSection'] }) => {
+  // const { title, desc, items } = HSEData.csr;
   const swiperRef = useRef<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
     <section className="overflow-hidden pb-12 xl:pb-20 2xl:pb-25">
       <div className="container">
-        <AnimatedHeading text={title} className="mb-4 md:mb-30 max-w-[780px]" />
+        <AnimatedHeading text={data.title} className="mb-4 md:mb-30 max-w-[780px]" />
         <div className="mb-6 flex justify-between flex-wrap gap-4 2xl:mb-15">
           <motion.p
             variants={moveUp(0.15)}
@@ -29,7 +30,7 @@ const CSR = () => {
             viewport={{ once: true, amount: 0.2 }}
             className="cmn-p font-bold max-w-4xl"
           >
-            {desc}
+            {data.description}
           </motion.p>
           <motion.div
             variants={moveUp(0.2)}
@@ -62,7 +63,7 @@ const CSR = () => {
             1024: { slidesPerView: 3, spaceBetween: 40 },
           }}
         >
-          {items.map((item, index) => {
+          {data.items.map((item, index) => {
             const isActive = index === activeIndex;
 
             return (
@@ -75,7 +76,7 @@ const CSR = () => {
                 >
                   <AlbumCard
                     title={item.title}
-                    album={item.album}
+                    album={item.images}
                     isActive={isActive}
                   />
                 </motion.div>

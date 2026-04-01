@@ -8,11 +8,15 @@ import AnimatedHeading from "../../../common/AnimateHeading";
 import { motion } from "framer-motion";
 import { moveLeft, moveUp, moveUpV2 } from "@/app/components/motionVariants";
 import Reveal from "../../../common/RevealOneByOneAnimation";
+import { AboutType } from "@/app/types/about";
 
 const SLOT_HEIGHT = "80px";
 
-const CompanyTimeline = () => {
-  const { heading, description, slides } = companyTimelineData;
+const CompanyTimeline = ({ data }: { data: AboutType['secondSection'] }) => {
+  // const { heading, description, slides } = companyTimelineData;
+  const heading = data.title
+  const description = data.subTitle
+  const slides = data.items
   const N = slides.length;
   const tripled = [...slides, ...slides, ...slides];
 

@@ -1,15 +1,16 @@
 
 import { Suspense } from "react";
 import PageBanner from "../common/PageBanner";
-
-import { bannerData } from "./data";
 import Main from "./sections/Main";
-const Index = () => {
+import { NewsType } from "@/app/types/news";
+import { Filters } from "@/app/types/projectfilters";
+
+const Index = ({ data, category }: { data: NewsType, category: Filters[] }) => {
   return (
     <>
-      <PageBanner title={bannerData.title} image={bannerData.image} />
+      <PageBanner title={data.pageTitle} image={data.banner} imageAlt={data.bannerAlt} />
       <Suspense>
-        <Main />
+        <Main news={data.news} category={category} />
       </Suspense>
     </>
   );

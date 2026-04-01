@@ -5,8 +5,15 @@ import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
 import Breadcrumb from "../../common/Breadcrumb";
 
-const PageHeader = () => {
-  return ( 
+const formatDate = (value: string) =>
+  new Intl.DateTimeFormat("en-US", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  }).format(new Date(value));
+
+const PageHeader = ({ date, category }: { date: string, category: string }) => {
+  return (
     <section className="mt-13 md:mt-[77px] mb-5 pt-15 sm:mt-[90px] sm:mb-10 sm:pt-20 lg:mt-[122px] lg:mb-15 xl:mb-[65px] lg:pt-25 xl:pt-100 2xl:pt-130 3xl:pt-150">
       <div className="container">
         <motion.div
@@ -17,7 +24,7 @@ const PageHeader = () => {
           variants={moveUp(0.1)}
         >
           <p className="font-nexa text-20 text-paragraph font-bold">
-            Published on Sep 15, 2025 | Blog
+            Published on {formatDate(date)} | {category}
           </p>
           <div className="w-full overflow-x-auto lg:w-auto">
             <Breadcrumb variant="dark" />
@@ -25,7 +32,7 @@ const PageHeader = () => {
         </motion.div>
       </div>
     </section>
-   );
+  );
 }
- 
+
 export default PageHeader;

@@ -8,11 +8,11 @@ import AnimatedHeading from "../../common/AnimateHeading";
 import { qualityData } from "../data";
 import ContainerAnchor from "../../Layout/ContainerAnchor";
 
-const QualityShield = () => {
-  const { title, desc, steps } = qualityData.qualityShield;
+const QualityShield = ({ data }: { data: QualityType['secondSection'] }) => {
+  // const { title, desc, steps } = qualityData.qualityShield;
   const [activeIndex, setActiveIndex] = useState(
-    steps.findIndex((step) => step.highlight) >= 0
-      ? steps.findIndex((step) => step.highlight)
+    data.items.findIndex((step) => step.title) >= 0
+      ? data.items.findIndex((step) => step.title)
       : 0,
   );
   const sectionRef = useRef<HTMLElement>(null);
@@ -59,14 +59,14 @@ const QualityShield = () => {
       <div className="container relative z-10">
         <div className="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-[minmax(0,1.2fr)_minmax(440px,1fr)] gap-y-10">
           <div ref={firstColumnRef} className="flex flex-col">
-            <AnimatedHeading text={title} className="mb-30" />
-            <motion.p variants={moveUp(0.15)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="cmn-p font-bold max-w-[51ch]" > {desc} </motion.p>
+            <AnimatedHeading text={data.title} className="mb-30" />
+            <motion.p variants={moveUp(0.15)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="cmn-p font-bold max-w-[51ch]" > {data.subTitle} </motion.p>
           </div>
 
           <div className="relative">
             <div className="absolute left-0 top-0 hidden h-full w-px bg-border xl:block" />
             <div className="flex flex-col gap-6 xl:gap-15">
-              {steps.map((step, index) => {
+              {data.items.map((step, index) => {
                 const isActive = index === activeIndex;
 
                 return (
@@ -99,16 +99,14 @@ const QualityShield = () => {
 
                       <span className="flex items-start justify-between gap-4">
                         <h3
-                          className={`font-condensed text-[30px] leading-none transition-colors duration-300 ${
-                            isActive ? "text-primary" : "text-secondary"
-                          }`}
+                          className={`font-condensed text-[30px] leading-none transition-colors duration-300 ${isActive ? "text-primary" : "text-secondary"
+                            }`}
                         >
                           {step.title}
                         </h3>
                         <span
-                          className={`mt-1 inline-flex shrink-0 xl:hidden transition-transform duration-300 ${
-                            isActive ? "rotate-180" : "rotate-0"
-                          }`}
+                          className={`mt-1 inline-flex shrink-0 xl:hidden transition-transform duration-300 ${isActive ? "rotate-180" : "rotate-0"
+                            }`}
                           aria-hidden="true"
                         >
                           <Image
@@ -124,11 +122,11 @@ const QualityShield = () => {
 
                     <div className="pt-3 xl:pt-4">
                       <p className="cmn-p max-w-[38ch] font-bold text-paragraph">
-                        {step.desc}
+                        {step.description}
                       </p>
 
                       <AnimatePresence initial={false}>
-                        {isActive && step.img ? (
+                        {isActive && step.image ? (
                           <motion.div
                             key={`step-image-${step.title}`}
                             initial={{ height: 0, opacity: 0, marginTop: 0 }}
@@ -139,8 +137,8 @@ const QualityShield = () => {
                           >
                             <div className="relative h-[220px] overflow-hidden md:h-[280px] xl:h-[195px] 2xl:h-[260px] 3xl:h-[306px]">
                               <Image
-                                src={step.img}
-                                alt={step.title}
+                                src={step.image}
+                                alt={step.imageAlt}
                                 fill
                                 sizes="(max-width: 1279px) 100vw, 40vw"
                                 className="object-cover"

@@ -3,8 +3,9 @@
 import Image from "next/image";
 import { videoSectionData } from "../data";
 import { motion } from "framer-motion";
+import { ProjectType } from "@/app/types/project";
 
-export default function VideoSection() {
+export default function VideoSection({ data }: { data: ProjectType['projects'][number]['thirdSection'] }) {
   return (
     <section className="overflow-hidden">
       <div className="relative w-full h-[350px] lg:h-auto lg:max-h-[895px]">
@@ -42,7 +43,7 @@ export default function VideoSection() {
 
         {/* image */}
         <Image
-          src={videoSectionData.video}
+          src={data.items[0].image}
           alt="project"
           className="w-full object-cover"
           width={2000}

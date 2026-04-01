@@ -6,18 +6,19 @@ import IndustriesWeServe from "./Sections/IndustriesServe";
 import Qsr from "./Sections/QSR";
 import TrustedClients from "./Sections/TrustedClients";
 import PreFooterCta from "./Sections/PreFooterCta";
+import { ServiceType } from "@/app/types/service";
 
-const Index = () => {
+const Index = ({ data, service }: { data: HomeType, service: ServiceType }) => {
     return (
         <>
-            <HeroSection />
-            <LegacySection />
-            <ExpertiseSection />
-            <WhatSetsUsApart />
-            <IndustriesWeServe />
-            <Qsr />
-            <TrustedClients />
-            <PreFooterCta />
+            <HeroSection data={data.bannerSection} />
+            <LegacySection data={data.firstSection} secondSection={data.secondSection} />
+            <ExpertiseSection data={data.thirdSection} service={service} />
+            <WhatSetsUsApart data={data.fourthSection} />
+            <IndustriesWeServe data={data.fifthSection} />
+            <Qsr data={data.sixthSection} />
+            <TrustedClients data={data.seventhSection} />
+            <PreFooterCta data={data.eighthSection} />
         </>
     );
 };

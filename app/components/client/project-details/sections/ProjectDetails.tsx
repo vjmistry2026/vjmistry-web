@@ -5,8 +5,9 @@ import { projectMeta, projectDetails, projectFeatures } from "../data";
 import AnimatedHeading from "../../common/AnimateHeading";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
+import { ProjectType } from "@/app/types/project";
 
-export default function ProjectDetails() {
+export default function ProjectDetails({ firstSection, secondSection }: { firstSection: ProjectType['projects'][number]['firstSection'], secondSection: ProjectType['projects'][number]['secondSection'] }) {
   return (
     <section>
       {/* SECTION 1  - Project Meta*/}
@@ -18,42 +19,138 @@ export default function ProjectDetails() {
         className="container border-b border-border py-70 3xl:py-[80px]"
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-4 gap-10">
-          {projectMeta.map((item, index) => (
-            <motion.div
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              variants={moveUp(index * 0.15)}
-              key={index}
-              className="flex items-center"
-            >
-              {/* icon box */}
-              <div className="w-[65px] h-[70px] 2xl:w-[73px] 2xl:h-[80px] border border-border flex items-center justify-center shrink-0">
-                <Image
-                  width={50}
-                  height={32}
-                  src={item.icon}
-                  alt={item.label}
-                  className={`w-auto object-contain ${
-                    item.label === "Location" ? "h-7 xl:h-[34px]" : "h-6 xl:h-8"
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            variants={moveUp(0 * 0.15)}
+            className="flex items-center"
+          >
+            {/* icon box */}
+            <div className="w-[65px] h-[70px] 2xl:w-[73px] 2xl:h-[80px] border border-border flex items-center justify-center shrink-0">
+              <Image
+                width={50}
+                height={32}
+                src="/assets/images/project-details/icons/1.svg"
+                alt="Year of Completion"
+                className={`w-auto object-contain h-6 xl:h-8
                   }`}
-                />
-              </div>
+              />
+            </div>
 
-              {/* text */}
-              <div className="flex flex-col flex-1 gap-[7px] xl:gap-[10px]">
-                <p className="pl-3 xl:pl-[17px] section-description text-secondary">
-                  {item.label}
-                </p>
+            {/* text */}
+            <div className="flex flex-col flex-1 gap-[7px] xl:gap-[10px]">
+              <p className="pl-3 xl:pl-[17px] section-description text-secondary">
+                Year of Completion
+              </p>
 
-                <div className="w-full h-px bg-border" />
+              <div className="w-full h-px bg-border" />
 
-                <p className="pl-3 xl:pl-[17px] section-description text-paragraph">
-                  {item.value}
-                </p>
-              </div>
-            </motion.div>
-          ))}
+              <p className="pl-3 xl:pl-[17px] section-description text-paragraph">
+                {firstSection.yearOfCompletion}
+              </p>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            variants={moveUp(1 * 0.15)}
+            className="flex items-center"
+          >
+            {/* icon box */}
+            <div className="w-[65px] h-[70px] 2xl:w-[73px] 2xl:h-[80px] border border-border flex items-center justify-center shrink-0">
+              <Image
+                width={50}
+                height={32}
+                src="/assets/images/project-details/icons/2.svg"
+                alt="Expertise"
+                className={`w-auto object-contain h-6 xl:h-8
+                  }`}
+              />
+            </div>
+
+            {/* text */}
+            <div className="flex flex-col flex-1 gap-[7px] xl:gap-[10px]">
+              <p className="pl-3 xl:pl-[17px] section-description text-secondary">
+                Expertise
+              </p>
+
+              <div className="w-full h-px bg-border" />
+
+              <p className="pl-3 xl:pl-[17px] section-description text-paragraph">
+                {firstSection.expertise}
+              </p>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            variants={moveUp(2 * 0.15)}
+            className="flex items-center"
+          >
+            {/* icon box */}
+            <div className="w-[65px] h-[70px] 2xl:w-[73px] 2xl:h-[80px] border border-border flex items-center justify-center shrink-0">
+              <Image
+                width={50}
+                height={32}
+                src="/assets/images/project-details/icons/3.svg"
+                alt="Location"
+                className={`w-auto object-contain h-7 xl:h-[34px]
+                  }`}
+              />
+            </div>
+
+            {/* text */}
+            <div className="flex flex-col flex-1 gap-[7px] xl:gap-[10px]">
+              <p className="pl-3 xl:pl-[17px] section-description text-secondary">
+                Location
+              </p>
+
+              <div className="w-full h-px bg-border" />
+
+              <p className="pl-3 xl:pl-[17px] section-description text-paragraph">
+                {firstSection.location.name}
+              </p>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            variants={moveUp(3 * 0.15)}
+            className="flex items-center"
+          >
+            {/* icon box */}
+            <div className="w-[65px] h-[70px] 2xl:w-[73px] 2xl:h-[80px] border border-border flex items-center justify-center shrink-0">
+              <Image
+                width={50}
+                height={32}
+                src="/assets/images/project-details/icons/4.svg"
+                alt="Client"
+                className={`w-auto object-contain h-6 xl:h-8
+                  }`}
+              />
+            </div>
+
+            {/* text */}
+            <div className="flex flex-col flex-1 gap-[7px] xl:gap-[10px]">
+              <p className="pl-3 xl:pl-[17px] section-description text-secondary">
+                Client
+              </p>
+
+              <div className="w-full h-px bg-border" />
+
+              <p className="pl-3 xl:pl-[17px] section-description text-paragraph">
+                {firstSection.client}
+              </p>
+            </div>
+          </motion.div>
+
         </div>
       </motion.div>
 
@@ -62,7 +159,7 @@ export default function ProjectDetails() {
         <div className="container pt-100">
           <AnimatedHeading
             className="mb-4 md:mb-30"
-            text={projectDetails.title}
+            text={secondSection.title}
           />
 
           <motion.p
@@ -72,7 +169,7 @@ export default function ProjectDetails() {
             variants={moveUp(0.3)}
             className="section-description mb-30 lg:mb-10 2xl:mb-15"
           >
-            {projectDetails.description}
+            {secondSection.description}
           </motion.p>
 
           <motion.div
@@ -83,8 +180,8 @@ export default function ProjectDetails() {
             className="w-full h-[250px] md:h-[280px] lg:h-auto"
           >
             <Image
-              src={projectDetails.image}
-              alt="project"
+              src={secondSection.image}
+              alt={secondSection.imageAlt}
               className="w-full h-full object-cover"
               width={2000}
               height={752}
@@ -97,7 +194,7 @@ export default function ProjectDetails() {
             <div
               className={`grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-4 border-x border-border divide-x divide-y divide-border`}
             >
-              {projectFeatures.map((item, index) => (
+              {secondSection.items.map((item, index) => (
                 <motion.div
                   initial="hidden"
                   whileInView="show"

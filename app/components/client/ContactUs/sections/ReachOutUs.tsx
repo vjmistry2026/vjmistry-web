@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
 import AnimatedHeading from "../../common/AnimateHeading";
 import { reachOutData } from "../data";
+import { ContactType } from "@/app/types/contact";
 
 const iconMap = {
   address: "/assets/images/contactus/icons/location.svg",
@@ -14,7 +15,7 @@ const iconMap = {
   email: "/assets/images/contactus/icons/mail.svg",
 } as const;
 
-const ReachOutUs = () => {
+const ReachOutUs = ({ data }: { data: ContactType['secondSection'] }) => {
   const lineAnimationFrameRef = useRef<number | null>(null);
   const [linePositions, setLinePositions] = useState<Record<number, "start" | "center" | "end">>({});
   const [animatedLines, setAnimatedLines] = useState<Record<number, boolean>>({});
@@ -73,7 +74,7 @@ const ReachOutUs = () => {
     <section className="pb-150 md:pb-130">
       <div className="container">
         <div className="mb-7 md:mb-10 xl:mb-15">
-          <AnimatedHeading text={reachOutData.title} className="mb-2 md:mb-30 leading-[1]" />
+          <AnimatedHeading text={data.title} className="mb-2 md:mb-30 leading-[1]" />
           <motion.p
             variants={moveUp(0.15)}
             initial="hidden"
@@ -81,12 +82,12 @@ const ReachOutUs = () => {
             viewport={{ once: true, amount: 0.2 }}
             className="cmn-p font-bold"
           >
-            {reachOutData.description}
+            {data.description}
           </motion.p>
         </div>
 
         <div className="grid grid-cols-1 gap-5 xl:grid-cols-2 xl:gap-10">
-          {reachOutData.items.map((item, index) => (
+          {data.items.map((item, index) => (
             <motion.div
               key={item.title}
               variants={moveUp(0.2 + index * 0.1)}
@@ -104,15 +105,13 @@ const ReachOutUs = () => {
               <div className="relative mb-5 mt-5 h-px w-full overflow-hidden bg-border xl:mt-[25px] xl:mb-30">
                 <span
                   onTransitionEnd={() => handleLineTransitionEnd(index)}
-                  className={`absolute inset-0 bg-primary ${
-                    animatedLines[index] ? "transition-transform duration-500 ease-in-out" : ""
-                  } ${
-                    linePositions[index] === "center"
+                  className={`absolute inset-0 bg-primary ${animatedLines[index] ? "transition-transform duration-500 ease-in-out" : ""
+                    } ${linePositions[index] === "center"
                       ? "translate-x-0"
                       : linePositions[index] === "end"
                         ? "translate-x-full"
                         : "-translate-x-full"
-                  }`}
+                    }`}
                 />
               </div>
 
@@ -125,21 +124,29 @@ const ReachOutUs = () => {
                 </div>
 
                 <div className="flex flex-wrap items-center gap-x-5 xl:gap-x-10 gap-y-4">
-                  {item.phones.map((phone) => (
-                    <a key={phone} href={`tel:${phone.replace(/[^\d+]/g, "")}`}
-                      className="flex items-start gap-3 text-paragraph/70 transition-colors duration-300 hover:text-primary"
-                    >
-                      <div className="min-w-[27px]">
+                  <a href={`tel:${item.phoneOne.replace(/[^\d+]/g, "")}`}
+                    className="flex items-start gap-3 text-paragraph/70 transition-colors duration-300 hover:text-primary"
+                  >
+                    <div className="min-w-[27px]">
                       <Image src={iconMap.phone} alt="" width={32} height={32} className="mt-1 h-3 w-3 xl:w-[26px] xl:h-[26px] shrink-0" />
-                      </div>
-                      <span className="cmn-p font-bold">{phone}</span>
-                    </a>
-                  ))}
+                    </div>
+                    <span className="cmn-p font-bold">{item.phoneOne}</span>
+                  </a>
+
+                  <a href={`tel:${item.phoneTwo.replace(/[^\d+]/g, "")}`}
+                    className="flex items-start gap-3 text-paragraph/70 transition-colors duration-300 hover:text-primary"
+                  >
+                    <div className="min-w-[27px]">
+                      <Image src={iconMap.phone} alt="" width={32} height={32} className="mt-1 h-3 w-3 xl:w-[26px] xl:h-[26px] shrink-0" />
+                    </div>
+                    <span className="cmn-p font-bold">{item.phoneTwo}</span>
+                  </a>
+
                 </div>
 
                 <a href={`mailto:${item.email}`} className="flex items-start gap-3 text-paragraph/70 transition-colors duration-300 hover:text-primary" >
                   <div className="min-w-[27px]">
-                  <Image src={iconMap.email} alt="" width={32} height={32} className="mt-1 h-3 w-3 xl:w-[32px] xl:h-[32.21px] shrink-0" />
+                    <Image src={iconMap.email} alt="" width={32} height={32} className="mt-1 h-3 w-3 xl:w-[32px] xl:h-[32.21px] shrink-0" />
                   </div>
                   <span className="cmn-p font-bold">{item.email}</span>
                 </a>
@@ -147,7 +154,7 @@ const ReachOutUs = () => {
 
               <div className="mt-7">
                 <Link
-                  href={item.directionHref}
+                  href={item.map}
                   target="_blank"
                   rel="noreferrer"
                   className="group inline-flex items-center font-nexa font-bold text-16 transition-all duration-250"

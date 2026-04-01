@@ -74,7 +74,7 @@ const animateOutgoingCollapse = (prevImage: string | null, container: HTMLElemen
     });
 };
 
-export default function HeroSection() {
+export default function HeroSection({ data }: { data: HomeType['bannerSection'] }) {
     const swiperRef = useRef<any>(null);
     const [activeIndex, setActiveIndex] = useState(0);
     const prevImageRef = useRef<string | null>(null);
@@ -98,7 +98,7 @@ export default function HeroSection() {
                 autoplay={{ delay: 5000, disableOnInteraction: false }}
                 onSwiper={(swiper) => {
                     swiperRef.current = swiper;
-                    prevImageRef.current = HERO_SLIDES[swiper.realIndex].image;
+                    prevImageRef.current = data.items[swiper.realIndex].image;
                 }}
                 onBeforeTransitionStart={(swiper) => {
                     animateOutgoingCollapse(prevImageRef.current, swiper.el, isMobile);
@@ -107,15 +107,15 @@ export default function HeroSection() {
                     setActiveIndex(swiper.realIndex);
                 }}
                 onSlideChangeTransitionEnd={(swiper) => {
-                    prevImageRef.current = HERO_SLIDES[swiper.realIndex].image;
+                    prevImageRef.current = data.items[swiper.realIndex].image;
                 }}
                 className="absolute inset-0 z-0"
             >
-                {HERO_SLIDES.map((slide) => (
-                    <SwiperSlide key={slide.id}>
+                {data.items.map((slide, index) => (
+                    <SwiperSlide key={index}>
                         <div className="relative h-screen w-full hero-slide">
                             <Image src={slide.image} alt={slide.title} fill priority className="object-cover pointer-events-none" />
-                            <div style={{background: "linear-gradient(180deg, rgba(0, 0, 0, 0) 20.98%, rgba(0, 0, 0, 0.8) 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2))"}} className="absolute inset-0" />
+                            <div style={{ background: "linear-gradient(180deg, rgba(0, 0, 0, 0) 20.98%, rgba(0, 0, 0, 0.8) 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2))" }} className="absolute inset-0" />
                         </div>
                     </SwiperSlide>
                 ))}
@@ -187,7 +187,7 @@ export default function HeroSection() {
                                         <div className="w-[50px] h-[40px] md:w-[60px] md:h-[50px] lg:w-[81px] lg:h-[75px] relative overflow-hidden">
                                             <AnimatePresence mode="wait">
                                                 <motion.div
-                                                    key={HERO_SLIDES[activeIndex].image}
+                                                    key={data.items[activeIndex].image}
                                                     initial={{ opacity: 0.2 }}
                                                     animate={{ opacity: 1 }}
                                                     exit={{ opacity: 0.4 }}
@@ -195,7 +195,7 @@ export default function HeroSection() {
                                                     className="absolute inset-0"
                                                 >
                                                     <Image
-                                                        src={HERO_SLIDES[activeIndex].image}
+                                                        src={data.items[activeIndex].image}
                                                         alt="thumb"
                                                         fill
                                                         className="object-cover"
@@ -215,12 +215,12 @@ export default function HeroSection() {
                                                         transition={{ duration: 0.6, ease: "easeInOut" }}
                                                         className="text-20 font-nexa leading-[100%] text-paragraph-2 min-w-[220px] lg:mb-[11px]"
                                                     >
-                                                        {HERO_SLIDES[activeIndex].title}
+                                                        {data.items[activeIndex].title}
                                                     </motion.p>
                                                 </AnimatePresence>
                                             </div>
                                             <p className="text-15 font-nexa font-bold leading-[1.66] text-[#D9D9D9]/30">
-                                                {activeIndex + 1}/{HERO_SLIDES.length}
+                                                {activeIndex + 1}/{data.items.length}
                                             </p>
                                         </div>
                                     </div>

@@ -13,8 +13,10 @@ import FilterBox from "./FilterBox";
 import NewsGrid from "./NewsGrid";
 import PopularBlock from "./PopularBlock";
 import AnimatedHeading from "../../common/AnimateHeading";
+import { NewsType } from "@/app/types/news";
+import { Filters } from "@/app/types/projectfilters";
 
-const Main = () => {
+const Main = ({ news, category }: { news: NewsType['news'], category: Filters[] }) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -37,11 +39,11 @@ const Main = () => {
   );
 
   const filteredNews = activeCategory
-    ? newsList.filter((article) => article.category === activeCategory)
-    : newsList;
+    ? news.filter((article) => article.firstSection.category.name === activeCategory)
+    : news;
   const { latestNewsList, remainingNewsList } = splitNewsByLatest(filteredNews);
 
-  return ( 
+  return (
     <section className="pb-15 xl:pb-25 2xl:pb-[120px] 3xl:pb-[147px]">
       <div className="container">
         <FilterBox
@@ -58,7 +60,7 @@ const Main = () => {
         <NewsGrid remainingNewsList={remainingNewsList} />
       </div>
     </section>
-   );
+  );
 }
- 
+
 export default Main;

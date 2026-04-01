@@ -8,10 +8,10 @@ import { moveUp } from "@/app/components/motionVariants";
 import { useContainerLeftInset } from "@/app/hooks/useContainerLeftInset";
 import ContainerAnchor from "../../Layout/ContainerAnchor";
 
-const Qsr = () => {
+const Qsr = ({ data }: { data: HomeType['sixthSection'] }) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const leftInset = useContainerLeftInset(containerRef);
-        const [screenWidth, setScreenWidth] = useState(0);
+    const [screenWidth, setScreenWidth] = useState(0);
 
     useEffect(() => {
         const check = () => setScreenWidth(window.innerWidth);
@@ -55,19 +55,19 @@ const Qsr = () => {
                     {/* CONTENT: image bottom-left, text right */}
                     <div
                         className="absolute bottom-0 left-0 right-0 z-[10]"
-                        style={{ paddingLeft: leftInset}}
+                        style={{ paddingLeft: leftInset }}
                     >
                         <div className="flex items-end gap-[60px] xl:gap-[80px]">
                             {/* LEFT IMAGE — bottom-aligned with bg svg */}
-    <motion.div
-      variants={moveUp(0.3)}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true }}
-      className="flex-none">
+                            <motion.div
+                                variants={moveUp(0.3)}
+                                initial="hidden"
+                                whileInView="show"
+                                viewport={{ once: true }}
+                                className="flex-none">
                                 <Image
-                                    src="/assets/images/home/qsr/qsr-main.png"
-                                    alt="QSR"
+                                    src={data.image}
+                                    alt={data.imageAlt}
                                     width={728}
                                     height={894}
                                     className="
@@ -87,7 +87,7 @@ const Qsr = () => {
                             <div className="flex-1 pb-[60px] xl:pb-[80px] 2xl:pb-[100px]" style={{ paddingRight: leftInset }}>
                                 <AnimatedHeading
                                     color="black"
-                                    text="Quality. Safety. Reliability."
+                                    text={data.title}
                                     className="leading-[120%] max-w-[488px] mb-[24px]"
                                 />
 
@@ -98,9 +98,7 @@ const Qsr = () => {
                                     viewport={{ once: true }}
                                     className="section-description max-w-[550px]"
                                 >
-                                    At VJ Mistry, quality and safety are integral to every stage of our work. Our processes are
-                                    aligned with industry standards and best practices, ensuring consistent outcomes, safe work
-                                    environments, and dependable project delivery.
+                                    {data.description}
                                 </motion.p>
                             </div>
                         </div>

@@ -14,9 +14,13 @@ import { moveUp, moveUpV2 } from "@/app/components/motionVariants";
 import { useContainerLeftInset } from "@/app/hooks/useContainerLeftInset";
 import SliderNavButton from "../../common/NavigationButton";
 import Reveal from "../../common/RevealOneByOneAnimation";
+import { ServiceType } from "@/app/types/service";
 
-const ExpertiseSection = () => {
-    const { heading, description, slides } = expertiseSectionData;
+const ExpertiseSection = ({ data, service }: { data: HomeType['thirdSection'], service: ServiceType }) => {
+    // const { heading, description, slides } = expertiseSectionData;
+    const heading = data.title
+    const description = data.description
+    const slides = service.firstSection.items
     const containerRef = useRef<HTMLDivElement>(null);
     const leftInset = useContainerLeftInset(containerRef);
 
@@ -100,7 +104,7 @@ const ExpertiseSection = () => {
                     style={{ marginLeft: leftInset }}
                 >
                     {slides.map((slide, index) => (
-                        <SwiperSlide key={slide.id}>
+                        <SwiperSlide key={index}>
                             <Reveal variants={moveUpV2} className="
       group relative overflow-hidden cursor-pointer
       [clip-path:polygon(0_0,calc(100%-45px)_0,100%_45px,100%_100%,0_100%)]
@@ -113,8 +117,8 @@ const ExpertiseSection = () => {
                             >
                                 {/* Image */}
                                 <Image
-                                    src={slide.image}
-                                    alt={slide.title}
+                                    src={slide.homeImage}
+                                    alt={slide.homeImageAlt}
                                     width={520}
                                     height={463}
                                     className="group-hover:scale-[1.04] transition-all duration-900 w-full h-[260px] md:h-[340px] lg:h-[420px] 2xl:h-full 3xl:min-h-[463px] 3xl:max-w-[633px] object-cover"

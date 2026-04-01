@@ -1,3 +1,5 @@
+import { NewsType } from "@/app/types/news";
+
 export const bannerData = {
   title: "News",
   image: "/assets/images/news/banner-img.jpg",
@@ -146,13 +148,13 @@ export const newsList: NewsItem[] = [
   }
 ];
 
-export const sortNewsByNewest = (items: NewsItem[]) =>
+export const sortNewsByNewest = (items: NewsType['news']) =>
   [...items].sort(
     (firstArticle, secondArticle) =>
-      new Date(secondArticle.date).getTime() - new Date(firstArticle.date).getTime(),
+      new Date(secondArticle.firstSection.date).getTime() - new Date(firstArticle.firstSection.date).getTime(),
   );
 
-export const splitNewsByLatest = (items: NewsItem[]) => {
+export const splitNewsByLatest = (items: NewsType['news']) => {
   const newsListByNewest = sortNewsByNewest(items);
 
   return {

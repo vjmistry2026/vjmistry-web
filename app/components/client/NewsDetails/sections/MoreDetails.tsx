@@ -7,6 +7,7 @@ import type { CSSProperties, MouseEvent } from "react";
 
 import { moveLeft, moveUp } from "@/app/components/motionVariants";
 import { newsDetails } from "../data";
+import { NewsType } from "@/app/types/news";
 
 const STICKY_TOP = 150;
 const MOBILE_TOC_SCROLL_OFFSET = 88;
@@ -30,7 +31,6 @@ const getTocScrollOffset = () =>
 const handleTocClick = (
   event: MouseEvent<HTMLAnchorElement>,
   sectionTitle: string,
-  setActiveSectionId: (sectionId: string) => void,
 ) => {
   event.preventDefault();
 
@@ -56,7 +56,7 @@ const handleTocClick = (
   window.history.replaceState(null, "", `#${sectionId}`);
 };
 
-const MoreDetails = () => {
+const MoreDetails = ({ secondSection, thirdSection }: { secondSection: NewsType['news'][number]['secondSection'], thirdSection: NewsType['news'][number]['thirdSection'] }) => {
   const article = newsDetails[0];
   const layoutRef = useRef<HTMLDivElement>(null);
   const contentColumnRef = useRef<HTMLDivElement>(null);
@@ -286,12 +286,12 @@ const MoreDetails = () => {
 
                 <nav className="mt-5">
                   <ul className="space-y-3 sm:space-y-4 xl:space-y-30">
-                    {article.content.map((section) => (
+                    {secondSection.items.map((section) => (
                       <li key={section.title}>
                         <a
                           href={`#${getSectionId(section.title)}`}
                           onClick={(event) =>
-                            handleTocClick(event, section.title, setActiveSectionId)
+                            handleTocClick(event, section.idToMap)
                           }
                           className="group flex items-center gap-3 xl:gap-30 text-paragraph transition-colors duration-300 lg:hover:text-primary"
                         >
@@ -314,9 +314,15 @@ const MoreDetails = () => {
             </div>
           </aside>
 
-          <div ref={contentColumnRef} className="min-w-0 space-y-5 md:space-y-12 xl:space-y-15 2xl:space-y-15 3xl:space-y-15" >
-            {article.content.map((section, index) => (
-              <motion.div
+          <div
+            ref={contentColumnRef}
+            className="min-w-0 space-y-5 md:space-y-12 xl:space-y-15 2xl:space-y-15 3xl:space-y-15"
+          >
+            <section className="news-item-content scroll-mt-[120px] lg:scroll-mt-[160px]" dangerouslySetInnerHTML={{ __html: thirdSection.content }}>
+
+            </section>
+            {/* {article.content.map((section, index) => (
+              <motion.section
                 key={section.title}
                 id={getSectionId(section.title)}
                 className="scroll-mt-[120px] lg:scroll-mt-[160px]"
@@ -336,8 +342,8 @@ const MoreDetails = () => {
                         {paragraph}
                       </p>
 
-                       {section.image === undefined ||
-                       section.imageAfterParagraph !== paragraphIndex ? null : (
+                      {section.image === undefined ||
+                        section.imageAfterParagraph !== paragraphIndex ? null : (
                         <div className="relative mt-5 aspect-[1.25/1] overflow-hidden sm:mt-6 sm:aspect-[1.55/1] xl:aspect-[1.95/1]">
                           <Image src={section.image} alt={section.title} fill className="object-cover" sizes="(max-width: 1024px) 100vw, 70vw" />
                         </div>
@@ -356,12 +362,12 @@ const MoreDetails = () => {
                     ))}
                   </ul>
                 )}
-              </motion.div>
-            ))}
+              </motion.section>
+            ))} */}
           </div>
         </div>
       </div>
-    </section>
+    </section >
   );
 };
 

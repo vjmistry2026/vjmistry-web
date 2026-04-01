@@ -9,6 +9,8 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { moveUp } from "@/app/components/motionVariants";
 import CustomButton from "../../common/CustomButton";
 import type { NewsItem } from "../data";
+import { NewsType } from "@/app/types/news";
+import { calculateReadTime } from "@/lib/calculateReadTime";
 
 const formatDate = (value: string) =>
   new Intl.DateTimeFormat("en-US", {
@@ -18,7 +20,7 @@ const formatDate = (value: string) =>
   }).format(new Date(value));
 
 type NewsGridProps = {
-  remainingNewsList: NewsItem[];
+  remainingNewsList: NewsType['news'];
 };
 
 const NewsGrid = ({ remainingNewsList }: NewsGridProps) => {
@@ -52,7 +54,7 @@ const NewsGrid = ({ remainingNewsList }: NewsGridProps) => {
       <div className="grid grid-cols-1 gap-x-30 2xl:gap-x-10 gap-y-8 xl:gap-y-12 md:grid-cols-2 lg:grid-cols-3">
         {visibleNews.map((article, index) => (
           <motion.article
-            key={article.id}
+            key={index}
             className="group"
             variants={moveUp((index % 9) * 0.08)}
             initial="hidden"
@@ -60,13 +62,13 @@ const NewsGrid = ({ remainingNewsList }: NewsGridProps) => {
             viewport={{ once: true, amount: 0.2 }}
           >
             <Link
-              href={`/media-center/news/${article.slug}`}
+              href={`/media-center/news/${article.firstSection.slug}`}
               className="block"
             >
               <div className="relative aspect-[0.94/1] h-[250px] md:h-[350px] xl:h-[400px] 3xl:h-[550px] w-full overflow-hidden">
                 <Image
-                  src={article.img}
-                  alt={article.title}
+                  src={article.firstSection.thumbnail}
+                  alt={article.firstSection.thumbnailAlt}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-105 "
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -89,18 +91,18 @@ const NewsGrid = ({ remainingNewsList }: NewsGridProps) => {
             <div className="pt-5">
               <div className="mb-5 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
                 <p className="section-description flex flex-wrap items-center text-20">
-                  <span className="font-nexa text-paragraph">{article.category}</span>
+                  <span className="font-nexa text-paragraph">{article.firstSection.category.name}</span>
                   <span className="mx-[10px] w-[5px] h-[5px] block bg-paragraph rounded-full text-paragraph opacity-70 mt-[3px]"></span>
-                  <span className="text-paragraph/70">{article.readTime}</span>
+                  <span className="text-paragraph/70">{calculateReadTime(article.thirdSection.content)}</span>
                 </p>
                 <p className="section-description text-paragraph">
-                  {formatDate(article.date)}
+                  {formatDate(article.firstSection.date)}
                 </p>
               </div>
 
-              <Link href={`/news/news-details/${article.slug}`}>
+              <Link href={`/news/news-details/${article.firstSection.slug}`}>
                 <h3 className="font-condensed text-32 leading-[110%] text-secondary transition-colors duration-300 hover:text-primary">
-                  {article.title}
+                  {article.firstSection.title}
                 </h3>
               </Link>
             </div>
