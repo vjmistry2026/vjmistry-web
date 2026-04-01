@@ -4,6 +4,8 @@ import Link from "next/link";
 
 import { moveLeft, moveUp } from "@/app/components/motionVariants";
 import type { NewsItem } from "../data";
+import { NewsType } from "@/app/types/news";
+import { calculateReadTime } from "@/lib/calculateReadTime";
 
 const articlePlacementClasses = [
   "xl:[grid-area:1/1/4/2]",
@@ -20,7 +22,7 @@ const formatDate = (value: string) =>
   }).format(new Date(value));
 
 type PopularBlockProps = {
-  latestNewsList: NewsItem[];
+  latestNewsList: NewsType['news'];
 };
 
 const PopularBlock = ({ latestNewsList }: PopularBlockProps) => {
@@ -34,12 +36,11 @@ const PopularBlock = ({ latestNewsList }: PopularBlockProps) => {
         const isFeatured = index === 0;
         return (
           <motion.article
-            key={article.id}
-            className={`${articlePlacementClasses[index] ?? ""} ${
-              isFeatured
-                ? "group"
-                : "grid grid-cols-[140px_minmax(0,1fr)] gap-5 border-b border-border last:border-0 pb-30 sm:grid-cols-[170px_minmax(0,1fr)]"
-            }`}
+            key={index}
+            className={`${articlePlacementClasses[index] ?? ""} ${isFeatured
+              ? "group"
+              : "grid grid-cols-[140px_minmax(0,1fr)] gap-5 border-b border-border last:border-0 pb-30 sm:grid-cols-[170px_minmax(0,1fr)]"
+              }`}
             variants={isFeatured ? moveUp(0) : moveLeft((index - 1) * 0.1)}
             initial="hidden"
             whileInView="show"
@@ -48,13 +49,13 @@ const PopularBlock = ({ latestNewsList }: PopularBlockProps) => {
             {isFeatured ? (
               <>
                 <Link
-                  href={`/media-center/news/${article.slug}`}
+                  href={`/media-center/news/${article.firstSection.slug}`}
                   className="block"
                 >
                   <div className="relative h-[250px] md:h-[300px] xl:h-[350px] 2xl:h-[504px] w-full overflow-hidden">
                     <Image
-                      src={article.img}
-                      alt={article.title}
+                      src={article.firstSection.thumbnail}
+                      alt={article.firstSection.thumbnailAlt}
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-105 "
                       sizes="(max-width: 1280px) 100vw, 55vw"
@@ -77,41 +78,41 @@ const PopularBlock = ({ latestNewsList }: PopularBlockProps) => {
                 <div className="">
                   <div className="mb-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-2 section-description pt-30">
                     <p className="flex flex-wrap items-center text-20">
-                      <span className="text-paragraph font-nexa">{article.category}</span>
+                      <span className="text-paragraph font-nexa">{article.firstSection.category.name}</span>
                       <span className="mx-[10px] w-[5px] h-[5px] block bg-paragraph rounded-full text-paragraph opacity-70"></span>
-                      <span className="text-paragraph/70">{article.readTime}</span>
+                      <span className="text-paragraph/70">{calculateReadTime(article.thirdSection.content)}</span>
                     </p>
-                    <p className="text-paragraph">{formatDate(article.date)}</p>
+                    <p className="text-paragraph">{formatDate(article.firstSection.date)}</p>
                   </div>
 
-                  <Link href={`/media-center/news/${article.slug}`}>
+                  <Link href={`/media-center/news/${article.firstSection.slug}`}>
                     <h3 className="max-w-[50ch] font-condensed text-32 leading-[110%] text-secondary transition-colors duration-300 hover:text-primary">
-                      {article.title}
+                      {article.firstSection.title}
                     </h3>
                   </Link>
                 </div>
               </>
             ) : (
               <>
-                  <Link href={`/media-center/news/${article.slug}`} className="block relative overflow-hidden h-full" >
+                <Link href={`/media-center/news/${article.firstSection.slug}`} className="block relative overflow-hidden h-full" >
                   <div className="relative overflow-hidden h-full">
-                    <Image src={article.img} alt={article.title} fill className="object-cover h-full w-full max-w-full" sizes="(max-width: 640px) 140px, 170px" />
+                    <Image src={article.firstSection.thumbnail} alt={article.firstSection.thumbnailAlt} fill className="object-cover h-full w-full max-w-full" sizes="(max-width: 640px) 140px, 170px" />
                   </div>
                 </Link>
 
                 <div className="min-w-0 flex flex-col justify-between">
                   <div className="mb-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-1 section-description">
-                      <p className="flex flex-wrap items-center text-16 xl:text-20">
-                        <span className="text-paragraph font-nexa">{article.category}</span>
-                        <span className="mx-[10px] w-[5px] h-[5px] block bg-paragraph rounded-full text-paragraph opacity-70"></span>
-                        <span className="text-paragraph/70">{article.readTime}</span>
-                      </p>
-                      <p className="text-paragraph text-16 xl:text-20">{formatDate(article.date)}</p>
+                    <p className="flex flex-wrap items-center text-16 xl:text-20">
+                      <span className="text-paragraph font-nexa">{article.firstSection.category.name}</span>
+                      <span className="mx-[10px] w-[5px] h-[5px] block bg-paragraph rounded-full text-paragraph opacity-70"></span>
+                      <span className="text-paragraph/70">{calculateReadTime(article.thirdSection.content)}</span>
+                    </p>
+                    <p className="text-paragraph text-16 xl:text-20">{formatDate(article.firstSection.date)}</p>
                   </div>
 
-                    <Link href={`/media-center/news/news-details/${article.slug}`}>
+                  <Link href={`/media-center/news/news-details/${article.firstSection.slug}`}>
                     <h3 className="font-condensed text-20 md:text-32 leading-[110%] text-secondary transition-colors duration-300 hover:text-primary">
-                      {article.title}
+                      {article.firstSection.title}
                     </h3>
                   </Link>
                 </div>

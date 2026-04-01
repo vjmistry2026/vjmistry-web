@@ -1,22 +1,23 @@
+import { ProjectType } from "@/app/types/project";
 import { Project } from "../projects/data";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-const ProjectCard = ({ project }: { project: Project }) => {
+const ProjectCard = ({ project }: { project: ProjectType['projects'][number] }) => {
   const [hovered, setHovered] = useState(false);
 
   return (
     <Link
-      href={`/projects/project-details`}
+      href={`/projects/${project.slug}`}
       className="group block cursor-pointer"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
       <div className="relative w-full h-[250px] md:h-[280px] 3xl:max-h-[513px] overflow-hidden">
         <Image
-          src={project.image}
-          alt={project.title}
+          src={project.thumbnail}
+          alt={project.thumbnailAlt}
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -41,7 +42,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
 
       <div className="pt-5">
         <p className="section-description mb-[10px] flex flex-wrap">
-          {[project.type, project.sector, project.location, project.status]
+          {[project.firstSection.projectType.name, project.firstSection.sector.name, project.firstSection.location.name, project.firstSection.status]
             .filter(Boolean)
             .map((item, index, arr) => (
               <span key={index}>

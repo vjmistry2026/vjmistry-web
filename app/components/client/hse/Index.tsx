@@ -7,19 +7,20 @@ import SpotlightSlider from "./sections/SpotlightSlider";
 import ZeroHarm from "./sections/ZeroHarm";
 import CSR from "./sections/CSR";
 import BottomTagline from "./sections/BottomTagline";
-const Index = () => {
-  return ( 
+import { HSeType } from "@/app/types/hse";
+const Index = ({ data }: { data: HSeType }) => {
+  return (
     <>
-    <PageBanner title={HSEData.bannerData.title} image={HSEData.bannerData.image} />
-    <DecImg sectionClassName="py-130 md:py-150" title={HSEData.hero.title} desc={HSEData.hero.desc} image={HSEData.hero.img} alt={HSEData.hero.title} className="lg:gap-[73px]" titleClass="mb-2 xl:mb-30 leading-[1.2]" />
-    <ComHealth/>
-    <ZeroHarm />
-    <QuoteBanner/>
-    <SpotlightSlider/>
-    <CSR/>
-    <BottomTagline/>
+      <PageBanner title={data.pageTitle} image={data.banner} imageAlt={data.bannerAlt} />
+      <DecImg sectionClassName="py-130 md:py-150" title={data.firstSection.title} desc={data.firstSection.description} image={data.firstSection.image} alt={data.firstSection.imageAlt} className="lg:gap-[73px]" titleClass="mb-2 xl:mb-30 leading-[1.2]" />
+      <ComHealth data={data.secondSection} />
+      <ZeroHarm data={data.thirdSection} />
+      <QuoteBanner data={data.fourthSection} />
+      <SpotlightSlider data={data.fifthSection} />
+      <CSR data={data.sixthSection} />
+      <BottomTagline data={data.seventhSection} />
     </>
-   );
+  );
 }
- 
+
 export default Index;

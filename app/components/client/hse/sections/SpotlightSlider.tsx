@@ -12,11 +12,12 @@ import { moveUp } from "@/app/components/motionVariants";
 import { HSEData } from "../data";
 
 import "swiper/css";
+import { HSeType } from "@/app/types/hse";
 
 type TrainingItem = (typeof HSEData.training.items)[number];
 
-const chunkItems = (items: TrainingItem[], size: number) => {
-  const chunks: TrainingItem[][] = [];
+const chunkItems = (items: HSeType['fifthSection']['items'], size: number) => {
+  const chunks: HSeType['fifthSection']['items'][] = [];
 
   for (let index = 0; index < items.length; index += size) {
     chunks.push(items.slice(index, index + size));
@@ -25,12 +26,12 @@ const chunkItems = (items: TrainingItem[], size: number) => {
   return chunks;
 };
 
-const SpotlightSlider = () => {
-  const { title, desc, items } = HSEData.training;
+const SpotlightSlider = ({ data }: { data: HSeType['fifthSection'] }) => {
+  // const { title, desc, items } = HSEData.training;
   const containerRef = useRef<HTMLDivElement>(null);
   const leftInset = useContainerLeftInset(containerRef);
   const swiperRef = useRef<SwiperType | null>(null);
-  const slides = useMemo(() => chunkItems(items, 2), [items]);
+  const slides = useMemo(() => chunkItems(data.items, 2), [data.items]);
   const [activeIndex, setActiveIndex] = useState(0);
 
   const progressWidth =
@@ -39,13 +40,19 @@ const SpotlightSlider = () => {
   return (
     <section className="overflow-hidden py-8 xl:py-20 2xl:py-25 3xl:py-150">
       <div ref={containerRef} className="container">
-        <AnimatedHeading text={title} className="mb-2 md:mb-30" />
+        <AnimatedHeading text={data.title} className="mb-2 md:mb-30" />
         <div className="mb-6 flex justify-between flex-wrap gap-y-4 md:gap-2 2xl:mb-15">
-          <motion.p variants={moveUp(0.15)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="cmn-p max-w-4xl" >
-            {desc}
+          <motion.p
+            variants={moveUp(0.15)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            className="cmn-p max-w-4xl"
+          >
+            {data.description}
           </motion.p>
-          <motion.div variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} 
-          className="flex items-center justify-between gap-[10px] xl:gap-[20px]" >
+          <motion.div variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}
+            className="flex items-center justify-between gap-[10px] xl:gap-[20px]" >
             <SliderNavButton direction="left" onClick={() => swiperRef.current?.slidePrev()} />
             <SliderNavButton direction="right" onClick={() => swiperRef.current?.slideNext()} />
           </motion.div>
@@ -75,16 +82,16 @@ const SpotlightSlider = () => {
                     viewport={{ once: true, amount: 0.2 }}
                     className="group relative min-h-[280px] overflow-hidden bg-secondary sm:min-h-[360px] xl:min-h-[420px] 3xl:min-h-[621px]"
                   >
-                    <Image src={item.img} alt={item.title} fill sizes="(max-width: 767px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                    <Image src={item.image} alt={item.imageAlt} fill sizes="(max-width: 767px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
                     <div className="absolute inset-x-0 bottom-0 p-5 text-white sm:p-7 xl:p-8 2xl:p-10">
                       <h3 className="mb-2 font-medium text-32 leading-none">
                         {item.title}
                       </h3>
-                      {item.desc ? (
+                      {item.description ? (
                         <p className="cmn-p leading-relaxed !text-paragraph-2/70 font-bold xl:text-15">
-                          {item.desc}
+                          {item.description}
                         </p>
                       ) : null}
                     </div>

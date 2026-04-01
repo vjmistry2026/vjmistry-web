@@ -11,13 +11,13 @@ import "swiper/css";
 
 type AlbumCardProps = {
   title: string;
-  album: string[];
+  album: { image: string, imageAlt: string }[];
   isActive?: boolean;
 };
 
 const MAX_MODAL_THUMBS = 5;
 
-const getThumbDisplay = (album: string[]) => {
+const getThumbDisplay = (album: { image: string; imageAlt: string }[]) => {
   if (album.length <= 4) {
     return {
       thumbs: album,
@@ -199,7 +199,7 @@ export default function AlbumCard({
                       >
                         <Image src="/assets/icons/close-icon.svg" width={34} height={34} alt="" className="h-[34px] w-[34px]" />
                       </button>
-                      <Image src={image} alt={`${title} image ${imageIndex + 1}`} fill sizes="(max-width: 640px) 92vw, 
+                      <Image src={image.image} alt={`${title} image ${imageIndex + 1}`} fill sizes="(max-width: 640px) 92vw, 
                           (max-width: 1024px) 86vw, 980px" className="object-cover max-w-[80vw] 3xl:max-w-[1444px] mx-auto" />
                     </div>
                   </SwiperSlide>
@@ -215,13 +215,12 @@ export default function AlbumCard({
                   key={`${title}-thumb-${imageIndex}`}
                   type="button"
                   onClick={() => modalSwiperRef.current?.slideTo(imageIndex)}
-                  className={`relative shrink-0 cursor-pointer overflow-hidden border transition-all duration-300 ${
-                    modalIndex === imageIndex
-                      ? "h-[70px] w-[100px] border-transparent grayscale-0 opacity-100"
-                      : "h-[50px] w-[70px] border-white/20 grayscale opacity-55"
-                  }`}
+                  className={`relative shrink-0 cursor-pointer overflow-hidden border transition-all duration-300 ${modalIndex === imageIndex
+                    ? "h-[70px] w-[100px] border-transparent grayscale-0 opacity-100"
+                    : "h-[50px] w-[70px] border-white/20 grayscale opacity-55"
+                    }`}
                 >
-                  <Image src={album[imageIndex]} alt="" fill sizes={modalIndex === imageIndex ? "100px" : "70px"} className="object-cover" />
+                  <Image src={album[imageIndex].image} alt={album[imageIndex].imageAlt} fill sizes={modalIndex === imageIndex ? "100px" : "70px"} className="object-cover" />
                 </button>
               ))}
             </div>
@@ -251,7 +250,7 @@ export default function AlbumCard({
       >
         <div className="relative overflow-hidden ">
           <Image
-            src={album[0]}
+            src={album[0].image}
             alt={title}
             width={513}
             height={426}
@@ -273,23 +272,20 @@ export default function AlbumCard({
         </div>
 
         <div
-          className={`relative overflow-hidden px-5 pt-4 pb-8 xl:pt-7 3xl:px-30 3xl:pt-10 3xl:pb-50 3xl:pb-[51px] 3xl:pt-[41px] flex w-full ${
-            isActive ? "bg-primary" : "bg-light"
-          }`}
+          className={`relative overflow-hidden px-5 pt-4 pb-8 xl:pt-7 3xl:px-30 3xl:pt-10 3xl:pb-50 3xl:pb-[51px] 3xl:pt-[41px] flex w-full ${isActive ? "bg-primary" : "bg-light"
+            }`}
         >
           <span
             onTransitionEnd={handleFooterOverlayTransitionEnd}
-            className={`absolute inset-0 bg-primary ${
-              isFooterOverlayAnimated ? "transition-transform duration-500 ease-in-out" : ""
-            } ${
-              isActive
+            className={`absolute inset-0 bg-primary ${isFooterOverlayAnimated ? "transition-transform duration-500 ease-in-out" : ""
+              } ${isActive
                 ? "translate-x-0"
                 : footerOverlayPosition === "center"
                   ? "translate-x-0"
                   : footerOverlayPosition === "end"
                     ? "translate-x-full"
                     : "-translate-x-full"
-            }`}
+              }`}
           />
           <div className="relative z-10 grid grid-cols-[auto_1fr] w-full items-center gap-1">
             <h3 className={`font-condensed leading-[1.1] text-32 group-hover:text-white ${isActive ? "text-white" : "text-secondary"}`} >
@@ -308,7 +304,7 @@ export default function AlbumCard({
                   aria-label={`Open ${title} image ${thumbIndex + 1}`}
                 >
                   <span className="relative block h-7 w-7 overflow-hidden rounded-full border border-white transition-all duration-200 hover:scale-105 xl:h-[33.23px] xl:w-[33.23px]">
-                    <Image src={thumb} alt="" fill sizes="28px" className="object-cover" />
+                    <Image src={thumb.image} alt="" fill sizes="28px" className="object-cover" />
                   </span>
                 </button>
               ))}

@@ -10,6 +10,9 @@ import CustomButton from "../../common/CustomButton";
 import { motion, AnimatePresence } from "framer-motion";
 import Reveal from "../../common/RevealOneByOneAnimation";
 import { moveUpV2 } from "@/app/components/motionVariants";
+import { ProjectType } from "@/app/types/project";
+import { Filters } from "@/app/types/projectfilters";
+import { projectStatus } from "@/app/components/AdminProjects/projectStatus";
 
 // ─── Dropdown ─────────────────────────────────────────────────────────────────
 type DropdownProps = {
@@ -105,9 +108,8 @@ const Dropdown = ({ label, options, value, onChange }: DropdownProps) => {
                   onChange(opt);
                   setOpen(false);
                 }}
-                className={`w-full text-left px-[16px] py-[9px] font-nexa font-bold text-16 hover:bg-primary hover:text-paragraph-2 transition-colors duration-250 ${
-                  value === opt ? "text-primary" : "text-[#111111]"
-                }`}
+                className={`w-full text-left px-[16px] py-[9px] font-nexa font-bold text-16 hover:bg-primary hover:text-paragraph-2 transition-colors duration-250 ${value === opt ? "text-primary" : "text-[#111111]"
+                  }`}
               >
                 {opt}
               </motion.button>
@@ -120,7 +122,7 @@ const Dropdown = ({ label, options, value, onChange }: DropdownProps) => {
 };
 
 // ─── Main ─────────────────────────────────────────────────────────────────────
-const ProjectsGrid = () => {
+const ProjectsGrid = ({ projects, location, projectType, sector }: { projects: ProjectType['projects'], location: Filters[], projectType: Filters[], sector: Filters[] }) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -189,16 +191,16 @@ const ProjectsGrid = () => {
     });
   };
 
-  const filtered = projectsData.filter((p) => {
+  const filtered = projects.filter((p) => {
     if (
       searchQuery &&
       !p.title.toLowerCase().includes(searchQuery.toLowerCase())
     )
       return false;
-    if (typeFilter && p.type !== typeFilter) return false;
-    if (sectorFilter && p.sector !== sectorFilter) return false;
-    if (locationFilter && p.location !== locationFilter) return false;
-    if (statusFilter && p.status !== statusFilter) return false;
+    if (typeFilter && p.firstSection.projectType.name !== typeFilter) return false;
+    if (sectorFilter && p.firstSection.sector.name !== sectorFilter) return false;
+    if (locationFilter && p.firstSection.location.name !== locationFilter) return false;
+    if (statusFilter && p.firstSection.status !== statusFilter) return false;
     return true;
   });
 
@@ -263,25 +265,25 @@ const ProjectsGrid = () => {
                   <div className="flex flex-col xl:flex-row items-start xl:items-center justify-evenly gap-6 xl:gap-8 2xl:gap-10 3xl:gap-[55px] xl:px-8 2xl:px-10 3xl:px-[50px] flex-1">
                     <Dropdown
                       label="Project Type"
-                      options={filterOptions.projectTypes}
+                      options={projectType.map((item) => item.name)}
                       value={draftType}
                       onChange={setDraftType}
                     />
                     <Dropdown
                       label="Sector"
-                      options={filterOptions.sectors}
+                      options={sector.map((item) => item.name)}
                       value={draftSector}
                       onChange={setDraftSector}
                     />
                     <Dropdown
                       label="Location"
-                      options={filterOptions.locations}
+                      options={location.map((item) => item.name)}
                       value={draftLocation}
                       onChange={setDraftLocation}
                     />
                     <Dropdown
                       label="Status"
-                      options={filterOptions.statuses}
+                      options={projectStatus.map((item) => item.name)}
                       value={draftStatus}
                       onChange={setDraftStatus}
                     />
@@ -328,25 +330,25 @@ const ProjectsGrid = () => {
             <div className="flex flex-row items-center justify-evenly gap-8 2xl:gap-10 3xl:gap-[55px] xl:px-8 2xl:px-10 3xl:px-[50px] flex-1">
               <Dropdown
                 label="Project Type"
-                options={filterOptions.projectTypes}
+                options={projectType.map((item) => item.name)}
                 value={draftType}
                 onChange={setDraftType}
               />
               <Dropdown
                 label="Sector"
-                options={filterOptions.sectors}
+                options={sector.map((item) => item.name)}
                 value={draftSector}
                 onChange={setDraftSector}
               />
               <Dropdown
                 label="Location"
-                options={filterOptions.locations}
+                options={location.map((item) => item.name)}
                 value={draftLocation}
                 onChange={setDraftLocation}
               />
               <Dropdown
                 label="Status"
-                options={filterOptions.statuses}
+                options={projectStatus.map((item) => item.name)}
                 value={draftStatus}
                 onChange={setDraftStatus}
               />
@@ -376,7 +378,7 @@ const ProjectsGrid = () => {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-[30px] 2xl:gap-x-[40px] gap-y-[30px] lg:gap-y-[48px] 2xl:gap-y-[65px]">
             {visible.map((project) => (
-              <Reveal key={project.id} variants={moveUpV2} >
+              <Reveal key={project._id} variants={moveUpV2} >
                 <ProjectCard project={project} />
               </Reveal>
             ))}
