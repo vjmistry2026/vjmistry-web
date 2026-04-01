@@ -75,7 +75,7 @@ const PowerBehind = ({ data }: { data: ContactType['firstSection'] }) => {
         return;
       }
       setError("")
-      const response = await fetch("/api/admin/contact", {
+      const response = await fetch("/api/admin/contact/enquiry", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

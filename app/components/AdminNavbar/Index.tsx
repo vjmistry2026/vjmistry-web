@@ -48,7 +48,7 @@ const AdminNavbar = () => {
     {
       name: "Contact", href: "##", icon: PhoneIcon, hasChild: true, children: [
         { name: "Main Page", href: "/admin/contact" },
-        { name: "Enquiries", href: "/admin/contact/enquiries" }
+        { name: "Enquiries", href: "/admin/contact/enquiry" }
       ]
     },
     { name: "Equipments", href: "/admin/equipments", icon: FaMoneyBill },
