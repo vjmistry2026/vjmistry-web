@@ -27,7 +27,7 @@ const BottomTagline = ({ data }: { data: HSeType['seventhSection'] }) => {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.3 }}
-            className="text-75 font-condensed font-bold max-w-[70vw] leading-[1] bg-[linear-gradient(90deg,#2B2020_0%,#4A2022_34%,#ED1C24_68%,#2B2020_100%)] bg-clip-text text-transparent py-10 xl:py-15 2xl:py-25 3xl:py-[108px]"
+            className="text-60 md:text-75 font-condensed font-bold md:max-w-[70vw] leading-[1] bg-[linear-gradient(90deg,#2B2020_0%,#4A2022_34%,#ED1C24_68%,#2B2020_100%)] bg-clip-text text-transparent py-10 xl:py-15 2xl:py-25 3xl:py-[108px]"
           >
             {item}
           </motion.h2>

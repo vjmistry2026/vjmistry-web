@@ -168,8 +168,37 @@ const CompanyTimeline = ({ data }: { data: AboutType['secondSection'] }) => {
               style={{ left: lineStyle.left, top: lineStyle.top }}
             />
           )}
-
-          <div ref={leftColRef} className="w-full lg:w-[48%] 3xl:w-[742px] shrink-0 lg:self-stretch">
+          <div className="block lg:hidden relative">
+            <div className="absolute left-0 right-0 h-[1.5px] bg-border z-0" style={{ top: "6px" }} />
+            <div className="relative z-10 timeline-outer">
+              <div className="timeline-track flex mb-3" style={trackStyle as React.CSSProperties}>
+                {tripled.map((slide, i) => {
+                  const realIndex = i % N;
+                  const isActive = realIndex === activeIndex;
+                  return (
+                    <div key={i} className="timeline-slot flex-shrink-0">
+                      <Reveal variants={moveUpV2}>
+                        <button
+                          onClick={() => handleSlideClick(realIndex)}
+                          aria-label={`Go to ${slide.year}`}
+                          className="flex flex-col items-start cursor-pointer w-full"
+                          style={{ height: SLOT_HEIGHT }}
+                        >
+                          <div className="flex flex-col items-center">
+                            <div className={`transition-all duration-300 mb-[18px] ${isActive ? "w-[13px] h-[13px] bg-primary lg:mt-[0.3px]" : "w-[8px] h-[8px] bg-paragraph mt-[2.9px]"}`} />
+                            <span className={`section-description transition-all duration-300 ${isActive ? "text-primary text-35 leading-[1.285]" : ""}`}>
+                              {slide.year}
+                            </span>
+                          </div>
+                        </button>
+                      </Reveal>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+          <div ref={leftColRef} className="w-full lg:w-[48%] 3xl:w-[742px] shrink-0 lg:self-stretch mb-4 lg:mb-0">
             <div className="relative w-full aspect-[603/357] lg:aspect-auto lg:h-full 3xl:h-[437px] overflow-hidden">
               <Image src={prevSlide.image} alt={prevSlide.title} fill className="object-cover pointer-events-none" priority />
               <Image
@@ -187,38 +216,9 @@ const CompanyTimeline = ({ data }: { data: AboutType['secondSection'] }) => {
             </div>
           </div>
 
-          <div ref={rightColRef} className="w-full lg:w-[52%] flex flex-col pt-10 lg:pt-[90px] overflow-hidden">
+          <div ref={rightColRef} className="w-full lg:w-[52%] flex flex-col pt-4 lg:pt-[90px] overflow-hidden">
 
-            <div className="block lg:hidden relative">
-              <div className="absolute left-0 right-0 h-[1.5px] bg-border z-0" style={{ top: "6px" }} />
-              <div className="relative z-10 timeline-outer">
-                <div className="timeline-track flex" style={trackStyle as React.CSSProperties}>
-                  {tripled.map((slide, i) => {
-                    const realIndex = i % N;
-                    const isActive = realIndex === activeIndex;
-                    return (
-                      <div key={i} className="timeline-slot flex-shrink-0">
-                        <Reveal variants={moveUpV2}>
-                          <button
-                            onClick={() => handleSlideClick(realIndex)}
-                            aria-label={`Go to ${slide.year}`}
-                            className="flex flex-col items-start cursor-pointer w-full"
-                            style={{ height: SLOT_HEIGHT }}
-                          >
-                            <div className="flex flex-col items-center">
-                              <div className={`transition-all duration-300 mb-[18px] ${isActive ? "w-[13px] h-[13px] bg-primary lg:mt-[0.3px]" : "w-[8px] h-[8px] bg-paragraph mt-[2.9px]"}`} />
-                              <span className={`section-description transition-all duration-300 ${isActive ? "text-primary text-35 leading-[1.285]" : ""}`}>
-                                {slide.year}
-                              </span>
-                            </div>
-                          </button>
-                        </Reveal>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
+            
 
             <div className="hidden lg:block relative z-10 timeline-outer">
               <div className="timeline-track flex" style={trackStyle as React.CSSProperties}>
@@ -249,8 +249,8 @@ const CompanyTimeline = ({ data }: { data: AboutType['secondSection'] }) => {
             </div>
 
             {/* Fixed height on both breakpoints — content never causes section to jump */}
-            <div key={activeIndex} className="mt-10 lg:mt-auto shrink-0 h-[160px] lg:h-[200px] 2xl:h-[220px] relative">
-              <div className="absolute inset-0 flex flex-col justify-end">
+            <div key={activeIndex} className="lg:mt-auto shrink-0 h-[240px] lg:h-[200px] 2xl:h-[220px] relative">
+              <div className="lg:absolute inset-0 flex flex-col justify-end">
                 <motion.h3
                   key={`${activeIndex}-title`}
                   initial="hidden"

@@ -57,7 +57,7 @@ const QualityShield = ({ data }: { data: QualityType['secondSection'] }) => {
       </div>
 
       <div className="container relative z-10">
-        <div className="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-[minmax(0,1.2fr)_minmax(440px,1fr)] ">
+        <div className="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-[minmax(0,1.2fr)_minmax(440px,1fr)] gap-y-10">
           <div ref={firstColumnRef} className="flex flex-col">
             <AnimatedHeading text={data.title} className="mb-30" />
             <motion.p variants={moveUp(0.15)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="cmn-p font-bold max-w-[51ch]" > {data.subTitle} </motion.p>
@@ -76,9 +76,13 @@ const QualityShield = ({ data }: { data: QualityType['secondSection'] }) => {
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: true, amount: 0.2 }}
-                    className="relative xl:pl-10 2xl:pl-25 3xl:pl-[108px]"
+                    className="relative border-b border-border pb-6 xl:border-b-0 xl:pb-0 xl:pl-10 2xl:pl-25 3xl:pl-[108px]"
                   >
-                    <button type="button" onClick={() => setActiveIndex(index)} className="group block w-full cursor-pointer text-left" >
+                    <button
+                      type="button"
+                      onClick={() => setActiveIndex(index)}
+                      className="group block w-full cursor-pointer text-left"
+                    >
                       {isActive ? (
                         <span className="absolute left-0 top-0 hidden -translate-x-1/2 xl:block">
                           <Image
@@ -93,11 +97,27 @@ const QualityShield = ({ data }: { data: QualityType['secondSection'] }) => {
                         <span className="absolute left-0 top-[8px] hidden h-[10px] w-[10px] xl:h-[13px] xl:w-[13px] -translate-x-1/2 bg-primary transition-transform duration-300 group-hover:scale-110 xl:block" />
                       )}
 
-                      <h3 className={`font-condensed text-[30px] leading-none transition-colors duration-300 ${isActive ? "text-primary" : "text-secondary"
-                        }`}
-                      >
-                        {step.title}
-                      </h3>
+                      <span className="flex items-start justify-between gap-4">
+                        <h3
+                          className={`font-condensed text-[30px] leading-none transition-colors duration-300 ${isActive ? "text-primary" : "text-secondary"
+                            }`}
+                        >
+                          {step.title}
+                        </h3>
+                        <span
+                          className={`mt-1 inline-flex shrink-0 xl:hidden transition-transform duration-300 ${isActive ? "rotate-180" : "rotate-0"
+                            }`}
+                          aria-hidden="true"
+                        >
+                          <Image
+                            src="/assets/icons/bottom_arrow_tip.svg"
+                            width={18}
+                            height={9}
+                            alt=""
+                            className="h-[8px] w-[16px] object-contain"
+                          />
+                        </span>
+                      </span>
                     </button>
 
                     <div className="pt-3 xl:pt-4">

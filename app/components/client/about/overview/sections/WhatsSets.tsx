@@ -89,8 +89,7 @@ const WhatSetsUsApart = ({ firstData, secondData }: { firstData: AboutType['four
         </div>
 
         <div className="container relative z-10">
-          <h2 className="section-heading text-paragraph-2 mb-[40px] md:mb-[50px] lg:mb-[60px]"> {heading} </h2>
-
+          <h2 className="section-heading text-paragraph-2 mb-5 md:mb-12 lg:mb-15"> {heading} </h2>
           <div className="grid grid-cols-1 md:grid-cols-3">
             {features.map((feature, index) => {
               const isActive = index === activeIndex;
@@ -158,15 +157,20 @@ const WhatSetsUsApart = ({ firstData, secondData }: { firstData: AboutType['four
                   } ${index === 2 ? "border-l md:border-l-0" : ""} ${index < 2 ? "border-b md:border-b-0 border-border" : ""
                   }`}
               >
-                <p className="font-condensed text-primary text-40 xl:text-60 3xl:text-85 leading-[100%] mb-[10px]">
+                <p className="font-condensed text-primary text-60 3xl:text-85 leading-[100%] mb-3 md:mb-[10px]">
                   <CounterAnimate2
                     value={stat.number}
                     totalTime={2}
                     start={0}
                   />
                 </p>
+<<<<<<< HEAD
                 <p className="section-description text-secondary">
                   {stat.value}
+=======
+                <p className="font-nexa leading-[1.2] md:leading-1p5 font-bold text-paragraph text-base md:text-20">
+                  {stat.label}
+>>>>>>> 519e1581e605101f3ae7af8e8dbf568be9779d2e
                 </p>
               </div>
             ))}

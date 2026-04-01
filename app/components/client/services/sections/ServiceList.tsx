@@ -11,8 +11,8 @@ const FILLIN_MS = 350;
 
 const ServicesSection = ({ data }: { data: ServiceType['firstSection'] }) => {
   // const { heading, services } = servicesSectionData;
-  const heading = data.title;
-  const services = data.items;
+  const heading = data.title
+  const services = data.items
   const [visibleIndex, setVisibleIndex] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
   const [scrolledDown, setScrolledDown] = useState(true);
@@ -102,6 +102,19 @@ const ServicesSection = ({ data }: { data: ServiceType['firstSection'] }) => {
         <div>
           {services.map((service, index) => {
             const isActive = index === activeIndex;
+            const isLeaving = index === visibleIndex && activeIndex !== visibleIndex;
+            const hiddenClipPath = scrolledDown
+              ? "inset(0 0 100% 0)"
+              : "inset(100% 0 0 0)";
+            const leavingClipPath = scrolledDown
+              ? "inset(100% 0 0 0)"
+              : "inset(0 0 100% 0)";
+            const clipPathValue = isActive
+              ? "inset(0 0 0 0)"
+              : isLeaving
+                ? leavingClipPath
+                : hiddenClipPath;
+
             return (
               <div key={index} ref={(el) => { cardRefs.current[index] = el; }}
                 className={`relative overflow-hidden border-t border-border ${index === services.length - 1 ? "border-b" : ""}`}
@@ -111,18 +124,13 @@ const ServicesSection = ({ data }: { data: ServiceType['firstSection'] }) => {
                   style={{
                     background:
                       "linear-gradient(180deg, #ED1C24 0%, #A71E22 100%)",
-                    transformOrigin: isActive
-                      ? scrolledDown
-                        ? "top"
-                        : "bottom"
-                      : scrolledDown
-                        ? "bottom"
-                        : "top",
-                    transform: `scaleY(${isActive ? 1 : 0})`,
+                    clipPath: clipPathValue,
+                    WebkitClipPath: clipPathValue,
+                    willChange: "clip-path",
                     transition: isActive
-                      ? `transform ${FILLIN_MS}ms ease-in-out`
-                      : index === visibleIndex
-                        ? `transform ${FILLOUT_MS}ms ease-in-out`
+                      ? `clip-path ${FILLIN_MS}ms ease-in-out, -webkit-clip-path ${FILLIN_MS}ms ease-in-out`
+                      : isLeaving
+                        ? `clip-path ${FILLOUT_MS}ms ease-in-out, -webkit-clip-path ${FILLOUT_MS}ms ease-in-out`
                         : "none",
                   }}
                 />
@@ -136,7 +144,7 @@ const ServicesSection = ({ data }: { data: ServiceType['firstSection'] }) => {
                           />
                         </div>
                         <h3
-                          className={`text-32 font-condensed leading-[100%] mb-5 lg:mb-[30px] transition-colors duration-300 ${isActive ? "text-paragraph-2" : "text-secondary"}`}
+                          className={`text-32 font-condensed leading-[100%] mb-2 md:mb-5 lg:mb-[30px] transition-colors duration-300 ${isActive ? "text-paragraph-2" : "text-secondary"}`}
                         >
                           {service.title}
                         </h3>
@@ -156,7 +164,7 @@ const ServicesSection = ({ data }: { data: ServiceType['firstSection'] }) => {
                         >
                           <Image
                             src={service.image}
-                            alt={service.imageAlt ?? service.title}
+                            alt={service.title}
                             fill
                             className="object-cover pointer-events-none"
                           />

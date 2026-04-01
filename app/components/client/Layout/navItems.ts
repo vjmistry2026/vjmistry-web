@@ -15,8 +15,7 @@ export const NAV_ITEMS: NavItem[] = [
     children: [
       { label: "Overview", href: "/about-us/overview" },
       { label: "Founder's Message", href: "/about-us/founder-message" },
-      { label: "Our Values", href: "#" },
-      { label: "Certificates", href: "/certificates" },
+      { label: "Certifications", href: "/certificates" },
     ],
   },
   {
@@ -35,16 +34,14 @@ export const NAV_ITEMS: NavItem[] = [
   {
     label: "How We Work",
     children: [
-      { label: "Process", href: "#" },
-      { label: "Safety", href: "#" },
       { label: "Quality", href: "/how-we-work/quality" },
+      { label: "HSE", href: "/how-we-work/hse" },
     ],
   },
   {
     label: "Media Center",
     children: [
       { label: "News", href: "/media-center/news" },
-      { label: "Events", href: "#" },
       { label: "Gallery", href: "/media-center/gallery" },
     ],
   },
@@ -58,21 +55,21 @@ export const NAV_ITEMS: NavItem[] = [
 
 // Footer
 export const quickLinks = [
-  { label: "About Us", href: "#" },
-  { label: "Services", href: "#" },
-  { label: "Projects", href: "#" },
+  { label: "About Us", href: "/about-us/overview" },
+  { label: "Services", href: "/services" },
+  { label: "Projects", href: "/projects" },
 ];
 
 export const resources = [
-  { label: "News", href: "#" },
-  { label: "Gallery", href: "#" },
+  { label: "News", href: "/media-center/news" },
+  { label: "Gallery", href: "/media-center/gallery" },
   { label: "Download Brochure", href: "#" },
   { label: "Download Company Profile", href: "#" },
 ];
 
 export const socialMedia = [
-  { label: "Facebook", icon: "/assets/images/footer/social/fb.svg", href: "#" },
-  { label: "Instagram", icon: "/assets/images/footer/social/insta.svg", href: "#" },
+  { label: "Facebook", icon: "/assets/images/footer/social/fb.svg", href: "https://www.facebook.com/vj.mistryco/" },
+  { label: "Instagram", icon: "/assets/images/footer/social/insta.svg", href: "https://www.instagram.com/vj.mistryco/" },
   { label: "LinkedIn", icon: "/assets/images/footer/social/linkedin.svg", href: "#" },
 ];
 

@@ -101,7 +101,7 @@ const Card = ({
           />
         </motion.div>
       </div>
-      <div className="overflow_anim">
+      <div className="overflow-visible md:overflow_anim">
         <motion.h3
           initial="hidden"
           whileInView="show"

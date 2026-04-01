@@ -45,14 +45,8 @@ const AboutVj = ({ data }: { data: AboutType['firstSection'] }) => {
     return (
         <section className="bg-white relative overflow-hidden">
             {/* BG SVG — top right */}
-            <div className="absolute top-[0%] max-w-[90%] md:-top-[15%] lg:-top-[22%] 2xl:-top-[15%] 3xl:-top-[14.2%] -right-3 w-auto h-full md:max-w-[900px] xl:max-w-[1180px] 2xl:max-w-[1220px] 3xl:max-w-[1500px]">
-                <Image
-                    src="/assets/images/about/overview/vj-svg-top-right.svg"
-                    alt=""
-                    width={1500}
-                    height={800}
-                    className="pointer-events-none object-contain"
-                />
+            <div className="absolute top-[0%] max-w-[90%] md:-top-[15%] lg:-top-[22%] xl:-top-[27%] xl:-top-[14.2%] -right-[5%] 2xl:-right-3  w-auto h-full md:max-w-[900px] xl:max-w-[1180px] 2xl:max-w-[1220px] 3xl:max-w-[1500px]">
+                <Image src="/assets/images/about/overview/vj-svg-top-right.svg" alt="" width={1500} height={800} className="pointer-events-none object-contain" />
             </div>
 
             <motion.div

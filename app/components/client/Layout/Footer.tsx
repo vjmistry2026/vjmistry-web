@@ -133,6 +133,7 @@ const Footer = () => {
                       viewport={{ once: true }}
                     >
                       <Link
+                      target="_blank"
                         key={item.label}
                         href={item.href}
                         className="relative overflow-hidden h-[50px] w-[50px] flex items-center justify-center bg-paragraph/20 group duration-300 transition-colors"
@@ -164,7 +165,7 @@ const Footer = () => {
           {/* ================= BOTTOM SECTION ================= */}
           <div className="pt-40 pb-70 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-[2fr_2.4fr_0fr_1.2fr] gap-y-[30px] lg:gap-y-[50px] gap-x-100">
             {/* LOGO (under Subscribe) */}
-            <Link href="/" className="z-999">
+            <Link href="/" className="">
               <motion.div
                 variants={moveUp(0.4)}
                 initial="hidden"
