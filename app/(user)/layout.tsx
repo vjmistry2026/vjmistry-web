@@ -39,6 +39,8 @@ export const metadata: Metadata = {
     description: "Engineering Excellence Built on Trust & Legacy",
 };
 
+export const dynamic = 'force-dynamic';
+
 export default function RootLayout({
     children,
 }: Readonly<{
