@@ -315,14 +315,14 @@ const MoreDetails = ({ secondSection, thirdSection }: { secondSection: NewsType[
                 <h2 className="mb-4 font-condensed text-32 leading-[110%] text-secondary sm:mb-5 2xl:text-40">
                   {section.title}
                 </h2>
-
+ 
                 <div className="space-y-5">
                   {section.paragraphs.map((paragraph, paragraphIndex) => (
                     <Fragment key={`${section.title}-${paragraphIndex}`}>
                       <p className="section-description leading-[1.7] text-paragraph">
                         {paragraph}
                       </p>
-
+ 
                       {section.image === undefined ||
                         section.imageAfterParagraph !== paragraphIndex ? null : (
                         <div className="relative mt-5 aspect-[1.25/1] overflow-hidden sm:mt-6 sm:aspect-[1.55/1] xl:aspect-[1.95/1]">
@@ -332,7 +332,7 @@ const MoreDetails = ({ secondSection, thirdSection }: { secondSection: NewsType[
                     </Fragment>
                   ))}
                 </div>
-
+ 
                 {section.list && (
                   <ul className="mt-6 grid grid-cols-1 gap-x-8 gap-y-4 sm:mt-8 md:grid-cols-2">
                     {section.list.map((item) => (

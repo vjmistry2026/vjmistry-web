@@ -105,8 +105,7 @@ const WhatSetsUsApart = ({ firstData, secondData }: { firstData: AboutType['four
                   onMouseLeave={handleMouseLeave}
                 >
                   {isActive && (
-                    <div
-                      className="absolute z-10 pointer-events-none"
+                    <div className="absolute z-10 pointer-events-none"
                       style={{
                         top: "-1px",
                         left: "-1px",
@@ -153,16 +152,14 @@ const WhatSetsUsApart = ({ firstData, secondData }: { firstData: AboutType['four
             {stats.map((stat, index) => (
               <div
                 key={index}
-                className={`p-10 xl:p-[63px] border-r border-border ${index === 0 ? "border-l" : ""
-                  } ${index === 2 ? "border-l md:border-l-0" : ""} ${index < 2 ? "border-b md:border-b-0 border-border" : ""
-                  }`}
+                className={`p-5 lg:p-10 xl:p-[63px] border-r border-border ${
+                  index === 0 ? "border-l" : ""
+                } ${index === 2 ? "border-l md:border-l-0" : ""} ${
+                  index < 2 ? "border-b md:border-b-0 border-border" : ""
+                }`}
               >
                 <p className="font-condensed text-primary text-60 3xl:text-85 leading-[100%] mb-3 md:mb-[10px]">
-                  <CounterAnimate2
-                    value={stat.number}
-                    totalTime={2}
-                    start={0}
-                  />
+                  <CounterAnimate2 value={stat.number} totalTime={2} start={0} />
                 </p>
                 <p className="font-nexa leading-[1.2] md:leading-1p5 font-bold text-paragraph text-base md:text-20">
                   {stat.value}

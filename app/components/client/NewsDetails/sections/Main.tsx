@@ -59,7 +59,7 @@ const Main = ({ image, imageAlt, title }: { image: string, imageAlt: string, tit
   return (
     <section>
       <div className="container">
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between mb-4 xl:mb-30">
+        <div className="flex flex-col gap-4 md:gap-6 lg:flex-row lg:items-start lg:justify-between mb-6 xl:mb-30">
           <div className="min-w-0 flex-1">
             <AnimatedHeading text={title} className="leading-[1.2]" />
           </div>
