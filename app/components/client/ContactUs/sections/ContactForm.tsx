@@ -100,7 +100,7 @@ const PowerBehind = ({ data }: { data: ContactType['firstSection'] }) => {
       <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-[1.2fr_1.5fr] 3xl:grid-cols-[875px_auto] align-end"
       // style={{ paddingInline: containerInset }}
       >
-        <motion.div initial={{ opacity: 0, x: -60 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }} className="relative" >
+        <motion.div initial={{ opacity: 0, x: -60 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }} className="relative mb-10 lg:mb-0"  >
           <div style={{ paddingLeft: containerInset }} className="relative h-full ">
             <div className="pointer-events-none absolute right-0 bottom-0 z-0  ">
               <img src="/assets/shapes/contact-shape.svg" alt="" className="w-auto h-auto object-cover" />

@@ -328,7 +328,6 @@ export default function AlbumCard({
           </div>
         </div>
       </article>
-
       {isOpen ? createPortal(modalContent, document.body) : null}
     </>
   );

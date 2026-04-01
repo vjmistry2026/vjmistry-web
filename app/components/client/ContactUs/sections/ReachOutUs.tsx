@@ -71,7 +71,7 @@ const ReachOutUs = ({ data }: { data: ContactType['secondSection'] }) => {
   };
 
   return (
-    <section className="pb-130">
+    <section className="pb-150 md:pb-130">
       <div className="container">
         <div className="mb-7 md:mb-10 xl:mb-15">
           <AnimatedHeading text={data.title} className="mb-2 md:mb-30 leading-[1]" />

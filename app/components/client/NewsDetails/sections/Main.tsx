@@ -97,7 +97,7 @@ const Main = ({ image, imageAlt, title }: { image: string, imageAlt: string, tit
           viewport={{ once: true, amount: 0.25 }}
           variants={moveUp(0.2)}
         >
-          <Image src={image} alt={imageAlt} width={1620} height={609} className="h-auto w-full object-cover" />
+          <Image src={image} alt={imageAlt} width={1620} height={609} className="h-auto min-h-[200px] w-full object-cover" />
         </motion.div>
       </div>
 

@@ -11,7 +11,7 @@ const Main = ({ firstSection, items }: { firstSection: GalleryType['firstSection
   // const { title, desc, items } = GalleryData.gallerySection;
 
   return (
-    <section className="py-150">
+    <section className="py-130 md:py-150">
       <div className="container">
         <AnimatedHeading text={firstSection.title} className="mb-4 md:mb-30" />
         <motion.p
@@ -24,7 +24,7 @@ const Main = ({ firstSection, items }: { firstSection: GalleryType['firstSection
           {firstSection.description}
         </motion.p>
 
-        <div className="mt-8 xl:mt-10 2xl:mt-15 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:mt-10 xl:grid-cols-3 3xl:gap-10">
+        <div className="mt-8 xl:mt-10 2xl:mt-15 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:mt-10 xl:grid-cols-3 3xl:gap-10 mb-5 md:mb-0">
           {items.map((item, index) => (
             <motion.div
               key={`${item.item}-${index}`}
