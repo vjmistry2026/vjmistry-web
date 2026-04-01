@@ -9,6 +9,8 @@ import { moveLeft, moveUp } from "@/app/components/motionVariants";
 import { newsDetails } from "../data";
 
 const STICKY_TOP = 150;
+const MOBILE_TOC_SCROLL_OFFSET = 88;
+const DESKTOP_TOC_SCROLL_OFFSET = 160;
 
 type SidebarMode = "static" | "fixed" | "bottom";
 
@@ -22,9 +24,13 @@ type SidebarLayout = {
 const getSectionId = (title: string) =>
   title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
+const getTocScrollOffset = () =>
+  window.innerWidth < 1024 ? MOBILE_TOC_SCROLL_OFFSET : DESKTOP_TOC_SCROLL_OFFSET;
+
 const handleTocClick = (
   event: MouseEvent<HTMLAnchorElement>,
   sectionTitle: string,
+  setActiveSectionId: (sectionId: string) => void,
 ) => {
   event.preventDefault();
 
@@ -35,9 +41,16 @@ const handleTocClick = (
     return;
   }
 
-  sectionElement.scrollIntoView({
+  const targetY =
+    window.scrollY +
+    sectionElement.getBoundingClientRect().top -
+    getTocScrollOffset();
+
+  setActiveSectionId(sectionId);
+
+  window.scrollTo({
+    top: Math.max(targetY, 0),
     behavior: "smooth",
-    block: "start",
   });
 
   window.history.replaceState(null, "", `#${sectionId}`);
@@ -183,6 +196,10 @@ const MoreDetails = () => {
       return;
     }
 
+    if (window.innerWidth < 1024) {
+      return;
+    }
+
     const sections = sectionIds
       .map((sectionId) => document.getElementById(sectionId))
       .filter((section): section is HTMLElement => section !== null);
@@ -273,15 +290,17 @@ const MoreDetails = () => {
                       <li key={section.title}>
                         <a
                           href={`#${getSectionId(section.title)}`}
-                          onClick={(event) => handleTocClick(event, section.title)}
-                          className="group flex items-center gap-3 xl:gap-30 text-paragraph transition-colors duration-300 hover:text-primary"
+                          onClick={(event) =>
+                            handleTocClick(event, section.title, setActiveSectionId)
+                          }
+                          className="group flex items-center gap-3 xl:gap-30 text-paragraph transition-colors duration-300 lg:hover:text-primary"
                         >
-                          <span className="mt-[7px] h-[6px] w-[6px] xl:h-[13px] xl:w-[13px] shrink-0 bg-primary transition-transform duration-300 group-hover:scale-125" />
+                          <span className="mt-[7px] h-[6px] w-[6px] xl:h-[13px] xl:w-[13px] shrink-0 bg-primary transition-transform duration-300 lg:group-hover:scale-125" />
                           <span
                             className={`section-description font-nexa text-20 leading-1p5 transition-colors duration-300 ${
                               activeSectionId === getSectionId(section.title)
                                 ? "text-primary"
-                                : "text-paragraph group-hover:text-primary"
+                                : "text-paragraph lg:group-hover:text-primary"
                             }`}
                           >
                             {section.title}

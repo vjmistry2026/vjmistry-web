@@ -127,7 +127,7 @@ const CompanyTimeline = () => {
       <div className="container">
         <div className="flex flex-col gap-5 lg:gap-[30px] mb-[30px] lg:mb-15">
           <AnimatedHeading text={heading} className="max-w-[940px] leading-[120%]" />
-          <div className="flex justify-between items-center gap-6">
+          <div className="flex justify-between items-center md:gap-6">
             <motion.p
               initial="hidden"
               whileInView="show"

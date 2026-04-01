@@ -11,7 +11,14 @@ type BreadcrumbProps = {
 
 const Breadcrumb = ({ variant = "light" }: BreadcrumbProps) => {
   const pathname = usePathname();
-  const segments = pathname.split("/").filter(Boolean);
+  const rawSegments = pathname.split("/").filter(Boolean);
+  const isNewsDetailPage =
+    rawSegments.length >= 3 &&
+    rawSegments[0] === "media-center" &&
+    rawSegments[1] === "news";
+  const segments = isNewsDetailPage
+    ? rawSegments.filter((segment, index) => !(index === 0 && segment === "media-center"))
+    : rawSegments;
 
   const crumbs = [
     { label: "Home", href: "/" },
@@ -64,7 +71,7 @@ const Breadcrumb = ({ variant = "light" }: BreadcrumbProps) => {
               <>
                 <span className={`${inactiveColor} section-description`}>•</span>
                 <span
-                  className={`section-description text-16 sm:text-20 ${isLast ? `${activeColor} max-w-[140px] truncate sm:max-w-none sm:truncate-none` : inactiveColor}`}
+                  className={`section-description text-16 sm:text-20 ${isLast ? `${activeColor} max-w-[15ch]  truncate sm:max-w-none sm:truncate-none` : inactiveColor}`}
                 >
                   {crumb.label}
                 </span>
