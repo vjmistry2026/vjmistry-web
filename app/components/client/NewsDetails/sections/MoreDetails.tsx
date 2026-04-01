@@ -10,8 +10,6 @@ import { newsDetails } from "../data";
 import { NewsType } from "@/app/types/news";
 
 const STICKY_TOP = 150;
-const MOBILE_TOC_SCROLL_OFFSET = 88;
-const DESKTOP_TOC_SCROLL_OFFSET = 160;
 
 type SidebarMode = "static" | "fixed" | "bottom";
 
@@ -24,9 +22,6 @@ type SidebarLayout = {
 
 const getSectionId = (title: string) =>
   title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-
-const getTocScrollOffset = () =>
-  window.innerWidth < 1024 ? MOBILE_TOC_SCROLL_OFFSET : DESKTOP_TOC_SCROLL_OFFSET;
 
 const handleTocClick = (
   event: MouseEvent<HTMLAnchorElement>,
@@ -41,16 +36,9 @@ const handleTocClick = (
     return;
   }
 
-  const targetY =
-    window.scrollY +
-    sectionElement.getBoundingClientRect().top -
-    getTocScrollOffset();
-
-  setActiveSectionId(sectionId);
-
-  window.scrollTo({
-    top: Math.max(targetY, 0),
+  sectionElement.scrollIntoView({
     behavior: "smooth",
+    block: "start",
   });
 
   window.history.replaceState(null, "", `#${sectionId}`);
@@ -196,10 +184,6 @@ const MoreDetails = ({ secondSection, thirdSection }: { secondSection: NewsType[
       return;
     }
 
-    if (window.innerWidth < 1024) {
-      return;
-    }
-
     const sections = sectionIds
       .map((sectionId) => document.getElementById(sectionId))
       .filter((section): section is HTMLElement => section !== null);
@@ -290,18 +274,15 @@ const MoreDetails = ({ secondSection, thirdSection }: { secondSection: NewsType[
                       <li key={section.title}>
                         <a
                           href={`#${getSectionId(section.title)}`}
-                          onClick={(event) =>
-                            handleTocClick(event, section.idToMap)
-                          }
-                          className="group flex items-center gap-3 xl:gap-30 text-paragraph transition-colors duration-300 lg:hover:text-primary"
+                          onClick={(event) => handleTocClick(event, section.idToMap)}
+                          className="group flex items-center gap-3 xl:gap-30 text-paragraph transition-colors duration-300 hover:text-primary"
                         >
-                          <span className="mt-[7px] h-[6px] w-[6px] xl:h-[13px] xl:w-[13px] shrink-0 bg-primary transition-transform duration-300 lg:group-hover:scale-125" />
+                          <span className="mt-[7px] h-[6px] w-[6px] xl:h-[13px] xl:w-[13px] shrink-0 bg-primary transition-transform duration-300 group-hover:scale-125" />
                           <span
-                            className={`section-description font-nexa text-20 leading-1p5 transition-colors duration-300 ${
-                              activeSectionId === getSectionId(section.title)
-                                ? "text-primary"
-                                : "text-paragraph lg:group-hover:text-primary"
-                            }`}
+                            className={`section-description font-nexa text-20 leading-1p5 transition-colors duration-300 ${activeSectionId === getSectionId(section.title)
+                              ? "text-primary"
+                              : "text-paragraph group-hover:text-primary"
+                              }`}
                           >
                             {section.title}
                           </span>
@@ -334,14 +315,14 @@ const MoreDetails = ({ secondSection, thirdSection }: { secondSection: NewsType[
                 <h2 className="mb-4 font-condensed text-32 leading-[110%] text-secondary sm:mb-5 2xl:text-40">
                   {section.title}
                 </h2>
-
+ 
                 <div className="space-y-5">
                   {section.paragraphs.map((paragraph, paragraphIndex) => (
                     <Fragment key={`${section.title}-${paragraphIndex}`}>
                       <p className="section-description leading-[1.7] text-paragraph">
                         {paragraph}
                       </p>
-
+ 
                       {section.image === undefined ||
                         section.imageAfterParagraph !== paragraphIndex ? null : (
                         <div className="relative mt-5 aspect-[1.25/1] overflow-hidden sm:mt-6 sm:aspect-[1.55/1] xl:aspect-[1.95/1]">
@@ -351,7 +332,7 @@ const MoreDetails = ({ secondSection, thirdSection }: { secondSection: NewsType[
                     </Fragment>
                   ))}
                 </div>
-
+ 
                 {section.list && (
                   <ul className="mt-6 grid grid-cols-1 gap-x-8 gap-y-4 sm:mt-8 md:grid-cols-2">
                     {section.list.map((item) => (
