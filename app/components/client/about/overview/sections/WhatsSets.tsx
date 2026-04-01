@@ -164,13 +164,8 @@ const WhatSetsUsApart = ({ firstData, secondData }: { firstData: AboutType['four
                     start={0}
                   />
                 </p>
-<<<<<<< HEAD
-                <p className="section-description text-secondary">
-                  {stat.value}
-=======
                 <p className="font-nexa leading-[1.2] md:leading-1p5 font-bold text-paragraph text-base md:text-20">
-                  {stat.label}
->>>>>>> 519e1581e605101f3ae7af8e8dbf568be9779d2e
+                  {stat.value}
                 </p>
               </div>
             ))}

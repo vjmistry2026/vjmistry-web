@@ -6,7 +6,7 @@ const Index = ({ data }: { data: FoundersMessageType }) => {
     return (
         <>
             <FoundersMessage data={data.firstSection} />
-            <CorePhilosophy />
+            <CorePhilosophy data={data.secondSection} />
         </>
     );
 };
