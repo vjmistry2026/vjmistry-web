@@ -2,20 +2,85 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { containerStagger, moveUp } from "@/app/components/motionVariants";
 import AnimatedHeading from "../../../common/AnimateHeading";
-import { foundersMessageData } from "../data";
 import { FoundersMessageType } from "@/app/types/foundersMessage";
 
 
 const CorePhilosophy = ({ data }: { data: FoundersMessageType['secondSection'] }) => {
-  // const { title, items } = foundersMessageData.corePhilosophy;
   const title = data.title
   const items = data.items
   const [activeTitle, setActiveTitle] = useState(
     items.find((item) => item.title) ?? items[0]?.title ?? "",
   );
+  const cardRefs = useRef<Array<HTMLElement | null>>([]);
+
+  useEffect(() => {
+    if (!items.length || typeof window === "undefined") {
+      return;
+    }
+
+    const mobileQuery = window.matchMedia("(max-width: 639px)");
+    let frameId: number | null = null;
+
+    const updateActiveCard = () => {
+      if (!mobileQuery.matches) {
+        return;
+      }
+
+      const viewportCenter = window.innerHeight / 2;
+      let closestTitle = "";
+      let closestDistance = Number.POSITIVE_INFINITY;
+
+      cardRefs.current.forEach((card, index) => {
+        if (!card) {
+          return;
+        }
+
+        const rect = card.getBoundingClientRect();
+        const cardCenter = rect.top + rect.height / 2;
+        const distanceToCenter = Math.abs(cardCenter - viewportCenter);
+
+        if (distanceToCenter < closestDistance) {
+          closestDistance = distanceToCenter;
+          closestTitle = items[index]?.title ?? "";
+        }
+      });
+
+      if (closestTitle) {
+        setActiveTitle(closestTitle);
+      }
+    };
+
+    const requestActiveCardUpdate = () => {
+      if (frameId !== null) {
+        window.cancelAnimationFrame(frameId);
+      }
+
+      frameId = window.requestAnimationFrame(updateActiveCard);
+    };
+
+    requestActiveCardUpdate();
+
+    const handleChange = () => {
+      requestActiveCardUpdate();
+    };
+
+    window.addEventListener("scroll", requestActiveCardUpdate, { passive: true });
+    window.addEventListener("resize", requestActiveCardUpdate);
+    mobileQuery.addEventListener("change", handleChange);
+
+    return () => {
+      if (frameId !== null) {
+        window.cancelAnimationFrame(frameId);
+      }
+
+      window.removeEventListener("scroll", requestActiveCardUpdate);
+      window.removeEventListener("resize", requestActiveCardUpdate);
+      mobileQuery.removeEventListener("change", handleChange);
+    };
+  }, [items]);
 
   return (
     <section className="bg-light pt-130 pb-150 sm:py-130">
@@ -42,6 +107,9 @@ const CorePhilosophy = ({ data }: { data: FoundersMessageType['secondSection'] }
             return (
               <motion.article
                 key={item.title}
+                ref={(node) => {
+                  cardRefs.current[index] = node;
+                }}
                 variants={moveUp(0.2 * index)}
                 role="button"
                 tabIndex={0}

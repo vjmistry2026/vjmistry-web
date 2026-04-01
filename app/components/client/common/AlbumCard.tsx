@@ -168,11 +168,11 @@ export default function AlbumCard({
 
         <div className="pt-2">
           <div className="relative">
-            <div className="absolute left-2 top-1/2 z-20 -translate-y-1/2 sm:left-0">
+            <div className="absolute left-2 top-1/2 z-20 hidden -translate-y-1/2 sm:left-0 sm:block">
               <SliderNavButton direction="left" onClick={() => modalSwiperRef.current?.slidePrev()} />
             </div>
 
-            <div className="absolute right-2 top-1/2 z-20 -translate-y-1/2 sm:right-0">
+            <div className="absolute right-2 top-1/2 z-20 hidden -translate-y-1/2 sm:right-0 sm:block">
               <SliderNavButton direction="right" onClick={() => modalSwiperRef.current?.slideNext()} />
             </div>
 
@@ -206,6 +206,11 @@ export default function AlbumCard({
                 ))}
               </Swiper>
             </div>
+          </div>
+
+          <div className="mx-auto mt-4 flex w-full max-w-[80vw] items-center justify-between sm:hidden">
+            <SliderNavButton direction="left" onClick={() => modalSwiperRef.current?.slidePrev()} />
+            <SliderNavButton direction="right" onClick={() => modalSwiperRef.current?.slideNext()} />
           </div>
 
           <div className="mt-4 px-3 py-3 sm:px-4">

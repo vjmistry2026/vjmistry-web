@@ -1,15 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
-import { Fragment, useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { CSSProperties, MouseEvent } from "react";
 
 import { moveLeft, moveUp } from "@/app/components/motionVariants";
-import { newsDetails } from "../data";
 import { NewsType } from "@/app/types/news";
 
 const STICKY_TOP = 150;
+const MOBILE_TOC_SCROLL_OFFSET = 88;
+const DESKTOP_TOC_SCROLL_OFFSET = 160;
 
 type SidebarMode = "static" | "fixed" | "bottom";
 
@@ -23,33 +23,61 @@ type SidebarLayout = {
 const getSectionId = (title: string) =>
   title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
+const getTargetSectionId = (value: string) => value.replace(/^#/, "");
+
+const getTocScrollOffset = () =>
+  window.innerWidth < 1024 ? MOBILE_TOC_SCROLL_OFFSET : DESKTOP_TOC_SCROLL_OFFSET;
+
+const normalizeText = (value: string) => value.replace(/\s+/g, " ").trim().toLowerCase();
+
 const handleTocClick = (
   event: MouseEvent<HTMLAnchorElement>,
-  sectionTitle: string,
+  targetSectionId: string,
+  setActiveSectionId: (sectionId: string) => void,
 ) => {
   event.preventDefault();
 
-  const sectionId = getSectionId(sectionTitle);
-  const sectionElement = document.getElementById(sectionId);
+  const normalizedSectionId = getTargetSectionId(targetSectionId);
+  const sectionElement = document.getElementById(normalizedSectionId);
 
   if (!sectionElement) {
     return;
   }
 
-  sectionElement.scrollIntoView({
+  const targetY =
+    window.scrollY +
+    sectionElement.getBoundingClientRect().top -
+    getTocScrollOffset();
+
+  setActiveSectionId(normalizedSectionId);
+
+  window.scrollTo({
+    top: Math.max(targetY, 0),
     behavior: "smooth",
-    block: "start",
   });
 
-  window.history.replaceState(null, "", `#${sectionId}`);
+  window.history.replaceState(null, "", `#${normalizedSectionId}`);
 };
 
-const MoreDetails = ({ secondSection, thirdSection }: { secondSection: NewsType['news'][number]['secondSection'], thirdSection: NewsType['news'][number]['thirdSection'] }) => {
-  const article = newsDetails[0];
+const MoreDetails = ({
+  secondSection,
+  thirdSection,
+}: {
+  secondSection: NewsType["news"][number]["secondSection"];
+  thirdSection: NewsType["news"][number]["thirdSection"];
+}) => {
   const layoutRef = useRef<HTMLDivElement>(null);
   const contentColumnRef = useRef<HTMLDivElement>(null);
   const sidebarColumnRef = useRef<HTMLElement>(null);
   const sidebarRef = useRef<HTMLDivElement>(null);
+  const tocItems = useMemo(
+    () =>
+      secondSection.items.map((section) => ({
+        ...section,
+        targetId: getTargetSectionId(section.idToMap || getSectionId(section.title)),
+      })),
+    [secondSection.items],
+  );
   const [sidebarLayout, setSidebarLayout] = useState<SidebarLayout>({
     mode: "static",
     width: 0,
@@ -59,12 +87,78 @@ const MoreDetails = ({ secondSection, thirdSection }: { secondSection: NewsType[
   const [activeSectionId, setActiveSectionId] = useState(() => {
     const initialHash =
       typeof window !== "undefined" ? window.location.hash.replace(/^#/, "") : "";
-    const firstSectionId = article?.content[0]
-      ? getSectionId(article.content[0].title)
+    const firstSectionId = secondSection.items[0]
+      ? getTargetSectionId(
+        secondSection.items[0].idToMap || getSectionId(secondSection.items[0].title),
+      )
       : "";
 
     return initialHash || firstSectionId;
   });
+
+  useEffect(() => {
+    const hashSectionId =
+      typeof window !== "undefined" ? window.location.hash.replace(/^#/, "") : "";
+    const firstSectionId = tocItems[0]?.targetId ?? "";
+
+    setActiveSectionId(hashSectionId || firstSectionId);
+  }, [tocItems]);
+
+  useEffect(() => {
+    const contentRoot = contentColumnRef.current?.querySelector(".news-item-content");
+
+    if (!contentRoot) {
+      return;
+    }
+
+    const headingElements = Array.from(
+      contentRoot.querySelectorAll<HTMLElement>("h2"),
+    );
+
+    if (headingElements.length === 0) {
+      return;
+    }
+
+    const usedIds = new Set<string>();
+
+    tocItems.forEach((item, index) => {
+      const normalizedTargetId = item.targetId;
+      let matchedHeading =
+        contentRoot.querySelector<HTMLElement>(`#${CSS.escape(normalizedTargetId)}`) ?? null;
+
+      if (!matchedHeading) {
+        matchedHeading =
+          headingElements.find(
+            (heading) => normalizeText(heading.textContent ?? "") === normalizeText(item.title),
+          ) ?? null;
+      }
+
+      if (!matchedHeading) {
+        matchedHeading = headingElements[index] ?? null;
+      }
+
+      if (!matchedHeading) {
+        return;
+      }
+
+      if (!matchedHeading.id || matchedHeading.id !== normalizedTargetId) {
+        matchedHeading.id = normalizedTargetId;
+      }
+
+      usedIds.add(normalizedTargetId);
+    });
+
+    headingElements.forEach((heading) => {
+      if (!heading.id) {
+        const generatedId = getSectionId(heading.textContent ?? "");
+
+        if (generatedId && !usedIds.has(generatedId)) {
+          heading.id = generatedId;
+          usedIds.add(generatedId);
+        }
+      }
+    });
+  }, [thirdSection.content, tocItems]);
 
   useEffect(() => {
     const updateSidebarLayout = () => {
@@ -178,14 +272,27 @@ const MoreDetails = ({ secondSection, thirdSection }: { secondSection: NewsType[
   }, []);
 
   useEffect(() => {
-    const sectionIds = article?.content.map((section) => getSectionId(section.title)) ?? [];
-
-    if (sectionIds.length === 0) {
+    if (window.innerWidth < 1024) {
       return;
     }
 
-    const sections = sectionIds
-      .map((sectionId) => document.getElementById(sectionId))
+    if (tocItems.length === 0) {
+      return;
+    }
+
+    const contentRoot = contentColumnRef.current?.querySelector(".news-item-content");
+
+    if (!contentRoot) {
+      return;
+    }
+
+    const sections = tocItems
+      .map((section) => section.targetId)
+      .map(
+        (sectionId) =>
+          document.getElementById(sectionId) ??
+          contentRoot.querySelector<HTMLElement>(`#${CSS.escape(sectionId)}`),
+      )
       .filter((section): section is HTMLElement => section !== null);
 
     if (sections.length === 0) {
@@ -215,11 +322,7 @@ const MoreDetails = ({ secondSection, thirdSection }: { secondSection: NewsType[
     return () => {
       observer.disconnect();
     };
-  }, [article]);
-
-  if (!article) {
-    return null;
-  }
+  }, [tocItems]);
 
   const sidebarColumnStyle: CSSProperties =
     sidebarLayout.containerHeight > 0
@@ -250,10 +353,10 @@ const MoreDetails = ({ secondSection, thirdSection }: { secondSection: NewsType[
   })();
 
   return (
-    <section className="relative pt-4 md:pt-12 xl:pt-15 2xl:pt-20 3xl:pt-150 pb-15 xl:pb-17 2xl:pb-20 3xl:pb-20">
+    <section className="relative pt-10 md:pt-12 xl:pt-15 2xl:pt-20 3xl:pt-150 pb-15 xl:pb-17 2xl:pb-20 3xl:pb-20">
       <div className="container">
         <div ref={layoutRef}
-          className="grid grid-cols-1 gap-7 md:gap-12 lg:grid-cols-[220px_minmax(0,1fr)] lg:items-start xl:grid-cols-[260px_minmax(0,1fr)] xl:gap-15 2xl:grid-cols-[320px_minmax(0,1fr)] 2xl:gap-20 3xl:grid-cols-[418px_968px] 3xl:gap-[234px]"
+          className="grid grid-cols-1 gap-10 md:gap-12 lg:grid-cols-[220px_minmax(0,1fr)] lg:items-start xl:grid-cols-[260px_minmax(0,1fr)] xl:gap-15 2xl:grid-cols-[320px_minmax(0,1fr)] 2xl:gap-20 3xl:grid-cols-[418px_968px] 3xl:gap-[234px]"
         >
           <aside ref={sidebarColumnRef} className="relative w-full mt-5 xl:mt-17 2xl:mt-[110px]" style={sidebarColumnStyle} >
             <div ref={sidebarRef} className="h-fit w-full" style={sidebarStyle}>
@@ -263,26 +366,28 @@ const MoreDetails = ({ secondSection, thirdSection }: { secondSection: NewsType[
                 viewport={{ once: true, amount: 0.3 }}
                 variants={moveLeft(0.1)}
               >
-                <p className="font-nexa text-20 font-extrabold mb-4 md:mb-5">
+                <p className="font-nexa text-20 font-extrabold mb-5">
                   Table Of Contents
                 </p>
                 <hr className="border-border w-[73%]" />
 
                 <nav className="mt-5">
                   <ul className="space-y-3 sm:space-y-4 xl:space-y-30">
-                    {secondSection.items.map((section) => (
+                    {tocItems.map((section) => (
                       <li key={section.title}>
                         <a
-                          href={`#${getSectionId(section.title)}`}
-                          onClick={(event) => handleTocClick(event, section.idToMap)}
-                          className="group flex items-center gap-3 xl:gap-30 text-paragraph transition-colors duration-300 hover:text-primary"
+                          href={`#${section.targetId}`}
+                          onClick={(event) =>
+                            handleTocClick(event, section.targetId, setActiveSectionId)
+                          }
+                          className="group flex items-center gap-3 xl:gap-30 text-paragraph transition-colors duration-300 lg:hover:text-primary"
                         >
-                          <span className="mt-[7px] h-[6px] w-[6px] xl:h-[13px] xl:w-[13px] shrink-0 bg-primary transition-transform duration-300 group-hover:scale-125" />
+                          <span className="mt-[7px] h-[6px] w-[6px] xl:h-[13px] xl:w-[13px] shrink-0 bg-primary transition-transform duration-300 lg:group-hover:scale-125" />
                           <span
-                            className={`section-description font-nexa text-20 leading-1p5 transition-colors duration-300 ${activeSectionId === getSectionId(section.title)
-                              ? "text-primary"
-                              : "text-paragraph group-hover:text-primary"
-                              }`}
+                            className={`section-description font-nexa text-20 leading-1p5 transition-colors duration-300 ${activeSectionId === section.targetId
+                               ? "text-primary"
+                               : "text-paragraph lg:group-hover:text-primary"
+                               }`}
                           >
                             {section.title}
                           </span>
@@ -297,54 +402,16 @@ const MoreDetails = ({ secondSection, thirdSection }: { secondSection: NewsType[
 
           <div
             ref={contentColumnRef}
-            className="min-w-0 space-y-5 md:space-y-12 xl:space-y-15 2xl:space-y-15 3xl:space-y-15"
+            className="min-w-0 space-y-10 md:space-y-12 xl:space-y-15 2xl:space-y-15 3xl:space-y-15"
           >
-            <section className="news-item-content scroll-mt-[120px] lg:scroll-mt-[160px]" dangerouslySetInnerHTML={{ __html: thirdSection.content }}>
-
-            </section>
-            {/* {article.content.map((section, index) => (
-              <motion.section
-                key={section.title}
-                id={getSectionId(section.title)}
-                className="scroll-mt-[120px] lg:scroll-mt-[160px]"
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, amount: 0.2 }}
-                variants={moveUp(index * 0.08)}
-              >
-                <h2 className="mb-4 font-condensed text-32 leading-[110%] text-secondary sm:mb-5 2xl:text-40">
-                  {section.title}
-                </h2>
- 
-                <div className="space-y-5">
-                  {section.paragraphs.map((paragraph, paragraphIndex) => (
-                    <Fragment key={`${section.title}-${paragraphIndex}`}>
-                      <p className="section-description leading-[1.7] text-paragraph">
-                        {paragraph}
-                      </p>
- 
-                      {section.image === undefined ||
-                        section.imageAfterParagraph !== paragraphIndex ? null : (
-                        <div className="relative mt-5 aspect-[1.25/1] overflow-hidden sm:mt-6 sm:aspect-[1.55/1] xl:aspect-[1.95/1]">
-                          <Image src={section.image} alt={section.title} fill className="object-cover" sizes="(max-width: 1024px) 100vw, 70vw" />
-                        </div>
-                      )}
-                    </Fragment>
-                  ))}
-                </div>
- 
-                {section.list && (
-                  <ul className="mt-6 grid grid-cols-1 gap-x-8 gap-y-4 sm:mt-8 md:grid-cols-2">
-                    {section.list.map((item) => (
-                      <li key={item} className="flex items-center gap-3 xl:gap-5 section-description text-black" >
-                        <span className="mt-[3px] h-[6px] w-[6px] xl:w-[13px] xl:h-[13px] shrink-0 bg-primary" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </motion.section>
-            ))} */}
+            <motion.section
+              className="news-item-content scroll-mt-[120px] lg:scroll-mt-[160px]"
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={moveUp(0.08)}
+              dangerouslySetInnerHTML={{ __html: thirdSection.content }}
+            />
           </div>
         </div>
       </div>
