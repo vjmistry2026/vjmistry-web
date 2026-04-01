@@ -33,7 +33,7 @@ const Breadcrumb = ({ variant = "light" }: BreadcrumbProps) => {
   return (
     <nav
       aria-label="Breadcrumb"
-      className="relative z-20 flex flex-wrap items-center gap-[6px] pointer-events-auto touch-manipulation"
+      className="relative z-20 flex max-w-full flex-wrap items-center gap-[6px] pointer-events-auto touch-manipulation"
     >
       {crumbs.map((crumb, index) => {
         const isLast = index === crumbs.length - 1;
@@ -42,7 +42,7 @@ const Breadcrumb = ({ variant = "light" }: BreadcrumbProps) => {
         return (
           <span
             key={crumb.href}
-            className="flex items-center gap-1 pr-1 lg:gap-3 lg:pr-3"
+            className={`flex items-center gap-1 pr-1 lg:gap-3 lg:pr-3 ${isLast ? "min-w-0 max-w-full" : ""}`}
           >
             {isClickable ? (
               <Link
@@ -64,7 +64,7 @@ const Breadcrumb = ({ variant = "light" }: BreadcrumbProps) => {
               <>
                 <span className={`${inactiveColor} section-description`}>•</span>
                 <span
-                  className={`section-description text-16 sm:text-20 ${isLast ? activeColor : inactiveColor}`}
+                  className={`section-description text-16 sm:text-20 ${isLast ? `${activeColor} max-w-[140px] truncate sm:max-w-none sm:truncate-none` : inactiveColor}`}
                 >
                   {crumb.label}
                 </span>

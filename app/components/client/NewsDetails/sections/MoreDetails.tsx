@@ -249,10 +249,10 @@ const MoreDetails = () => {
   })();
 
   return (
-    <section className="relative pt-10 md:pt-12 xl:pt-15 2xl:pt-20 3xl:pt-150 pb-15 xl:pb-17 2xl:pb-20 3xl:pb-20">
+    <section className="relative pt-4 md:pt-12 xl:pt-15 2xl:pt-20 3xl:pt-150 pb-15 xl:pb-17 2xl:pb-20 3xl:pb-20">
       <div className="container">
         <div ref={layoutRef}
-          className="grid grid-cols-1 gap-10 md:gap-12 lg:grid-cols-[220px_minmax(0,1fr)] lg:items-start xl:grid-cols-[260px_minmax(0,1fr)] xl:gap-15 2xl:grid-cols-[320px_minmax(0,1fr)] 2xl:gap-20 3xl:grid-cols-[418px_968px] 3xl:gap-[234px]"
+          className="grid grid-cols-1 gap-7 md:gap-12 lg:grid-cols-[220px_minmax(0,1fr)] lg:items-start xl:grid-cols-[260px_minmax(0,1fr)] xl:gap-15 2xl:grid-cols-[320px_minmax(0,1fr)] 2xl:gap-20 3xl:grid-cols-[418px_968px] 3xl:gap-[234px]"
         >
           <aside ref={sidebarColumnRef} className="relative w-full mt-5 xl:mt-17 2xl:mt-[110px]" style={sidebarColumnStyle} >
             <div ref={sidebarRef} className="h-fit w-full" style={sidebarStyle}>
@@ -262,7 +262,7 @@ const MoreDetails = () => {
                 viewport={{ once: true, amount: 0.3 }}
                 variants={moveLeft(0.1)}
               >
-                <p className="font-nexa text-20 font-extrabold  mb-5">
+                <p className="font-nexa text-20 font-extrabold mb-4 md:mb-5">
                   Table Of Contents
                 </p>
                 <hr className="border-border w-[73%]" />
@@ -295,12 +295,9 @@ const MoreDetails = () => {
             </div>
           </aside>
 
-          <div
-            ref={contentColumnRef}
-            className="min-w-0 space-y-10 md:space-y-12 xl:space-y-15 2xl:space-y-15 3xl:space-y-15"
-          >
+          <div ref={contentColumnRef} className="min-w-0 space-y-5 md:space-y-12 xl:space-y-15 2xl:space-y-15 3xl:space-y-15" >
             {article.content.map((section, index) => (
-              <motion.section
+              <motion.div
                 key={section.title}
                 id={getSectionId(section.title)}
                 className="scroll-mt-[120px] lg:scroll-mt-[160px]"
@@ -340,7 +337,7 @@ const MoreDetails = () => {
                     ))}
                   </ul>
                 )}
-              </motion.section>
+              </motion.div>
             ))}
           </div>
         </div>

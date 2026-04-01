@@ -40,23 +40,12 @@ const SpotlightSlider = () => {
     <section className="overflow-hidden py-8 xl:py-20 2xl:py-25 3xl:py-150">
       <div ref={containerRef} className="container">
         <AnimatedHeading text={title} className="mb-2 md:mb-30" />
-        <div className="mb-6 flex justify-between flex-wrap gap-2 2xl:mb-15">
-          <motion.p
-            variants={moveUp(0.15)}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-            className="cmn-p max-w-4xl"
-          >
+        <div className="mb-6 flex justify-between flex-wrap gap-y-4 md:gap-2 2xl:mb-15">
+          <motion.p variants={moveUp(0.15)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="cmn-p max-w-4xl" >
             {desc}
           </motion.p>
-          <motion.div
-            variants={moveUp(0.2)}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-            className="flex items-center justify-between gap-[10px] xl:gap-[20px]"
-          >
+          <motion.div variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} 
+          className="flex items-center justify-between gap-[10px] xl:gap-[20px]" >
             <SliderNavButton direction="left" onClick={() => swiperRef.current?.slidePrev()} />
             <SliderNavButton direction="right" onClick={() => swiperRef.current?.slideNext()} />
           </motion.div>
