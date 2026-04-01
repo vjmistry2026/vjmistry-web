@@ -188,7 +188,10 @@ const DownloadCenter = ({ data }: { data: CertificateType['thirdSection'] }) => 
 
               <div className="min-h-0 flex-1 bg-[#F5F5F5] p-3 sm:p-4">
                 <iframe
-                  src={`${previewItem.file}#toolbar=0&navpanes=0&view=FitH`}
+                  // src={`${previewItem.file}#toolbar=0&navpanes=0&view=FitH`}
+                  src={`/api/pdf-proxy?url=${encodeURIComponent(
+                    previewItem.file
+                  )}#toolbar=0`}
                   title={previewItem.title}
                   className="h-full w-full rounded-[16px] border-0 bg-white"
                 />

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { NAV_ITEMS } from "./navItems";
 import { moveLeft } from "../../motionVariants";
@@ -10,6 +11,7 @@ import { moveLeft } from "../../motionVariants";
 export default function MobileNavbar() {
     const [open, setOpen] = useState(false);
     const [activeItem, setActiveItem] = useState<string | null>(null);
+    const pathname = usePathname();
 
     const toggleItem = (label: string) => {
         setActiveItem((prev) => (prev === label ? null : label));
@@ -86,74 +88,90 @@ export default function MobileNavbar() {
                         <div className="pt-[100px] px-[24px] pb-[40px]">
                             <ul className="flex flex-col gap-[24px]">
                                 {NAV_ITEMS.map((item, index) => (
-                                    <motion.li
-                                        key={item.label}
-                                        variants={moveLeft(index * 0.15)}
-                                        initial="hidden"
-                                        animate="show"
-                                        viewport={{ once: true }}
-                                    >
-                                        {/* MAIN ITEM */}
-                                        <div className="flex items-center justify-between">
-                                            {item.href ? (
-                                                <Link
-                                                    href={item.href}
-                                                    onClick={() => setOpen(false)}
-                                                    className="text-20 font-nexa font-bold text-secondary"
-                                                >
-                                                    {item.label}
-                                                </Link>
-                                            ) : (
-                                                <button
-                                                    onClick={() => toggleItem(item.label)}
-                                                    className="text-20 font-nexa font-bold text-secondary"
-                                                >
-                                                    {item.label}
-                                                </button>
-                                            )}
+                                    (() => {
+                                        const isCurrentItem =
+                                            item.href === pathname ||
+                                            item.children?.some((child) => child.href === pathname);
+                                        const isExpanded = activeItem === item.label || Boolean(isCurrentItem && item.children);
 
-                                            {item.children && (
-                                                <motion.span
-                                                    animate={{ rotate: activeItem === item.label ? 180 : 0 }}
-                                                    className="ml-4 text-primary cursor-pointer"
-                                                    onClick={() => toggleItem(item.label)}
-                                                >
-                                                    <Image
-                                                        src="/assets/icons/down-arrow-tip.svg"
-                                                        alt="Arrow Down"
-                                                        width={16}
-                                                        height={16}
-                                                        className="pointer-events-none invert"
-                                                    />
-                                                </motion.span>
-                                            )}
-                                        </div>
+                                        return (
+                                            <motion.li
+                                                key={item.label}
+                                                variants={moveLeft(index * 0.15)}
+                                                initial="hidden"
+                                                animate="show"
+                                                viewport={{ once: true }}
+                                            >
+                                                {/* MAIN ITEM */}
+                                                <div className="flex items-center justify-between">
+                                                    {item.href ? (
+                                                        <Link
+                                                            href={item.href}
+                                                            onClick={() => setOpen(false)}
+                                                            className={`text-20 font-nexa font-bold transition-colors duration-200 ${isCurrentItem ? "text-primary" : "text-secondary"
+                                                                }`}
+                                                        >
+                                                            {item.label}
+                                                        </Link>
+                                                    ) : (
+                                                        <button
+                                                            onClick={() => toggleItem(item.label)}
+                                                            className={`text-20 font-nexa font-bold transition-colors duration-200 ${isCurrentItem ? "text-primary" : "text-secondary"
+                                                                }`}
+                                                        >
+                                                            {item.label}
+                                                        </button>
+                                                    )}
 
-                                        {/* SUB MENU */}
-                                        <AnimatePresence>
-                                            {item.children && activeItem === item.label && (
-                                                <motion.ul
-                                                    initial={{ height: 0, opacity: 0 }}
-                                                    animate={{ height: "auto", opacity: 1 }}
-                                                    exit={{ height: 0, opacity: 0 }}
-                                                    transition={{ duration: 0.25 }}
-                                                    className="pl-[16px] mt-[12px] flex flex-col gap-[12px] overflow-hidden"
-                                                >
-                                                    {item.children.map((child) => (
-                                                        <li key={child.label}>
-                                                            <Link
-                                                                href={child.href}
-                                                                onClick={() => setOpen(false)}
-                                                                className="text-16 font-nexa font-bold text-paragraph"
-                                                            >
-                                                                {child.label}
-                                                            </Link>
-                                                        </li>
-                                                    ))}
-                                                </motion.ul>
-                                            )}
-                                        </AnimatePresence>
-                                    </motion.li>
+                                                    {item.children && (
+                                                        <motion.span
+                                                            animate={{ rotate: isExpanded ? 180 : 0 }}
+                                                            className="ml-4 text-primary cursor-pointer"
+                                                            onClick={() => toggleItem(item.label)}
+                                                        >
+                                                            <Image
+                                                                src="/assets/icons/down-arrow-tip.svg"
+                                                                alt="Arrow Down"
+                                                                width={16}
+                                                                height={16}
+                                                                className="pointer-events-none invert"
+                                                            />
+                                                        </motion.span>
+                                                    )}
+                                                </div>
+
+                                                {/* SUB MENU */}
+                                                <AnimatePresence>
+                                                    {item.children && isExpanded && (
+                                                        <motion.ul
+                                                            initial={{ height: 0, opacity: 0 }}
+                                                            animate={{ height: "auto", opacity: 1 }}
+                                                            exit={{ height: 0, opacity: 0 }}
+                                                            transition={{ duration: 0.25 }}
+                                                            className="pl-[16px] mt-[12px] flex flex-col gap-[12px] overflow-hidden"
+                                                        >
+                                                            {item.children.map((child) => {
+                                                                const isCurrentChild = child.href === pathname;
+
+                                                                return (
+                                                                    <li key={child.label}>
+                                                                        <Link
+                                                                            href={child.href}
+                                                                            onClick={() => setOpen(false)}
+                                                                            className={`text-16 font-nexa font-bold transition-colors duration-200 ${isCurrentChild ? "text-primary" : "text-paragraph"
+                                                                                }`}
+                                                                        >
+                                                                            {child.label}
+                                                                        </Link>
+                                                                    </li>
+                                                                );
+                                                            })}
+                                                        </motion.ul>
+                                                    )}
+                                                </AnimatePresence>
+                                            </motion.li>
+                                        );
+                                    })()
                                 ))}
                             </ul>
                         </div>

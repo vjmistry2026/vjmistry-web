@@ -17,11 +17,13 @@ const Footer = () => {
   const [activeLocation, setActiveLocation] =
     useState<keyof typeof contactLocations>("headOffice");
   const activeData = contactLocations[activeLocation];
+  const phoneNumbers = activeData.phone.split("|").map((phone) => phone.trim()).filter(Boolean);
+  const emailAddresses = activeData.email.split("|").map((email) => email.trim()).filter(Boolean);
 
   return (
     <footer className="bg-[#1C1C1C] overflow-hidden">
       <div className="relative overflow-hidden">
-        <div className="absolute left-0 top-0 bottom-0 z-0">
+        <div className="pointer-events-none absolute left-0 top-0 bottom-0 z-0">
           <Image
             src="/assets/images/footer/footer-left-svg.svg"
             alt="Footer Background"
@@ -30,7 +32,7 @@ const Footer = () => {
             className="pointer-events-none object-contain opacity-10 2xl:w-[80%] 3xl:w-full"
           />
         </div>
-        <div className="container">
+        <div className="container relative z-10">
           {/* ================= TOP SECTION ================= */}
           <div className="pb-40 pt-70 grid grid-cols-2 xl:grid-cols-[2fr_1.2fr_1.2fr_1.2fr] gap-y-[30px] xl:gap-y-[60px] gap-x-100">
             {/* SUBSCRIBE */}
@@ -257,9 +259,19 @@ const Footer = () => {
                   height={16}
                   className="pointer-events-none"
                 />
-                <p className="text-20 font-nexa font-bold leading-[1.5] text-paragraph">
-                  {activeData.phone}
-                </p>
+                <div className="text-20 font-nexa font-bold leading-[1.5] text-paragraph">
+                  {phoneNumbers.map((phone, index) => (
+                    <span key={phone}>
+                      <a
+                        href={`tel:${phone.replace(/[^\d+]/g, "")}`}
+                        className="transition-colors duration-300 hover:text-paragraph-2"
+                      >
+                        {phone}
+                      </a>
+                      {index < phoneNumbers.length - 1 ? <span>{" | "}</span> : null}
+                    </span>
+                  ))}
+                </div>
               </motion.div>
               {/* EMAIL */}
               <motion.div
@@ -277,9 +289,19 @@ const Footer = () => {
                   height={16}
                   className="pointer-events-none"
                 />
-                <p className="text-20 font-nexa font-bold leading-[1.5] text-paragraph">
-                  {activeData.email}
-                </p>
+                <div className="text-20 font-nexa font-bold leading-[1.5] text-paragraph">
+                  {emailAddresses.map((email, index) => (
+                    <span key={email}>
+                      <a
+                        href={`mailto:${email}`}
+                        className="transition-colors duration-300 hover:text-paragraph-2"
+                      >
+                        {email}
+                      </a>
+                      {index < emailAddresses.length - 1 ? <span>{" | "}</span> : null}
+                    </span>
+                  ))}
+                </div>
               </motion.div>
             </div>
             {/* EMPTY COLUMN (under Resources) */}

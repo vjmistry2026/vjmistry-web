@@ -300,11 +300,17 @@ body {
 }
 
 .news-item-content h2 {
-    @apply mb-4 font-condensed text-32 leading-[110%] text-secondary sm:mb-5
+    @apply mb-5 font-condensed text-32 leading-[110%] text-secondary
+}
+
+@media (min-width: 1536px) {
+    .news-item-content h2 {
+        font-size: 40px;
+    }
 }
 
 .news-item-content p {
-    @apply mb-4 section-description leading-[1.7] text-paragraph
+    @apply mb-5 section-description leading-[1.7] text-paragraph
 }
 
 .news-item-content ul {
