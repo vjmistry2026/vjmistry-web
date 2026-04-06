@@ -95,7 +95,7 @@ const PowerBehind = ({ data }: { data: ContactType['firstSection'] }) => {
   };
 
   return (
-    <section className="relative overflow-hidden py-130 3xl:py-150">
+    <section className="relative overflow-hidden py-40 sm:py-130 3xl:py-150">
       <ContainerAnchor ref={containerRef} />
       <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-[1.2fr_1.5fr] 3xl:grid-cols-[875px_auto] align-end"
       // style={{ paddingInline: containerInset }}
@@ -106,7 +106,7 @@ const PowerBehind = ({ data }: { data: ContactType['firstSection'] }) => {
               <img src="/assets/shapes/contact-shape.svg" alt="" className="w-auto h-auto object-cover" />
             </div>
 
-            <AnimatedHeading text="Let's Build Something Great Together" className="pb-2 font-medium md:pb-30 leading-[1.2] text-60 3xl:text-75" />
+            <AnimatedHeading text="Let's Build Something Great Together" className="mb-30" />
 
             <p className="cmn-p max-w-[41ch] font-bold">
               {data.description}
@@ -117,74 +117,78 @@ const PowerBehind = ({ data }: { data: ContactType['firstSection'] }) => {
         <motion.div initial={{ opacity: 0, x: 60 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }} className="" >
           <div style={{ paddingRight: containerInset }} className="relative ">
             <div className="bg-light px-6 py-7 lg:px-8 xl:px-[12] 2xl:px-50 2xl:py-[65px] h-full">
-              <form className="space-y-12 xl:space-y-17 3xl:space-y-[67.85px]" onSubmit={handleSubmit(onSubmit)} noValidate>
-                <div className="grid grid-cols-1 gap-10 md:grid-cols-2 h-full">
-                  <FloatingInput
-                    label="First Name"
-                    value={values.first}
-                    error={errors.first?.message}
-                    registration={register("first", {
-                      required: "First name is required.",
+              <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)} noValidate>
+                <div className="space-y-12 xl:space-y-17 3xl:space-y-[67.85px]">
+                  <div className="grid grid-cols-1 gap-10 md:grid-cols-2 h-full">
+                    <FloatingInput
+                      label="First Name"
+                      value={values.first}
+                      error={errors.first?.message}
+                      registration={register("first", {
+                        required: "First name is required.",
+                        minLength: {
+                          value: 2,
+                          message: "First name must be at least 2 characters.",
+                        },
+                      })}
+                    />
+                    <FloatingInput
+                      label="Second Name"
+                      value={values.second}
+                      error={errors.second?.message}
+                      registration={register("second", {
+                        required: "Second name is required.",
+                        minLength: {
+                          value: 2,
+                          message: "Second name must be at least 2 characters.",
+                        },
+                      })}
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
+                    <FloatingInput
+                      label="Email Id"
+                      type="email"
+                      value={values.email}
+                      error={errors.email?.message}
+                      registration={register("email", {
+                        required: "Email is required.",
+                        pattern: {
+                          value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                          message: "Enter a valid email address.",
+                        },
+                      })}
+                    />
+                    <FloatingInput
+                      label="Mobile / Phone Number"
+                      value={values.phone}
+                      error={errors.phone?.message}
+                      registration={register("phone", {
+                        required: "Phone number is required.",
+                        pattern: {
+                          value: /^[+]?[\d\s()-]{7,20}$/,
+                          message: "Enter a valid phone number.",
+                        },
+                      })}
+                    />
+                  </div>
+                </div>
+
+                <div className="mt-12 xl:mt-17 3xl:mt-[67.85px] mb-8 xl:mb-12 3xl:mb-5">
+                  <FloatingTextarea
+                    label="Write Message To Us"
+                    value={values.message}
+                    error={errors.message?.message}
+                    registration={register("message", {
+                      required: "Message is required.",
                       minLength: {
-                        value: 2,
-                        message: "First name must be at least 2 characters.",
-                      },
-                    })}
-                  />
-                  <FloatingInput
-                    label="Second Name"
-                    value={values.second}
-                    error={errors.second?.message}
-                    registration={register("second", {
-                      required: "Second name is required.",
-                      minLength: {
-                        value: 2,
-                        message: "Second name must be at least 2 characters.",
+                        value: 10,
+                        message: "Message must be at least 10 characters.",
                       },
                     })}
                   />
                 </div>
-
-                <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
-                  <FloatingInput
-                    label="Email Id"
-                    type="email"
-                    value={values.email}
-                    error={errors.email?.message}
-                    registration={register("email", {
-                      required: "Email is required.",
-                      pattern: {
-                        value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                        message: "Enter a valid email address.",
-                      },
-                    })}
-                  />
-                  <FloatingInput
-                    label="Mobile / Phone Number"
-                    value={values.phone}
-                    error={errors.phone?.message}
-                    registration={register("phone", {
-                      required: "Phone number is required.",
-                      pattern: {
-                        value: /^[+]?[\d\s()-]{7,20}$/,
-                        message: "Enter a valid phone number.",
-                      },
-                    })}
-                  />
-                </div>
-
-                <FloatingTextarea
-                  label="Write Message To Us"
-                  value={values.message}
-                  error={errors.message?.message}
-                  registration={register("message", {
-                    required: "Message is required.",
-                    minLength: {
-                      value: 10,
-                      message: "Message must be at least 10 characters.",
-                    },
-                  })}
-                />
 
                 {successMessage ? (
                   <div

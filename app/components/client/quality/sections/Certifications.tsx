@@ -54,9 +54,9 @@ const Certifications = ({ data }: { data: QualityType['thirdSection'] }) => {
   };
 
   return (
-    <section className="pt-130 pb-150 xl:py-130">
+    <section className="pt-40 pb-40 sm:pt-130 sm:pb-150 xl:py-130">
       <div className="container">
-        <AnimatedHeading text={data.title} className="mb-2 md:mb-30" />
+        <AnimatedHeading text={data.title} className="mb-30" />
         <motion.p variants={moveUp(0.15)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="cmn-p font-bold max-w-3xl" > {data.subTitle} </motion.p>
 
         <div className="mt-8 grid grid-cols-1 gap-px border border-border bg-border grid-cols-2 xl:mt-10 xl:grid-cols-4">

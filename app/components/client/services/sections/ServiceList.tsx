@@ -94,9 +94,9 @@ const ServicesSection = ({ data }: { data: ServiceType['firstSection'] }) => {
   }, [triggerTransition]);
 
   return (
-    <section className="py-100 lg:py-130 3xl:py-150">
+    <section className="py-40 sm:py-100 lg:py-130 3xl:py-150">
       <div className="border-b border-border pb-4">
-        <div className="container mb-5 md:mb-[30px] 2xl:mb-[60px]">
+        <div className="container mb-30 2xl:mb-15">
           <AnimatedHeading className="section-heading leading-[120%] max-w-[711px]" text={heading} />
         </div>
         <div>

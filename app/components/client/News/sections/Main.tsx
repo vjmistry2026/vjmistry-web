@@ -55,7 +55,7 @@ const Main = ({ news, category }: { news: NewsType['news'], category: Filters[] 
             })
           }
         />
-        <AnimatedHeading text="Most Popular" className="mb-30 pt-5 md:pt-10 xl:pt-13 2xl:pt-15 3xl:pt-[76px]" />
+        <AnimatedHeading text="Most Popular" className="mb-30 pt-40 md:pt-10 xl:pt-13 2xl:pt-15 3xl:pt-[76px]" />
         <PopularBlock latestNewsList={latestNewsList} />
         <NewsGrid remainingNewsList={remainingNewsList} />
       </div>

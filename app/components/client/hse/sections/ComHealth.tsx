@@ -12,12 +12,12 @@ const ComHealth = ({ data }: { data: HSeType['secondSection'] }) => {
   // const { title, desc, stats } = HSEData.commitment;
 
   return (
-    <section className="py-130 bg-light relative overflow-hidden">
+    <section className="py-40 sm:py-130 bg-light relative overflow-hidden">
       <div className="absolute top-0 right-0">
         <Image src="/assets/images/hse/shapes/shape-1.svg" width={1705} height={592} alt="" />
       </div>
       <div className="container">
-        <AnimatedHeading text={data.title} className="mb-2 md:mb-30 2xl:mb-[53px] max-w-xl leading-[1.2]" />
+        <AnimatedHeading text={data.title} className="mb-30 2xl:mb-[53px] max-w-xl leading-[1.2]" />
         <div className="grid grid-cols-1 xl:grid-cols-[1fr_3fr] 2xl:grid-cols-[666px_877px] gap-5 xl:gap-10 2xl:gap-17 3xl:gap-[75px]">
           <motion.div
             variants={moveUp(0.15)}

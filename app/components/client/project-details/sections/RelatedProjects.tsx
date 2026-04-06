@@ -9,7 +9,7 @@ import { ProjectType } from "@/app/types/project";
 
 const RelatedProjects = ({ data }: { data: ProjectType }) => {
   return (
-    <section className="w-full pt-100 pb-150 md:pb-100 lg:pb-130 2xl:pb-150">
+    <section className="w-full pt-40 pb-50 sm:pt-100 sm:pb-150 md:pb-100 lg:pb-130 2xl:pb-150">
       <div className="container mx-auto px-4">
         <AnimatedHeading
           text="Related Projects"

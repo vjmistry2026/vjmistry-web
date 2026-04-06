@@ -25,6 +25,7 @@ const AnimatedHeading = ({
     color = "black",
 }: AnimatedHeadingProps) => {
     const headingRef = useRef<HTMLElement | null>(null);
+    const words = text.split(" ");
 
     useEffect(() => {
         const el = headingRef.current;
@@ -56,13 +57,20 @@ const AnimatedHeading = ({
 
     return (
         <Tag ref={headingRef} className={`section-heading ${className}`} style={{ color: TEXT_COLORS[color] }}>
-            {text.split(" ").map((word, wordIndex) => (
-                <span key={wordIndex} style={{ display: "inline-block", whiteSpace: "nowrap", marginRight: "0.25em" }}>
-                    {word.split("").map((char, charIndex) => (
-                        <span key={charIndex} data-char style={{ display: "inline-block" }}>
-                            {char}
-                        </span>
-                    ))}
+            {words.map((word, wordIndex) => (
+                <span key={wordIndex} style={{ lineHeight: "inherit" }}>
+                    <span style={{ whiteSpace: "nowrap", lineHeight: "inherit" }}>
+                        {word.split("").map((char, charIndex) => (
+                            <span
+                                key={charIndex}
+                                data-char
+                                style={{ display: "inline-block", lineHeight: "inherit" }}
+                            >
+                                {char}
+                            </span>
+                        ))}
+                    </span>
+                    {wordIndex < words.length - 1 ? " " : null}
                 </span>
             ))}
         </Tag>

@@ -53,7 +53,7 @@ const DownloadCenter = ({ data }: { data: CertificateType['thirdSection'] }) => 
     <>
       <section className="pt-40 pb-10 xl:pt-150 xl:pb-150 border-b border-border">
         <div className="container">
-          <AnimatedHeading text={data.title} className="mb-4 md:mb-30" />
+          <AnimatedHeading text={data.title} className="mb-30" />
           <motion.p
             variants={moveUp(0.18)}
             initial="hidden"
@@ -67,7 +67,7 @@ const DownloadCenter = ({ data }: { data: CertificateType['thirdSection'] }) => 
           <div className="grid grid-cols-1 pt-8 md:grid-cols-2 xl:grid-cols-3 gap-x-5 xl:gap-x-10 gap-y-6 xl:gap-y-10 2xl:gap-y-15 xl:pt-10 2xl:pt-15 border-b border-border pb-130 md:pb-150 ">
             {data.items.map((item, index) => (
               <motion.article key={index} variants={moveUp(index * 0.1)} initial="hidden" whileInView="show"
-                viewport={{ once: true, amount: 0.2 }} className="flex min-h-[202px] flex-col bg-light px-8 py-30 md:px-10 2xl:py-10 2xl:px-[44.43px] " >
+                viewport={{ once: true, amount: 0.2 }} className="flex min-h-[202px] flex-col bg-light px-8 py-40 md:px-10 2xl:py-10 2xl:px-[44.43px] " >
                 <div className="flex items-center gap-4 2xl:gap-[22.21px]">
                   <Image src="/assets/icons/pdf-icon.svg" alt="" width={46.66} height={49} className="pointer-events-none h-10 xl:h-[49px] w-auto flex-shrink-0" />
                   <h3 className="font-condensed text-32 leading-[100%] text-secondary"> {item.title} </h3>
