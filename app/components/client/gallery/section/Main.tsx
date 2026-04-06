@@ -11,9 +11,9 @@ const Main = ({ firstSection, items }: { firstSection: GalleryType['firstSection
   // const { title, desc, items } = GalleryData.gallerySection;
 
   return (
-    <section className="py-130 md:py-150">
+    <section className="py-50 sm:py-130 xl:py-150">
       <div className="container">
-        <AnimatedHeading text={firstSection.title} className="mb-4 md:mb-30" />
+        <AnimatedHeading text={firstSection.title} className="mb-30" />
         <motion.p
           variants={moveUp(0.15)}
           initial="hidden"

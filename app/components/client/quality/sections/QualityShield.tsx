@@ -46,12 +46,9 @@ const QualityShield = ({ data }: { data: QualityType['secondSection'] }) => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden bg-light py-130 ">
+    <section ref={sectionRef} className="relative overflow-hidden bg-light py-40 sm:py-130 ">
       <ContainerAnchor />
-
-      <div
-        className="absolute bottom-[-3%] left-0 z-[5] overflow-hidden"
-        style={shapeBoundary ? { width: `${shapeBoundary}px` } : undefined}
+      <div className="absolute bottom-[-3%] left-0 z-[5] overflow-hidden" style={shapeBoundary ? { width: `${shapeBoundary}px` } : undefined}
       >
         <Image src="/assets/shapes/shape-quality-shield.svg" width={1066} height={731} alt="" className="w-[1066px] object-contain" />
       </div>

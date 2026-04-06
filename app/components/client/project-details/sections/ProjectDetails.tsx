@@ -16,7 +16,7 @@ export default function ProjectDetails({ firstSection, secondSection }: { firstS
         whileInView="show"
         viewport={{ once: true }}
         variants={moveUp(0.1)}
-        className="container border-b border-border py-70 3xl:py-[80px]"
+        className="container border-b border-border py-50 md:py-70 3xl:py-20"
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-4 gap-10">
           <motion.div
@@ -27,7 +27,7 @@ export default function ProjectDetails({ firstSection, secondSection }: { firstS
             className="flex items-center"
           >
             {/* icon box */}
-            <div className="w-[65px] h-[70px] 2xl:w-[73px] 2xl:h-[80px] border border-border flex items-center justify-center shrink-0">
+            <div className="w-[65px] h-[70px] 2xl:w-[73px] 2xl:h-20 border border-border flex items-center justify-center shrink-0">
               <Image
                 width={50}
                 height={32}
@@ -157,10 +157,7 @@ export default function ProjectDetails({ firstSection, secondSection }: { firstS
       {/* SECTION 2 - Project Details*/}
       <div>
         <div className="container pt-100">
-          <AnimatedHeading
-            className="mb-4 md:mb-30"
-            text={secondSection.title}
-          />
+          <AnimatedHeading className="mb-30" text={secondSection.title} />
 
           <motion.p
             initial="hidden"

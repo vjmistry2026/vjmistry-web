@@ -25,7 +25,7 @@ const LegacySection = ({ data, secondSection }: { data: HomeType['firstSection']
         offset: ["start end", "end start"],
     });
 
-    const y = useTransform(scrollYProgress, [0, 1], ["0vh", "14vh"]);
+    const y = useTransform(scrollYProgress, [0, 1], ["0vh", "10vh"]);
 
     useEffect(() => {
         const isAbove720 = window.innerWidth >= 720;
@@ -146,8 +146,8 @@ const LegacySection = ({ data, secondSection }: { data: HomeType['firstSection']
                     <div className="flex-1 relative flex">
                         <div
                             ref={imageWrapperRef}
-                            className=" h-fit
-    relative overflow-hidden
+                            className="
+    relative w-full overflow-hidden min-h-[280px] sm:min-h-[340px] md:min-h-[420px] lg:min-h-[520px] xl:min-h-[620px]
     [clip-path:polygon(0_0,calc(100%-40px)_0,100%_40px,100%_100%,0_100%)]
     sm:[clip-path:polygon(0_0,calc(100%-50px)_0,100%_50px,100%_100%,0_100%)]
     md:[clip-path:polygon(0_0,calc(100%-60px)_0,100%_60px,100%_100%,0_100%)]
@@ -156,13 +156,16 @@ const LegacySection = ({ data, secondSection }: { data: HomeType['firstSection']
     2xl:[clip-path:polygon(0_0,calc(100%-90px)_0,100%_90px,100%_100%,0_100%)]
   "
                         >
-                            <motion.div style={{ y }} className="w-full h-full">
+                            <motion.div
+                                style={{ y }}
+                                className="absolute inset-x-0 -top-[10%] h-[120%] md:-top-[14%] md:h-[128%] lg:-top-[10%] lg:h-[120%]"
+                            >
                                 <Image
                                     src={data.image}
                                     alt={data.imageAlt}
-                                    width={836}
-                                    height={707}
-                                    className="pointer-events-none w-full h-full object-cover scale-[1.15]"
+                                    fill
+                                    sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 54vw"
+                                    className="pointer-events-none object-cover md:scale-[1.08] lg:scale-[1.15]"
                                     priority
                                 />
                             </motion.div>

@@ -214,7 +214,7 @@ const ProjectsGrid = ({ projects, location, projectType, sector }: { projects: P
       <div className="xl:border-b border-border">
         <div className="container h-full">
           {/* Mobile Filter Button */}
-          <div className="xl:hidden pt-100">
+          <div className="xl:hidden pt-50 sm:pt-100">
             <button
               onClick={() => setShowFilters(!showFilters)}
               className="w-full flex items-center leading-0 justify-between px-5 gap-2 border border-primary py-3 md:py-4 lg:py-5 text-secondary section-description hover:bg-primary hover:text-white transition-colors duration-300"

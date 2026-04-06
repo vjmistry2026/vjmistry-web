@@ -79,7 +79,7 @@ const SectionTwo = ({ data }: { data: CertificateType['secondSection'] }) => {
   return (
     <section className="py-100 lg:py-130 3xl:py-130 bg-light">
       <div className="container">
-        <AnimatedHeading text={data.title} className="mb-4 md:mb-30" />
+        <AnimatedHeading text={data.title} className="mb-30" />
         <motion.p
           variants={moveUp(0.15)}
           initial="hidden"

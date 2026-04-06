@@ -12,7 +12,7 @@ const Index = ({ data }: { data: HSeType }) => {
   return (
     <>
       <PageBanner title={data.pageTitle} image={data.banner} imageAlt={data.bannerAlt} />
-      <DecImg sectionClassName="py-130 md:py-150" title={data.firstSection.title} desc={data.firstSection.description} image={data.firstSection.image} alt={data.firstSection.imageAlt} className="lg:gap-[73px]" titleClass="mb-2 xl:mb-30 leading-[1.2]" />
+      <DecImg sectionClassName="py-40 sm:py-130 md:py-150" title={data.firstSection.title} desc={data.firstSection.description} image={data.firstSection.image} alt={data.firstSection.imageAlt} className="lg:gap-[73px]" titleClass="mb-30 leading-[1.2]" />
       <ComHealth data={data.secondSection} />
       <ZeroHarm data={data.thirdSection} />
       <QuoteBanner data={data.fourthSection} />

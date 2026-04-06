@@ -89,7 +89,7 @@ const WhatSetsUsApart = ({ firstData, secondData }: { firstData: AboutType['four
         </div>
 
         <div className="container relative z-10">
-          <h2 className="section-heading text-paragraph-2 mb-5 md:mb-12 lg:mb-15"> {heading} </h2>
+          <h2 className="section-heading text-paragraph-2 mb-30"> {heading} </h2>
           <div className="grid grid-cols-1 md:grid-cols-3">
             {features.map((feature, index) => {
               const isActive = index === activeIndex;
@@ -117,8 +117,8 @@ const WhatSetsUsApart = ({ firstData, secondData }: { firstData: AboutType['four
                     />
                   )}
 
-                  <div className="p-[24px] lg:p-[30px] h-full cursor-pointer relative flex flex-col justify-between z-20">
-                    <div className={`w-[60px] h-[60px] flex items-center justify-center transition-colors duration-300 shrink-0 mb-[33px] ${isActive ? "bg-secondary" : "bg-paragraph-2"}`} >
+                  <div className="p-[24px] p-2 lg:p-[30px] h-full cursor-pointer relative flex flex-col justify-between z-20">
+                    <div className={`w-15 h-15 flex items-center justify-center transition-colors duration-300 shrink-0 mb-[33px] ${isActive ? "bg-secondary" : "bg-paragraph-2"}`} >
                       <Image src={feature.image} alt={feature.imageAlt ?? feature.title} width={22} height={22}
                         className={`pointer-events-none w-auto h-[32px] transition-all duration-300 ${isActive ? "invert brightness-0" : ""}`}
                       />

@@ -15,7 +15,7 @@ const ZeroHarm = ({ data }: { data: HSeType['thirdSection'] }) => {
   );
 
   return (
-    <section className="bg-white pt-130 pb-150">
+    <section className="bg-white pt-40 pb-50 sm:pt-130 sm:pb-150">
       <div className="container">
         <AnimatedHeading text={data.title} className="mb-30" />
         <p className="cmn-p max-w-3xl font-bold">{data.description}</p>

@@ -31,7 +31,7 @@ const PopularBlock = ({ latestNewsList }: PopularBlockProps) => {
   }
 
   return (
-    <div className="grid grid-cols-1 gap-30 2xl:gap-30 xl:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] 3xl:grid-cols-[842px_auto] border-b border-border pb-5 xl:pb-13 2xl:pb-25">
+    <div className="grid grid-cols-1 gap-40 2xl:gap-30 xl:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] 3xl:grid-cols-[842px_auto] border-b border-border pb-5 xl:pb-13 2xl:pb-25">
       {latestNewsList.map((article, index) => {
         const isFeatured = index === 0;
         return (

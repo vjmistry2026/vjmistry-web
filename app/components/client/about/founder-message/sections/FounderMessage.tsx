@@ -59,7 +59,7 @@ export default function FoundersMessage({ data }: { data: FoundersMessageType['f
           <Breadcrumb variant="dark" />
         </motion.div>
 
-        <AnimatedHeading text={data.items[0].title} className="mb-5 lg:mb-8" />
+        <AnimatedHeading text={data.items[0].title} className="mb-30" />
 
         <div className="flex flex-col xl:flex-row items-stretch 3xl:items-end justify-between gap-8 lg:gap-15 2xl:gap-22">
           {/* ── LEFT COLUMN ── */}

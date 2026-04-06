@@ -61,7 +61,7 @@ const AboutVj = ({ data }: { data: AboutType['firstSection'] }) => {
 
                     {/* LEFT — full width mobile, 58% on lg+ */}
                     <div className="w-full md:w-[50%] lg:w-[58%] flex flex-col justify-center md:py-120">
-                        <h2 ref={titleRef} className="section-heading flex items-center gap-3 text-secondary" >
+                        <h2 ref={titleRef} className="section-heading flex items-center gap-3 text-secondary mb-4 md:mb-30" >
                             {data.title}
                             <span className="relative w-fit inline-block overflow-hidden">
                                 <span
@@ -79,7 +79,7 @@ const AboutVj = ({ data }: { data: AboutType['firstSection'] }) => {
                             initial="hidden"
                             whileInView="show"
                             viewport={{ once: true }}
-                            className="mt-[20px] lg:mt-[30px] section-description xl:max-w-[670px] 2xl:max-w-[877px] md:-tracking-[0.3px] lg:-tracking-normal"
+                            className=" section-description xl:max-w-[670px] 2xl:max-w-[877px] md:-tracking-[0.3px] lg:-tracking-normal"
                         >
                             {data.description}
                         </motion.p>

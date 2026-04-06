@@ -125,12 +125,12 @@ body {
     --text-82: clamp(44px, 2.79vw + 44px, 82px);
     --text-85: clamp(48px, 2.72vw + 48px, 85px);
 
-    --spacing-30: clamp(20px, 0.44vw + 20px, 30px);
+    --space-30: clamp(18px, 0.44vw + 0.1em, 30px);
 
     /* --space-40: clamp(25px, 2vw + 8px, 40px); */
-    --space-40: clamp(25px, 1.1vw + 25px, 40px);
+    --space-40: clamp(30px, 1.1vw + 25px, 40px);
 
-    --space-50: clamp(30px, 5vw + 0.1em, 50px);
+    --space-50: clamp(40px, 5vw + 0.1em, 50px);
 
     /* --space-70: clamp(35px, 3vw + 8px, 70px); */
     --space-70: clamp(35px, 2.57vw + 35px, 70px);
@@ -159,6 +159,12 @@ body {
     }
 }
 
+@media (max-width:786px) {
+    :root {
+        /* --space-30: clamp(0.6em, 0.44vw + 0.1em, 20px); */
+    }
+}
+
 @theme inline {
     --font-family-sans: var(--font-nexa);
 
@@ -183,7 +189,7 @@ body {
     --text-75: var(--text-75);
     --text-82: var(--text-82);
     --text-85: var(--text-85);
-    --spacing-30: var(--spacing-30);
+    --spacing-30: var(--space-30);
     --spacing-40: var(--space-40);
     --spacing-50: var(--space-50);
     --spacing-70: var(--space-70);
@@ -232,7 +238,7 @@ body {
 }
 
 @utility section-heading {
-    @apply text-60 lg:text-66 3xl:text-75 font-condensed leading-[100%];
+    @apply text-60 lg:text-66 3xl:text-75 font-condensed leading-[1.2];
 }
 
 @utility section-description {

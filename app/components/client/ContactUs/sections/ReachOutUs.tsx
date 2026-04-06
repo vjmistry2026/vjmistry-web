@@ -74,7 +74,7 @@ const ReachOutUs = ({ data }: { data: ContactType['secondSection'] }) => {
     <section className="pb-150 md:pb-130">
       <div className="container">
         <div className="mb-7 md:mb-10 xl:mb-15">
-          <AnimatedHeading text={data.title} className="mb-2 md:mb-30 leading-[1]" />
+          <AnimatedHeading text={data.title} className="mb-30" />
           <motion.p
             variants={moveUp(0.15)}
             initial="hidden"
@@ -118,7 +118,7 @@ const ReachOutUs = ({ data }: { data: ContactType['secondSection'] }) => {
               <div className="space-y-4 xl:space-y-30">
                 <div className="flex items-start gap-3 text-paragraph/70">
                   <div className="min-w-[27px]">
-                    <Image src={iconMap.address} alt="" width={22.99} height={26.66} className="mt-1 h-3 w-3 xl:w-[22.99px] xl:h-[26.66px] shrink-0" />
+                    <Image src={iconMap.address} alt="" width={22.99} height={26.66} className="mt-1 h-5 w-5 xl:w-[22.99px] xl:h-[26.66px] shrink-0" />
                   </div>
                   <p className="cmn-p font-bold">{item.address}</p>
                 </div>
@@ -128,7 +128,7 @@ const ReachOutUs = ({ data }: { data: ContactType['secondSection'] }) => {
                     className="flex items-start gap-3 text-paragraph/70 transition-colors duration-300 hover:text-primary"
                   >
                     <div className="min-w-[27px]">
-                      <Image src={iconMap.phone} alt="" width={32} height={32} className="mt-1 h-3 w-3 xl:w-[26px] xl:h-[26px] shrink-0" />
+                      <Image src={iconMap.phone} alt="" width={32} height={32} className="mt-1 h-5 w-5 xl:w-[26px] xl:h-[26px] shrink-0" />
                     </div>
                     <span className="cmn-p font-bold">{item.phoneOne}</span>
                   </a>
@@ -137,7 +137,7 @@ const ReachOutUs = ({ data }: { data: ContactType['secondSection'] }) => {
                     className="flex items-start gap-3 text-paragraph/70 transition-colors duration-300 hover:text-primary"
                   >
                     <div className="min-w-[27px]">
-                      <Image src={iconMap.phone} alt="" width={32} height={32} className="mt-1 h-3 w-3 xl:w-[26px] xl:h-[26px] shrink-0" />
+                      <Image src={iconMap.phone} alt="" width={32} height={32} className="mt-1 h-5 w-5 xl:w-[26px] xl:h-[26px] shrink-0" />
                     </div>
                     <span className="cmn-p font-bold">{item.phoneTwo}</span>
                   </a>
@@ -146,7 +146,7 @@ const ReachOutUs = ({ data }: { data: ContactType['secondSection'] }) => {
 
                 <a href={`mailto:${item.email}`} className="flex items-start gap-3 text-paragraph/70 transition-colors duration-300 hover:text-primary" >
                   <div className="min-w-[27px]">
-                    <Image src={iconMap.email} alt="" width={32} height={32} className="mt-1 h-3 w-3 xl:w-[32px] xl:h-[32.21px] shrink-0" />
+                    <Image src={iconMap.email} alt="" width={32} height={32} className="mt-1 h-5 w-5 xl:w-[32px] xl:h-[32.21px] shrink-0" />
                   </div>
                   <span className="cmn-p font-bold">{item.email}</span>
                 </a>
@@ -165,7 +165,7 @@ const ReachOutUs = ({ data }: { data: ContactType['secondSection'] }) => {
                   </span>
                   <span className="inline-flex h-[44px] xl:h-[64px] w-[44px] xl:w-[64px] items-center justify-center border border-border transition-all duration-300 group-hover:border-primary group-hover:bg-primary sm:h-[52px] sm:w-[52px]">
                     <Image src="/assets/icons/right-top-arrow-primary.svg" alt="" width={12} height={12}
-                      className="h-3 w-3 rotate-0 object-contain transition-all duration-300 group-hover:rotate-45 group-hover:invert group-hover:brightness-0 sm:h-[14px] sm:w-[14px]"
+                      className="h-5 w-5 rotate-0 object-contain transition-all duration-300 group-hover:rotate-45 group-hover:invert group-hover:brightness-0 sm:h-[14px] sm:w-[14px]"
                     />
                   </span>
                 </Link>

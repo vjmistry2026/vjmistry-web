@@ -129,7 +129,7 @@ const CompanyTimeline = ({ data }: { data: AboutType['secondSection'] }) => {
   return (
     <section ref={sectionRef} className="bg-white pb-100 lg:pb-130 3xl:pb-150 overflow-hidden">
       <div className="container">
-        <div className="flex flex-col gap-5 lg:gap-[30px] mb-[30px] lg:mb-15">
+        <div className="flex flex-col gap-3 lg:gap-[30px] mb-[30px] lg:mb-15">
           <AnimatedHeading text={heading} className="max-w-[940px] leading-[120%]" />
           <div className="flex justify-between items-center md:gap-6">
             <motion.p
@@ -256,7 +256,7 @@ const CompanyTimeline = ({ data }: { data: AboutType['secondSection'] }) => {
                   initial="hidden"
                   animate="show"
                   variants={moveUp(0)}
-                  className="text-32 font-condensed leading-[100%] text-secondary mb-5 lg:mb-[30px]"
+                  className="text-32 font-condensed leading-[100%] text-secondary mb-3 md:mb-30"
                 >
                   {activeSlide.title}
                 </motion.h3>

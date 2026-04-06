@@ -71,7 +71,7 @@ const CustomButton = ({
     </>
   );
 
-  const sharedClass = `group inline-flex items-center font-nexa font-bold text-16 transition-all duration-250 ${disabled ? "cursor-not-allowed opacity-70" : "cursor-pointer"} ${className} ${pressed ? "scale-95" : "scale-100"}`;
+  const sharedClass = `group inline-flex items-center font-nexa font-bold text-16 transition-all duration-250 w-fit ${disabled ? "cursor-not-allowed opacity-70" : "cursor-pointer"} ${className} ${pressed ? "scale-95" : "scale-100"}`;
 
   if (!href || href === "" || href === "#") {
     return (
