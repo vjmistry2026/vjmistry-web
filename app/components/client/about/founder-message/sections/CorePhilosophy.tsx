@@ -21,11 +21,11 @@ const CorePhilosophy = ({ data }: { data: FoundersMessageType['secondSection'] }
       return;
     }
 
-    const mobileQuery = window.matchMedia("(max-width: 639px)");
+    const touchQuery = window.matchMedia("(max-width: 1023px)");
     let frameId: number | null = null;
 
     const updateActiveCard = () => {
-      if (!mobileQuery.matches) {
+      if (!touchQuery.matches) {
         return;
       }
 
@@ -69,7 +69,7 @@ const CorePhilosophy = ({ data }: { data: FoundersMessageType['secondSection'] }
 
     window.addEventListener("scroll", requestActiveCardUpdate, { passive: true });
     window.addEventListener("resize", requestActiveCardUpdate);
-    mobileQuery.addEventListener("change", handleChange);
+    touchQuery.addEventListener("change", handleChange);
 
     return () => {
       if (frameId !== null) {
@@ -78,7 +78,7 @@ const CorePhilosophy = ({ data }: { data: FoundersMessageType['secondSection'] }
 
       window.removeEventListener("scroll", requestActiveCardUpdate);
       window.removeEventListener("resize", requestActiveCardUpdate);
-      mobileQuery.removeEventListener("change", handleChange);
+      touchQuery.removeEventListener("change", handleChange);
     };
   }, [items]);
 
