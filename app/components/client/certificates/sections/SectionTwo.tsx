@@ -77,9 +77,9 @@ const SectionTwo = ({ data }: { data: CertificateType['secondSection'] }) => {
   }, [data.items]);
 
   return (
-    <section className="py-100 lg:py-130 3xl:py-130 bg-light">
+    <section className="pt-40 pb-50 lg:py-130 3xl:py-130 bg-light">
       <div className="container">
-        <AnimatedHeading text={data.title} className="mb-30" />
+        <AnimatedHeading text={data.title} className="mb-30 leading-[1]" />
         <motion.p
           variants={moveUp(0.15)}
           initial="hidden"

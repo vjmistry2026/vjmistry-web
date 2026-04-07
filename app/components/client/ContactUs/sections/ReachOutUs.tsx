@@ -117,7 +117,7 @@ const ReachOutUs = ({ data }: { data: ContactType['secondSection'] }) => {
 
               <div className="space-y-4 xl:space-y-30">
                 <div className="flex items-start gap-3 text-paragraph/70">
-                  <div className="min-w-[27px]">
+                  <div className="min-w-3 xl:min-w-[27px]">
                     <Image src={iconMap.address} alt="" width={22.99} height={26.66} className="mt-1 h-5 w-5 xl:w-[22.99px] xl:h-[26.66px] shrink-0" />
                   </div>
                   <p className="cmn-p font-bold">{item.address}</p>
@@ -127,7 +127,7 @@ const ReachOutUs = ({ data }: { data: ContactType['secondSection'] }) => {
                   <a href={`tel:${item.phoneOne.replace(/[^\d+]/g, "")}`}
                     className="flex items-start gap-3 text-paragraph/70 transition-colors duration-300 hover:text-primary"
                   >
-                    <div className="min-w-[27px]">
+                    <div className="min-w-3 xl:min-w-[27px]">
                       <Image src={iconMap.phone} alt="" width={32} height={32} className="mt-1 h-5 w-5 xl:w-[26px] xl:h-[26px] shrink-0" />
                     </div>
                     <span className="cmn-p font-bold">{item.phoneOne}</span>
@@ -136,7 +136,7 @@ const ReachOutUs = ({ data }: { data: ContactType['secondSection'] }) => {
                   <a href={`tel:${item.phoneTwo.replace(/[^\d+]/g, "")}`}
                     className="flex items-start gap-3 text-paragraph/70 transition-colors duration-300 hover:text-primary"
                   >
-                    <div className="min-w-[27px]">
+                    <div className="min-w-3 xl:min-w-[27px]">
                       <Image src={iconMap.phone} alt="" width={32} height={32} className="mt-1 h-5 w-5 xl:w-[26px] xl:h-[26px] shrink-0" />
                     </div>
                     <span className="cmn-p font-bold">{item.phoneTwo}</span>
@@ -145,7 +145,7 @@ const ReachOutUs = ({ data }: { data: ContactType['secondSection'] }) => {
                 </div>
 
                 <a href={`mailto:${item.email}`} className="flex items-start gap-3 text-paragraph/70 transition-colors duration-300 hover:text-primary" >
-                  <div className="min-w-[27px]">
+                  <div className="min-w-3 xl:min-w-[27px]">
                     <Image src={iconMap.email} alt="" width={32} height={32} className="mt-1 h-5 w-5 xl:w-[32px] xl:h-[32.21px] shrink-0" />
                   </div>
                   <span className="cmn-p font-bold">{item.email}</span>

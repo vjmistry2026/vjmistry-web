@@ -152,7 +152,7 @@ const WhatSetsUsApart = ({ firstData, secondData }: { firstData: AboutType['four
             {stats.map((stat, index) => (
               <div
                 key={index}
-                className={`p-5 lg:p-10 xl:p-[63px] border-r border-border ${
+                className={`p-5 md:py-10  2xl:p-[63px] border-r border-border ${
                   index === 0 ? "border-l" : ""
                 } ${index === 2 ? "border-l md:border-l-0" : ""} ${
                   index < 2 ? "border-b md:border-b-0 border-border" : ""
