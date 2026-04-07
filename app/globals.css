@@ -125,7 +125,7 @@ body {
     --text-82: clamp(44px, 2.79vw + 44px, 82px);
     --text-85: clamp(48px, 2.72vw + 48px, 85px);
 
-    --space-30: clamp(18px, 0.44vw + 0.1em, 30px);
+    --space-30: clamp(18px, 3vw + 0.1em, 30px);
 
     /* --space-40: clamp(25px, 2vw + 8px, 40px); */
     --space-40: clamp(30px, 1.1vw + 25px, 40px);
@@ -302,7 +302,7 @@ body {
 }
 
 .cmn-p {
-    @apply font-nexa text-20 leading-1p5 text-paragraph;
+    @apply font-nexa xl:text-20 leading-1p5 text-paragraph;
 }
 
 .news-item-content h2 {

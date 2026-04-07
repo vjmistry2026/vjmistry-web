@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { type CSSProperties, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import { useForm, useWatch } from "react-hook-form";
@@ -12,6 +12,7 @@ import { useContainerLeftInset } from "@/app/hooks/useContainerLeftInset";
 import CustomButton from "../../common/CustomButton";
 import { ContactType } from "@/app/types/contact";
 import ReCAPTCHA from 'react-google-recaptcha';
+
 type ContactFormValues = {
   first: string;
   second: string;
@@ -25,7 +26,8 @@ const PowerBehind = ({ data }: { data: ContactType['firstSection'] }) => {
   const successRef = useRef<HTMLDivElement>(null);
   const containerInset = useContainerLeftInset(containerRef);
   const [successMessage, setSuccessMessage] = useState("");
-  const recaptcha = useRef<ReCAPTCHA>(null)
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const [captchaKey, setCaptchaKey] = useState(0);
   const [error, setError] = useState("")
   const {
     control,
@@ -69,8 +71,7 @@ const PowerBehind = ({ data }: { data: ContactType['firstSection'] }) => {
   const onSubmit = async (data: ContactFormValues) => {
     try {
       setSuccessMessage("");
-      const captchaValue = recaptcha?.current?.getValue()
-      if (!captchaValue) {
+      if (!captchaToken) {
         setError("Please verify yourself to continue")
         return;
       }
@@ -85,6 +86,8 @@ const PowerBehind = ({ data }: { data: ContactType['firstSection'] }) => {
       if (response.ok) {
         setSuccessMessage(`Thanks ${data.first}, your message has been sent successfully.`);
         reset()
+        setCaptchaToken(null);
+        setCaptchaKey((key) => key + 1);
       } else {
         alert("Something went wrong, try again")
       }
@@ -97,13 +100,14 @@ const PowerBehind = ({ data }: { data: ContactType['firstSection'] }) => {
   return (
     <section className="relative overflow-hidden py-40 sm:py-130 3xl:py-150">
       <ContainerAnchor ref={containerRef} />
-      <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-[1.2fr_1.5fr] 3xl:grid-cols-[875px_auto] align-end"
-      // style={{ paddingInline: containerInset }}
+      <div
+        className="grid grid-cols-1 align-end lg:grid-cols-2 2xl:grid-cols-[1.2fr_1.5fr] 3xl:grid-cols-[875px_auto]"
+        style={{ "--container-inset": `${containerInset}px` } as CSSProperties}
       >
         <motion.div initial={{ opacity: 0, x: -60 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }} className="relative mb-10 lg:mb-0"  >
-          <div style={{ paddingLeft: containerInset }} className="relative h-full ">
-            <div className="pointer-events-none absolute right-0 bottom-0 z-0  ">
-              <img src="/assets/shapes/contact-shape.svg" alt="" className="w-auto h-auto object-cover" />
+          <div className="relative h-full pl-[var(--container-inset)]">
+            <div className="pointer-events-none absolute bottom-0 left-0 z-0 lg:left-auto lg:right-0">
+              <img src="/assets/shapes/contact-shape.svg" alt="" className="h-auto w-[50%] object-cover sm:w-[60%] md:w-[320px] lg:w-auto" />
             </div>
 
             <AnimatedHeading text="Let's Build Something Great Together" className="mb-30" />
@@ -115,7 +119,7 @@ const PowerBehind = ({ data }: { data: ContactType['firstSection'] }) => {
         </motion.div>
 
         <motion.div initial={{ opacity: 0, x: 60 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }} className="" >
-          <div style={{ paddingRight: containerInset }} className="relative ">
+          <div className="relative px-[var(--container-inset)] lg:pl-0 lg:pr-[var(--container-inset)]">
             <div className="bg-light px-6 py-7 lg:px-8 xl:px-[12] 2xl:px-50 2xl:py-[65px] h-full">
               <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)} noValidate>
                 <div className="space-y-12 xl:space-y-17 3xl:space-y-[67.85px]">
@@ -201,7 +205,18 @@ const PowerBehind = ({ data }: { data: ContactType['firstSection'] }) => {
 
 
                 <div className="flex items-stretch gap-4 pt-0 flex-col">
-                  <ReCAPTCHA sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""} ref={recaptcha} className='mt-5' />
+                  <ReCAPTCHA
+                    key={captchaKey}
+                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+                    onChange={(token) => {
+                      setCaptchaToken(token);
+                      if (token) {
+                        setError("");
+                      }
+                    }}
+                    onExpired={() => setCaptchaToken(null)}
+                    className='mt-5'
+                  />
                   {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
                   <CustomButton
                     label={isSubmitting ? "Sending..." : "Submit"}

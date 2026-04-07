@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { foundersMessageData } from "../data";
 import Breadcrumb from "@/app/components/client/common/Breadcrumb";
 import AnimatedHeading from "../../../common/AnimateHeading";
 import { motion } from "framer-motion";
@@ -65,13 +64,7 @@ export default function FoundersMessage({ data }: { data: FoundersMessageType['f
           {/* ── LEFT COLUMN ── */}
           <div ref={descriptionColumnRef} className="flex flex-col order-2 xl:order-1">
             <div className="mb-5 lg:mb-8">
-              <Image
-                src="/assets/images/about/founder-message/quotes.svg"
-                alt="Quote"
-                width={50}
-                height={42}
-                className="h-8 xl:h-[42] w-auto"
-              />
+              <Image src="/assets/images/about/founder-message/quotes.svg" alt="Quote" width={50} height={42} className="h-8 xl:h-[42] w-auto" />
             </div>
 
             <div
@@ -84,9 +77,9 @@ export default function FoundersMessage({ data }: { data: FoundersMessageType['f
 
           {/* ── RIGHT COLUMN ── */}
           <div className="relative w-full xl:w-[50%] 3xl:w-[746px] h-full shrink-0 pl-10 xl:pl-6 order-1 xl:order-2">
-            {/* Aspect ratio box — gives real height at all breakpoints */}
+            {/* Fixed single-column heights prevent the clipped image from getting too tall on tablets. */}
             <div
-              className="relative w-full aspect-[4/3] lg:aspect-[16/11] h-full xl:aspect-auto"
+              className="relative w-full h-[300px] sm:h-[360px] md:h-[420px] lg:h-[500px] xl:h-full xl:aspect-auto"
               style={imageColumnHeight ? { height: `${imageColumnHeight}px` } : undefined}
             >
               <Image
