@@ -105,7 +105,7 @@ const PowerBehind = ({ data }: { data: ContactType['firstSection'] }) => {
         style={{ "--container-inset": `${containerInset}px` } as CSSProperties}
       >
         <motion.div initial={{ opacity: 0, x: -60 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }} className="relative mb-10 lg:mb-0"  >
-          <div className="relative h-full pl-[var(--container-inset)]">
+          <div className="relative h-full px-[var(--container-inset)] lg:pr-0">
             <div className="pointer-events-none absolute bottom-0 left-0 z-0 lg:left-auto lg:right-0">
               <img src="/assets/shapes/contact-shape.svg" alt="" className="h-auto w-[50%] object-cover sm:w-[60%] md:w-[320px] lg:w-auto" />
             </div>
@@ -122,8 +122,8 @@ const PowerBehind = ({ data }: { data: ContactType['firstSection'] }) => {
           <div className="relative px-[var(--container-inset)] lg:pl-0 lg:pr-[var(--container-inset)]">
             <div className="bg-light px-6 py-7 lg:px-8 xl:px-[12] 2xl:px-50 2xl:py-[65px] h-full">
               <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)} noValidate>
-                <div className="space-y-12 xl:space-y-17 3xl:space-y-[67.85px]">
-                  <div className="grid grid-cols-1 gap-10 md:grid-cols-2 h-full">
+                <div className="space-y-8 md:space-y-12 xl:space-y-17 3xl:space-y-[67.85px]">
+                  <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-10 h-full">
                     <FloatingInput
                       label="First Name"
                       value={values.first}
@@ -150,7 +150,7 @@ const PowerBehind = ({ data }: { data: ContactType['firstSection'] }) => {
                     />
                   </div>
 
-                  <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
+                  <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-10">
                     <FloatingInput
                       label="Email Id"
                       type="email"
@@ -179,7 +179,7 @@ const PowerBehind = ({ data }: { data: ContactType['firstSection'] }) => {
                   </div>
                 </div>
 
-                <div className="mt-12 xl:mt-17 3xl:mt-[67.85px] mb-8 xl:mb-12 3xl:mb-5">
+                <div className="mt-8 md:mt-12 xl:mt-17 3xl:mt-[67.85px] mb-6 md:mb-8 xl:mb-12 3xl:mb-5">
                   <FloatingTextarea
                     label="Write Message To Us"
                     value={values.message}

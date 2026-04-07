@@ -15,11 +15,11 @@ const SectionTwo = ({ data }: { data: CertificateType['secondSection'] }) => {
       return;
     }
 
-    const mobileQuery = window.matchMedia("(max-width: 639px)");
+    const touchQuery = window.matchMedia("(max-width: 1023px)");
     let frameId: number | null = null;
 
     const updateActiveCard = () => {
-      if (!mobileQuery.matches) {
+      if (!touchQuery.matches) {
         return;
       }
 
@@ -63,7 +63,7 @@ const SectionTwo = ({ data }: { data: CertificateType['secondSection'] }) => {
 
     window.addEventListener("scroll", requestActiveCardUpdate, { passive: true });
     window.addEventListener("resize", requestActiveCardUpdate);
-    mobileQuery.addEventListener("change", handleChange);
+    touchQuery.addEventListener("change", handleChange);
 
     return () => {
       if (frameId !== null) {
@@ -72,7 +72,7 @@ const SectionTwo = ({ data }: { data: CertificateType['secondSection'] }) => {
 
       window.removeEventListener("scroll", requestActiveCardUpdate);
       window.removeEventListener("resize", requestActiveCardUpdate);
-      mobileQuery.removeEventListener("change", handleChange);
+      touchQuery.removeEventListener("change", handleChange);
     };
   }, [data.items]);
 
@@ -90,7 +90,7 @@ const SectionTwo = ({ data }: { data: CertificateType['secondSection'] }) => {
           {data.description}
         </motion.p>
 
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3 xl:gap-8 3xl:gap-10">
+        <div className="grid grid-cols-1 gap-5  xl:grid-cols-3 xl:gap-8 3xl:gap-10">
           {data.items.map((item, index) => {
             const isActive = activeId === item._id;
 
