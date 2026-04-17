@@ -11,7 +11,7 @@ export interface ProjectType {
 
     projects: {
         _id?: string;
-
+status:string;
         metaTitle: string;
         metaDescription: string;
         banner: string;

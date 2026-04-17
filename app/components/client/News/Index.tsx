@@ -10,7 +10,7 @@ const Index = ({ data, category }: { data: NewsType, category: Filters[] }) => {
     <>
       <PageBanner title={data.pageTitle} image={data.banner} imageAlt={data.bannerAlt} />
       <Suspense>
-        <Main news={data.news} category={category} />
+        <Main news={data.news.filter((item)=>item.status == "published")} category={category} />
       </Suspense>
     </>
   );

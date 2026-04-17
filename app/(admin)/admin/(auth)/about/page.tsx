@@ -162,6 +162,7 @@ const AboutPage = () => {
                                     <ImageUploader
                                         value={field.value}
                                         onChange={field.onChange}
+                                        recommendedDimension="Recommended: 1920 x 743 (px)"
                                     />
                                 )}
                             />
@@ -197,6 +198,7 @@ const AboutPage = () => {
                                             <ImageUploader
                                                 value={field.value}
                                                 onChange={field.onChange}
+                                                recommendedDimension="Recommended: 637 x 508 (px)"
                                             />
                                         )}
                                     />
@@ -281,6 +283,7 @@ const AboutPage = () => {
                                                         <ImageUploader
                                                             value={field.value}
                                                             onChange={field.onChange}
+                                                            recommendedDimension="Recommended: 742 x 439 (px)"
                                                         />
                                                     )}
                                                 />
@@ -371,8 +374,10 @@ const AboutPage = () => {
                                                 rules={{ required: "Logo is required" }}
                                                 render={({ field }) => (
                                                     <ImageUploader
+                                                    isLogo
                                                         value={field.value}
                                                         onChange={field.onChange}
+                                                        recommendedDimension="Recommended: 60 x 50 (px)"
                                                     />
                                                 )}
                                             />
@@ -433,6 +438,7 @@ const AboutPage = () => {
                                             <ImageUploader
                                                 value={field.value}
                                                 onChange={field.onChange}
+                                                recommendedDimension="Recommended: 1920 x 679 (px)"
                                             />
                                         )}
                                     />
@@ -462,8 +468,10 @@ const AboutPage = () => {
                                                 rules={{ required: "Logo is required" }}
                                                 render={({ field }) => (
                                                     <ImageUploader
+                                                    isLogo
                                                         value={field.value}
                                                         onChange={field.onChange}
+                                                        recommendedDimension="Recommended: 30 x 35 (px)"
                                                     />
                                                 )}
                                             />

@@ -20,6 +20,11 @@ const projectSchema = new mongoose.Schema({
       thumbnailAlt: { type: String },
       title: { type: String },
       slug: { type: String },
+      status: {
+        type: String,
+        enum: ["draft", "published"],
+        default: "draft",
+      },
       firstSection: {
         yearOfCompletion: { type: String },
         expertise: { type: String },

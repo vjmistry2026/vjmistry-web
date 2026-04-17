@@ -183,6 +183,7 @@ const ExpertisePage = () => {
                                     <ImageUploader
                                         value={field.value}
                                         onChange={field.onChange}
+                                        recommendedDimension="Recommended: 1920 x 743 (px)"
                                     />
                                 )}
                             />
@@ -236,7 +237,7 @@ const ExpertisePage = () => {
                                             control={control}
                                             rules={{ required: "Image is required" }}
                                             render={({ field }) => (
-                                                <ImageUploader value={field.value} onChange={field.onChange} />
+                                                <ImageUploader value={field.value} onChange={field.onChange} recommendedDimension="Recommended: 790 x 574 (px)"/>
                                             )}
                                         />
                                     </div>
@@ -385,8 +386,10 @@ const ExpertisePage = () => {
                                                 rules={{ required: "Logo is required" }}
                                                 render={({ field }) => (
                                                     <ImageUploader
+                                                    isLogo
                                                         value={field.value}
                                                         onChange={field.onChange}
+                                                        recommendedDimension="Recommended: 40 x 40 (px)"
                                                     />
                                                 )}
                                             />
@@ -438,6 +441,7 @@ const ExpertisePage = () => {
                                             <ImageUploader
                                                 value={field.value}
                                                 onChange={field.onChange}
+                                                recommendedDimension="Recommended: 1620 x 694 (px)"
                                             />
                                         )}
                                     />
@@ -510,6 +514,7 @@ const ExpertisePage = () => {
                                                     <ImageUploader
                                                         value={field.value}
                                                         onChange={field.onChange}
+                                                        recommendedDimension="Recommended: 984 x 621 (px)"
                                                     />
                                                 )}
                                             />
@@ -588,6 +593,7 @@ const ExpertisePage = () => {
                                                             <ImageUploader
                                                                 value={field.value}
                                                                 onChange={field.onChange}
+                                                                recommendedDimension="Recommended: 513 x 426 (px)"
                                                             />
                                                         )}
                                                     />
@@ -643,6 +649,7 @@ const ExpertisePage = () => {
                                                                         onChange={(url: string) => {
                                                                             field.onChange(url); // update file URL // update size separately
                                                                         }}
+                                                                        recommendedDimension="Recommended: 1450 x 680 (px)"
                                                                     />
                                                                 )}
                                                             />

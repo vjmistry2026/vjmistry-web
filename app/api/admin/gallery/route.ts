@@ -52,6 +52,7 @@ export async function PATCH(request: NextRequest) {
             toUpdateItem.item = body.name;
             toUpdateItem.thumbnail = body.image;
             toUpdateItem.thumbnailAlt = body.imageAlt;
+            toUpdateItem.status = body.status;
             await gallery.save();
             revalidateTag("gallery", "default")
             return NextResponse.json({ message: "Item updated successfully" }, { status: 200 });
@@ -97,7 +98,7 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ message: "Gallery not found" }, { status: 404 });
         }
         revalidateTag("gallery", "default")
-        gallery.items.push({ item: body.name, thumbnail: body.image, thumbnailAlt: body.imageAlt, images: [] });
+        gallery.items.push({ item: body.name, thumbnail: body.image, thumbnailAlt: body.imageAlt, images: [], status:body.status });
         await gallery.save();
         return NextResponse.json({ message: "Gallery created successfully" }, { status: 200 });
     } catch (error) {

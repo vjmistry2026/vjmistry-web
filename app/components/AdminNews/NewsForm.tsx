@@ -44,6 +44,7 @@ interface ProjectFormProps {
     thirdSection: {
         content: string;
     };
+    status:string;
 }
 
 const NewsForm = ({ editMode }: { editMode?: boolean }) => {
@@ -113,6 +114,7 @@ const NewsForm = ({ editMode }: { editMode?: boolean }) => {
                 const data = await response.json();
                 setValue("metaTitle", data.data.metaTitle);
                 setValue("metaDescription", data.data.metaDescription);
+                setValue("status", data.data.status);
                 setValue("firstSection", {
                     ...data.data.firstSection,
                     category: data.data.firstSection.category?._id || "",
@@ -164,6 +166,47 @@ const NewsForm = ({ editMode }: { editMode?: boolean }) => {
                 className="flex flex-col gap-5"
                 onSubmit={handleSubmit(handleAddNews)}
             >
+
+                <input type="hidden" {...register("status")} />
+
+                <div className="flex items-center gap-2 justify-end">
+                    <Label className="">Status</Label>
+                    <Controller
+                        name={`status`}
+                        control={control}
+                        // rules={{ required: "Location is required" }}
+                        render={({ field }) => (
+                            <Select
+                                onValueChange={field.onChange}
+                                value={field.value}
+                                defaultValue=""
+                            >
+                                <SelectTrigger className="w-fit">
+                                    <SelectValue placeholder="Select Status" />
+                                </SelectTrigger>
+                                <SelectContent>
+
+                                    <SelectItem value={"draft"}>
+                                        Draft
+                                    </SelectItem>
+
+                                    <SelectItem value={"published"}>
+                                        Published
+                                    </SelectItem>
+                                </SelectContent>
+                            </Select>
+                        )}
+                    />
+
+                    <Button
+                        type="button"
+                        onClick={() => handleSubmit((data) => handleAddNews({ ...data, status: watch("status") }))()}
+                        className="bg-green-700 text-white"
+                    >
+                        Save
+                    </Button>
+                </div>
+
                 <AdminItemContainer>
                     <Label main>First Section</Label>
                     <div className="p-5 rounded-md flex flex-col gap-2">
@@ -261,6 +304,7 @@ const NewsForm = ({ editMode }: { editMode?: boolean }) => {
                                         <ImageUploader
                                             value={field.value}
                                             onChange={field.onChange}
+                                            recommendedDimension="Recommended: 1620 x 610 (px)"
                                         />
                                     )}
                                 />
@@ -290,6 +334,7 @@ const NewsForm = ({ editMode }: { editMode?: boolean }) => {
                                         <ImageUploader
                                             value={field.value}
                                             onChange={field.onChange}
+                                            recommendedDimension="Recommended: 800 x 600 (px)"
                                         />
                                     )}
                                 />

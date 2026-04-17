@@ -173,6 +173,8 @@ export async function PATCH(request: NextRequest) {
       foundProject.slug = body.slug;
       foundProject.metaTitle = body.metaTitle;
       foundProject.metaDescription = body.metaDescription;
+      foundProject.status = body.status;
+
       await project.save();
       revalidateTag("indi-project", "default");
       return NextResponse.json(

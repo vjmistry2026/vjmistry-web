@@ -324,6 +324,7 @@ export default function EquipmentPage() {
                                     <ImageUploader
                                         value={field.value}
                                         onChange={field.onChange}
+                                        recommendedDimension="Recommended: 1920 x 743 (px)"
                                     />
                                 )}
                             />
@@ -609,6 +610,7 @@ export default function EquipmentPage() {
                                                 <ImageUploader
                                                     value={image}
                                                     onChange={setImage}
+                                                    recommendedDimension="Recommended: 375 x 400 (px)"
                                                 />
                                             </div>
 
@@ -689,6 +691,7 @@ export default function EquipmentPage() {
                                                         <ImageUploader
                                                             value={image}
                                                             onChange={setImage}
+                                                            recommendedDimension="Recommended: 375 x 400 (px)"
                                                         />
                                                     </div>
 

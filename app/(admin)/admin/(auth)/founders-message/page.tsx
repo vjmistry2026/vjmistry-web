@@ -135,6 +135,7 @@ const AdminHome = () => {
                                                     <ImageUploader
                                                         value={field.value}
                                                         onChange={field.onChange}
+                                                        recommendedDimension="Recommended: 722 x 538 (px)"
                                                     />
                                                 )}
                                             />
@@ -243,8 +244,10 @@ const AdminHome = () => {
                                             rules={{ required: "Logo is required" }}
                                             render={({ field }) => (
                                                 <ImageUploader
+                                                isLogo
                                                     value={field.value}
                                                     onChange={field.onChange}
+                                                    recommendedDimension="Recommended: 40 x 40 (px)"
                                                 />
                                             )}
                                         />
@@ -296,6 +299,7 @@ const AdminHome = () => {
                                         <ImageUploader
                                             value={field.value}
                                             onChange={field.onChange}
+                                            recommendedDimension="Recommended: 1920 x 560 (px)"
                                         />
                                     )}
                                 />

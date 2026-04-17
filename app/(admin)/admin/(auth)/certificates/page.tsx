@@ -122,6 +122,7 @@ const CertificatePage = () => {
                                     <ImageUploader
                                         value={field.value}
                                         onChange={field.onChange}
+                                        recommendedDimension="Recommended: 1920 x 743 (px)"
                                     />
                                 )}
                             />
@@ -209,8 +210,10 @@ const CertificatePage = () => {
                                                 rules={{ required: "Logo is required" }}
                                                 render={({ field }) => (
                                                     <ImageUploader
+                                                    isLogo
                                                         value={field.value}
                                                         onChange={field.onChange}
+                                                        recommendedDimension="Recommended: 35 x 35 (px)"
                                                     />
                                                 )}
                                             />
