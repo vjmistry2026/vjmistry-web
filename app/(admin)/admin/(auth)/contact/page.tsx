@@ -107,6 +107,7 @@ const ContactPage = () => {
                                     <ImageUploader
                                         value={field.value}
                                         onChange={field.onChange}
+                                        recommendedDimension="Recommended: 1920 x 743 (px)"
                                     />
                                 )}
                             />

@@ -166,6 +166,7 @@ const IndiGallery = () => {
         onChange={(url) =>
           append({ image: url, imageAlt: "" })
         }
+        recommendedDimension="Recommended: 1444 x 676 (px)"
       />
 
       {/* EXISTING IMAGES */}
@@ -188,6 +189,7 @@ const IndiGallery = () => {
                 <ImageUploader
                   value={field.value}
                   onChange={field.onChange}
+                  recommendedDimension="Recommended: 1444 x 676 (px)"
                 />
               )}
             />

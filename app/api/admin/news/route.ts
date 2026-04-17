@@ -140,6 +140,7 @@ export async function PATCH(request: NextRequest) {
       foundNews.thirdSection = body.thirdSection;
       foundNews.metaTitle = body.metaTitle;
       foundNews.metaDescription = body.metaDescription;
+      foundNews.status = body.status;
       await news.save();
       revalidateTag("indi-news", "default");
       return NextResponse.json(

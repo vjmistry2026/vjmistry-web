@@ -61,6 +61,7 @@ interface ProjectFormProps {
       video: string;
     }[];
   };
+  status:string;
 }
 
 const ProjectForm = ({ editMode }: { editMode?: boolean }) => {
@@ -188,6 +189,7 @@ const ProjectForm = ({ editMode }: { editMode?: boolean }) => {
         setValue("secondSection", data.data.secondSection);
         setValue("secondSection.items", data.data.secondSection.items);
         setValue("thirdSection.items", data.data.thirdSection.items);
+        setValue("status", data.data.status);
       } else {
         const data = await response.json();
         alert(data.message);
@@ -235,6 +237,47 @@ const ProjectForm = ({ editMode }: { editMode?: boolean }) => {
         className="flex flex-col gap-5"
         onSubmit={handleSubmit(handleAddProject)}
       >
+
+        <input type="hidden" {...register("status")} />
+
+        <div className="flex items-center gap-2 justify-end">
+          <Label className="">Status</Label>
+          <Controller
+            name={`status`}
+            control={control}
+            // rules={{ required: "Location is required" }}
+            render={({ field }) => (
+              <Select
+                onValueChange={field.onChange}
+                value={field.value}
+                defaultValue=""
+              >
+                <SelectTrigger className="w-fit">
+                  <SelectValue placeholder="Select Status" />
+                </SelectTrigger>
+                <SelectContent>
+
+                  <SelectItem value={"draft"}>
+                    Draft
+                  </SelectItem>
+
+                  <SelectItem value={"published"}>
+                    Published
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+            )}
+          />
+
+          <Button
+            type="button"
+            onClick={() => handleSubmit((data) => handleAddProject({ ...data, status: watch("status") }))()}
+            className="bg-green-700 text-white"
+          >
+            Save
+          </Button>
+        </div>
+
         <AdminItemContainer>
           <Label className="" main>
             Banner
@@ -250,6 +293,7 @@ const ProjectForm = ({ editMode }: { editMode?: boolean }) => {
                     <ImageUploader
                       value={field.value}
                       onChange={field.onChange}
+                      recommendedDimension="Recommended: 1920 x 743 (px)"
                     />
                   )}
                 />
@@ -276,6 +320,7 @@ const ProjectForm = ({ editMode }: { editMode?: boolean }) => {
                     <ImageUploader
                       value={field.value}
                       onChange={field.onChange}
+                      recommendedDimension="Recommended: 514 x 513 (px)"
                     />
                   )}
                 />
@@ -550,6 +595,7 @@ const ProjectForm = ({ editMode }: { editMode?: boolean }) => {
                     <ImageUploader
                       value={field.value}
                       onChange={field.onChange}
+                      recommendedDimension="Recommended: 1619 x 752 (px)"
                     />
                   )}
                 />
@@ -638,6 +684,7 @@ const ProjectForm = ({ editMode }: { editMode?: boolean }) => {
                               <ImageUploader
                                 value={field.value}
                                 onChange={field.onChange}
+                                recommendedDimension="Recommended: 1920 x 895 (px)"
                               />
                             )}
                           />
@@ -744,14 +791,14 @@ const ProjectForm = ({ editMode }: { editMode?: boolean }) => {
           </div>
         </AdminItemContainer>
 
-        <div className="flex">
+        {/* <div className="flex">
           <Button
             type="submit"
             className="cursor-pointer text-white text-[16px] w-full"
           >
             Submit
           </Button>
-        </div>
+        </div> */}
       </form>
     </div>
   );

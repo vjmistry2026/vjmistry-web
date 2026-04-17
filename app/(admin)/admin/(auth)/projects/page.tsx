@@ -21,6 +21,8 @@ import { ImageUploader } from '@/components/ui/image-uploader'
 import { closestCorners, DndContext, DragEndEvent } from '@dnd-kit/core'
 import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import ProjectCard from "./ProjectCard";
+import { FaEye } from "react-icons/fa6";
+import Link from "next/link";
 
 
 interface CurrentOpeningsPageProps {
@@ -41,7 +43,7 @@ export default function CurrentOpenings() {
   const [projectType, setProjectType] = useState<string>("");
   const [sector, setSector] = useState<string>("");
   const [location, setLocation] = useState<string>("");
-  const [projectsList, setProjectsList] = useState<{ _id: string, title: string }[]>([]);
+  const [projectsList, setProjectsList] = useState<{ _id: string, title: string, status:string, slug:string }[]>([]);
   const [locationList, setLocationList] = useState<{ _id: string, name: string }[]>([]);
   const [projectTypeList, setProjectTypeList] = useState<{ _id: string, name: string }[]>([]);
   const [sectorList, setSectorList] = useState<{ _id: string, name: string }[]>([]);
@@ -334,7 +336,7 @@ export default function CurrentOpenings() {
 
     if (!over || active.id === over.id) return;
 
-    setProjectsList((projectsList: { _id: string; title: string }[]) => {
+    setProjectsList((projectsList: { _id: string; title: string, status:string, slug:string }[]) => {
       const originalPos = getTaskPos(active.id);
       const newPos = getTaskPos(over.id);
       return arrayMove(projectsList, originalPos, newPos);
@@ -391,6 +393,7 @@ export default function CurrentOpenings() {
                   <ImageUploader
                     value={field.value}
                     onChange={field.onChange}
+                    recommendedDimension="Recommended: 1920 x 743 (px)"
                   />
                 )}
               />
@@ -654,7 +657,12 @@ export default function CurrentOpenings() {
                 <div className="text-[16px]">
                   {item.title}
                 </div>
-                <div className="flex gap-5">
+                <div className="flex gap-5 items-center">
+                  {item.status == "draft" ? (<Link href={`/projects/${item.slug}`} target="_blank"><div className="text-[16px] rounded-xl bg-yellow-300 p-1 flex items-center gap-1">
+                    <FaEye />
+                  </div></Link>) : (<div className="text-[16px] rounded-xl bg-green-300 p-1 flex items-center gap-1">
+                    <FaEye />
+                  </div>)}
                   <MdEdit onClick={() => router.push(`/admin/projects/edit/${item._id}`)} />
 
                   <Dialog>

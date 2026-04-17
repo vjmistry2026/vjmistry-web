@@ -11,6 +11,7 @@ export interface NewsType {
 export interface NewsItem {
     metaTitle: string;
     metaDescription: string;
+    status: string;
     firstSection: {
         title: string;
         slug: string;

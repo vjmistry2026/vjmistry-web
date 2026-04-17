@@ -10,7 +10,7 @@ const Index = ({ data, location, projectType, sector }: { data: ProjectType, loc
         <>
             <PageBanner title={data.pageTitle} image={data.banner} imageAlt={data.bannerAlt} />
             <Suspense fallback={<div className="py-100 text-center">Loading...</div>}>
-                <ProjectsGrid projects={data.projects} location={location} projectType={projectType} sector={sector} />
+                <ProjectsGrid projects={data.projects.filter((item)=>item.status == "published")} location={location} projectType={projectType} sector={sector} />
             </Suspense>
         </>
     );

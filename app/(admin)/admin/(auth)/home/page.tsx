@@ -206,6 +206,7 @@ const HomePage = () => {
                                                     <ImageUploader
                                                         value={field.value}
                                                         onChange={field.onChange}
+                                                        recommendedDimension="Recommended: 1920 x 949 (px)"
                                                     />
                                                 )}
                                             />
@@ -276,6 +277,7 @@ const HomePage = () => {
                                             <ImageUploader
                                                 value={field.value}
                                                 onChange={field.onChange}
+                                                recommendedDimension="Recommended: 836 x 707 (px)"
                                             />
                                         )}
                                     />
@@ -370,8 +372,10 @@ const HomePage = () => {
                                                 rules={{ required: "Image is required" }}
                                                 render={({ field }) => (
                                                     <ImageUploader
+                                                    isLogo
                                                         value={field.value}
                                                         onChange={field.onChange}
+                                                        recommendedDimension="Recommended: 40 x 40 (px)"
                                                     />
                                                 )}
                                             />
@@ -465,6 +469,7 @@ const HomePage = () => {
                                                                 <ImageUploader
                                                                     value={field.value}
                                                                     onChange={field.onChange}
+                                                                    recommendedDimension="Recommended: 529 x 356 (px)"
                                                                 />
                                                             )}
                                                         />
@@ -498,6 +503,7 @@ const HomePage = () => {
                                                                     isLogo
                                                                     value={field.value}
                                                                     onChange={field.onChange}
+                                                                    recommendedDimension="Recommended: 35 x 35 (px)"
                                                                 />
                                                             )}
                                                         />
@@ -602,6 +608,7 @@ const HomePage = () => {
                                                                 <ImageUploader
                                                                     value={field.value}
                                                                     onChange={field.onChange}
+                                                                    recommendedDimension="Recommended: 350 x 350 (px)"
                                                                 />
                                                             )}
                                                         />
@@ -635,6 +642,7 @@ const HomePage = () => {
                                                                     isLogo
                                                                     value={field.value}
                                                                     onChange={field.onChange}
+                                                                    recommendedDimension="Recommended: 50 x 50 (px)"
                                                                 />
                                                             )}
                                                         />
@@ -709,6 +717,7 @@ const HomePage = () => {
                                             <ImageUploader
                                                 value={field.value}
                                                 onChange={field.onChange}
+                                                recommendedDimension="Recommended: 1350 x 900 (px)"
                                             />
                                         )}
                                     />
@@ -784,6 +793,7 @@ const HomePage = () => {
                                                                     isLogo
                                                                     value={field.value}
                                                                     onChange={field.onChange}
+                                                                    recommendedDimension="Recommended: 200 x 60 (px)"
                                                                 />
                                                             )}
                                                         />
@@ -838,6 +848,7 @@ const HomePage = () => {
                                             <ImageUploader
                                                 value={field.value}
                                                 onChange={field.onChange}
+                                                recommendedDimension="Recommended: 1920 x 643 (px)"
                                             />
                                         )}
                                     />

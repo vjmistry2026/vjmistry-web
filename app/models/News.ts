@@ -17,6 +17,11 @@ const newsSchema = new mongoose.Schema({
         metaDescription: {
             type: String,
         },
+        status: {
+            type: String,
+            enum: ["draft", "published"],
+            default: "draft",
+        },
         firstSection: {
             title: { type: String },
             slug: { type: String },

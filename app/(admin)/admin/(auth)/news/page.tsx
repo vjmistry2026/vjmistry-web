@@ -18,6 +18,8 @@ import AdminItemContainer from '@/app/components/common/AdminItemContainer';
 import { useForm, Controller } from "react-hook-form";
 import { ImageUploader } from '@/components/ui/image-uploader'
 import { useRouter } from "next/navigation";
+import { FaEye } from "react-icons/fa6";
+import Link from "next/link";
 
 
 interface CurrentOpeningsPageProps {
@@ -42,7 +44,7 @@ export default function CurrentOpenings() {
 
     const [category, setCategory] = useState<string>("");
     const [categoryList, setCategoryList] = useState<{ _id: string, name: string }[]>([]);
-    const [newsList, setNewsList] = useState<{ _id: string, firstSection: { title: string } }[]>([]);
+    const [newsList, setNewsList] = useState<{ _id: string, status:string, firstSection: { title: string, slug:string } }[]>([]);
 
     const router = useRouter();
 
@@ -219,6 +221,7 @@ export default function CurrentOpenings() {
                                     <ImageUploader
                                         value={field.value}
                                         onChange={field.onChange}
+                                        recommendedDimension="Recommended: 1920 x 743 (px)"
                                     />
                                 )}
                             />
@@ -340,7 +343,14 @@ export default function CurrentOpenings() {
                                 <div className="text-[16px]">
                                     {item.firstSection.title}
                                 </div>
-                                <div className="flex gap-5">
+                                <div className="flex gap-5 items-center">
+
+                                    {item.status == "draft" ? (<Link href={`/media-center/news/${item.firstSection.slug}`} target="_blank"><div className="text-[16px] rounded-xl bg-yellow-300 p-1 flex items-center gap-1">
+                                        <FaEye />
+                                    </div></Link>) : (<div className="text-[16px] rounded-xl bg-green-300 p-1 flex items-center gap-1">
+                                        <FaEye />
+                                    </div>)}
+
                                     <MdEdit onClick={() => router.push(`/admin/news/edit/${item._id}`)} />
 
                                     <Dialog>

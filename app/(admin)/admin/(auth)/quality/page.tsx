@@ -134,7 +134,7 @@ const QualityPage = () => {
                                 name="banner"
                                 rules={{ required: "Banner is required" }}
                                 control={control}
-                                render={({ field }) => <ImageUploader value={field.value} onChange={field.onChange} />}
+                                render={({ field }) => <ImageUploader value={field.value} onChange={field.onChange} recommendedDimension="Recommended: 1920 x 743 (px)"/>}
                             />
                             <FormError error={errors.banner?.message} />
                         </div>
@@ -186,7 +186,7 @@ const QualityPage = () => {
                                             control={control}
                                             rules={{ required: "Image is required" }}
                                             render={({ field }) => (
-                                                <ImageUploader value={field.value} onChange={field.onChange} />
+                                                <ImageUploader value={field.value} onChange={field.onChange} recommendedDimension="Recommended: 790 x 574 (px)"/>
                                             )}
                                         />
                                     </div>
@@ -249,7 +249,7 @@ const QualityPage = () => {
                                                         control={control}
                                                         rules={{ required: "Image is required" }}
                                                         render={({ field }) => (
-                                                            <ImageUploader isLogo value={field.value} onChange={field.onChange} />
+                                                            <ImageUploader  value={field.value} onChange={field.onChange} recommendedDimension="Recommended: 588 x 306 (px)"/>
                                                         )}
                                                     />
                                                     {errors.secondSection?.items?.[index]?.image && (
@@ -386,7 +386,7 @@ const QualityPage = () => {
                                                     control={control}
                                                     rules={{ required: "Image is required" }}
                                                     render={({ field }) => (
-                                                        <ImageUploader value={field.value} onChange={field.onChange} />
+                                                        <ImageUploader value={field.value} onChange={field.onChange} recommendedDimension="Recommended: 337 x 440 (px)"/>
                                                     )}
                                                 />
                                                 <FormError error={errors.thirdSection?.items?.[index]?.image?.message} />

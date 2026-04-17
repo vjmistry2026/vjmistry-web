@@ -127,6 +127,7 @@ const ServicePage = () => {
                                     <ImageUploader
                                         value={field.value}
                                         onChange={field.onChange}
+                                        recommendedDimension="Recommended: 1920 x 743 (px)"
                                     />
                                 )}
                             />
@@ -197,6 +198,7 @@ const ServicePage = () => {
                                                                 <ImageUploader
                                                                     value={field.value}
                                                                     onChange={field.onChange}
+                                                                    recommendedDimension="Recommended: 552 x 400 (px)"
                                                                 />
                                                             )}
                                                         />
@@ -230,6 +232,7 @@ const ServicePage = () => {
                                                                     isLogo
                                                                     value={field.value}
                                                                     onChange={field.onChange}
+                                                                    recommendedDimension="Recommended: 62 x 62 (px)"
                                                                 />
                                                             )}
                                                         />

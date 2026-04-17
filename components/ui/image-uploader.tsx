@@ -14,9 +14,10 @@ interface ImageUploaderProps {
   deleteAfterUpload?: boolean;
   isLogo?: boolean;
   multiple?: boolean;
+  recommendedDimension?: string;
 }
 
-export function ImageUploader({ value, onChange, className, deleteAfterUpload = false, isLogo = false, multiple = false }: ImageUploaderProps) {
+export function ImageUploader({ value, onChange, className, deleteAfterUpload = false, isLogo = false, multiple = false, recommendedDimension}: ImageUploaderProps) {
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [localImageUrl, setLocalImageUrl] = useState<string | null>(null);
@@ -121,6 +122,10 @@ export function ImageUploader({ value, onChange, className, deleteAfterUpload = 
       setIsUploadComplete(false);
       onChange("", undefined);
       alert("Image deleted successfully")
+    }else{
+      setLocalImageUrl(null);
+      setIsUploadComplete(false);
+      onChange("", undefined);
     }
   };
 
@@ -163,6 +168,11 @@ export function ImageUploader({ value, onChange, className, deleteAfterUpload = 
               <p className="text-gray-600">
                 {isDragActive ? "Drop the image here" : "Drag & drop an image here, or click to select"}
               </p>
+              {recommendedDimension && (
+                <p className="text-center text-xs text-gray-500">
+                  {recommendedDimension}
+                </p>
+              )}
             </>
           )}
         </div>

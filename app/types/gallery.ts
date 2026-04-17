@@ -19,5 +19,7 @@ export interface GalleryType {
             image: string;
             imageAlt: string;
         }[];
+
+        status:string;
     }[];
 }

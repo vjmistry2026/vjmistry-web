@@ -25,6 +25,14 @@ import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-ki
 import GalleryCard from "./ProjectCard";
 import { FormError } from "@/app/components/common/FormError";
 import { Textarea } from "@/components/ui/textarea";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
+import { FaEye } from "react-icons/fa6";
 
 interface GalleryFormProps {
     metaTitle: string;
@@ -44,9 +52,10 @@ const GalleryPage = () => {
     const [item, setItem] = useState<string>("");
     const [image, setImage] = useState<string>("");
     const [imageAlt, setImageAlt] = useState<string>("");
+    const [status, setStatus] = useState<string>("");
     const [reorderMode, setReorderMode] = useState(false);
 
-    const [itemList, setItemList] = useState<{ _id: string; item: string; thumbnail: string; thumbnailAlt: string }[]>([]);
+    const [itemList, setItemList] = useState<{ _id: string; item: string; thumbnail: string; thumbnailAlt: string, status: string }[]>([]);
 
     const handleFetchItem = async () => {
         try {
@@ -84,13 +93,14 @@ const GalleryPage = () => {
         try {
             const response = await fetch("/api/admin/gallery", {
                 method: "POST",
-                body: JSON.stringify({ name: item, image: image, imageAlt: imageAlt }),
+                body: JSON.stringify({ name: item, image: image, imageAlt: imageAlt, status }),
             });
             if (response.ok) {
                 const data = await response.json();
                 setItem("");
                 setImage("");
                 setImageAlt("");
+                setStatus("");
                 alert(data.message);
                 handleFetchItem();
             } else {
@@ -106,7 +116,7 @@ const GalleryPage = () => {
         try {
             const response = await fetch(`/api/admin/gallery?id=${id}`, {
                 method: "PATCH",
-                body: JSON.stringify({ name: item, image: image, imageAlt: imageAlt }),
+                body: JSON.stringify({ name: item, image: image, imageAlt: imageAlt, status }),
             });
             if (response.ok) {
                 const data = await response.json();
@@ -114,6 +124,7 @@ const GalleryPage = () => {
                 setItem("");
                 setImage("");
                 setImageAlt("");
+                setStatus("")
                 handleFetchItem();
             } else {
                 const data = await response.json();
@@ -169,7 +180,7 @@ const GalleryPage = () => {
 
         if (!over || active.id === over.id) return;
 
-        setItemList((itemList: { _id: string; item: string; thumbnail: string; thumbnailAlt: string }[]) => {
+        setItemList((itemList: { _id: string; item: string; thumbnail: string; thumbnailAlt: string, status: string }[]) => {
             const originalPos = getTaskPos(active.id);
             const newPos = getTaskPos(over.id);
             return arrayMove(itemList, originalPos, newPos);
@@ -219,6 +230,7 @@ const GalleryPage = () => {
                                     <ImageUploader
                                         value={field.value}
                                         onChange={field.onChange}
+                                        recommendedDimension="Recommended: 1920 x 743 (px)"
                                     />
                                 )}
                             />
@@ -306,7 +318,7 @@ const GalleryPage = () => {
                                                 onChange={(e) => setItem(e.target.value)}
                                             />
                                             <Label className="font-bold">Thumbnail</Label>
-                                            <ImageUploader value={image} onChange={(url) => setImage(url)} />
+                                            <ImageUploader value={image} onChange={(url) => setImage(url)} recommendedDimension="Recommended: 513 x 426 (px)"/>
                                             <Label className="font-bold">Thumbnail Alt</Label>
                                             <Input
                                                 type="text"
@@ -314,6 +326,28 @@ const GalleryPage = () => {
                                                 value={imageAlt}
                                                 onChange={(e) => setImageAlt(e.target.value)}
                                             />
+                                            <div className="flex items-center gap-2 justify-end">
+                                                <Label className="">Status</Label>
+                                                <Select
+                                                    onValueChange={setStatus}
+                                                    value={status}
+                                                    defaultValue=""
+                                                >
+                                                    <SelectTrigger className="w-fit">
+                                                        <SelectValue placeholder="Select Status" />
+                                                    </SelectTrigger>
+                                                    <SelectContent>
+
+                                                        <SelectItem value={"draft"}>
+                                                            Draft
+                                                        </SelectItem>
+
+                                                        <SelectItem value={"published"}>
+                                                            Published
+                                                        </SelectItem>
+                                                    </SelectContent>
+                                                </Select>
+                                            </div>
                                         </div>
                                     </DialogHeader>
                                     <DialogClose className="bg-black text-white px-2 py-1 rounded-md" onClick={handleAddItem}>
@@ -347,12 +381,18 @@ const GalleryPage = () => {
                                     <p>{item.item}</p>
                                 </div>
                                 <div className="flex gap-8 items-center">
+                                    {item.status == "draft" ? (<div className="text-[16px] rounded-xl bg-yellow-300 p-1 flex items-center gap-1">
+                                        <FaEye />
+                                    </div>) : (<div className="text-[16px] rounded-xl bg-green-300 p-1 flex items-center gap-1">
+                                        <FaEye />
+                                    </div>)}
                                     <Dialog>
                                         <DialogTrigger
                                             onClick={() => {
                                                 setItem(item.item);
                                                 setImage(item.thumbnail);
                                                 setImageAlt(item.thumbnailAlt);
+                                                setStatus(item.status)
                                             }}
                                         >
                                             <FaEdit className="text-lg cursor-pointer" />
@@ -369,7 +409,7 @@ const GalleryPage = () => {
                                                         onChange={(e) => setItem(e.target.value)}
                                                     />
                                                     <Label className="font-bold">Thumbnail</Label>
-                                                    <ImageUploader value={image} onChange={(url) => setImage(url)} />
+                                                    <ImageUploader value={image} onChange={(url) => setImage(url)} recommendedDimension="Recommended: 513 x 426 (px)"/>
                                                     <Label className="font-bold">Thumbnail Alt</Label>
                                                     <Input
                                                         type="text"
@@ -377,6 +417,28 @@ const GalleryPage = () => {
                                                         value={imageAlt}
                                                         onChange={(e) => setImageAlt(e.target.value)}
                                                     />
+                                                    <div className="flex items-center gap-2 justify-end">
+                                                        <Label className="">Status</Label>
+                                                        <Select
+                                                            onValueChange={setStatus}
+                                                            value={status}
+                                                            defaultValue=""
+                                                        >
+                                                            <SelectTrigger className="w-fit">
+                                                                <SelectValue placeholder="Select Status" />
+                                                            </SelectTrigger>
+                                                            <SelectContent>
+
+                                                                <SelectItem value={"draft"}>
+                                                                    Draft
+                                                                </SelectItem>
+
+                                                                <SelectItem value={"published"}>
+                                                                    Published
+                                                                </SelectItem>
+                                                            </SelectContent>
+                                                        </Select>
+                                                    </div>
                                                 </div>
                                             </DialogHeader>
                                             <DialogClose
