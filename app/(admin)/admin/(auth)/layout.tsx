@@ -9,7 +9,7 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen bg-gray-100 ">
       {/* Sidebar */}
       <aside className="w-64 bg-white shadow-md flex flex-col h-screen overflow-y-auto">
         <div className="flex-1 px-3 py-4">
@@ -41,7 +41,7 @@ export default function AdminLayout({
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 h-screen overflow-hidden">
+      <main className="flex-1 overflow-hidden">
         {/* Fixed Top Bar */}
         {/* <div className="grid grid-cols-2 w-[calc(100vw-256px)]  shadow-sm py-4 px-8 fixed top-0 left-64 z-10 border-b">
           <h2 className="font-bold text-primary">English Version</h2>

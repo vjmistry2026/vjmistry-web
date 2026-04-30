@@ -182,9 +182,9 @@ const ContactPage = () => {
                         </div>
 
                         <Label>Items</Label>
-                        <div className='border p-2 rounded-md grid grid-cols-2 gap-2'>
+                        <div className='border border-black/20 p-2 rounded-md grid grid-cols-2 gap-2'>
                             {secondSectionItems.map((field, index) => (
-                                <div key={field.id} className='grid grid-cols-1 gap-2 relative border-r pr-2 last:border-r-0'>
+                                <div key={field.id} className='grid grid-cols-1 gap-2 relative border-r border-black/20 pr-2 last:border-r-0'>
                                     <div className='absolute top-2 right-2'>
                                         <RiDeleteBinLine onClick={() => secondSectionRemove(index)} className='cursor-pointer text-red-600' />
                                     </div>

@@ -12,7 +12,7 @@ const EquipmentCard = ({ equipment, id }: { equipment: { title: string, _id: str
     }
 
     return (
-        <div ref={setNodeRef} style={style} className='flex items-center justify-between border p-2 rounded-md' {...attributes} {...listeners} key={equipment._id}>
+        <div ref={setNodeRef} style={style} className='flex items-center justify-between border border-black/20 p-2 rounded-md' {...attributes} {...listeners} key={equipment._id}>
             <div>
                 <p className="text-[16px]">{equipment.title}</p>
             </div>

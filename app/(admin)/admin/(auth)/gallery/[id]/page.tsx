@@ -174,7 +174,7 @@ const IndiGallery = () => {
         {fields.map((field, index) => (
           <div
             key={field.id}
-            className="relative border p-3 rounded-md"
+            className="relative border border-black/20 p-3 rounded-md"
           >
             <RiDeleteBinLine
               onClick={() => remove(index)}

@@ -186,11 +186,11 @@ const HomePage = () => {
                     <Label className='font-bold' main>Banner Section</Label>
                     <div className='p-5 rounded-md flex flex-col gap-5'>
                         <Label className='font-bold'>Items</Label>
-                        <div className='border p-2 rounded-md flex flex-col gap-5'>
+                        <div className='border border-black/20 p-2 rounded-md flex flex-col gap-5'>
 
 
                             {bannerSectionItems.map((field, index) => (
-                                <div key={field.id} className='grid grid-cols-2 gap-2 relative border-b pb-5 last:border-b-0'>
+                                <div key={field.id} className='grid grid-cols-2 gap-2 relative border-b border-black/20 pb-5 last:border-b-0'>
                                     <div className='absolute top-2 right-2'>
                                         <RiDeleteBinLine onClick={() => bannerSectionRemove(index)} className='cursor-pointer text-red-600' />
                                     </div>
@@ -328,11 +328,11 @@ const HomePage = () => {
                     <Label className='font-bold' main>Second Section</Label>
                     <div className='p-5 rounded-md flex flex-col gap-5'>
                         <Label className='font-bold'>Items</Label>
-                        <div className='border p-2 rounded-md flex flex-col gap-5'>
+                        <div className='border border-black/20 p-2 rounded-md flex flex-col gap-5'>
 
 
                             {secondSectionItems.map((field, index) => (
-                                <div key={field.id} className='grid grid-cols-2 gap-2 relative border-b pb-5 last:border-b-0'>
+                                <div key={field.id} className='grid grid-cols-2 gap-2 relative border-b border-black/20 pb-5 last:border-b-0'>
                                     <div className='absolute top-2 right-2'>
                                         <RiDeleteBinLine onClick={() => secondSectionRemove(index)} className='cursor-pointer text-red-600' />
                                     </div>
@@ -449,10 +449,10 @@ const HomePage = () => {
                                 <div className='flex items-center justify-between my-5'>
                                     <Label className='font-bold'>Items</Label>
                                 </div>
-                                <div className='border p-2 rounded-md flex flex-col gap-5'>
+                                <div className='border border-black/20 p-2 rounded-md flex flex-col gap-5'>
 
                                     {fourthSectionItems.map((field, index) => (
-                                        <div key={field.id} className='grid grid-cols-1 gap-2 relative border-b pb-5 last:border-b-0'>
+                                        <div key={field.id} className='grid grid-cols-1 gap-2 relative border-b border-black/20 pb-5 last:border-b-0'>
                                             <div className='absolute top-2 right-2'>
                                                 <RiDeleteBinLine onClick={() => fourthSectionRemove(index)} className='cursor-pointer text-red-600' />
                                             </div>
@@ -588,10 +588,10 @@ const HomePage = () => {
                                 <div className='flex items-center justify-between my-5'>
                                     <Label className='font-bold'>Items</Label>
                                 </div>
-                                <div className='border p-2 rounded-md flex flex-col gap-5'>
+                                <div className='border border-black/20 p-2 rounded-md flex flex-col gap-5'>
 
                                     {fifthSectionItems.map((field, index) => (
-                                        <div key={field.id} className='grid grid-cols-1 gap-2 relative border-b pb-5 last:border-b-0'>
+                                        <div key={field.id} className='grid grid-cols-1 gap-2 relative border-b border-black/20 pb-5 last:border-b-0'>
                                             <div className='absolute top-2 right-2'>
                                                 <RiDeleteBinLine onClick={() => fifthSectionRemove(index)} className='cursor-pointer text-red-600' />
                                             </div>
@@ -772,10 +772,10 @@ const HomePage = () => {
                                 <div className='flex items-center justify-between my-5'>
                                     <Label className='font-bold'>Items</Label>
                                 </div>
-                                <div className='border p-2 rounded-md flex flex-col gap-5'>
+                                <div className='border border-black/20 p-2 rounded-md flex flex-col gap-5'>
 
                                     {seventhSectionItems.map((field, index) => (
-                                        <div key={field.id} className='grid grid-cols-1 gap-2 relative border-b pb-5 last:border-b-0'>
+                                        <div key={field.id} className='grid grid-cols-1 gap-2 relative border-b border-black/20 pb-5 last:border-b-0'>
                                             <div className='absolute top-2 right-2'>
                                                 <RiDeleteBinLine onClick={() => seventhSectionRemove(index)} className='cursor-pointer text-red-600' />
                                             </div>

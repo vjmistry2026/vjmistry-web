@@ -360,11 +360,11 @@ const NewsForm = ({ editMode }: { editMode?: boolean }) => {
                     <Label main>Second Section</Label>
                     <div className="p-5 rounded-md flex flex-col gap-3">
                         <Label>Items</Label>
-                        <div className="border p-2 rounded-md">
+                        <div className="border border-black/20 p-2 rounded-md">
                             {secondSectionItems.map((field, index) => (
                                 <div
                                     key={field.id}
-                                    className="grid grid-cols-2 gap-2 relative border-b pb-2 last:border-b-0"
+                                    className="grid grid-cols-2 gap-2 relative border-b border-black/20 pb-2 last:border-b-0"
                                 >
                                     <div className="absolute top-2 right-2">
                                         <RiDeleteBinLine
@@ -374,7 +374,7 @@ const NewsForm = ({ editMode }: { editMode?: boolean }) => {
                                     </div>
                                     <div className="flex flex-col gap-2">
                                         <div className="flex flex-col gap-2">
-                                            <Label className="pl-3 font-bold">Title</Label>
+                                            <Label className="font-bold">Title</Label>
                                             <Input
                                                 type="text"
                                                 placeholder="Title"
@@ -384,7 +384,7 @@ const NewsForm = ({ editMode }: { editMode?: boolean }) => {
                                     </div>
                                     <div className="flex flex-col gap-2">
                                         <div className="flex flex-col gap-2">
-                                            <Label className="pl-3 font-bold">Id To Map</Label>
+                                            <Label className="font-bold">Id To Map</Label>
                                             <Input
                                                 type="text"
                                                 placeholder="Id To Map"

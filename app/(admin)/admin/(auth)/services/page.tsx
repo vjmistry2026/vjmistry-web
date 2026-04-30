@@ -166,7 +166,7 @@ const ServicePage = () => {
                                     <Label className='font-bold'>Items</Label>
                                     <Button disabled={firstSectionItems.length < 2} type="button" className={`text-white text-[16px] ${reorderMode ? "bg-yellow-700" : "bg-green-700"}`} onClick={() => setReorderMode(!reorderMode)}>{reorderMode ? "Done" : "Reorder"}</Button>
                                 </div>
-                                <div className='border p-2 rounded-md flex flex-col gap-5'>
+                                <div className='border border-black/20 p-2 rounded-md flex flex-col gap-5'>
 
                                     {reorderMode &&
 
@@ -181,7 +181,7 @@ const ServicePage = () => {
                                     }
 
                                     {!reorderMode && firstSectionItems.map((field, index) => (
-                                        <div key={field.id} className='grid grid-cols-1 gap-2 relative border-b pb-5 last:border-b-0'>
+                                        <div key={field.id} className='grid grid-cols-1 gap-2 relative border-b border-black/20 pb-5 last:border-b-0'>
                                             <div className='absolute top-2 right-2'>
                                                 <RiDeleteBinLine onClick={() => firstSectionRemove(index)} className='cursor-pointer text-red-600' />
                                             </div>
