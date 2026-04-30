@@ -195,15 +195,15 @@ const CertificatePage = () => {
                         </div>
 
                         <Label>Items</Label>
-                        <div className='border p-2 rounded-md'>
+                        <div className='border border-black/20 p-2 rounded-md'>
                             {secondSectionItems.map((field, index) => (
-                                <div key={field.id} className='grid grid-cols-2 gap-2 relative border-b pb-2 last:border-b-0'>
+                                <div key={field.id} className='grid grid-cols-2 gap-2 relative border-b border-black/20 pb-2 last:border-b-0'>
                                     <div className='absolute top-2 right-2'>
                                         <RiDeleteBinLine onClick={() => secondSectionRemove(index)} className='cursor-pointer text-red-600' />
                                     </div>
                                     <div className='flex flex-col gap-2'>
                                         <div className='flex flex-col gap-2'>
-                                            <Label className='pl-3 font-bold'>Image</Label>
+                                            <Label className='font-bold'>Image</Label>
                                             <Controller
                                                 name={`secondSection.items.${index}.image`}
                                                 control={control}
@@ -220,7 +220,7 @@ const CertificatePage = () => {
                                             {errors.secondSection?.items?.[index]?.image && <p className='text-red-500'>{errors.secondSection?.items?.[index]?.image.message}</p>}
                                         </div>
                                         <div className='flex flex-col gap-2'>
-                                            <Label className='pl-3 font-bold'>Alt Tag</Label>
+                                            <Label className='font-bold'>Alt Tag</Label>
                                             <Input type='text' placeholder='Alt Tag' {...register(`secondSection.items.${index}.imageAlt`)} />
                                         </div>
 
@@ -228,11 +228,11 @@ const CertificatePage = () => {
 
                                     <div>
                                         <div className='flex flex-col gap-2'>
-                                            <Label className='pl-3 font-bold'>Title</Label>
+                                            <Label className='font-bold'>Title</Label>
                                             <Input type='text' placeholder='Title' {...register(`secondSection.items.${index}.title`)} />
                                         </div>
                                         <div className='flex flex-col gap-2'>
-                                            <Label className='pl-3 font-bold'>Description</Label>
+                                            <Label className='font-bold'>Description</Label>
                                             <Textarea placeholder='Description' {...register(`secondSection.items.${index}.description`)} />
                                         </div>
 

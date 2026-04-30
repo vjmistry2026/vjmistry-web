@@ -239,7 +239,7 @@ const AboutPage = () => {
 
 
                 <AdminItemContainer>
-                    <Label main>Section Section</Label>
+                    <Label main>Second Section</Label>
                     <div className='p-5 rounded-md flex flex-col gap-2'>
                         <div className='flex flex-col gap-2'>
                             <div className='flex flex-col gap-1'>
@@ -263,11 +263,11 @@ const AboutPage = () => {
 
                         <div>
                             <Label className='font-bold'>Items</Label>
-                            <div className='border p-2 rounded-md flex flex-col gap-5'>
+                            <div className='border border-black/20 p-2 rounded-md flex flex-col gap-5'>
 
 
                                 {secondSectionItems.map((field, index) => (
-                                    <div key={field.id} className='grid grid-cols-2 gap-2 relative border-b pb-5 last:border-b-0'>
+                                    <div key={field.id} className='grid grid-cols-2 gap-2 relative border-b border-black/20 pb-5 last:border-b-0'>
                                         <div className='absolute top-2 right-2'>
                                             <RiDeleteBinLine onClick={() => secondSectionRemove(index)} className='cursor-pointer text-red-600' />
                                         </div>
@@ -359,15 +359,15 @@ const AboutPage = () => {
                     <div className='p-5 rounded-md flex flex-col gap-5'>
 
                         <Label>Items</Label>
-                        <div className='border p-2 rounded-md flex flex-col gap-2'>
+                        <div className='border border-black/20 p-2 rounded-md flex flex-col gap-2'>
                             {thirdSectionItems.map((field, index) => (
-                                <div key={field.id} className='grid grid-cols-2 gap-2 relative border-b pb-4 last:border-b-0'>
+                                <div key={field.id} className='grid grid-cols-2 gap-2 relative border-b border-black/20 pb-4 last:border-b-0'>
                                     <div className='absolute top-2 right-2'>
                                         <RiDeleteBinLine onClick={() => thirdSectionRemove(index)} className='cursor-pointer text-red-600' />
                                     </div>
                                     <div className='flex flex-col gap-2'>
                                         <div className='flex flex-col gap-2'>
-                                            <Label className='pl-3 font-bold'>Image</Label>
+                                            <Label className='font-bold'>Image</Label>
                                             <Controller
                                                 name={`thirdSection.items.${index}.image`}
                                                 control={control}
@@ -384,7 +384,7 @@ const AboutPage = () => {
                                             {errors.thirdSection?.items?.[index]?.image && <p className='text-red-500'>{errors.thirdSection?.items?.[index]?.image.message}</p>}
                                         </div>
                                         <div className='flex flex-col gap-2'>
-                                            <Label className='pl-3 font-bold'>Alt Tag</Label>
+                                            <Label className='font-bold'>Alt Tag</Label>
                                             <Input type='text' placeholder='Alt Tag' {...register(`thirdSection.items.${index}.imageAlt`)} />
                                         </div>
 
@@ -392,11 +392,11 @@ const AboutPage = () => {
 
                                     <div>
                                         <div className='flex flex-col gap-2'>
-                                            <Label className='pl-3 font-bold'>Title</Label>
+                                            <Label className='font-bold'>Title</Label>
                                             <Input type='text' placeholder='Title' {...register(`thirdSection.items.${index}.title`)} />
                                         </div>
                                         <div className='flex flex-col gap-2'>
-                                            <Label className='pl-3 font-bold'>Description</Label>
+                                            <Label className='font-bold'>Description</Label>
                                             <Textarea placeholder='Description' {...register(`thirdSection.items.${index}.description`)} />
                                         </div>
 
@@ -453,15 +453,15 @@ const AboutPage = () => {
                         </div>
 
                         <Label>Items</Label>
-                        <div className='border p-2 rounded-md'>
+                        <div className='border border-black/20 p-2 rounded-md'>
                             {fourthSectionItems.map((field, index) => (
-                                <div key={field.id} className='grid grid-cols-2 gap-2 relative border-b pb-2 last:border-b-0'>
+                                <div key={field.id} className='grid grid-cols-2 gap-2 relative border-b border-black/20 pb-2 last:border-b-0'>
                                     <div className='absolute top-2 right-2'>
                                         <RiDeleteBinLine onClick={() => fourthSectionRemove(index)} className='cursor-pointer text-red-600' />
                                     </div>
                                     <div className='flex flex-col gap-2'>
                                         <div className='flex flex-col gap-2'>
-                                            <Label className='pl-3 font-bold'>Image</Label>
+                                            <Label className='font-bold'>Image</Label>
                                             <Controller
                                                 name={`fourthSection.items.${index}.image`}
                                                 control={control}
@@ -478,7 +478,7 @@ const AboutPage = () => {
                                             {errors.fourthSection?.items?.[index]?.image && <p className='text-red-500'>{errors.fourthSection?.items?.[index]?.image.message}</p>}
                                         </div>
                                         <div className='flex flex-col gap-2'>
-                                            <Label className='pl-3 font-bold'>Alt Tag</Label>
+                                            <Label className='font-bold'>Alt Tag</Label>
                                             <Input type='text' placeholder='Alt Tag' {...register(`fourthSection.items.${index}.imageAlt`)} />
                                         </div>
 
@@ -486,11 +486,11 @@ const AboutPage = () => {
 
                                     <div>
                                         <div className='flex flex-col gap-2'>
-                                            <Label className='pl-3 font-bold'>Title</Label>
+                                            <Label className='font-bold'>Title</Label>
                                             <Input type='text' placeholder='Title' {...register(`fourthSection.items.${index}.title`)} />
                                         </div>
                                         <div className='flex flex-col gap-2'>
-                                            <Label className='pl-3 font-bold'>Description</Label>
+                                            <Label className='font-bold'>Description</Label>
                                             <Textarea placeholder='Description' {...register(`fourthSection.items.${index}.description`)} />
                                         </div>
 
@@ -513,11 +513,11 @@ const AboutPage = () => {
                     <div className='p-5 rounded-md flex flex-col gap-2'>
                         <div>
                             <Label className='font-bold'>Items</Label>
-                            <div className='border p-2 rounded-md flex flex-col gap-5 mt-0.5'>
+                            <div className='border border-black/20 p-2 rounded-md flex flex-col gap-5 mt-0.5'>
 
 
                                 {fifthSectionItems.map((field, index) => (
-                                    <div key={field.id} className='grid grid-cols-2 gap-2 relative border-b pb-5'>
+                                    <div key={field.id} className='grid grid-cols-2 gap-2 relative border-b border-black/20 pb-5'>
                                         <div className='absolute top-2 right-2'>
                                             <RiDeleteBinLine onClick={() => fifthSectionRemove(index)} className='cursor-pointer text-red-600' />
                                         </div>
@@ -564,7 +564,7 @@ const AboutPage = () => {
                             <Input type='text' placeholder='' {...register("metaDescription")} />
                         </div>
 
-                        <div className='flex flex-col gap-2 w-1/2'>
+                        {/* <div className='flex flex-col gap-2 w-1/2'>
                             <Label className='font-bold'>Og Type</Label>
                             <Controller
                                 name={`ogType`}
@@ -591,10 +591,10 @@ const AboutPage = () => {
                                 )}
                             />
 
-                        </div>
+                        </div> */}
 
 
-                        <div className='flex flex-col gap-2 w-1/2'>
+                        {/* <div className='flex flex-col gap-2 w-1/2'>
                             <Label className='font-bold'>Og Image</Label>
                             <Controller
                                 name={`ogImage`}
@@ -608,7 +608,7 @@ const AboutPage = () => {
                                     />
                                 )}
                             />
-                        </div>
+                        </div> */}
 
                     </div>
 

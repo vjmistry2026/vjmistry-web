@@ -12,7 +12,7 @@ const GalleryCard = ({ item, id }: { item: { item: string, _id: string }, id: st
     }
 
     return (
-        <div ref={setNodeRef} style={style} className='flex items-center justify-between border p-2 rounded-md' {...attributes} {...listeners} key={item._id}>
+        <div ref={setNodeRef} style={style} className='flex items-center justify-between border border-black/20 p-2 rounded-md' {...attributes} {...listeners} key={item._id}>
             <div>
                 <p className="text-[16px]">{item.item}</p>
             </div>

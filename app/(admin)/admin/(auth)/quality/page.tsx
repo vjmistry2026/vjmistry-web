@@ -445,7 +445,7 @@ const QualityPage = () => {
                 </AdminItemContainer>
             </div>
 
-            <div className="flex col-span-2">
+            <div className="flex col-span-2 mt-5">
                 <Button type="submit" className="cursor-pointer text-white text-[16px] w-full text-center">
                     Submit
                 </Button>

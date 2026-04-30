@@ -146,7 +146,7 @@ const AdminEnquiry = () => {
                                 <h5 className=" text-xl font-bold tracking-tight text-gray-900 dark:text-white">{item.first}</h5>
                             </div>
                             <div className='flex items-center gap-10'>
-                                <button onClick={() => setSelectedEnquiry(item)}><LuMessageSquareShare /></button>
+                                <button onClick={() => setSelectedEnquiry(item)}><LuMessageSquareShare className='text-white'/></button>
 
                                 {selectedEnquiry &&
                                     <div className="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">

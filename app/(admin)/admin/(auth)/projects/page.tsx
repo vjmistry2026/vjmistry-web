@@ -457,7 +457,7 @@ export default function CurrentOpenings() {
             </div>
             <div className="mt-2 flex flex-col gap-2 overflow-y-scroll h-[80%]">
               {projectTypeList.map((item) => (
-                <div className="flex justify-between border p-2 items-center rounded-md shadow-md hover:shadow-lg transition-all duration-300" key={item._id}>
+                <div className="flex justify-between border border-black/20 p-2 items-center rounded-md shadow-md hover:shadow-lg transition-all duration-300" key={item._id}>
                   <div className="text-[16px]">
                     {item.name}
                   </div>
@@ -519,7 +519,7 @@ export default function CurrentOpenings() {
             </div>
             <div className="mt-2 flex flex-col gap-2 overflow-y-scroll h-[80%]">
               {sectorList.map((item) => (
-                <div className="flex justify-between border p-2 items-center rounded-md shadow-md hover:shadow-lg transition-all duration-300" key={item._id}>
+                <div className="flex justify-between border border-black/20 p-2 items-center rounded-md shadow-md hover:shadow-lg transition-all duration-300" key={item._id}>
                   <div className="text-[16px]">
                     {item.name}
                   </div>
@@ -584,7 +584,7 @@ export default function CurrentOpenings() {
 
               <div className="mt-2 flex flex-col gap-2 overflow-y-scroll h-[80%]">
                 {locationList.map((item) => (
-                  <div className="flex justify-between border p-2 items-center rounded-md shadow-md hover:shadow-lg transition-all duration-300" key={item._id}>
+                  <div className="flex justify-between border border-black/20 p-2 items-center rounded-md shadow-md hover:shadow-lg transition-all duration-300" key={item._id}>
                     <div className="text-[16px]">
                       {item.name}
                     </div>
@@ -653,7 +653,7 @@ export default function CurrentOpenings() {
             }
 
             {!reorderMode && projectsList.map((item) => (
-              <div className="flex justify-between border p-2 items-center rounded-md shadow-md hover:shadow-lg transition-all duration-300" key={item._id}>
+              <div className="flex justify-between border border-black/20 p-2 items-center rounded-md shadow-md hover:shadow-lg transition-all duration-300" key={item._id}>
                 <div className="text-[16px]">
                   {item.title}
                 </div>

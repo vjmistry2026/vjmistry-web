@@ -374,7 +374,7 @@ const GalleryPage = () => {
 
                         {!reorderMode && itemList?.map((item) => (
                             <div
-                                className="flex justify-between items-center border rounded-md p-4 hover:bg-gray-100  hover:shadow-md transform  transition-all"
+                                className="flex justify-between items-center border border-black/20 rounded-md p-4 hover:bg-gray-100  hover:shadow-md transform  transition-all"
                                 key={item._id}
                             >
                                 <div>
