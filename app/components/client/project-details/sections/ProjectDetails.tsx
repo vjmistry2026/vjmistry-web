@@ -186,7 +186,7 @@ export default function ProjectDetails({ firstSection, secondSection }: { firstS
           </motion.div>
         </div>
 
-        <div className="border-t border-b border-border mb-100 lg:mb-130 2xl:mb-150">
+        <div className="border-t border-b border-border mb-100 ">
           <div className="container">
             <div
               className={`grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-4 border-x border-border divide-x divide-y divide-border`}
