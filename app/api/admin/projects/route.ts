@@ -177,6 +177,7 @@ export async function PATCH(request: NextRequest) {
 
       await project.save();
       revalidateTag("indi-project", "default");
+      revalidateTag("all-project", "default");
       return NextResponse.json(
         { data: project, message: "Project updated successfully" },
         { status: 200 }
@@ -225,6 +226,7 @@ export async function POST(request: NextRequest) {
     // }
     // await expertise.save();
     project.projects.push(body);
+    revalidateTag("all-project", "default");
     await project.save();
     return NextResponse.json(
       { data: project, message: "Project created successfully" },
@@ -258,6 +260,7 @@ export async function DELETE(request: NextRequest) {
       (project: { _id: string }) => project._id.toString() !== id
     );
     await project.save();
+    revalidateTag("all-project", "default");
     return NextResponse.json(
       { data: project, message: "Project deleted successfully" },
       { status: 200 }
