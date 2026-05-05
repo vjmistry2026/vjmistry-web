@@ -49,6 +49,7 @@ export const getIndiProjects = unstable_cache(
             (project: { slug: string }) => project.slug === slug
         );
 
+
         if (!project) {
             throw new Error("Project not found");
         }
