@@ -12,7 +12,7 @@ const ImageCard = ({url,index,handleRemoveImage,id}: {url:string,index:number,ha
         transform: CSS.Transform.toString(transform),
     }
   return (
-    <div ref={setNodeRef} style={style} className="relative h-40" id={url} {...attributes} {...listeners}>
+    <div ref={setNodeRef} style={style} className="relative h-full" id={url} {...attributes} {...listeners}>
                                     <Image
                                         src={url}
                                         alt={`Uploaded image ${index + 1}`}
