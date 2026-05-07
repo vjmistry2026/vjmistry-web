@@ -332,3 +332,32 @@ body {
     content: "";
     @apply block h-[6px] w-[6px] xl:w-[13px] xl:h-[13px] bg-primary shrink-0;
 }
+
+
+
+.project-details-slider .swiper-button-next,
+.project-details-slider .swiper-button-prev {
+  width: 45px !important;
+  height: 45px !important;
+  /* background: rgba(0, 0, 0, 0.6); */
+  border-radius: 9999px;
+  /* backdrop-filter: blur(10px); */
+  transition: all 0.3s ease;
+  color: var(--primary);
+}
+
+
+.project-details-slider .swiper-button-next::after,
+.project-details-slider .swiper-button-prev::after {
+  font-size: 18px !important;
+  color: white;
+  font-weight: 700;
+}
+
+.project-details-slider .swiper-button-prev {
+  left: 20px !important;
+}
+
+.project-details-slider .swiper-button-next {
+  right: 20px !important;
+}

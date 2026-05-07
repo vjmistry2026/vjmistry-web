@@ -1,11 +1,17 @@
 "use client";
 
 import Image from "next/image";
-import { projectMeta, projectDetails, projectFeatures } from "../data";
+// import { projectMeta, projectDetails, projectFeatures } from "../data";
 import AnimatedHeading from "../../common/AnimateHeading";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
 import { ProjectType } from "@/app/types/project";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 export default function ProjectDetails({ firstSection, secondSection }: { firstSection: ProjectType['projects'][number]['firstSection'], secondSection: ProjectType['projects'][number]['secondSection'] }) {
   return (
@@ -169,7 +175,7 @@ export default function ProjectDetails({ firstSection, secondSection }: { firstS
             {secondSection.description}
           </motion.p>
 
-          <motion.div
+          {/* <motion.div
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
@@ -183,7 +189,44 @@ export default function ProjectDetails({ firstSection, secondSection }: { firstS
               width={2000}
               height={752}
             />
+          </motion.div> */}
+
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            variants={moveUp(0.4)}
+            className="w-full overflow-hidden h-[250px]  md:h-auto"
+          >
+            <Swiper
+              modules={[Navigation, Pagination, Autoplay]}
+              slidesPerView={1}
+              spaceBetween={20}
+              navigation
+              // pagination={{ clickable: true }}
+              autoplay={{
+                delay: 4000,
+                disableOnInteraction: false,
+              }}
+              loop
+              className="w-full project-details-slider"
+            >
+              {secondSection.images.map((image, index) => (
+                <SwiperSlide key={index}>
+                  <div className="relative w-full h-[250px] md:h-[450px] xl:h-[650px] overflow-hidden">
+                    <Image
+                      src={image}
+                      alt={`${secondSection.title} image ${index + 1}`}
+                      fill
+                      className="object-cover"
+                      sizes="100vw"
+                    />
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </motion.div>
+
         </div>
 
         <div className="border-t border-b border-border mb-100 ">
