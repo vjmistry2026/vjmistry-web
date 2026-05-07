@@ -41,6 +41,7 @@ status:string;
             title: string;
             description: string;
             image: string;
+            images:string[];
             imageAlt: string;
             items: {
                 title: string;
