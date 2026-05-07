@@ -47,7 +47,7 @@ const projectSchema = new mongoose.Schema({
       secondSection: {
         title: { type: String },
         description: { type: String },
-        image: { type: String },
+        images: [],
         imageAlt: { type: String },
         items: [{
           title: { type: String }

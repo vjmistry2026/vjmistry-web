@@ -21,6 +21,12 @@ import { useParams, useRouter } from "next/navigation";
 import { RiAiGenerateText } from "react-icons/ri";
 import { projectStatus } from "./projectStatus";
 import { VideoUploader } from "@/components/ui/video-uploader";
+import { closestCorners, DndContext, DragEndEvent } from '@dnd-kit/core'
+import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
+import ImageCard from './ImageCard'
+import { TbReorder } from "react-icons/tb";
+import { GiConfirmed } from "react-icons/gi";
+import Image from "next/image";
 
 interface ProjectStatus {
   name: string;
@@ -48,7 +54,7 @@ interface ProjectFormProps {
   secondSection: {
     title: string;
     description: string;
-    image: string;
+    images: string[];
     imageAlt: string;
     items: {
       title: string;
@@ -61,7 +67,7 @@ interface ProjectFormProps {
       video: string;
     }[];
   };
-  status:string;
+  status: string;
 }
 
 const ProjectForm = ({ editMode }: { editMode?: boolean }) => {
@@ -105,6 +111,8 @@ const ProjectForm = ({ editMode }: { editMode?: boolean }) => {
   const [sectorList, setSectorList] = useState<{ _id: string; name: string }[]>(
     []
   );
+
+  const [reorderMode, setReorderMode] = useState(false);
 
   const handleFetchLocation = async () => {
     try {
@@ -190,6 +198,8 @@ const ProjectForm = ({ editMode }: { editMode?: boolean }) => {
         setValue("secondSection.items", data.data.secondSection.items);
         setValue("thirdSection.items", data.data.thirdSection.items);
         setValue("status", data.data.status);
+        setValue("secondSection.images", data.data.secondSection.images);
+        setImageUrls(data.data.secondSection.images);
       } else {
         const data = await response.json();
         alert(data.message);
@@ -230,6 +240,37 @@ const ProjectForm = ({ editMode }: { editMode?: boolean }) => {
         .then(() => handleFetchProjectType());
     }
   }, []);
+
+
+  const [imageUrls, setImageUrls] = useState<string[]>([]);
+  const handleImageUpload = async (uploadedUrl: string) => {
+    setImageUrls((prev) => [...prev, uploadedUrl]);
+    setValue("secondSection.images", [...imageUrls, uploadedUrl]);
+  };
+
+  const handleRemoveImage = (indexToRemove: number) => {
+    setImageUrls((prev) => prev.filter((_, index) => index !== indexToRemove));
+    setValue(
+      "secondSection.images",
+      imageUrls.filter((_, index) => index !== indexToRemove)
+    );
+  };
+
+
+  const getTaskPos = (id: string) => imageUrls.findIndex((item: string) => (item == id))
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+
+    if (!over || active.id === over.id) return;
+
+    const oldIndex = getTaskPos(active.id as string);
+    const newIndex = getTaskPos(over.id as string);
+
+    const newPosition = arrayMove(imageUrls, oldIndex, newIndex);
+    setImageUrls(newPosition);
+    setValue("secondSection.images", newPosition);
+
+  };
 
   return (
     <div className="flex flex-col gap-5">
@@ -586,7 +627,7 @@ const ProjectForm = ({ editMode }: { editMode?: boolean }) => {
                 )}
               </div>
 
-              <div>
+              {/* <div>
                 <Label className="">Image</Label>
                 <Controller
                   name="secondSection.image"
@@ -602,6 +643,49 @@ const ProjectForm = ({ editMode }: { editMode?: boolean }) => {
                 {errors.secondSection?.image && (
                   <p className="text-red-500">{errors.secondSection.image.message}</p>
                 )}
+              </div> */}
+
+
+              <div>
+                <div className='flex justify-between items-center'>
+                  <Label className="block text-sm">Images</Label>
+                  <Button className="bg-green-600 text-white" type="button" onClick={() => setReorderMode(!reorderMode)}>{reorderMode ? <GiConfirmed /> : <TbReorder />}</Button>
+                </div>
+                <div className="mt-2">
+                  <ImageUploader onChange={handleImageUpload} deleteAfterUpload={true} multiple={true} />
+                </div>
+
+                {reorderMode && <div className="mt-4 grid grid-cols-3 gap-4">
+                  <DndContext collisionDetection={closestCorners} onDragEnd={handleDragEnd}>
+                    <SortableContext items={imageUrls} strategy={verticalListSortingStrategy}>
+                      {imageUrls.map((url, index) => (
+                        <ImageCard key={url} url={url} index={index} handleRemoveImage={handleRemoveImage} id={url} />
+                      ))}
+                    </SortableContext>
+                  </DndContext>
+                </div>}
+
+
+                {!reorderMode && <div className="mt-4 grid grid-cols-3 gap-4">
+                  {imageUrls.map((url, index) => (
+                    <div key={index} className="relative h-40">
+                      <Image
+                        src={url}
+                        alt={`Uploaded image ${index + 1}`}
+                        className="h-full w-full object-cover rounded-lg"
+                        width={100}
+                        height={100}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveImage(index)}
+                        className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
+                      >
+                        ×
+                      </button>
+                    </div>
+                  ))}
+                </div>}
               </div>
 
               <div className="flex flex-col gap-1">
