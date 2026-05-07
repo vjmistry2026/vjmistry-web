@@ -655,7 +655,7 @@ const ProjectForm = ({ editMode }: { editMode?: boolean }) => {
                   <ImageUploader onChange={handleImageUpload} deleteAfterUpload={true} multiple={true} />
                 </div>
 
-                {reorderMode && <div className="mt-4 grid grid-cols-3 gap-4">
+                {reorderMode && <div className="mt-4 grid grid-cols-3 gap-4 h-full">
                   <DndContext collisionDetection={closestCorners} onDragEnd={handleDragEnd}>
                     <SortableContext items={imageUrls} strategy={verticalListSortingStrategy}>
                       {imageUrls.map((url, index) => (
@@ -666,9 +666,9 @@ const ProjectForm = ({ editMode }: { editMode?: boolean }) => {
                 </div>}
 
 
-                {!reorderMode && <div className="mt-4 grid grid-cols-3 gap-4">
+                {!reorderMode && <div className="mt-4 grid grid-cols-3 gap-4 h-full">
                   {imageUrls.map((url, index) => (
-                    <div key={index} className="relative h-40">
+                    <div key={index} className="relative h-full">
                       <Image
                         src={url}
                         alt={`Uploaded image ${index + 1}`}
