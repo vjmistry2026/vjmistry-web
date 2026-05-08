@@ -10,16 +10,20 @@ import { ImageUploader } from '@/components/ui/image-uploader'
 import { RiDeleteBinLine } from "react-icons/ri";
 import { Textarea } from '@/components/ui/textarea'
 import AdminItemContainer from '@/app/components/common/AdminItemContainer';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { VideoUploader } from '@/components/ui/video-uploader';
 
 interface HomeFormProps {
     metaTitle: string;
     metaDescription: string;
     bannerSection: {
         items: {
+            type: string;
             image: string;
             imageAlt: string;
             title: string;
             description: string;
+            video: string;
         }[]
     }
     firstSection: {
@@ -91,7 +95,7 @@ interface HomeFormProps {
 const HomePage = () => {
 
 
-    const { register, handleSubmit, setValue, control, formState: { errors } } = useForm<HomeFormProps>();
+    const { register, handleSubmit, setValue, control, formState: { errors }, watch } = useForm<HomeFormProps>();
 
 
     const { fields: bannerSectionItems, append: bannerSectionAppend, remove: bannerSectionRemove } = useFieldArray({
@@ -188,67 +192,121 @@ const HomePage = () => {
                         <Label className='font-bold'>Items</Label>
                         <div className='border border-black/20 p-2 rounded-md flex flex-col gap-5'>
 
-
                             {bannerSectionItems.map((field, index) => (
-                                <div key={field.id} className='grid grid-cols-2 gap-2 relative border-b border-black/20 pb-5 last:border-b-0'>
+                                <div key={field.id} className='grid grid-cols-1 gap-2 relative border-b border-black/20 pb-5 last:border-b-0'>
                                     <div className='absolute top-2 right-2'>
                                         <RiDeleteBinLine onClick={() => bannerSectionRemove(index)} className='cursor-pointer text-red-600' />
                                     </div>
 
-                                    <div className='flex flex-col gap-2'>
-                                        <div className='flex flex-col gap-2'>
-                                            <Label className='font-bold'>Image</Label>
-                                            <Controller
-                                                name={`bannerSection.items.${index}.image`}
-                                                control={control}
-                                                rules={{ required: "Image is required" }}
-                                                render={({ field }) => (
-                                                    <ImageUploader
-                                                        value={field.value}
-                                                        onChange={field.onChange}
-                                                        recommendedDimension="Recommended: 1920 x 949 (px)"
-                                                    />
-                                                )}
-                                            />
-                                            {errors.bannerSection?.items?.[index]?.image && (
-                                                <p className="text-red-500">{errors.bannerSection?.items?.[index]?.image.message}</p>
+                                    <div className='flex flex-col gap-2 w-1/3'>
+                                    <Label className='font-bold'>Style</Label>
+                                        <Controller
+                                            name={`bannerSection.items.${index}.type`}
+                                            control={control}
+                                            rules={{ required: "Style is required" }}
+                                            render={({ field }) => (
+                                                <Select
+                                                    onValueChange={field.onChange}
+                                                    value={field.value}
+                                                    defaultValue=""
+                                                >
+                                                    <SelectTrigger className="w-full">
+                                                        <SelectValue placeholder="Select Style" />
+                                                    </SelectTrigger>
+                                                    <SelectContent>
+                                                        <SelectItem value="video">
+                                                            Video Banner
+                                                        </SelectItem>
+                                                        <SelectItem value="image">
+                                                            Image Banner
+                                                        </SelectItem>
+                                                    </SelectContent>
+                                                </Select>
                                             )}
-                                        </div>
-
-                                        <div className='flex flex-col gap-2'>
-                                            <div className='flex flex-col gap-2'>
-                                                <Label className='font-bold'>Alt Tag</Label>
-                                                <Input type='text' placeholder='Alt Tag' {...register(`bannerSection.items.${index}.imageAlt`, {
-                                                    required: "Value is required"
-                                                })} />
-                                                {errors.bannerSection?.items?.[index]?.imageAlt && <p className='text-red-500'>{errors.bannerSection?.items?.[index]?.imageAlt.message}</p>}
-                                            </div>
-                                        </div>
-
+                                        />
+                                        {errors.bannerSection?.items?.[index]?.type && (
+                                                    <p className="text-red-500">{errors.bannerSection?.items?.[index]?.type.message}</p>
+                                                )}
 
                                     </div>
 
-                                    <div className='flex flex-col gap-2'>
-                                        <div className='flex flex-col gap-2'>
+                                    {watch(`bannerSection.items.${index}.type`) && <div>
+                                        {watch(`bannerSection.items.${index}.type`) == "image" ? <div className='flex flex-col gap-2'>
                                             <div className='flex flex-col gap-2'>
-                                                <Label className='font-bold'>Title</Label>
-                                                <Input type='text' placeholder='Title' {...register(`bannerSection.items.${index}.title`, {
-                                                    required: "Value is required"
-                                                })} />
-                                                {errors.bannerSection?.items?.[index]?.title && <p className='text-red-500'>{errors.bannerSection?.items?.[index]?.title.message}</p>}
+                                                <Label className='font-bold'>Image</Label>
+                                                <Controller
+                                                    name={`bannerSection.items.${index}.image`}
+                                                    control={control}
+                                                    rules={{ required: "Image is required" }}
+                                                    render={({ field }) => (
+                                                        <ImageUploader
+                                                            value={field.value}
+                                                            onChange={field.onChange}
+                                                            recommendedDimension="Recommended: 1920 x 949 (px)"
+                                                        />
+                                                    )}
+                                                />
+                                                {errors.bannerSection?.items?.[index]?.image && (
+                                                    <p className="text-red-500">{errors.bannerSection?.items?.[index]?.image.message}</p>
+                                                )}
                                             </div>
-                                        </div>
+
+                                            <div className='flex flex-col gap-2'>
+                                                <div className='flex flex-col gap-2'>
+                                                    <Label className='font-bold'>Alt Tag</Label>
+                                                    <Input type='text' placeholder='Alt Tag' {...register(`bannerSection.items.${index}.imageAlt`, {
+                                                        required: "Value is required"
+                                                    })} />
+                                                    {errors.bannerSection?.items?.[index]?.imageAlt && <p className='text-red-500'>{errors.bannerSection?.items?.[index]?.imageAlt.message}</p>}
+                                                </div>
+                                            </div>
+
+
+                                        </div> : 
+                                        
+                                        <div className='flex flex-col gap-2'>
+                                                <Label className='font-bold'>Video</Label>
+                                                <Controller
+                                                    name={`bannerSection.items.${index}.image`}
+                                                    control={control}
+                                                    rules={{ required: "Image is required" }}
+                                                    render={({ field }) => (
+                                                        <VideoUploader
+                                                            value={field.value}
+                                                            onChange={field.onChange}
+                                                        />
+                                                    )}
+                                                />
+                                                {errors.bannerSection?.items?.[index]?.video && (
+                                                    <p className="text-red-500">{errors.bannerSection?.items?.[index]?.video.message}</p>
+                                                )}
+                                            </div>
+                                            
+                                            }
 
                                         <div className='flex flex-col gap-2'>
                                             <div className='flex flex-col gap-2'>
-                                                <Label className='font-bold'>Description</Label>
-                                                <Input type='text' placeholder='Description' {...register(`bannerSection.items.${index}.description`, {
-                                                    required: "Value is required"
-                                                })} />
-                                                {errors.bannerSection?.items?.[index]?.description && <p className='text-red-500'>{errors.bannerSection?.items?.[index]?.description.message}</p>}
+                                                <div className='flex flex-col gap-2'>
+                                                    <Label className='font-bold'>Title</Label>
+                                                    <Input type='text' placeholder='Title' {...register(`bannerSection.items.${index}.title`, {
+                                                        required: "Value is required"
+                                                    })} />
+                                                    {errors.bannerSection?.items?.[index]?.title && <p className='text-red-500'>{errors.bannerSection?.items?.[index]?.title.message}</p>}
+                                                </div>
+                                            </div>
+
+                                            <div className='flex flex-col gap-2'>
+                                                <div className='flex flex-col gap-2'>
+                                                    <Label className='font-bold'>Description</Label>
+                                                    <Input type='text' placeholder='Description' {...register(`bannerSection.items.${index}.description`, {
+                                                        required: "Value is required"
+                                                    })} />
+                                                    {errors.bannerSection?.items?.[index]?.description && <p className='text-red-500'>{errors.bannerSection?.items?.[index]?.description.message}</p>}
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+
+                                    </div>}
 
                                 </div>
                             ))}
@@ -257,7 +315,7 @@ const HomePage = () => {
 
                         </div>
                         <div className='flex justify-end mt-2'>
-                            <Button type='button' addItem onClick={() => bannerSectionAppend({ title: "", image: "", imageAlt: "", description: "" })}>Add Item</Button>
+                            <Button type='button' addItem onClick={() => bannerSectionAppend({ title: "", image: "", imageAlt: "", description: "", type: "", video: "" })}>Add Item</Button>
                         </div>
                     </div>
                 </AdminItemContainer>
@@ -372,7 +430,7 @@ const HomePage = () => {
                                                 rules={{ required: "Image is required" }}
                                                 render={({ field }) => (
                                                     <ImageUploader
-                                                    isLogo
+                                                        isLogo
                                                         value={field.value}
                                                         onChange={field.onChange}
                                                         recommendedDimension="Recommended: 40 x 40 (px)"
