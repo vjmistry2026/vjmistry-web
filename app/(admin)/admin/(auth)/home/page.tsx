@@ -2,7 +2,7 @@
 
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { Button } from '@/components/ui/button'
@@ -94,7 +94,7 @@ interface HomeFormProps {
 
 const HomePage = () => {
 
-
+    const [reorderMode, setReorderMode] = useState(false);
     const { register, handleSubmit, setValue, control, formState: { errors }, watch } = useForm<HomeFormProps>();
 
 
@@ -199,7 +199,7 @@ const HomePage = () => {
                                     </div>
 
                                     <div className='flex flex-col gap-2 w-1/3'>
-                                    <Label className='font-bold'>Style</Label>
+                                        <Label className='font-bold'>Style</Label>
                                         <Controller
                                             name={`bannerSection.items.${index}.type`}
                                             control={control}
@@ -225,8 +225,8 @@ const HomePage = () => {
                                             )}
                                         />
                                         {errors.bannerSection?.items?.[index]?.type && (
-                                                    <p className="text-red-500">{errors.bannerSection?.items?.[index]?.type.message}</p>
-                                                )}
+                                            <p className="text-red-500">{errors.bannerSection?.items?.[index]?.type.message}</p>
+                                        )}
 
                                     </div>
 
@@ -262,9 +262,9 @@ const HomePage = () => {
                                             </div>
 
 
-                                        </div> : 
-                                        
-                                        <div className='flex flex-col gap-2'>
+                                        </div> :
+
+                                            <div className='flex flex-col gap-2'>
                                                 <Label className='font-bold'>Video</Label>
                                                 <Controller
                                                     name={`bannerSection.items.${index}.image`}
@@ -281,8 +281,8 @@ const HomePage = () => {
                                                     <p className="text-red-500">{errors.bannerSection?.items?.[index]?.video.message}</p>
                                                 )}
                                             </div>
-                                            
-                                            }
+
+                                        }
 
                                         <div className='flex flex-col gap-2'>
                                             <div className='flex flex-col gap-2'>
