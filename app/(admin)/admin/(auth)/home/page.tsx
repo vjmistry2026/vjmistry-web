@@ -153,7 +153,10 @@ const HomePage = () => {
                 const data = await response.json();
                 setValue("metaTitle", data.data.metaTitle);
                 setValue("metaDescription", data.data.metaDescription);
-                setValue("bannerSection.items", data.data.bannerSection.items);
+                setValue("bannerSection.items", data.data.bannerSection.items.map((item: HomeFormProps["bannerSection"]["items"][number]) => ({
+                    ...item,
+                    video: item.video || (item.type === "video" ? item.image : ""),
+                })));
                 setValue("firstSection", data.data.firstSection);
                 setValue("secondSection.items", data.data.secondSection.items);
                 setValue("thirdSection", data.data.thirdSection);
@@ -267,9 +270,9 @@ const HomePage = () => {
                                         <div className='flex flex-col gap-2'>
                                                 <Label className='font-bold'>Video</Label>
                                                 <Controller
-                                                    name={`bannerSection.items.${index}.image`}
+                                                    name={`bannerSection.items.${index}.video`}
                                                     control={control}
-                                                    rules={{ required: "Image is required" }}
+                                                    rules={{ required: "Video is required" }}
                                                     render={({ field }) => (
                                                         <VideoUploader
                                                             value={field.value}

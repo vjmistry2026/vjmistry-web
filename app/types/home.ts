@@ -3,10 +3,12 @@ interface HomeType {
     metaDescription: string;
     bannerSection: {
         items: {
+            type?: "image" | "video" | string;
             image: string;
             imageAlt: string;
             title: string;
             description: string;
+            video?: string;
         }[]
     }
     firstSection: {
