@@ -13,20 +13,24 @@ const homeSchema = new mongoose.Schema({
     bannerSection: {
         items: [
             {
-                image: {
+                type: {
                     type: String,
                     required: true,
+                },
+                image: {
+                    type: String,
                 },
                 imageAlt: {
                     type: String,
                 },
                 title: {
                     type: String,
-                    required: true,
                 },
                 description: {
                     type: String,
-                    required: true,
+                },
+                video: {
+                    type: String,
                 },
             },
         ],
