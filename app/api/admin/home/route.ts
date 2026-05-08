@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/lib/mongodb";
 import Home from "@/app/models/Home";
 import { verifyAdmin } from "@/lib/verifyAdmin";
+import { revalidateTag } from "next/cache";
 
 
 export async function GET() {
@@ -27,6 +28,7 @@ export async function PATCH(request: NextRequest) {
         }
         await connectDB();
         const home = await Home.findOneAndUpdate({}, body,{upsert:true,new:true});
+        revalidateTag("home","default")
         if (!home) {
             return NextResponse.json({ message: "Home not found" }, { status: 404 });
         }

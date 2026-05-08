@@ -12,6 +12,9 @@ import { Textarea } from '@/components/ui/textarea'
 import AdminItemContainer from '@/app/components/common/AdminItemContainer';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { VideoUploader } from '@/components/ui/video-uploader';
+import { closestCorners, DndContext, DragEndEvent } from '@dnd-kit/core'
+import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
+import FileCard from './FileCard';
 
 interface HomeFormProps {
     metaTitle: string;
@@ -98,7 +101,7 @@ const HomePage = () => {
     const { register, handleSubmit, setValue, control, formState: { errors }, watch } = useForm<HomeFormProps>();
 
 
-    const { fields: bannerSectionItems, append: bannerSectionAppend, remove: bannerSectionRemove } = useFieldArray({
+    const { fields: bannerSectionItems, append: bannerSectionAppend, remove: bannerSectionRemove,move } = useFieldArray({
         control,
         name: "bannerSection.items"
     });
@@ -178,6 +181,21 @@ const HomePage = () => {
     }
 
 
+    const getTaskPos = (id: number | string) => bannerSectionItems.findIndex((item: { id: string }) => (item.id == id))
+    const handleDragEnd = (event: DragEndEvent) => {
+        const { active, over } = event;
+
+        if (!over || active.id === over.id) return;
+
+        const originalPos = getTaskPos(active.id);
+        const newPos = getTaskPos(over.id);
+
+        if (originalPos !== -1 && newPos !== -1) {
+            move(originalPos, newPos);
+        }
+    };
+
+
 
     useEffect(() => {
         fetchHomeData();
@@ -192,10 +210,25 @@ const HomePage = () => {
                 <AdminItemContainer>
                     <Label className='font-bold' main>Banner Section</Label>
                     <div className='p-5 rounded-md flex flex-col gap-5'>
-                        <Label className='font-bold'>Items</Label>
+                        <div className='flex justify-between'>
+                            <Label className='font-bold'>Items</Label>
+                            <Button disabled={bannerSectionItems.length < 2} type="button" className={`text-white text-[16px] ${reorderMode ? "bg-yellow-700" : "bg-green-700"}`} onClick={() => setReorderMode(!reorderMode)}>{reorderMode ? "Done" : "Reorder"}</Button>
+                        </div>
                         <div className='border border-black/20 p-2 rounded-md flex flex-col gap-5'>
 
-                            {bannerSectionItems.map((field, index) => (
+                            {reorderMode &&
+
+                                <DndContext collisionDetection={closestCorners} onDragEnd={handleDragEnd}>
+                                    <SortableContext items={bannerSectionItems.map((item) => item.id)} strategy={verticalListSortingStrategy}>
+                                        {bannerSectionItems?.map((item, index) => (
+                                            <FileCard key={index} item={item} id={item.id} />
+                                        ))}
+                                    </SortableContext>
+                                </DndContext>
+
+                            }
+
+                            {!reorderMode && bannerSectionItems.map((field, index) => (
                                 <div key={field.id} className='grid grid-cols-1 gap-2 relative border-b border-black/20 pb-5 last:border-b-0'>
                                     <div className='absolute top-2 right-2'>
                                         <RiDeleteBinLine onClick={() => bannerSectionRemove(index)} className='cursor-pointer text-red-600' />
