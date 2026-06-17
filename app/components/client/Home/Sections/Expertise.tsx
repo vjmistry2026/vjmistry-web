@@ -127,10 +127,10 @@ const ExpertiseSection = ({
         >
           {slides.map((slide, index) => (
             <SwiperSlide key={index}>
-              <Link href={`/services`}>
-                  <Reveal
-                    variants={moveUpV2}
-                    className="
+              <Link href={`/services#service-${index}`}>
+                <Reveal
+                  variants={moveUpV2}
+                  className="
                         group relative overflow-hidden cursor-pointer
                         [clip-path:polygon(0_0,calc(100%-45px)_0,100%_45px,100%_100%,0_100%)]
                         md:[clip-path:polygon(0_0,calc(100%-55px)_0,100%_50px,100%_100%,0_100%)]
@@ -139,26 +139,26 @@ const ExpertiseSection = ({
                         2xl:[clip-path:polygon(0_0,calc(100%-78px)_0,100%_65px,100%_100%,0_100%)]
                         3xl:min-h-[463px] 3xl:max-w-[633px]
                       "
-                  >
-                    {/* Image */}
-                    <Image
-                      src={slide.homeImage}
-                      alt={slide.homeImageAlt}
-                      width={520}
-                      height={463}
-                      className="group-hover:scale-[1.04] transition-all duration-900 w-full h-[260px] md:h-[340px] lg:h-[420px] 2xl:h-full 3xl:min-h-[463px] 3xl:max-w-[633px] object-cover"
-                    />
-                    {/* Dark overlay */}
-                    <div
-                      style={{
-                        background:
-                          "linear-gradient(180deg, rgba(0, 0, 0, 0) 15.01%, rgba(0, 0, 0, 0.5) 100%)",
-                      }}
-                      className="absolute inset-0"
-                    />
-                    {/* DEFAULT TITLE */}
-                    <h3
-                      className="
+                >
+                  {/* Image */}
+                  <Image
+                    src={slide.homeImage}
+                    alt={slide.homeImageAlt}
+                    width={520}
+                    height={463}
+                    className="group-hover:scale-[1.04] transition-all duration-900 w-full h-[260px] md:h-[340px] lg:h-[420px] 2xl:h-full 3xl:min-h-[463px] 3xl:max-w-[633px] object-cover"
+                  />
+                  {/* Dark overlay */}
+                  <div
+                    style={{
+                      background:
+                        "linear-gradient(180deg, rgba(0, 0, 0, 0) 15.01%, rgba(0, 0, 0, 0.5) 100%)",
+                    }}
+                    className="absolute inset-0"
+                  />
+                  {/* DEFAULT TITLE */}
+                  <h3
+                    className="
                           absolute bottom-[25px] lg:bottom-[50px] left-[25px] lg:left-[50px]
                           text-30 md:text-32 font-condensed leading-[120%]
                           max-w-[300px] text-paragraph-2
@@ -166,12 +166,12 @@ const ExpertiseSection = ({
                           translate-y-0
                           group-hover:translate-y-[200%]
                         "
-                    >
-                      {slide.title}
-                    </h3>
-                    {/* WHITE BOX (SAME LEFT & BOTTOM) */}
-                    <div
-                      className="
+                  >
+                    {slide.title}
+                  </h3>
+                  {/* WHITE BOX (SAME LEFT & BOTTOM) */}
+                  <div
+                    className="
                           absolute bottom-[25px] lg:bottom-[50px] left-[25px] lg:left-[50px]
                           w-[calc(100%-50px)] lg:w-[calc(100%-100px)]
                           flex items-center justify-between
@@ -181,21 +181,21 @@ const ExpertiseSection = ({
                           translate-y-[200%]
                           group-hover:translate-y-0
                         "
-                    >
-                      <span className="max-w-[300px] leading-[120%] font-condensed text-30 md:text-32 text-secondary">
-                        {slide.title}
-                      </span>
-                      <span className="flex h-[40px] w-[40px] md:h-[64px] md:w-[64px] items-center justify-center bg-primary flex-shrink-0">
-                        <Image
-                          src="/assets/icons/right-top-arrow-white.svg"
-                          alt="arrow"
-                          width={14}
-                          height={14}
-                          className="translate-y-[8px] -translate-x-[8px] group-hover:translate-y-[0px] group-hover:translate-x-[0px] transition-transform duration-700"
-                        />
-                      </span>
-                    </div>
-                  </Reveal>
+                  >
+                    <span className="max-w-[300px] leading-[120%] font-condensed text-30 md:text-32 text-secondary">
+                      {slide.title}
+                    </span>
+                    <span className="flex h-[40px] w-[40px] md:h-[64px] md:w-[64px] items-center justify-center bg-primary flex-shrink-0">
+                      <Image
+                        src="/assets/icons/right-top-arrow-white.svg"
+                        alt="arrow"
+                        width={14}
+                        height={14}
+                        className="translate-y-[8px] -translate-x-[8px] group-hover:translate-y-[0px] group-hover:translate-x-[0px] transition-transform duration-700"
+                      />
+                    </span>
+                  </div>
+                </Reveal>
               </Link>
             </SwiperSlide>
           ))}

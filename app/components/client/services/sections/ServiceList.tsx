@@ -9,10 +9,10 @@ import { ServiceType } from "@/app/types/service";
 const FILLOUT_MS = 300;
 const FILLIN_MS = 350;
 
-const ServicesSection = ({ data }: { data: ServiceType['firstSection'] }) => {
+const ServicesSection = ({ data }: { data: ServiceType["firstSection"] }) => {
   // const { heading, services } = servicesSectionData;
-  const heading = data.title
-  const services = data.items
+  const heading = data.title;
+  const services = data.items;
   const [visibleIndex, setVisibleIndex] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
   const [scrolledDown, setScrolledDown] = useState(true);
@@ -54,7 +54,7 @@ const ServicesSection = ({ data }: { data: ServiceType['firstSection'] }) => {
           const vh = window.innerHeight;
           const best = visible.reduce((a, b) =>
             Math.abs(a.rect.top + a.rect.height / 2 - vh / 2) <
-              Math.abs(b.rect.top + b.rect.height / 2 - vh / 2)
+            Math.abs(b.rect.top + b.rect.height / 2 - vh / 2)
               ? a
               : b,
           );
@@ -97,12 +97,16 @@ const ServicesSection = ({ data }: { data: ServiceType['firstSection'] }) => {
     <section className="py-40 sm:py-100 lg:py-130 3xl:py-150">
       <div className="border-b border-border pb-4">
         <div className="container mb-30 2xl:mb-15">
-          <AnimatedHeading className="section-heading leading-[120%] max-w-[711px]" text={heading} />
+          <AnimatedHeading
+            className="section-heading leading-[120%] max-w-[711px]"
+            text={heading}
+          />
         </div>
         <div>
           {services.map((service, index) => {
             const isActive = index === activeIndex;
-            const isLeaving = index === visibleIndex && activeIndex !== visibleIndex;
+            const isLeaving =
+              index === visibleIndex && activeIndex !== visibleIndex;
             const hiddenClipPath = scrolledDown
               ? "inset(0 0 100% 0)"
               : "inset(100% 0 0 0)";
@@ -116,7 +120,12 @@ const ServicesSection = ({ data }: { data: ServiceType['firstSection'] }) => {
                 : hiddenClipPath;
 
             return (
-              <div key={index} ref={(el) => { cardRefs.current[index] = el; }}
+              <div
+              key={index}
+              id={`service-${index}`}
+                ref={(el) => {
+                  cardRefs.current[index] = el;
+                }}
                 className={`relative overflow-hidden border-t border-border ${index === services.length - 1 ? "border-b" : ""}`}
               >
                 <div
@@ -139,7 +148,11 @@ const ServicesSection = ({ data }: { data: ServiceType['firstSection'] }) => {
                     <div className="flex flex-col lg:flex-row items-center">
                       <div className="w-full lg:w-[54%] xl:w-[59%] p-6 md:p-10 lg:py-12 2xl:p-15">
                         <div className="mb-7 lg:mb-[38px]">
-                          <Image src={service.logo} alt={service.logoAlt} width={62} height={62}
+                          <Image
+                            src={service.logo}
+                            alt={service.logoAlt}
+                            width={62}
+                            height={62}
                             className={`w-auto h-[40px] lg:h-[62px] pointer-events-none transition-all duration-250 ${isActive ? "invert brightness-0" : ""}`}
                           />
                         </div>
