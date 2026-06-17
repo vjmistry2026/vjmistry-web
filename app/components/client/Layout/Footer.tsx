@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   quickLinks,
   resources,
@@ -16,9 +16,33 @@ import AnimatedHeading from "../common/AnimateHeading";
 const Footer = () => {
   const [activeLocation, setActiveLocation] =
     useState<keyof typeof contactLocations>("headOffice");
+  const [previewDocument, setPreviewDocument] = useState<{
+    label: string;
+    href: string;
+    download: string;
+  } | null>(null);
   const activeData = contactLocations[activeLocation];
   const phoneNumbers = activeData.phone.split("|").map((phone) => phone.trim()).filter(Boolean);
   const emailAddresses = activeData.email.split("|").map((email) => email.trim()).filter(Boolean);
+
+  useEffect(() => {
+    if (!previewDocument) return;
+
+    const previousOverflow = document.body.style.overflow;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setPreviewDocument(null);
+      }
+    };
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [previewDocument]);
 
   return (
     <footer className="bg-[#1C1C1C] overflow-hidden">
@@ -106,13 +130,29 @@ const Footer = () => {
                     whileInView="show"
                     viewport={{ once: true }}
                     key={item.label}
-                  >
-                    <Link
-                      href={item.href}
-                      className="hover:text-paragraph-2 duration-300 font-nexa font-bold transition-colors"
                     >
-                      {item.label}
-                    </Link>
+                    {item.download ? (
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setPreviewDocument({
+                            label: item.label,
+                            href: item.href,
+                            download: item.download,
+                          })
+                        }
+                        className="hover:text-paragraph-2 duration-300 font-nexa font-bold transition-colors cursor-pointer text-left"
+                      >
+                        {item.label}
+                      </button>
+                    ) : (
+                      <Link
+                        href={item.href}
+                        className="hover:text-paragraph-2 duration-300 font-nexa font-bold transition-colors"
+                      >
+                        {item.label}
+                      </Link>
+                    )}
                   </motion.li>
                 ))}
               </ul>
@@ -369,6 +409,60 @@ const Footer = () => {
           </motion.div>
         </div>
       </motion.div>
+
+      {previewDocument ? (
+        <div
+          className="fixed inset-0 z-[10050] flex items-center justify-center bg-secondary/70 p-4 backdrop-blur-[3px] sm:p-6 lg:p-10"
+          role="dialog"
+          aria-modal="true"
+          aria-label={previewDocument.label}
+          onClick={() => setPreviewDocument(null)}
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 24, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            onClick={(event) => event.stopPropagation()}
+            className="mx-auto flex h-[min(88vh,860px)] w-full max-w-[1200px] flex-col overflow-hidden bg-white shadow-[0_24px_80px_rgba(0,0,0,0.22)]"
+          >
+            <div className="flex flex-wrap items-start justify-between gap-4 border-b border-border px-5 py-4 sm:px-8 sm:py-5">
+              <div className="min-w-0">
+                <p className="font-nexa text-14 font-bold uppercase tracking-[0.14em] text-primary">
+                  Document Preview
+                </p>
+                <h3 className="mt-2 truncate font-condensed text-24 leading-[100%] text-secondary sm:text-32">
+                  {previewDocument.label}
+                </h3>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <a
+                  href={previewDocument.href}
+                  download={previewDocument.download}
+                  className="inline-flex items-center gap-2 border border-primary px-4 py-2 font-nexa text-14 font-bold leading-none text-primary transition-colors duration-300 hover:bg-primary hover:text-paragraph-2"
+                >
+                  Download
+                </a>
+                <button
+                  type="button"
+                  onClick={() => setPreviewDocument(null)}
+                  className="inline-flex cursor-pointer items-center gap-2 border border-border px-4 py-2 font-nexa text-14 font-bold leading-none text-secondary transition-colors duration-300 hover:border-secondary hover:bg-secondary hover:text-paragraph-2"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+
+            <div className="min-h-0 flex-1 bg-[#F5F5F5] p-3 sm:p-4">
+              <iframe
+                src={`${previewDocument.href}#toolbar=0`}
+                title={previewDocument.label}
+                className="h-full w-full border-0 bg-white"
+              />
+            </div>
+          </motion.div>
+        </div>
+      ) : null}
     </footer>
   );
 };

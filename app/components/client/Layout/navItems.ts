@@ -60,11 +60,15 @@ export const quickLinks = [
   { label: "Projects", href: "/projects" },
 ];
 
-export const resources = [
+type FooterResource =
+  | { label: string; href: string; download: string }
+  | { label: string; href: string; download?: never };
+
+export const resources: FooterResource[] = [
   { label: "News", href: "/media-center/news" },
   { label: "Gallery", href: "/media-center/gallery" },
-  { label: "Download Brochure", href: "#" },
-  { label: "Download Company Profile", href: "#" },
+  // { label: "Download Brochure", href: "#" },
+  { label: "Download Company Profile", href: "/assets/documents/resources/company-profile.pdf", download: "company-profile.pdf" },
 ];
 
 export const socialMedia = [
