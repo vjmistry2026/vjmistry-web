@@ -328,7 +328,6 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState, useLayoutEffect } from "react";
-import { industriesData } from "../data";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import AnimatedHeading from "../../common/AnimateHeading";
@@ -349,18 +348,22 @@ const IndustriesWeServe = ({ data }: { data: HomeType['fifthSection'] }) => {
     const sectionRef = useRef<HTMLElement | null>(null);
     const scrollRef = useRef<HTMLDivElement | null>(null);
     const [isLg, setIsLg] = useState(false);
-
-    useEffect(() => {
-        const check = () => setIsLg(window.innerWidth >= 1024);
-        check();
-        window.addEventListener("resize", check);
-        return () => window.removeEventListener("resize", check);
-    }, []);
+    const [navbarHeight, setNavbarHeight] = useState(0);
 
     const getNavbarHeight = () => {
         const nav = document.querySelector(".site-navbar") as HTMLElement | null;
         return nav?.offsetHeight ?? 0;
     };
+
+    useEffect(() => {
+        const check = () => {
+            setIsLg(window.innerWidth >= 1024);
+            setNavbarHeight(getNavbarHeight());
+        };
+        check();
+        window.addEventListener("resize", check);
+        return () => window.removeEventListener("resize", check);
+    }, []);
 
     useEffect(() => {
         const section = sectionRef.current;
@@ -371,16 +374,17 @@ const IndustriesWeServe = ({ data }: { data: HomeType['fifthSection'] }) => {
 
         mm.add("(min-width: 1024px)", () => {
             const ctx = gsap.context(() => {
-                const scrollHeight = scrollEl.scrollHeight - scrollEl.clientHeight;
+                const getScrollDistance = () =>
+                    Math.max(0, scrollEl.scrollHeight - scrollEl.clientHeight);
 
                 gsap.to(scrollEl, {
-                    scrollTop: scrollHeight,
+                    scrollTop: () => getScrollDistance(),
                     ease: "power1.out",
                     scrollTrigger: {
                         trigger: section,
                         pin: section,
                         start: () => `top ${getNavbarHeight()}px`,
-                        end: `+=${scrollHeight}`,
+                        end: () => `+=${getScrollDistance()}`,
                         scrub: 0.6,
                         anticipatePin: 1,
                         invalidateOnRefresh: true,
@@ -414,10 +418,15 @@ const IndustriesWeServe = ({ data }: { data: HomeType['fifthSection'] }) => {
         };
     }, []);
 
+    useEffect(() => {
+        ScrollTrigger.refresh();
+    }, [navbarHeight]);
+
     return (
         <section
             ref={sectionRef}
             className="bg-secondary overflow-visible lg:h-[100dvh] lg:overflow-hidden"
+            style={isLg ? { height: `calc(100dvh - ${navbarHeight}px)` } : undefined}
         >
             <ContainerAnchor ref={containerRef} />
             <div
@@ -425,7 +434,7 @@ const IndustriesWeServe = ({ data }: { data: HomeType['fifthSection'] }) => {
                 style={isLg ? { paddingLeft: leftInset } : undefined}
             >
                 {/* LEFT */}
-                <div className="w-full lg:w-[45%] flex flex-col justify-start pt-100 lg:pt-150 2xl:pt-[191px] lg:pr-[66px] mb-[32px] lg:mb-[0px]">
+                <div className="w-full lg:w-[45%] flex flex-col justify-start pt-100 lg:pt-150 3xl:pt-[191px] lg:pr-[66px] mb-[32px] lg:mb-[0px]">
                     <AnimatedHeading color="white" text={heading} className="mb-[30px]" />
                     <motion.p
                         variants={moveUp(0.35)}
@@ -439,7 +448,7 @@ const IndustriesWeServe = ({ data }: { data: HomeType['fifthSection'] }) => {
                 </div>
 
                 {/* RIGHT */}
-                <div className="w-full lg:w-[55%] relative">
+                <div className="w-full lg:w-[65%] 3xl:w-[55%] relative">
                     <div className="absolute left-0 top-0 w-full h-px bg-gradient-to-r from-transparent via-white/70 to-transparent lg:left-0 lg:top-0 lg:h-full lg:w-px lg:bg-gradient-to-b" />
                     <div
                         ref={scrollRef}
@@ -447,24 +456,17 @@ const IndustriesWeServe = ({ data }: { data: HomeType['fifthSection'] }) => {
                     >
                         {items.map((item, index) => (
                             <motion.div
-                                variants={moveUp(index * 0.3)}
+                                variants={moveUp(0.12)}
                                 initial="hidden"
                                 whileInView="show"
                                 viewport={{ once: true }}
                                 key={index}
-                                className="flex items-center py-[30px] lg:py-[30px] 2xl:py-[40px] lg:first:pt-[0px] lg:last:pb-[0px] lg:last:border-b-0 border-b border-white/20"
+                                className="flex items-center py-[30px] lg:py-[30px] 2xl:py-[40px] lg:first:pt-[0px] lg:last:pb-[0px] lg:last:border-b-0 border-b border-white/20 pb-10"
                             >
-                                <div
-                                    style={isLg ? { paddingRight: leftInset } : undefined}
-                                    className="flex lg:flex-row flex-col items-start gap-[30px] xl:gap-[40px] lg:pl-[30px] xl:pl-[40px]"
+                                <div style={isLg ? { paddingRight: leftInset } : undefined} className="flex lg:flex-row flex-col items-start gap-[30px] xl:gap-[40px] lg:pl-[30px] xl:pl-[40px]"
                                 >
                                     <div className="w-full h-[250px] md:h-[300px] lg:w-[220px] lg:h-[220px] xl:w-[250px] xl:h-[250px] 2xl:w-[350px] 2xl:h-[350px] relative shrink-0">
-                                        <Image
-                                            src={item.image}
-                                            alt={item.imageAlt}
-                                            fill
-                                            className="object-cover pointer-events-none"
-                                        />
+                                        <Image src={item.image} alt={item.imageAlt} fill onLoadingComplete={() => ScrollTrigger.refresh()} className="object-cover pointer-events-none" />
                                     </div>
                                     <div className="flex flex-col gap-[20px] xl:gap-[30px]">
                                         <motion.div
