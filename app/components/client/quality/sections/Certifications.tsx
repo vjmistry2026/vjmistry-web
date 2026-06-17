@@ -19,7 +19,7 @@ const Certifications = ({ data }: { data: QualityType['thirdSection'] }) => {
   useEffect(() => {
     const updateVisibleItems = () => {
       if (window.innerWidth >= 1280) {
-        setVisibleItems(4);
+        setVisibleItems(3);
         return;
       }
 
@@ -112,7 +112,7 @@ const Certifications = ({ data }: { data: QualityType['thirdSection'] }) => {
           ) : null}
         </div>
 
-        <div className="mt-8 overflow-hidden border border-[#d9d9d9] xl:mt-10">
+        <div className="mt-8 overflow-hidden border-y border-l border-[#d9d9d9] xl:mt-10">
           <div
             className="flex transition-transform duration-500 ease-out"
             style={{ transform: `translateX(-${currentSlideIndex * slideStep}%)` }}
@@ -126,7 +126,7 @@ const Certifications = ({ data }: { data: QualityType['thirdSection'] }) => {
                 whileInView="show"
                 viewport={{ once: true, amount: 0.18 }}
                 onClick={() => setActiveIndex(index)}
-                className="group relative flex min-h-[260px] shrink-0 basis-full cursor-pointer items-center justify-center overflow-hidden border-r border-[#d9d9d9] bg-light p-6 transition-colors duration-300 sm:min-h-[320px] sm:basis-1/2 xl:min-h-[360px] xl:basis-1/4"
+                className="group relative flex min-h-[260px] shrink-0 basis-full cursor-pointer items-center justify-center overflow-hidden border-r border-[#d9d9d9] bg-light hover:bg-white p-6 transition-colors duration-300 sm:min-h-[320px] sm:basis-1/2 xl:min-h-[360px] xl:basis-1/3"
               >
                 <Image
                   src={item.image}
