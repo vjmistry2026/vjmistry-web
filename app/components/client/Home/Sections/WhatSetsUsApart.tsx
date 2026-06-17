@@ -124,7 +124,7 @@ const WhatSetsUsApart = ({ data }: { data: HomeType['fourthSection'] }) => {
                                             startAutoplay();
                                         });
                                     }}
-                                    className={`relative border-l border-y border-border overflow-hidden cursor-pointer 3xl:min-h-[356px] ${index === slides.length - 1 ? "border-r" : ""}`}
+                                    className={`relative border-l border-y border-border overflow-hidden  3xl:min-h-[356px] ${index === slides.length - 1 ? "border-r" : ""}`}
                                 >
                                     {/* BACKGROUND IMAGE
                                         When active: fades in + slowly drifts (scale + translate)

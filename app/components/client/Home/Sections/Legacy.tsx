@@ -137,7 +137,7 @@ const LegacySection = ({ data, secondSection }: { data: HomeType['firstSection']
                             viewport={{ once: true }}
                             className="mt-[20px] lg:mt-[30px] xl:mt-[40px] 2xl:mt-15 flex-shrink-0"
                         >
-                            <CustomButton label={data.buttonText} href={""} textColor="black" />
+                            <CustomButton label={data.buttonText} href="/about-us/overview" textColor="black" />
                         </motion.div>
                     </div>
 

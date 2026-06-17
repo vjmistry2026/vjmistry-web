@@ -15,200 +15,228 @@ import { useContainerLeftInset } from "@/app/hooks/useContainerLeftInset";
 import SliderNavButton from "../../common/NavigationButton";
 import Reveal from "../../common/RevealOneByOneAnimation";
 import { ServiceType } from "@/app/types/service";
+import Link from "next/link";
 
-const ExpertiseSection = ({ data, service }: { data: HomeType['thirdSection'], service: ServiceType }) => {
-    // const { heading, description, slides } = expertiseSectionData;
-    const heading = data.title
-    const description = data.description
-    const slides = service.firstSection.items
-    const containerRef = useRef<HTMLDivElement>(null);
-    const leftInset = useContainerLeftInset(containerRef);
+const ExpertiseSection = ({
+  data,
+  service,
+}: {
+  data: HomeType["thirdSection"];
+  service: ServiceType;
+}) => {
+  // const { heading, description, slides } = expertiseSectionData;
+  const heading = data.title;
+  const description = data.description;
+  const slides = service.firstSection.items;
+  const containerRef = useRef<HTMLDivElement>(null);
+  const leftInset = useContainerLeftInset(containerRef);
 
-    const swiperRef = useRef<any>(null);
-    const [progress, setProgress] = useState(0);
+  const swiperRef = useRef<any>(null);
+  const [progress, setProgress] = useState(0);
 
-    return (
-        <section className="bg-secondary py-100 lg:py-130">
-            <div>
-                {/* HEADER */}
-                <div
-                    ref={containerRef}
-                    className="container flex flex-col lg:flex-row lg:items-end items-start justify-between mb-[40px] lg:mb-[60px] gap-[20px]"
-                >
-                    <div className="w-full">
-                        <AnimatedHeading
-                            text={heading}
-                            className="mb-[20px] lg:mb-[30px]"
-                            color="white"
+  return (
+    <section className="bg-secondary py-100 lg:py-130">
+      <div>
+        {/* HEADER */}
+        <div
+          ref={containerRef}
+          className="container flex flex-col lg:flex-row lg:items-end items-start justify-between mb-[40px] lg:mb-[60px] gap-[20px]"
+        >
+          <div className="w-full">
+            <AnimatedHeading
+              text={heading}
+              className="mb-[20px] lg:mb-[30px]"
+              color="white"
+            />
+
+            <motion.p
+              variants={moveUp(0.35)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              className="section-description max-w-[590px] text-paragraph-2/70"
+            >
+              {description}
+            </motion.p>
+          </div>
+
+          {/* STATIC BUTTONS */}
+          <div className="flex w-full items-center justify-between lg:justify-end">
+            <motion.div
+              variants={moveUp(0.35)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+            >
+              <CustomButton
+                label="View All Services"
+                href="/services"
+                textColor="white"
+              />
+            </motion.div>
+            <motion.div
+              variants={moveUp(0.35)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              className="flex lg:hidden items-center justify-center gap-[10px]"
+            >
+              <SliderNavButton
+                direction="left"
+                onClick={() => swiperRef.current?.slidePrev()}
+              />
+              <SliderNavButton
+                direction="right"
+                onClick={() => swiperRef.current?.slideNext()}
+              />
+            </motion.div>
+          </div>
+        </div>
+
+        {/* SLIDER */}
+        <Swiper
+          modules={[Navigation]}
+          onSwiper={(swiper) => (swiperRef.current = swiper)}
+          onProgress={(swiper) => setProgress(swiper.progress)}
+          spaceBetween={20}
+          slidesPerView={1.04}
+          breakpoints={{
+            640: {
+              slidesPerView: 1.3,
+              spaceBetween: 20,
+            },
+            768: {
+              slidesPerView: 2.1,
+              spaceBetween: 20,
+            },
+            1024: {
+              slidesPerView: 2.3,
+              spaceBetween: 30,
+            },
+            1480: {
+              slidesPerView: 2.62,
+              spaceBetween: 40,
+            },
+            1620: {
+              slidesPerView: 2.62,
+              spaceBetween: 40,
+            },
+          }}
+          className="mb-[25px] lg:mb-[40px] !pr-[15px] !lg:pr-0"
+          style={{ marginLeft: leftInset }}
+        >
+          {slides.map((slide, index) => (
+            <SwiperSlide key={index}>
+              <Link href={`/services`}>
+                  <Reveal
+                    variants={moveUpV2}
+                    className="
+                        group relative overflow-hidden cursor-pointer
+                        [clip-path:polygon(0_0,calc(100%-45px)_0,100%_45px,100%_100%,0_100%)]
+                        md:[clip-path:polygon(0_0,calc(100%-55px)_0,100%_50px,100%_100%,0_100%)]
+                        lg:[clip-path:polygon(0_0,calc(100%-65px)_0,100%_55px,100%_100%,0_100%)]
+                        xl:[clip-path:polygon(0_0,calc(100%-72px)_0,100%_60px,100%_100%,0_100%)]
+                        2xl:[clip-path:polygon(0_0,calc(100%-78px)_0,100%_65px,100%_100%,0_100%)]
+                        3xl:min-h-[463px] 3xl:max-w-[633px]
+                      "
+                  >
+                    {/* Image */}
+                    <Image
+                      src={slide.homeImage}
+                      alt={slide.homeImageAlt}
+                      width={520}
+                      height={463}
+                      className="group-hover:scale-[1.04] transition-all duration-900 w-full h-[260px] md:h-[340px] lg:h-[420px] 2xl:h-full 3xl:min-h-[463px] 3xl:max-w-[633px] object-cover"
+                    />
+                    {/* Dark overlay */}
+                    <div
+                      style={{
+                        background:
+                          "linear-gradient(180deg, rgba(0, 0, 0, 0) 15.01%, rgba(0, 0, 0, 0.5) 100%)",
+                      }}
+                      className="absolute inset-0"
+                    />
+                    {/* DEFAULT TITLE */}
+                    <h3
+                      className="
+                          absolute bottom-[25px] lg:bottom-[50px] left-[25px] lg:left-[50px]
+                          text-30 md:text-32 font-condensed leading-[120%]
+                          max-w-[300px] text-paragraph-2
+                          transition-transform duration-800 ease-[cubic-bezier(0.22,1,0.36,1)]
+                          translate-y-0
+                          group-hover:translate-y-[200%]
+                        "
+                    >
+                      {slide.title}
+                    </h3>
+                    {/* WHITE BOX (SAME LEFT & BOTTOM) */}
+                    <div
+                      className="
+                          absolute bottom-[25px] lg:bottom-[50px] left-[25px] lg:left-[50px]
+                          w-[calc(100%-50px)] lg:w-[calc(100%-100px)]
+                          flex items-center justify-between
+                          bg-white
+                          px-[20px] py-[10px] lg:py-[20px]
+                          transition-transform duration-800 ease-[cubic-bezier(0.22,1,0.36,1)]
+                          translate-y-[200%]
+                          group-hover:translate-y-0
+                        "
+                    >
+                      <span className="max-w-[300px] leading-[120%] font-condensed text-30 md:text-32 text-secondary">
+                        {slide.title}
+                      </span>
+                      <span className="flex h-[40px] w-[40px] md:h-[64px] md:w-[64px] items-center justify-center bg-primary flex-shrink-0">
+                        <Image
+                          src="/assets/icons/right-top-arrow-white.svg"
+                          alt="arrow"
+                          width={14}
+                          height={14}
+                          className="translate-y-[8px] -translate-x-[8px] group-hover:translate-y-[0px] group-hover:translate-x-[0px] transition-transform duration-700"
                         />
-
-                        <motion.p
-                            variants={moveUp(0.35)}
-                            initial="hidden"
-                            whileInView="show"
-                            viewport={{ once: true }}
-                            className="section-description max-w-[590px] text-paragraph-2/70"
-                        >
-                            {description}
-                        </motion.p>
+                      </span>
                     </div>
+                  </Reveal>
+              </Link>
+            </SwiperSlide>
+          ))}
+        </Swiper>
 
-                    {/* STATIC BUTTONS */}
-                    <div className="flex w-full items-center justify-between lg:justify-end">
-                        <motion.div variants={moveUp(0.35)} initial="hidden" whileInView="show" viewport={{ once: true }}>
-                            <CustomButton label="View All Services" href="#" textColor="white" />
-                        </motion.div>
-                        <motion.div
-                            variants={moveUp(0.35)}
-                            initial="hidden"
-                            whileInView="show"
-                            viewport={{ once: true }}
-                            className="flex lg:hidden items-center justify-center gap-[10px]"
-                        >
-                            <SliderNavButton direction="left" onClick={() => swiperRef.current?.slidePrev()} />
-                            <SliderNavButton direction="right" onClick={() => swiperRef.current?.slideNext()} />
-                        </motion.div>
-                    </div>
-                </div>
+        {/* PAGINATION BAR */}
+        <motion.div
+          variants={moveUp(0.45)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="flex justify-center lg:mb-[20px] container"
+        >
+          <div className="relative w-[265px] lg:w-[484px] h-[4px] bg-[#3A3A3A]">
+            <span
+              className="absolute left-0 top-0 h-full bg-primary transition-all duration-500"
+              style={{ width: `${progress * 100}%` }}
+            />
+          </div>
+        </motion.div>
 
-                {/* SLIDER */}
-                <Swiper
-                    modules={[Navigation]}
-                    onSwiper={(swiper) => (swiperRef.current = swiper)}
-                    onProgress={(swiper) => setProgress(swiper.progress)}
-                    spaceBetween={20}
-                    slidesPerView={1.04}
-                    breakpoints={{
-                        640: {
-                            slidesPerView: 1.3,
-                            spaceBetween: 20,
-                        },
-                        768: {
-                            slidesPerView: 2.1,
-                            spaceBetween: 20,
-                        },
-                        1024: {
-                            slidesPerView: 2.3,
-                            spaceBetween: 30,
-                        },
-                        1480: {
-                            slidesPerView: 2.62,
-                            spaceBetween: 40,
-                        },
-                        1620: {
-                            slidesPerView: 2.62,
-                            spaceBetween: 40,
-                        },
-                    }}
-                    className="mb-[25px] lg:mb-[40px] !pr-[15px] !lg:pr-0"
-                    style={{ marginLeft: leftInset }}
-                >
-                    {slides.map((slide, index) => (
-                        <SwiperSlide key={index}>
-                            <Reveal variants={moveUpV2} className="
-      group relative overflow-hidden cursor-pointer
-      [clip-path:polygon(0_0,calc(100%-45px)_0,100%_45px,100%_100%,0_100%)]
-      md:[clip-path:polygon(0_0,calc(100%-55px)_0,100%_50px,100%_100%,0_100%)]
-      lg:[clip-path:polygon(0_0,calc(100%-65px)_0,100%_55px,100%_100%,0_100%)]
-      xl:[clip-path:polygon(0_0,calc(100%-72px)_0,100%_60px,100%_100%,0_100%)]
-      2xl:[clip-path:polygon(0_0,calc(100%-78px)_0,100%_65px,100%_100%,0_100%)]
-      3xl:min-h-[463px] 3xl:max-w-[633px]
-    "
-                            >
-                                {/* Image */}
-                                <Image
-                                    src={slide.homeImage}
-                                    alt={slide.homeImageAlt}
-                                    width={520}
-                                    height={463}
-                                    className="group-hover:scale-[1.04] transition-all duration-900 w-full h-[260px] md:h-[340px] lg:h-[420px] 2xl:h-full 3xl:min-h-[463px] 3xl:max-w-[633px] object-cover"
-                                />
-
-                                {/* Dark overlay */}
-                                <div
-                                    style={{
-                                        background:
-                                            "linear-gradient(180deg, rgba(0, 0, 0, 0) 15.01%, rgba(0, 0, 0, 0.5) 100%)",
-                                    }}
-                                    className="absolute inset-0"
-                                />
-
-                                {/* DEFAULT TITLE */}
-                                <h3
-                                    className="
-        absolute bottom-[25px] lg:bottom-[50px] left-[25px] lg:left-[50px]
-        text-30 md:text-32 font-condensed leading-[120%]
-        max-w-[300px] text-paragraph-2
-        transition-transform duration-800 ease-[cubic-bezier(0.22,1,0.36,1)]
-        translate-y-0
-        group-hover:translate-y-[200%]
-      "
-                                >
-                                    {slide.title}
-                                </h3>
-
-                                {/* WHITE BOX (SAME LEFT & BOTTOM) */}
-                                <div
-                                    className="
-        absolute bottom-[25px] lg:bottom-[50px] left-[25px] lg:left-[50px]
-        w-[calc(100%-50px)] lg:w-[calc(100%-100px)]
-        flex items-center justify-between
-        bg-white
-        px-[20px] py-[10px] lg:py-[20px]
-        transition-transform duration-800 ease-[cubic-bezier(0.22,1,0.36,1)]
-        translate-y-[200%]
-        group-hover:translate-y-0
-      "
-                                >
-                                    <span className="max-w-[300px] leading-[120%] font-condensed text-30 md:text-32 text-secondary">
-                                        {slide.title}
-                                    </span>
-
-                                    <span className="flex h-[40px] w-[40px] md:h-[64px] md:w-[64px] items-center justify-center bg-primary flex-shrink-0">
-                                        <Image
-                                            src="/assets/icons/right-top-arrow-white.svg"
-                                            alt="arrow"
-                                            width={14}
-                                            height={14}
-                                            className="translate-y-[8px] -translate-x-[8px] group-hover:translate-y-[0px] group-hover:translate-x-[0px] transition-transform duration-700"
-                                        />
-                                    </span>
-                                </div>
-                            </Reveal>
-                        </SwiperSlide>
-                    ))}
-                </Swiper>
-
-                {/* PAGINATION BAR */}
-                <motion.div
-                    variants={moveUp(0.45)}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true }}
-                    className="flex justify-center lg:mb-[20px] container"
-                >
-                    <div className="relative w-[265px] lg:w-[484px] h-[4px] bg-[#3A3A3A]">
-                        <span
-                            className="absolute left-0 top-0 h-full bg-primary transition-all duration-500"
-                            style={{ width: `${progress * 100}%` }}
-                        />
-                    </div>
-                </motion.div>
-
-                {/* NAVIGATION */}
-                <motion.div
-                    variants={moveUp(0.5)}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true }}
-                    className="hidden lg:flex items-center justify-center gap-[20px]"
-                >
-                    <SliderNavButton direction="left" onClick={() => swiperRef.current?.slidePrev()} />
-                    <SliderNavButton direction="right" onClick={() => swiperRef.current?.slideNext()} />
-                </motion.div>
-            </div>
-        </section>
-    );
+        {/* NAVIGATION */}
+        <motion.div
+          variants={moveUp(0.5)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="hidden lg:flex items-center justify-center gap-[20px]"
+        >
+          <SliderNavButton
+            direction="left"
+            onClick={() => swiperRef.current?.slidePrev()}
+          />
+          <SliderNavButton
+            direction="right"
+            onClick={() => swiperRef.current?.slideNext()}
+          />
+        </motion.div>
+      </div>
+    </section>
+  );
 };
 
 export default ExpertiseSection;

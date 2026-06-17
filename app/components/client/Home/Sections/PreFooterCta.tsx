@@ -66,7 +66,7 @@ const PreFooterCta = ({ data }: { data: HomeType['eighthSection'] }) => {
                         whileInView="show"
                         viewport={{ once: true }}
                     >
-                        <CustomButton label={data.buttonText} href="#" textColor="white" />
+                        <CustomButton label={data.buttonText} href="/contact-us" textColor="white" />
                     </motion.div>
                 </div>
             </div>
