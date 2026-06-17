@@ -66,6 +66,6 @@ export const qualityData = {
   certifications: {
     title:"Certifications",
     desc:"Our certifications stand as a testament to our commitment to international standards, rigorous processes, and consistent excellence.",
-    items: ["/assets/images/quality/certifications/c1.jpg", "/assets/images/quality/certifications/c2.jpg", "/assets/images/quality/certifications/c3.jpg", "/assets/images/quality/certifications/c4.jpg",]
+    items: ["/assets/images/quality/certifications/c1.jpg", "/assets/images/quality/certifications/c3.jpg", "/assets/images/quality/certifications/c4.jpg",]
   }
 };
