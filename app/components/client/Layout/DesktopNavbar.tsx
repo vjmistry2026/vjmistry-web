@@ -183,7 +183,7 @@ export default function DesktopNavbar() {
           {/* CTA */}
           <Link
             ref={ctaRef}
-            href="#"
+            href="/contact-us"
             onMouseEnter={() => setHoveredItem("Contact Us")}
             onMouseLeave={() => setHoveredItem(null)}
             className="ml-5 2xl:ml-[20px] p-[25px] bg-primary flex items-center justify-center"

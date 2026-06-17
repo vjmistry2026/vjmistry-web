@@ -213,7 +213,7 @@ export default function HeroSection({ data }: { data: HomeType['bannerSection'] 
                                         whileInView="show"
                                         viewport={{ once: true }}
                                     >
-                                        <CustomButton label="Explore Our Services" href="#" textColor="white" />
+                                        <CustomButton label="Explore Our Services" href="/services" textColor="white" />
                                     </motion.div>
                                     <motion.div
                                         variants={moveUp(1.6)}
@@ -221,7 +221,7 @@ export default function HeroSection({ data }: { data: HomeType['bannerSection'] 
                                         whileInView="show"
                                         viewport={{ once: true }}
                                     >
-                                        <CustomButton label="Get in Touch" href="#" textColor="white" />
+                                        <CustomButton label="Get in Touch" href="/contact-us#getInTouch" textColor="white" />
                                     </motion.div>
                                 </motion.div>
                             </div>

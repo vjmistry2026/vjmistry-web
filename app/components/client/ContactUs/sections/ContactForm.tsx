@@ -98,7 +98,7 @@ const PowerBehind = ({ data }: { data: ContactType['firstSection'] }) => {
   };
 
   return (
-    <section className="relative overflow-hidden py-40 sm:py-130 3xl:py-150">
+    <section id="getInTouch" className="relative overflow-hidden py-40 sm:py-130 3xl:py-150">
       <ContainerAnchor ref={containerRef} />
       <div
         className="grid grid-cols-1 align-end lg:grid-cols-2 2xl:grid-cols-[1.2fr_1.5fr] 3xl:grid-cols-[875px_auto]"
