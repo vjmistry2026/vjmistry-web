@@ -8,7 +8,7 @@ import AnimatedHeading from "../../common/AnimateHeading";
 import { qualityData } from "../data";
 import ContainerAnchor from "../../Layout/ContainerAnchor";
 
-const QualityShield = ({ data }: { data: QualityType['secondSection'] }) => {
+const QualityShield = ({ data }: { data: QualityType["secondSection"] }) => {
   // const { title, desc, steps } = qualityData.qualityShield;
   const [activeIndex, setActiveIndex] = useState(
     data.items.findIndex((step) => step.title) >= 0
@@ -46,18 +46,38 @@ const QualityShield = ({ data }: { data: QualityType['secondSection'] }) => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden bg-light py-40 sm:py-130 ">
+    <section
+      ref={sectionRef}
+      className="relative overflow-hidden bg-light py-40 sm:py-130 "
+    >
       <ContainerAnchor />
-      <div className="absolute bottom-[-3%] left-0 z-[5] overflow-hidden" style={shapeBoundary ? { width: `${shapeBoundary}px` } : undefined}
+      <div
+        className="absolute bottom-[-3%] left-0 z-[5] overflow-hidden"
+        style={shapeBoundary ? { width: `${shapeBoundary}px` } : undefined}
       >
-        <Image src="/assets/shapes/shape-quality-shield.svg" width={1066} height={731} alt="" className="w-[1066px] object-contain" />
+        <Image
+          src="/assets/shapes/shape-quality-shield.svg"
+          width={1066}
+          height={731}
+          alt=""
+          className="w-[1066px] object-contain"
+        />
       </div>
 
       <div className="container relative z-10">
         <div className="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-[minmax(0,1.2fr)_minmax(440px,1fr)] gap-y-10">
           <div ref={firstColumnRef} className="flex flex-col">
             <AnimatedHeading text={data.title} className="mb-30" />
-            <motion.p variants={moveUp(0.15)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="cmn-p font-bold max-w-[51ch]" > {data.subTitle} </motion.p>
+            <motion.p
+              variants={moveUp(0.15)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.2 }}
+              className="cmn-p font-bold max-w-[51ch]"
+            >
+              {" "}
+              {data.subTitle}{" "}
+            </motion.p>
           </div>
 
           <div className="relative">
@@ -96,14 +116,16 @@ const QualityShield = ({ data }: { data: QualityType['secondSection'] }) => {
 
                       <span className="flex items-start justify-between gap-4">
                         <h3
-                          className={`font-condensed text-[30px] leading-none transition-colors duration-300 ${isActive ? "text-primary" : "text-secondary"
-                            }`}
+                          className={`font-condensed text-[30px] leading-none transition-colors duration-300 ${
+                            isActive ? "text-primary" : "text-secondary"
+                          }`}
                         >
                           {step.title}
                         </h3>
                         <span
-                          className={`mt-1 inline-flex shrink-0 xl:hidden transition-transform duration-300 ${isActive ? "rotate-180" : "rotate-0"
-                            }`}
+                          className={`mt-1 inline-flex shrink-0 xl:hidden transition-transform duration-300 ${
+                            isActive ? "rotate-180" : "rotate-0"
+                          }`}
                           aria-hidden="true"
                         >
                           <Image
@@ -123,26 +145,55 @@ const QualityShield = ({ data }: { data: QualityType['secondSection'] }) => {
                       </p>
 
                       <AnimatePresence initial={false}>
-                        {isActive && step.image ? (
-                          <motion.div
-                            key={`step-image-${step.title}`}
-                            initial={{ height: 0, opacity: 0, marginTop: 0 }}
-                            animate={{ height: "auto", opacity: 1, marginTop: 20 }}
-                            exit={{ height: 0, opacity: 0, marginTop: 0 }}
-                            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                            className="overflow-hidden"
-                          >
-                            <div className="relative h-[220px] overflow-hidden md:h-[280px] xl:h-[195px] 2xl:h-[260px] 3xl:h-[306px]">
+                        {step.image && (
+                          <>
+                            {/* Mobile: accordion (below xl) */}
+                            <AnimatePresence initial={false}>
+                              {isActive && (
+                                <motion.div
+                                  key={`step-image-${step.title}`}
+                                  initial={{
+                                    height: 0,
+                                    opacity: 0,
+                                    marginTop: 0,
+                                  }}
+                                  animate={{
+                                    height: "auto",
+                                    opacity: 1,
+                                    marginTop: 20,
+                                  }}
+                                  exit={{ height: 0, opacity: 0, marginTop: 0 }}
+                                  transition={{
+                                    duration: 0.45,
+                                    ease: [0.22, 1, 0.36, 1],
+                                  }}
+                                  className="overflow-hidden xl:hidden"
+                                >
+                                  <div className="relative h-[220px] overflow-hidden md:h-[280px]">
+                                    <Image
+                                      src={step.image}
+                                      alt={step.imageAlt}
+                                      fill
+                                      sizes="100vw"
+                                      className="object-cover"
+                                    />
+                                  </div>
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
+
+                            {/* Desktop: always visible (xl+) */}
+                            <div className="relative mt-5 hidden h-[195px] overflow-hidden xl:block 2xl:h-[260px] 3xl:h-[306px]">
                               <Image
                                 src={step.image}
                                 alt={step.imageAlt}
                                 fill
-                                sizes="(max-width: 1279px) 100vw, 40vw"
+                                sizes="40vw"
                                 className="object-cover"
                               />
                             </div>
-                          </motion.div>
-                        ) : null}
+                          </>
+                        )}
                       </AnimatePresence>
                     </div>
                   </motion.div>
