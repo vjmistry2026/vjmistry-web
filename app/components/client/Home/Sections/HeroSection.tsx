@@ -185,6 +185,7 @@ export default function HeroSection({ data }: { data: HomeType['bannerSection'] 
                         <HeroAnimatedHeading
                             tag="h1"
                             // text="Engineering Excellence Built on Trust & Legacy"
+                            key={activeIndex}
                             text={data.items[activeIndex].title}
                             className="text-75 3xl:text-85 font-condensed font-medium text-white leading-[120%] max-w-[23ch]"
                         />
