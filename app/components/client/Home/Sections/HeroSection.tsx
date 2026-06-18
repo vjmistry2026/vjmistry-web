@@ -184,7 +184,8 @@ export default function HeroSection({ data }: { data: HomeType['bannerSection'] 
                     <div className="w-full">
                         <HeroAnimatedHeading
                             tag="h1"
-                            text="Engineering Excellence Built on Trust & Legacy"
+                            // text="Engineering Excellence Built on Trust & Legacy"
+                            text={data.items[activeIndex].title}
                             className="text-75 3xl:text-85 font-condensed font-medium text-white leading-[120%] max-w-[23ch]"
                         />
                         <div className="w-full flex lg:flex-row flex-col gap-10 lg:gap-0 2xl:gap-10 justify-between lg:items-end">
@@ -283,7 +284,7 @@ export default function HeroSection({ data }: { data: HomeType['bannerSection'] 
                                                         animate="show"
                                                         exit={{ opacity: 0, y: -8 }}
                                                         transition={{ duration: 0.6, ease: "easeInOut" }}
-                                                        className="text-20 font-nexa leading-[100%] text-paragraph-2 min-w-[220px] lg:mb-[11px]"
+                                                        className="text-20 font-nexa leading-[100%] text-paragraph-2 min-w-[220px] lg:mb-[11px] line-clamp-2"
                                                     >
                                                         {data.items[activeIndex].title}
                                                     </motion.p>
