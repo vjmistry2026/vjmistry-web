@@ -12,6 +12,9 @@ import { Textarea } from '@/components/ui/textarea'
 import AdminItemContainer from '@/app/components/common/AdminItemContainer';
 import { FormError } from '@/app/components/common/FormError';
 import { FileUploader } from '@/components/ui/file-uploader';
+import { closestCorners, DndContext, DragEndEvent } from '@dnd-kit/core'
+import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
+import FileCard from '../home/FileCard';
 
 interface CertificateFormProps {
     metaTitle: string;
@@ -48,12 +51,14 @@ const CertificatePage = () => {
 
     const { register, handleSubmit, setValue, control, formState: { errors }, watch } = useForm<CertificateFormProps>();
 
-    const { fields: secondSectionItems, append: secondSectionAppend, remove: secondSectionRemove, move } = useFieldArray({
+    const [reorderMode, setReorderMode] = useState(false);
+
+    const { fields: secondSectionItems, append: secondSectionAppend, remove: secondSectionRemove } = useFieldArray({
         control,
         name: "secondSection.items"
     });
 
-    const { fields: thirdSectionItems, append: thirdSectionAppend, remove: thirdSectionRemove } = useFieldArray({
+    const { fields: thirdSectionItems, append: thirdSectionAppend, remove: thirdSectionRemove,move } = useFieldArray({
         control,
         name: "thirdSection.items"
     });
@@ -98,6 +103,20 @@ const CertificatePage = () => {
             console.log("Error in fetching certificate data", error);
         }
     }
+
+    const getTaskPos = (id: number | string) => thirdSectionItems.findIndex((item: { id: string }) => (item.id == id))
+    const handleDragEnd = (event: DragEndEvent) => {
+        const { active, over } = event;
+
+        if (!over || active.id === over.id) return;
+
+        const originalPos = getTaskPos(active.id);
+        const newPos = getTaskPos(over.id);
+
+        if (originalPos !== -1 && newPos !== -1) {
+            move(originalPos, newPos);
+        }
+    };
 
 
     useEffect(() => {
@@ -210,7 +229,7 @@ const CertificatePage = () => {
                                                 rules={{ required: "Logo is required" }}
                                                 render={({ field }) => (
                                                     <ImageUploader
-                                                    isLogo
+                                                        isLogo
                                                         value={field.value}
                                                         onChange={field.onChange}
                                                         recommendedDimension="Recommended: 35 x 35 (px)"
@@ -278,9 +297,26 @@ const CertificatePage = () => {
                                     <FormError error={errors.thirdSection?.description?.message} />
                                 </div>
                                 <div>
+                                    <div className='flex justify-between my-3'>
                                     <Label className="font-bold">Items</Label>
-                                    <div className="border border-black/20 p-2 rounded-md grid grid-cols-2 gap-5 mt-0.5">
-                                        {thirdSectionItems.map((field, index) => (
+                                    <Button disabled={thirdSectionItems.length < 2} type="button" className={`text-white text-[16px] ${reorderMode ? "bg-yellow-700" : "bg-green-700"}`} onClick={() => setReorderMode(!reorderMode)}>{reorderMode ? "Done" : "Reorder"}</Button>
+                                    </div>
+                                    <div className={`border border-black/20 p-2 rounded-md grid ${reorderMode ?  "grid-cols-1" : "grid-cols-2"} gap-5 mt-0.5`}>
+
+                                        {reorderMode &&
+
+                                            <DndContext collisionDetection={closestCorners} onDragEnd={handleDragEnd}>
+                                                <SortableContext items={thirdSectionItems.map((item) => item.id)} strategy={verticalListSortingStrategy}>
+                                                    {thirdSectionItems?.map((item, index) => (
+                                                        <FileCard key={index} item={item} id={item.id} />
+                                                    ))}
+                                                </SortableContext>
+                                            </DndContext>
+
+                                        }
+
+
+                                        {!reorderMode && thirdSectionItems.map((field, index) => (
                                             <div key={field.id} className="grid grid-cols-1 gap-2 relative border-r border-black/20 pr-5 last:border-0">
                                                 <div className="absolute top-2 right-2">
                                                     <RiDeleteBinLine

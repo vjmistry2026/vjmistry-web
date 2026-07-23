@@ -12,7 +12,7 @@ const FileCard = ({ item, id }: { item: { title: string }, id: string }) => {
     }
 
     return (
-        <div ref={setNodeRef} style={style} className='flex items-center justify-between border p-2 rounded-md' {...attributes} {...listeners} key={id}>
+        <div ref={setNodeRef} style={style} className='flex items-center justify-between border p-2 rounded-md cursor-grab' {...attributes} {...listeners} key={id}>
             <div>
                 <p className="text-[16px]">{item.title}</p>
             </div>
