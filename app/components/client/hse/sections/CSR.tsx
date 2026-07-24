@@ -8,7 +8,7 @@ import AnimatedHeading from "../../common/AnimateHeading";
 import AlbumCard from "../../common/AlbumCard";
 import SliderNavButton from "../../common/NavigationButton";
 import { moveUp } from "@/app/components/motionVariants";
-import { HSEData } from "../data";
+// import { HSEData } from "../data";
 
 import "swiper/css";
 import { HSeType } from "@/app/types/hse";
@@ -50,40 +50,41 @@ const CSR = ({ data }: { data: HSeType['sixthSection'] }) => {
           </motion.div>
         </div>
 
-        <Swiper
-          onSwiper={(swiper) => {
-            swiperRef.current = swiper;
-          }}
-          onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
-          className=""
-          breakpoints={{
-            0: { slidesPerView: 1, spaceBetween: 16 },
-            640: { slidesPerView: 1.5, spaceBetween: 18 },
-            768: { slidesPerView: 2, spaceBetween: 20 },
-            1024: { slidesPerView: 3, spaceBetween: 40 },
-          }}
-        >
-          {data.items.map((item, index) => {
-            const isActive = index === activeIndex;
+<Swiper
+  onSwiper={(swiper) => {
+    swiperRef.current = swiper;
+  }}
+  onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
+  className="!overflow-visible [&_.swiper-wrapper]:!items-stretch [&_.swiper-slide]:!h-auto"
+  breakpoints={{
+    0: { slidesPerView: 1, spaceBetween: 16 },
+    640: { slidesPerView: 1.5, spaceBetween: 18 },
+    768: { slidesPerView: 2, spaceBetween: 20 },
+    1024: { slidesPerView: 3, spaceBetween: 40 },
+  }}
+>
+  {data.items.map((item, index) => {
+    const isActive = index === activeIndex;
 
-            return (
-              <SwiperSlide key={item.title}>
-                <motion.div
-                  variants={moveUp(index * 0.08)}
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={{ once: true, amount: 0.18 }}
-                >
-                  <AlbumCard
-                    title={item.title}
-                    album={item.images}
-                    isActive={isActive}
-                  />
-                </motion.div>
-              </SwiperSlide>
-            );
-          })}
-        </Swiper>
+    return (
+      <SwiperSlide key={item.title}>
+        <motion.div
+          variants={moveUp(index * 0.08)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.18 }}
+          className="h-full"
+        >
+          <AlbumCard
+            title={item.title}
+            album={item.images}
+            isActive={isActive}
+          />
+        </motion.div>
+      </SwiperSlide>
+    );
+  })}
+</Swiper>
       </div>
     </section>
   );

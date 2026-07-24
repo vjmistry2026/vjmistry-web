@@ -11,7 +11,7 @@ import "swiper/css";
 
 type AlbumCardProps = {
   title: string;
-  album: { image: string, imageAlt: string }[];
+  album: { image: string; imageAlt: string }[];
   isActive?: boolean;
 };
 
@@ -36,9 +36,15 @@ const getVisibleModalThumbs = (total: number, activeIndex: number) => {
     return Array.from({ length: total }, (_, index) => index);
   }
 
-  const startIndex = Math.max(0, Math.min(activeIndex - 2, total - MAX_MODAL_THUMBS));
+  const startIndex = Math.max(
+    0,
+    Math.min(activeIndex - 2, total - MAX_MODAL_THUMBS),
+  );
 
-  return Array.from({ length: MAX_MODAL_THUMBS }, (_, index) => startIndex + index);
+  return Array.from(
+    { length: MAX_MODAL_THUMBS },
+    (_, index) => startIndex + index,
+  );
 };
 
 export default function AlbumCard({
@@ -153,7 +159,10 @@ export default function AlbumCard({
       aria-label={`${title} gallery`}
       onClick={() => setIsOpen(false)}
     >
-      <div className="relative w-full 3xl:max-w-[1620px]" onClick={(event) => event.stopPropagation()} >
+      <div
+        className="relative w-full 3xl:max-w-[1620px]"
+        onClick={(event) => event.stopPropagation()}
+      >
         <div className="max-w-[80vw] 3xl:max-w-[1444px]  mx-auto relative">
           <button
             type="button"
@@ -161,19 +170,30 @@ export default function AlbumCard({
             className="absolute right-0 top-0 z-[10060] flex h-12 w-12 -translate-y-full cursor-pointer items-center justify-center bg-transparent text-white transition-colors duration-200 hover:text-primary sm:h-14 sm:w-14 xl:w-5 xl:h-5"
             aria-label="Close gallery"
           >
-            <Image src="/assets/icons/close-icon.svg" width={34} height={34} alt="" className="h-5 w-5" />
+            <Image
+              src="/assets/icons/close-icon.svg"
+              width={34}
+              height={34}
+              alt=""
+              className="h-5 w-5"
+            />
           </button>
         </div>
-
 
         <div className="pt-2">
           <div className="relative">
             <div className="absolute left-2 top-1/2 z-20 hidden -translate-y-1/2 sm:left-0 sm:block">
-              <SliderNavButton direction="left" onClick={() => modalSwiperRef.current?.slidePrev()} />
+              <SliderNavButton
+                direction="left"
+                onClick={() => modalSwiperRef.current?.slidePrev()}
+              />
             </div>
 
             <div className="absolute right-2 top-1/2 z-20 hidden -translate-y-1/2 sm:right-0 sm:block">
-              <SliderNavButton direction="right" onClick={() => modalSwiperRef.current?.slideNext()} />
+              <SliderNavButton
+                direction="right"
+                onClick={() => modalSwiperRef.current?.slideNext()}
+              />
             </div>
 
             <div className="mx-auto w-full  overflow-hidden">
@@ -190,17 +210,29 @@ export default function AlbumCard({
               >
                 {album.map((image, imageIndex) => (
                   <SwiperSlide key={`${title}-${imageIndex}`}>
-                    <div className="relative mx-auto  min-h-[260px] md:min-h-[400px] xl:min-h-[500px] max-h-[80vh] 3xl:min-h-[676px]  overflow-hidden ">
+                    <div className="relative mx-auto flex items-center justify-center max-h-[80vh]">
                       <button
                         type="button"
                         onClick={() => setIsOpen(false)}
                         className="absolute right-0 top-0 z-[10060] flex h-12 w-12 -translate-y-full cursor-pointer items-center justify-center bg-transparent text-white transition-colors duration-200 hover:text-primary sm:h-14 sm:w-14 z-40"
                         aria-label="Close gallery"
                       >
-                        <Image src="/assets/icons/close-icon.svg" width={34} height={34} alt="" className="h-[34px] w-[34px]" />
+                        <Image
+                          src="/assets/icons/close-icon.svg"
+                          width={34}
+                          height={34}
+                          alt=""
+                          className="h-[34px] w-[34px]"
+                        />
                       </button>
-                      <Image src={image.image} alt={`${title} image ${imageIndex + 1}`} fill sizes="(max-width: 640px) 92vw, 
-                          (max-width: 1024px) 86vw, 980px" className="object-cover max-w-[80vw] 3xl:max-w-[1444px] mx-auto" />
+                      <Image
+                        src={image.image}
+                        alt={`${title} image ${imageIndex + 1}`}
+                        width={0}
+                        height={0}
+                        sizes="(max-width: 640px) 92vw, (max-width: 1024px) 86vw, 80vw"
+                        className="w-auto h-auto max-w-[80vw] 3xl:max-w-[1444px] max-h-[80vh]"
+                      />
                     </div>
                   </SwiperSlide>
                 ))}
@@ -209,8 +241,14 @@ export default function AlbumCard({
           </div>
 
           <div className="mx-auto mt-4 flex w-full max-w-[80vw] items-center justify-between sm:hidden">
-            <SliderNavButton direction="left" onClick={() => modalSwiperRef.current?.slidePrev()} />
-            <SliderNavButton direction="right" onClick={() => modalSwiperRef.current?.slideNext()} />
+            <SliderNavButton
+              direction="left"
+              onClick={() => modalSwiperRef.current?.slidePrev()}
+            />
+            <SliderNavButton
+              direction="right"
+              onClick={() => modalSwiperRef.current?.slideNext()}
+            />
           </div>
 
           <div className="mt-4 px-3 py-3 sm:px-4">
@@ -220,12 +258,19 @@ export default function AlbumCard({
                   key={`${title}-thumb-${imageIndex}`}
                   type="button"
                   onClick={() => modalSwiperRef.current?.slideTo(imageIndex)}
-                  className={`relative shrink-0 cursor-pointer overflow-hidden border transition-all duration-300 ${modalIndex === imageIndex
-                    ? "h-[70px] w-[100px] border-transparent grayscale-0 opacity-100"
-                    : "h-[50px] w-[70px] border-white/20 grayscale opacity-55"
-                    }`}
+                  className={`relative shrink-0 cursor-pointer overflow-hidden border transition-all duration-300 ${
+                    modalIndex === imageIndex
+                      ? "h-[70px] w-[100px] border-transparent grayscale-0 opacity-100"
+                      : "h-[50px] w-[70px] border-white/20 grayscale opacity-55"
+                  }`}
                 >
-                  <Image src={album[imageIndex].image} alt={album[imageIndex].imageAlt} fill sizes={modalIndex === imageIndex ? "100px" : "70px"} className="object-cover" />
+                  <Image
+                    src={album[imageIndex].image}
+                    alt={album[imageIndex].imageAlt}
+                    fill
+                    sizes={modalIndex === imageIndex ? "100px" : "70px"}
+                    className="object-cover"
+                  />
                 </button>
               ))}
             </div>
@@ -250,8 +295,7 @@ export default function AlbumCard({
         onMouseEnter={handleFooterMouseEnter}
         onMouseLeave={handleFooterMouseLeave}
         className={`group cursor-pointer border border-border transition-colors duration-300 h-full grid grid-rows-[auto_1fr]
-          ${isActive ? "bg-primary text-white" : "bg-white text-secondary"
-          }`}
+          ${isActive ? "bg-primary text-white" : "bg-white text-secondary"}`}
       >
         <div className="relative overflow-hidden ">
           <Image
@@ -277,23 +321,30 @@ export default function AlbumCard({
         </div>
 
         <div
-          className={`relative overflow-hidden px-5 pt-4 pb-8 xl:pt-7 3xl:px-30 3xl:pt-10 3xl:pb-50 3xl:pb-[51px] 3xl:pt-[41px] flex w-full ${isActive ? "bg-primary" : "bg-light"
-            }`}
+          className={`relative overflow-hidden px-5 pt-4 pb-8 xl:pt-7 3xl:px-30 3xl:pt-10 3xl:pb-50 3xl:pb-[51px] 3xl:pt-[41px] flex w-full ${
+            isActive ? "bg-primary" : "bg-light"
+          }`}
         >
           <span
             onTransitionEnd={handleFooterOverlayTransitionEnd}
-            className={`absolute inset-0 bg-primary ${isFooterOverlayAnimated ? "transition-transform duration-500 ease-in-out" : ""
-              } ${isActive
+            className={`absolute inset-0 bg-primary ${
+              isFooterOverlayAnimated
+                ? "transition-transform duration-500 ease-in-out"
+                : ""
+            } ${
+              isActive
                 ? "translate-x-0"
                 : footerOverlayPosition === "center"
                   ? "translate-x-0"
                   : footerOverlayPosition === "end"
                     ? "translate-x-full"
                     : "-translate-x-full"
-              }`}
+            }`}
           />
           <div className="relative z-10 grid grid-cols-[auto_1fr] w-full items-center gap-1">
-            <h3 className={`font-condensed leading-[1.1] text-32 group-hover:text-white ${isActive ? "text-white" : "text-secondary"}`} >
+            <h3
+              className={`font-condensed leading-[1.1] text-32 group-hover:text-white ${isActive ? "text-white" : "text-secondary"}`}
+            >
               {title}
             </h3>
             <div className="flex shrink-0 items-center justify-end ">
@@ -309,7 +360,13 @@ export default function AlbumCard({
                   aria-label={`Open ${title} image ${thumbIndex + 1}`}
                 >
                   <span className="relative block h-7 w-7 overflow-hidden rounded-full border border-white transition-all duration-200 hover:scale-105 xl:h-[33.23px] xl:w-[33.23px]">
-                    <Image src={thumb.image} alt="" fill sizes="28px" className="object-cover" />
+                    <Image
+                      src={thumb.image}
+                      alt=""
+                      fill
+                      sizes="28px"
+                      className="object-cover"
+                    />
                   </span>
                 </button>
               ))}
