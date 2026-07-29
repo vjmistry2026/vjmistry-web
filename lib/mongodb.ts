@@ -32,8 +32,14 @@ if (!global.mongoose) {
 }
 
 async function connectDB(): Promise<mongoose.Connection> {
-  if (cached.conn) {
+  if (cached.conn && cached.conn.readyState === 1) {
     return cached.conn;
+  }
+
+  if (cached.conn && cached.conn.readyState !== 1) {
+    // stale connection from a previous invocation — reset and reconnect
+    cached.conn = null;
+    cached.promise = null;
   }
 
   if (!cached.promise) {
