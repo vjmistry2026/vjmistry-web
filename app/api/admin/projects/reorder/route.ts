@@ -5,10 +5,10 @@ import mongoose from "mongoose";
 import { revalidateTag } from "next/cache";
 
 export async function POST(req: NextRequest) {
+    await connectDB()
     const session = await mongoose.startSession()
     try {
         session.startTransaction()
-        await connectDB()
         const formData = await req.formData()
         const projects = formData.get("projects") as string
         const actualProjects = JSON.parse(projects)
