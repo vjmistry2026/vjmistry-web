@@ -43,11 +43,12 @@ export default function CurrentOpenings() {
   const [projectType, setProjectType] = useState<string>("");
   const [sector, setSector] = useState<string>("");
   const [location, setLocation] = useState<string>("");
-  const [projectsList, setProjectsList] = useState<{ _id: string, title: string, status:string, slug:string }[]>([]);
+  const [projectsList, setProjectsList] = useState<{ _id: string, title: string, status: string, slug: string }[]>([]);
   const [locationList, setLocationList] = useState<{ _id: string, name: string }[]>([]);
   const [projectTypeList, setProjectTypeList] = useState<{ _id: string, name: string }[]>([]);
   const [sectorList, setSectorList] = useState<{ _id: string, name: string }[]>([]);
   const [reorderMode, setReorderMode] = useState(false);
+  const [isReordering, setIsReordering] = useState(false);
 
   const router = useRouter();
 
@@ -336,7 +337,7 @@ export default function CurrentOpenings() {
 
     if (!over || active.id === over.id) return;
 
-    setProjectsList((projectsList: { _id: string; title: string, status:string, slug:string }[]) => {
+    setProjectsList((projectsList: { _id: string; title: string, status: string, slug: string }[]) => {
       const originalPos = getTaskPos(active.id);
       const newPos = getTaskPos(over.id);
       return arrayMove(projectsList, originalPos, newPos);
@@ -346,6 +347,7 @@ export default function CurrentOpenings() {
 
   const confirmPosition = async () => {
     setReorderMode(!reorderMode);
+    setIsReordering(true); // add this
 
     const updatedProjects = projectsList.map((project) => ({
       ...project,
@@ -355,15 +357,22 @@ export default function CurrentOpenings() {
 
     const formData = new FormData()
     formData.append('projects', JSON.stringify(updatedProjects))
-    const response = await fetch(`/api/admin/projects/reorder`, {
-      method: "POST",
-      body: formData
-    })
-    if (response.ok) {
-      const data = await response.json()
-      if (data.success) {
-        alert(data.message)
+    try {
+      const response = await fetch(`/api/admin/projects/reorder`, {
+        method: "POST",
+        body: formData
+      })
+      if (response.ok) {
+        const data = await response.json()
+        if (data.success) {
+          alert(data.message)
+        }
       }
+    } catch (error) {
+      console.log("Error reordering projects", error)
+      alert("Failed to save the new order")
+    } finally {
+      setIsReordering(false); // add this
     }
   };
 
@@ -635,7 +644,13 @@ export default function CurrentOpenings() {
           <div className="flex justify-between border-b-2 pb-2">
             <Label className="text-sm font-bold">Projects</Label>
             <div className="flex gap-2">
-              <Button className={`text-white text-[16px] ${reorderMode ? "bg-yellow-700" : "bg-green-700"}`} onClick={() => reorderMode ? confirmPosition() : setReorderMode(!reorderMode)}>{reorderMode ? "Done" : "Reorder"}</Button>
+              <Button
+                className={`text-white text-[16px] ${reorderMode ? "bg-yellow-700" : "bg-green-700"}`}
+                onClick={() => reorderMode ? confirmPosition() : setReorderMode(!reorderMode)}
+                disabled={isReordering}
+              >
+                {isReordering ? "Reordering..." : reorderMode ? "Done" : "Reorder"}
+              </Button>
               <Button onClick={() => router.push("/admin/projects/add")}>Add Project</Button>
             </div>
           </div>
