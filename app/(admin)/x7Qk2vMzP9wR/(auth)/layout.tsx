@@ -32,7 +32,7 @@ export default function AdminLayout({
         {/* Logout */}
         <div className="px-3 py-4 border-t border-gray-200">
           <ClientSideLink
-            href="/admin/logout"
+            href="/x7Qk2vMzP9wR/logout"
             name="Logout"
             icon={<ArrowRightOnRectangleIcon className="h-5 w-5" />}
             className="text-red-600 hover:bg-red-50 hover:text-red-700"

@@ -147,7 +147,7 @@ const IndiGallery = () => {
       method: "POST",
       body: JSON.stringify(getValues("images")),
     });
-    router.push("/admin/gallery");
+    router.push("/x7Qk2vMzP9wR/gallery");
   };
 
   useEffect(() => {

@@ -333,7 +333,7 @@ export default function CurrentOpenings() {
                     <div className="flex justify-between border-b-2 pb-2">
                         <Label className="text-sm font-bold">News</Label>
                         <div className="flex gap-2">
-                            <Button onClick={() => router.push("/admin/news/add")} className="text-white">Add News</Button>
+                            <Button onClick={() => router.push("/x7Qk2vMzP9wR/news/add")} className="text-white">Add News</Button>
                         </div>
                     </div>
                     <div className="mt-2 flex flex-col gap-2 overflow-y-scroll h-[90%]">
@@ -351,7 +351,7 @@ export default function CurrentOpenings() {
                                         <FaEye />
                                     </div>)}
 
-                                    <MdEdit onClick={() => router.push(`/admin/news/edit/${item._id}`)} />
+                                    <MdEdit onClick={() => router.push(`/x7Qk2vMzP9wR/news/edit/${item._id}`)} />
 
                                     <Dialog>
                                         <DialogTrigger><MdDelete /></DialogTrigger>

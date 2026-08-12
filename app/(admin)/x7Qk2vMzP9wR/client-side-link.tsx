@@ -38,7 +38,7 @@ function ClientSideLink({
       });
       const data = await res.json();
       if (data.success) {
-        window.location.href = "/admin/login";
+        window.location.href = "/x7Qk2vMzP9wR/login";
       }
     } catch (error) {
       console.log(error);
@@ -49,10 +49,10 @@ function ClientSideLink({
   return (
     <>
       <Link
-        href={href == "/admin/logout" ? "#" : href}
+        href={href == "/x7Qk2vMzP9wR/logout" ? "#" : href}
         onClick={() => {  // Prevent navigation on click
           setOpenLink?.(isOpen ? null : href);
-          if (href === "/admin/logout") {
+          if (href === "/x7Qk2vMzP9wR/logout") {
             handleLogout();
             return;
           }

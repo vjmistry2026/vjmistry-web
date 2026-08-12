@@ -651,7 +651,7 @@ export default function CurrentOpenings() {
               >
                 {isReordering ? "Reordering..." : reorderMode ? "Done" : "Reorder"}
               </Button>
-              <Button onClick={() => router.push("/admin/projects/add")}>Add Project</Button>
+              <Button onClick={() => router.push("/x7Qk2vMzP9wR/projects/add")}>Add Project</Button>
             </div>
           </div>
           <div className="mt-2 flex flex-col gap-2 overflow-y-scroll h-[90%]">
@@ -678,7 +678,7 @@ export default function CurrentOpenings() {
                   </div></Link>) : (<div className="text-[16px] rounded-xl bg-green-300 p-1 flex items-center gap-1">
                     <FaEye />
                   </div>)}
-                  <MdEdit onClick={() => router.push(`/admin/projects/edit/${item._id}`)} />
+                  <MdEdit onClick={() => router.push(`/x7Qk2vMzP9wR/projects/edit/${item._id}`)} />
 
                   <Dialog>
                     <DialogTrigger><MdDelete /></DialogTrigger>
