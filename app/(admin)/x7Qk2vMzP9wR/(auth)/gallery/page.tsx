@@ -450,7 +450,7 @@ const GalleryPage = () => {
                                         </DialogContent>
                                     </Dialog>
 
-                                    <Link href={`/admin/gallery/${item._id}`}>
+                                    <Link href={`/x7Qk2vMzP9wR/gallery/${item._id}`}>
                                         <FilesIcon className="text-lg cursor-pointer" />
                                     </Link>
 

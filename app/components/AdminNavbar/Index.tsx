@@ -1,6 +1,6 @@
 "use client"
 
-import ClientSideLink from '@/app/(admin)/admin/client-side-link';
+import ClientSideLink from '@/app/(admin)/x7Qk2vMzP9wR/client-side-link';
 import React, { useState } from 'react'
 import {
   BriefcaseIcon,
@@ -26,76 +26,76 @@ const AdminNavbar = () => {
 
   // const [services, setServices] = useState([])
   // const fetchServices = async () => {
-  //     const response = await fetch("/api/admin/expertise");
+  //     const response = await fetch("/api/x7Qk2vMzP9wR/expertise");
   //     const data = await response.json();
   //     setServices(data.data.secondSection.items)
   // }
 
   const navItems = [
-    { name: "Home", href: "/admin/home", icon: HomeIcon },
-    { name: "About", href: "/admin/about", icon: InfoIcon },
+    { name: "Home", href: "/x7Qk2vMzP9wR/home", icon: HomeIcon },
+    { name: "About", href: "/x7Qk2vMzP9wR/about", icon: InfoIcon },
     {
       name: "Services", href: "###", icon: Workflow, hasChild: true, children: [
-        { name: "Main Page", href: "/admin/services" },
+        { name: "Main Page", href: "/x7Qk2vMzP9wR/services" },
       ]
     },
-    { name: "Projects", href: "/admin/projects", icon: MdInterests },
-    { name: "Founder's Message", href: "/admin/founders-message", icon: LucideSword },
-    { name: "Quality", href: "/admin/quality", icon: MdReviews },
-    { name: "HSE", href: "/admin/hse", icon: TbBellStar },
-    { name: "Certificates", href: "/admin/certificates", icon: AwardIcon },
-    { name: "Gallery", href: "/admin/gallery", icon: GalleryThumbnails },
+    { name: "Projects", href: "/x7Qk2vMzP9wR/projects", icon: MdInterests },
+    { name: "Founder's Message", href: "/x7Qk2vMzP9wR/founders-message", icon: LucideSword },
+    { name: "Quality", href: "/x7Qk2vMzP9wR/quality", icon: MdReviews },
+    { name: "HSE", href: "/x7Qk2vMzP9wR/hse", icon: TbBellStar },
+    { name: "Certificates", href: "/x7Qk2vMzP9wR/certificates", icon: AwardIcon },
+    { name: "Gallery", href: "/x7Qk2vMzP9wR/gallery", icon: GalleryThumbnails },
     {
       name: "Contact", href: "##", icon: PhoneIcon, hasChild: true, children: [
-        { name: "Main Page", href: "/admin/contact" },
-        { name: "Enquiries", href: "/admin/contact/enquiry" }
+        { name: "Main Page", href: "/x7Qk2vMzP9wR/contact" },
+        { name: "Enquiries", href: "/x7Qk2vMzP9wR/contact/enquiry" }
       ]
     },
-    { name: "Equipments", href: "/admin/equipments", icon: FaMoneyBill },
-    { name: "News", href: "/admin/news", icon: NewspaperIcon },
-    // { name: "Manager's Message", href: "/admin/managers-message", icon: MdManageAccounts },
-    // { name: "Leadership Team", href: "/admin/leadership-team", icon: UserGroupIcon },
-    // { name: "Learning Program", href: "/admin/learning-program", icon: BookA },
-    // { name: "Interests", href: "/admin/interests", icon: MdInterests },
-    // { name: "Footer Enquiries", href: "/admin/footer-enquiries", icon: FaDownLong },
-    // { name: "Testimonials", href: "/admin/testimonials", icon: MdReviews },
-    // { name: "Beam Schools", href: "/admin/beam-schools", icon: Workflow },
-    // { name: "Blogs", href: "/admin/blogs", icon: Share2Icon },
-    // { name: "School Uniqueness", href: "/admin/school-uniqueness", icon: TbBellStar },
-    // { name: "School Achievements", href: "/admin/school-achievements", icon: BriefcaseIcon },
-    // { name: "Scholarship Programs", href: "/admin/scholarship-programs", icon: FaMoneyBill },
-    // { name: "Alumni", href: "/admin/alumni", icon: FaMoneyBill },
-    // { name: "Our Team", href: "/admin/team", icon: UserGroupIcon },
-    // { name: "Group Company", href: "/admin/group-company", icon: GroupIcon },
-    // { name: "Awards", href: "/admin/awards", icon: AwardIcon },
-    // { name: "Clients", href: "/admin/clients", icon: PresentationChartBarIcon },
+    { name: "Equipments", href: "/x7Qk2vMzP9wR/equipments", icon: FaMoneyBill },
+    { name: "News", href: "/x7Qk2vMzP9wR/news", icon: NewspaperIcon },
+    // { name: "Manager's Message", href: "/x7Qk2vMzP9wR/managers-message", icon: MdManageAccounts },
+    // { name: "Leadership Team", href: "/x7Qk2vMzP9wR/leadership-team", icon: UserGroupIcon },
+    // { name: "Learning Program", href: "/x7Qk2vMzP9wR/learning-program", icon: BookA },
+    // { name: "Interests", href: "/x7Qk2vMzP9wR/interests", icon: MdInterests },
+    // { name: "Footer Enquiries", href: "/x7Qk2vMzP9wR/footer-enquiries", icon: FaDownLong },
+    // { name: "Testimonials", href: "/x7Qk2vMzP9wR/testimonials", icon: MdReviews },
+    // { name: "Beam Schools", href: "/x7Qk2vMzP9wR/beam-schools", icon: Workflow },
+    // { name: "Blogs", href: "/x7Qk2vMzP9wR/blogs", icon: Share2Icon },
+    // { name: "School Uniqueness", href: "/x7Qk2vMzP9wR/school-uniqueness", icon: TbBellStar },
+    // { name: "School Achievements", href: "/x7Qk2vMzP9wR/school-achievements", icon: BriefcaseIcon },
+    // { name: "Scholarship Programs", href: "/x7Qk2vMzP9wR/scholarship-programs", icon: FaMoneyBill },
+    // { name: "Alumni", href: "/x7Qk2vMzP9wR/alumni", icon: FaMoneyBill },
+    // { name: "Our Team", href: "/x7Qk2vMzP9wR/team", icon: UserGroupIcon },
+    // { name: "Group Company", href: "/x7Qk2vMzP9wR/group-company", icon: GroupIcon },
+    // { name: "Awards", href: "/x7Qk2vMzP9wR/awards", icon: AwardIcon },
+    // { name: "Clients", href: "/x7Qk2vMzP9wR/clients", icon: PresentationChartBarIcon },
     // { name: "Services", href: "#", icon: EnvelopeIcon,hasChild:true,children: [
-    //     { name: "Engineering", href: "/admin/services/engineering" },
-    //     { name: "Fabrication", href: "/admin/services/fabrication" },
-    //     { name: "Blasting", href: "/admin/services/blasting" },
-    //     { name: "Steel Erection", href: "/admin/services/steel-erection" },
+    //     { name: "Engineering", href: "/x7Qk2vMzP9wR/services/engineering" },
+    //     { name: "Fabrication", href: "/x7Qk2vMzP9wR/services/fabrication" },
+    //     { name: "Blasting", href: "/x7Qk2vMzP9wR/services/blasting" },
+    //     { name: "Steel Erection", href: "/x7Qk2vMzP9wR/services/steel-erection" },
     //   ] },
-    // { name: "Industries", href: "/admin/industries", icon: BriefcaseIcon },
+    // { name: "Industries", href: "/x7Qk2vMzP9wR/industries", icon: BriefcaseIcon },
     // { name: "Expertise", href: "##", icon: GlobeAltIcon , hasChild:true,children: [
-    //   { name: "Main Page", href: "/admin/expertise" },
+    //   { name: "Main Page", href: "/x7Qk2vMzP9wR/expertise" },
     //   ...services.map((service: { _id: string,title:string }) => (
-    //     { name: service.title, href: `/admin/expertise/${service._id}` }
+    //     { name: service.title, href: `/x7Qk2vMzP9wR/expertise/${service._id}` }
     //   )),
     // ] },
-    // { name: "Projects", href: "/admin/projects", icon: Workflow },
-    // { name: "Clients", href: "/admin/clients", icon: RiShakeHandsLine },
+    // { name: "Projects", href: "/x7Qk2vMzP9wR/projects", icon: Workflow },
+    // { name: "Clients", href: "/x7Qk2vMzP9wR/clients", icon: RiShakeHandsLine },
 
 
-    // { name: "QHSE", href: "/admin/qhse", icon: GiHealthNormal },
-    // { name: "Sustainability", href: "/admin/sustainability", icon: LeafIcon },
-    // { name: "AI Technology", href: "/admin/ai-technology", icon: FaRobot },
+    // { name: "QHSE", href: "/x7Qk2vMzP9wR/qhse", icon: GiHealthNormal },
+    // { name: "Sustainability", href: "/x7Qk2vMzP9wR/sustainability", icon: LeafIcon },
+    // { name: "AI Technology", href: "/x7Qk2vMzP9wR/ai-technology", icon: FaRobot },
     // { name: "Current Openings", href: "####", icon:BriefcaseIcon,hasChild:true,children: [
-    //   { name: "Main Page", href: "/admin/current-openings" },
-    //   {name:"Enquiries",href:"/admin/current-openings/enquiries"}
+    //   { name: "Main Page", href: "/x7Qk2vMzP9wR/current-openings" },
+    //   {name:"Enquiries",href:"/x7Qk2vMzP9wR/current-openings/enquiries"}
     // ] },
 
-    // // { name: "Sustainability", href: "/admin/sustainability", icon: LeafIcon },
-    { name: "Settings", href: "/admin/settings", icon: SettingsIcon },
+    // // { name: "Sustainability", href: "/x7Qk2vMzP9wR/sustainability", icon: LeafIcon },
+    { name: "Settings", href: "/x7Qk2vMzP9wR/settings", icon: SettingsIcon },
   ];
 
   return (

@@ -12,8 +12,8 @@ export async function proxy(request: NextRequest) {
   response.headers.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
   // Define protected and public admin routes
-  const isLoginPage = path === "/admin/login";
-  const isProtectedRoute = path.startsWith("/admin") && !isLoginPage;
+  const isLoginPage = path === "/x7Qk2vMzP9wR/login";
+  const isProtectedRoute = path.startsWith("/x7Qk2vMzP9wR") && !isLoginPage;
 
   const token = request.cookies.get("adminToken")?.value || "";
   const secret = new TextEncoder().encode(process.env.JWT_SECRET || "your-secret-key");
@@ -22,7 +22,7 @@ export async function proxy(request: NextRequest) {
   if (isLoginPage && token) {
     try {
       await jose.jwtVerify(token, secret);
-      return NextResponse.redirect(new URL("/admin", request.url));
+      return NextResponse.redirect(new URL("/x7Qk2vMzP9wR", request.url));
     } catch {
       // invalid token — let them stay on login
     }
@@ -31,14 +31,14 @@ export async function proxy(request: NextRequest) {
   // 🔹 2. If user is on a protected route and no valid token → redirect to login
   if (isProtectedRoute) {
     if (!token) {
-      return NextResponse.redirect(new URL("/admin/login", request.url));
+      return NextResponse.redirect(new URL("/x7Qk2vMzP9wR/login", request.url));
     }
 
     try {
       await jose.jwtVerify(token, secret);
       return NextResponse.next();
     } catch {
-      return NextResponse.redirect(new URL("/admin/login", request.url));
+      return NextResponse.redirect(new URL("/x7Qk2vMzP9wR/login", request.url));
     }
   }
 
@@ -47,5 +47,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/api/:path*", "/admin/:path*"],
+  matcher: ["/api/:path*", "/x7Qk2vMzP9wR/:path*"],
 };
