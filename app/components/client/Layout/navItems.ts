@@ -86,8 +86,8 @@ export const contactLocations = {
   },
   branch: {
     label: "Branch",
-    address: "Dar es Salaam, Ohio Street, Tanzania, P.O. Box 2345, Dar es Salaam",
-    phone: "+255 700 111 222 | +255 700 333 444",
-    email: "branch@vjmistry.com",
+    address: "Dar es Salaam P. O. Box 1545 129A Mwakalinga Road (Off Mandela Rd)",
+    phone: "+255 740 678620 | +255 657 007 300",
+    email: "info@vjmistry.com",
   },
 };
