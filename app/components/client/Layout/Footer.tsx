@@ -22,8 +22,14 @@ const Footer = () => {
     download: string;
   } | null>(null);
   const activeData = contactLocations[activeLocation];
-  const phoneNumbers = activeData.phone.split("|").map((phone) => phone.trim()).filter(Boolean);
-  const emailAddresses = activeData.email.split("|").map((email) => email.trim()).filter(Boolean);
+  const phoneNumbers = activeData.phone
+    .split("|")
+    .map((phone) => phone.trim())
+    .filter(Boolean);
+  const emailAddresses = activeData.email
+    .split("|")
+    .map((email) => email.trim())
+    .filter(Boolean);
 
   useEffect(() => {
     if (!previewDocument) return;
@@ -130,7 +136,7 @@ const Footer = () => {
                     whileInView="show"
                     viewport={{ once: true }}
                     key={item.label}
-                    >
+                  >
                     {item.download ? (
                       <button
                         type="button"
@@ -175,7 +181,7 @@ const Footer = () => {
                       viewport={{ once: true }}
                     >
                       <Link
-                      target="_blank"
+                        target="_blank"
                         key={item.label}
                         href={item.href}
                         className="relative overflow-hidden h-[50px] w-[50px] flex items-center justify-center bg-paragraph/20 group duration-300 transition-colors"
@@ -241,7 +247,7 @@ const Footer = () => {
                   const isActive = activeLocation === key;
                   return (
                     <motion.button
-                      variants={moveUp(0.35)}
+                      variants={moveUp(0)}
                       initial="hidden"
                       whileInView="show"
                       viewport={{ once: true }}
@@ -265,8 +271,8 @@ const Footer = () => {
               </div>
               {/* ADDRESS */}
               <motion.div
-                key={activeData.address}
-                variants={moveUp(0.4)}
+                key={`address-${activeLocation}`}
+                variants={moveUp(0.1)}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
@@ -279,14 +285,14 @@ const Footer = () => {
                   height={16}
                   className="mt-[4px] pointer-events-none"
                 />
-                <p className="text-20 font-nexa font-bold leading-[1.5] text-paragraph">
+                <p className="text-20 font-nexa font-bold leading-[1.5] text-paragraph max-w-[600px]">
                   {activeData.address}
                 </p>
               </motion.div>
               {/* PHONE */}
               <motion.div
-                key={activeData.phone}
-                variants={moveUp(0.5)}
+                key={`phone-${activeLocation}`}
+                variants={moveUp(0.2)}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
@@ -308,15 +314,17 @@ const Footer = () => {
                       >
                         {phone}
                       </a>
-                      {index < phoneNumbers.length - 1 ? <span>{" | "}</span> : null}
+                      {index < phoneNumbers.length - 1 ? (
+                        <span>{" | "}</span>
+                      ) : null}
                     </span>
                   ))}
                 </div>
               </motion.div>
               {/* EMAIL */}
               <motion.div
-                key={activeData.email}
-                variants={moveUp(0.6)}
+                key={`email-${activeLocation}`}
+                variants={moveUp(0.3)}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
@@ -338,7 +346,9 @@ const Footer = () => {
                       >
                         {email}
                       </a>
-                      {index < emailAddresses.length - 1 ? <span>{" | "}</span> : null}
+                      {index < emailAddresses.length - 1 ? (
+                        <span>{" | "}</span>
+                      ) : null}
                     </span>
                   ))}
                 </div>
@@ -380,7 +390,7 @@ const Footer = () => {
 
       {/* ================= PRIVACY ================= */}
       <motion.div
-        variants={moveUp(0.4)}
+        variants={moveUp(0.1)}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true }}
@@ -388,7 +398,7 @@ const Footer = () => {
       >
         <div className="container py-[20px] 2xl:py-[34px] leading-[100%] flex items-center justify-between lg:justify-start lg:gap-[80px] text-20 font-nexa font-bold text-paragraph">
           <motion.div
-            variants={moveUp(0.2)}
+            variants={moveUp(0.15)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
@@ -398,7 +408,7 @@ const Footer = () => {
             </Link>
           </motion.div>
           <motion.div
-            variants={moveUp(0.35)}
+            variants={moveUp(0.2)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
