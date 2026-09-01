@@ -34,7 +34,7 @@ export const getAllNews = unstable_cache(
 );
 
 export const getIndiNews = unstable_cache(
-    async (slug: string): Promise<NewsType['news'][number]> => {
+    async (slug: string): Promise<NewsType['news'][number] | null> => {
         await connectDB();
 
         const news = await News.findOne({})
@@ -44,7 +44,7 @@ export const getIndiNews = unstable_cache(
         );
 
         if (!foundNews) {
-            throw new Error("News not found");
+            return null
         }
 
         return JSON.parse(JSON.stringify(foundNews));

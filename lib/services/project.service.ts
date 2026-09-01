@@ -38,7 +38,7 @@ export const getAllProjects = unstable_cache(
 );
 
 export const getIndiProjects = unstable_cache(
-    async (slug: string): Promise<ProjectType['projects'][number]> => {
+    async (slug: string): Promise<ProjectType['projects'][number] | null> => {
         await connectDB();
 
         const project = await Project.findOne({})
@@ -50,8 +50,8 @@ export const getIndiProjects = unstable_cache(
         );
 
 
-        if (!project) {
-            throw new Error("Project not found");
+        if (!foundProject) {
+            return null
         }
 
         return JSON.parse(JSON.stringify(foundProject));

@@ -84,10 +84,11 @@ const PowerBehind = ({ data }: { data: ContactType['firstSection'] }) => {
         body: JSON.stringify(data),
       });
       if (response.ok) {
-        setSuccessMessage(`Thanks ${data.first}, your message has been sent successfully.`);
+        // setSuccessMessage(`Thanks ${data.first}, your message has been sent successfully.`);
         reset()
         setCaptchaToken(null);
         setCaptchaKey((key) => key + 1);
+        window.location.replace("/thank-you");
       } else {
         alert("Something went wrong, try again")
       }
