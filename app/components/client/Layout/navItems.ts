@@ -81,12 +81,14 @@ export const contactLocations = {
   headOffice: {
     label: "Head Office",
     address: "Bukoba, Tanzania Sokoine Road, Tanzania, P.O. Box 1007, Bukoba",
+    address2:"",
     phone: "+255 657 007 300 | +255 715 755 766",
     email: "info@vjmistry.com",
   },
   branch: {
     label: "Branch",
     address: "Dar es Salaam P. O. Box 1545 129A Mwakalinga Road (Off Mandela Rd)",
+    address2: "Vetenary Bus Stop Opposite Oilcom Petrol Station",
     phone: "+255 740 678620 | +255 657 007 300",
     email: "info@vjmistry.com",
   },
