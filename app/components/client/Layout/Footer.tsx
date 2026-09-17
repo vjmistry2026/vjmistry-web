@@ -289,6 +289,28 @@ const Footer = () => {
                   {activeData.address}
                 </p>
               </motion.div>
+              {activeData.address2 && (
+              <motion.div
+                key={`address1-${activeLocation}`}
+                variants={moveUp(0.1)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                className="flex items-start gap-[12px] mb-[10px] lg:mb-[20px]"
+              >
+                <Image
+                  src="/assets/images/footer/map.svg"
+                  alt="Location"
+                  width={16}
+                  height={16}
+                  className="mt-[4px] pointer-events-none"
+                />
+                <p className="text-20 font-nexa font-bold leading-[1.5] text-paragraph max-w-[600px]">
+                  {activeData.address2}
+                </p>
+              </motion.div>
+              )}
+       
               {/* PHONE */}
               <motion.div
                 key={`phone-${activeLocation}`}
